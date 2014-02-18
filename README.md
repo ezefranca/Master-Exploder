@@ -7,7 +7,7 @@ Sobre
 O Projeto Integrador III, tem como objetivo o desenvolvimento de um jogo na plataforma Allegro 5, baseado em
 visão computacional.
 
-Integrante
+Integrantes
 ---------------------
 [Ezequiel França](github.com/ezefranca)
 
