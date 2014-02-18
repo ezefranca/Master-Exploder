@@ -10,6 +10,7 @@ visão computacional.
 Integrante
 ---------------------
 [Ezequiel França](github.com/ezefranca)
+
 [Gabriel Fontenelle](https://github.com/OdnaropX)
 
 Requisitos
