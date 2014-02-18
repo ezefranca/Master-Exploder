@@ -10,7 +10,7 @@ visão computacional.
 Integrante
 ---------------------
 [Ezequiel França](github.com/ezefranca)
-
+[Gabriel Fontenelle](https://github.com/OdnaropX)
 
 Requisitos
 ----------------------
@@ -24,28 +24,10 @@ Cópia do código fonte:
 Como compilar
 ----------------------
 
-Utilizando CMake:
-
--> Criar a pasta release:
-```
-$ mkdir release
-```
--> Navegue até a pasta release
-```
-$ cd release
-```
--> Executar o CMake (Para geração do Makefile)
-```
-$ cmake ..
-```
--> Compilar usando Makefile
 ```
 $ make
 ```
--> Executar
-```
-$ ./main
-```
+
 
 Licença e Créditos
 ----------------------
