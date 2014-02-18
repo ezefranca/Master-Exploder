@@ -7,6 +7,11 @@ Sobre
 O Projeto Integrador III, tem como objetivo o desenvolvimento de um jogo na plataforma Allegro 5, baseado em
 visão computacional.
 
+Master Explode
+----------------------
+
+O nome "Master Explode" é uma referência a uma das músicas da banda [Tenacius D](http://en.wikipedia.org/wiki/Tenacious_D) no album (e filme) [The Pick of Destiny](http://en.wikipedia.org/wiki/The_Pick_of_Destiny)
+
 Integrantes
 ---------------------
 [Ezequiel França](github.com/ezefranca)
