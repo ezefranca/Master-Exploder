@@ -1,4 +1,4 @@
-Projeto Integrador III - [![Build Status](https://travis-ci.org/ezefranca/BCC-2s13-PI2-LOGIKID.png?branch=master)](https://travis-ci.org/ezefranca/BCC-2s13-PI2-LOGIKID)
+Projeto Integrador III - [![Build Status](https://travis-ci.org/ezefranca/BCC-1s14-PI3-Master-Exploder.png?branch=master)](https://travis-ci.org/ezefranca/BCC-1s14-PI3-Master-Exploder)
 ===
 
 Sobre
