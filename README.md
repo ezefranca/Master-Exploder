@@ -4,21 +4,26 @@ Projeto Integrador III - [![Build Status](https://travis-ci.org/ezefranca/BCC-1s
 Sobre
 ---------------------
 
-O Projeto Integrador III, tem como objetivo o desenvolvimento de um jogo na plataforma Allegro 5, baseado em
-visão computacional.
+O Projeto Integrador III, tem como objetivo o desenvolvimento de um jogo em linguagem C, utlizando a biblioteca Allegro 5, e sua iteração seja feira através de visão.
 
-Master Explode
-----------------------
+Master Exploder
+-----------------
 
-O nome "Master Explode" é uma referência a uma das músicas da banda [Tenacius D](http://en.wikipedia.org/wiki/Tenacious_D) no album (e filme) [The Pick of Destiny](http://en.wikipedia.org/wiki/The_Pick_of_Destiny)
+O nome "Master Exploder" é uma referência a uma das músicas da banda [Tenacius D](http://en.wikipedia.org/wiki/Tenacious_D) no album (e filme) [The Pick of Destiny](http://en.wikipedia.org/wiki/The_Pick_of_Destiny)
 
 Integrantes
 ---------------------
-[Ezequiel França](github.com/ezefranca)
+Alunos:
 
-[Gabriel Fontenelle](https://github.com/OdnaropX)
+[![Ezequiel França](http://www.gravatar.com/avatar/.png)](https://github.com/ezefranca) | [![Gabriel Fontenelle](http://www.gravatar.com/avatar/.png)](https://github.com/OdnaropX) | [![Eryckson Magno](http://www.gravatar.com/avatar/.png)](http://github.com/eryckson) |
+--- | --- | --- | --- | --- | --- | ---
+[Ezequiel França](github.com/ezefranca) | [Gabriel Fontenelle](https://github.com/OdnaropX) | [Eryckson Magno](https://github.com/eryckson)
 
-Requisitos
+Orientador:
+
+[Profº Marcelo Hashimoto](https://www.github.com/mhsenac)
+
+Requisitos de instalação
 ----------------------
 
 Allegro 5.x e OpenCV instalados no sistema.
