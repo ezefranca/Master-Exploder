@@ -2,6 +2,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
+#include <math.h>
 #include "camera.h"
 
 #define FPS 60
@@ -12,6 +13,76 @@ void erro(char *mensagem) {
   exit(EXIT_FAILURE);
 }
 
+int limiarizacao(unsigned char ***matriz, int altura, int largura){
+	for(int i = 0; i < altura; i++) {
+		for(int j = 0; j < largura; j++)
+			for(int k = 0; k < 3; k++){
+				if(matriz[i][j][k] < 128)
+					matriz[i][j][k] = 0;
+				else
+					matriz[i][j][k] = 255;
+			}
+		}
+		return 1;
+}
+
+void otsu_binarizacao(unsigned char ***matriz, unsigned char ***saida, int altura, int largura)
+/* método de otsu - referencia teórica wiki.icmc.usp.br/images/b/bb/Otsu_e_derivadas.pdf‎ */
+{
+  int histograma[256];
+  double probabilidade[256], omega[256]; /* probabilidade de ser cinza */
+  double myu[256];
+  double max_sigma, sigma[256];
+  int i, x, y, z; /* variaveis para os loops for */
+  int limiar; /* limiar para binarização */
+
+  /* geração do histograma */
+  for (i = 0; i < 256; i++) histograma[i] = 0;
+  for (y = 0; y < altura; y++)
+    for (x = 0; x < largura; x++) {
+      for (z = 0; z < 3; z++)
+      histograma[matriz[y][x][z]]++;
+    }
+  /* calculo da probabilidade */
+  for ( i = 0; i < 256; i ++ ) {
+    probabilidade[i] = (double)histograma[i] / (altura * largura);
+  }
+
+  /* omega e myu*/
+  omega[0] = probabilidade[0];
+  myu[0] = 0.0;
+  for (i = 1; i < 256; i++) {
+    omega[i] = omega[i-1] + probabilidade[i];
+    myu[i] = myu[i-1] + i*probabilidade[i];
+  }
+
+
+/* Maximização do sigma, determina o valor de Limiar ideal */
+  //Não entendi 100% a ideia aqui...
+  limiar = 0;
+  max_sigma = 0.0;
+  for (i = 0; i < 255; i++) {
+    if (omega[i] != 0.0 && omega[i] != 1.0)
+      sigma[i] = pow(myu[255]*omega[i] - myu[i], 2) / (omega[i]*(1.0 - omega[i]));
+    else
+      sigma[i] = 0.0;
+    if (sigma[i] > max_sigma) {
+      max_sigma = sigma[i];
+      limiar = i;
+    }
+  }
+
+  /* saida da binarização */
+
+  for (y = 0; y < altura; y++)
+    for (x = 0; x < largura; x++)
+      for(z = 0; z < 3; z++)
+      if (matriz[y][x][z] > limiar)
+	saida[y][x][z] = 255;
+      else
+	saida[y][x][z] = 0;
+
+}
 
 int main() {
 
@@ -85,6 +156,8 @@ int main() {
         }
       }
     }
+    otsu_binarizacao(fundo, fundo, altura, largura);
+    //limiarizacao(fundo, altura, largura);
 
   while(1) {
 
@@ -118,21 +191,24 @@ int main() {
       float cx = 0;
       int cn = 0;
 
+      //limiarizacao(cam->quadro, altura, largura);
+      //otsu_binarizacao(cam->quadro, cam->quadro, altura, largura);
+
       for (int i = 0; i < altura; i++)
       {
         for (int j = 0; j < largura; j++)
         {
 
 
-          soma_r = cam->quadro[i][j][0] - fundo[i][j][0];
-          soma_g = cam->quadro[i][j][1] - fundo[i][j][1];
-          soma_b = cam->quadro[i][j][2] - fundo[i][j][2];
+          soma_r = fundo[i][j][0] - cam->quadro[i][j][0];
+          soma_g = fundo[i][j][1] - cam->quadro[i][j][1];
+          soma_b = fundo[i][j][2] - cam->quadro[i][j][2];
 
           quadrado = (soma_r * soma_r) + (soma_g * soma_g) + (soma_b * soma_b) ;
 
           euclidiana = sqrt(quadrado);
 
-          if(euclidiana > 10) {
+          if(euclidiana > 200) {
            max_x = i;
            max_y = j;
            matriz[i][j][0] = 0;
@@ -152,7 +228,6 @@ int main() {
 
      }
       /**********/
-     euclidiana = 0;
      camera_copia(cam, cam->quadro, esquerda);
      camera_copia(cam, matriz, direita);
        //camera_copia(cam, fundo, direita);
