@@ -15,7 +15,7 @@ Integrantes
 ---------------------
 Alunos:
 
-[![Ezequiel França](http://www.gravatar.com/avatar/.png)](https://github.com/ezefranca) | [![Gabriel Fontenelle](http://www.gravatar.com/avatar/.png)](https://github.com/OdnaropX) | [![Eryckson Magno](http://www.gravatar.com/avatar/.png)](http://github.com/eryckson) |
+[![Ezequiel França](https://0.gravatar.com/avatar/3b4da2efb9fda1566a2907dd551fc907?d=https%3A%2F%2Fidenticons.github.com%2F3a716d3607e5bf63ee1c167fa81c8f5d.png&r=x&s=100)](https://github.com/ezefranca) | [![Gabriel Fontenelle](http://www.gravatar.com/avatar/.png)](https://github.com/OdnaropX) | [![Eryckson Magno](https://2.gravatar.com/avatar/0fd66c4aa854213fcd775f34c41d9414?d=https%3A%2F%2Fidenticons.github.com%2F7715c71e8dd7e36002865e63a975843a.png&r=x&s=100)](http://github.com/eryckson) |
 --- | --- | --- | --- | --- | --- | ---
 [Ezequiel França](github.com/ezefranca) | [Gabriel Fontenelle](https://github.com/OdnaropX) | [Eryckson Magno](https://github.com/eryckson)
 
