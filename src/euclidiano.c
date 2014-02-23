@@ -75,9 +75,7 @@ int main() {
   int desenhar = 0;
   int terminar = 0;
 
-  while(1) {
-
-    for (int i = 0; i < altura; i++)
+     for (int i = 0; i < altura; i++)
     {
       for (int j = 0; j < largura; j++)
       {
@@ -87,6 +85,10 @@ int main() {
         }
       }
     }
+
+  while(1) {
+
+
 
 
     ALLEGRO_EVENT event;
@@ -110,7 +112,6 @@ int main() {
     if(desenhar && al_is_event_queue_empty(queue)) {
       desenhar = 0;
       camera_atualiza(cam);
-      printf("CAMERA ATUALIZADA\n");
       /**********/
 
       float cy = 0;
@@ -131,19 +132,19 @@ int main() {
 
           euclidiana = sqrt(quadrado);
 
-          if(euclidiana > 80) {
+          if(euclidiana > 200) {
            max_x = i;
            max_y = j;
-           matriz[i][j][0] = 255;
-           matriz[i][j][1] = 255;
-           matriz[i][j][2] = 255;
+           matriz[i][j][0] = 0;
+           matriz[i][j][1] = 0;
+           matriz[i][j][2] = 0;
 
          }
 
          else {
-           matriz[i][j][0] = 0;
-           matriz[i][j][1] = 0;
-           matriz[i][j][2] = 0;
+           matriz[i][j][0] = 255;
+           matriz[i][j][1] = 255;
+           matriz[i][j][2] = 255;
          }
 
 
