@@ -2,7 +2,10 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
+#include <math.h>
 #include "camera.h"
+#include "otsu.h"
+#include "limiarizacao.h"
 
 #define FPS 60
 
@@ -12,14 +15,25 @@ void erro(char *mensagem) {
   exit(EXIT_FAILURE);
 }
 
+int distancia_euclidiana(unsigned char r_velho, unsigned char g_velho, unsigned char b_velho, unsigned char r_atual, unsigned char g_atual, unsigned char b_atual){
+
+  int soma_r = r_velho - r_atual;
+  int soma_g = g_velho - g_atual;
+  int soma_b = b_velho - b_atual;
+
+  int quadrado = (soma_r * soma_r) + (soma_g * soma_g) + (soma_b * soma_b) ;
+  int euclidiana = sqrt(quadrado);
+
+  return euclidiana;
+
+
+}
+
 
 int main() {
 
   //Bloco de variaveis
   int euclidiana = 0;
-  int soma = 0, soma_r =0, soma_g = 0, soma_b = 0;
-  int quadrado = 0;
-  int raiz = 0;
   int max_x = 0, max_y = 0, min_x = 0, min_y = 0;
   camera *cam = camera_inicializa(0);
   //Fim do bloco de variaveis
@@ -85,6 +99,8 @@ int main() {
         }
       }
     }
+    otsu_binarizacao(fundo, fundo, altura, largura);
+    limiarizacao(fundo, altura, largura);
 
   while(1) {
 
@@ -118,21 +134,18 @@ int main() {
       float cx = 0;
       int cn = 0;
 
+      //limiarizacao(cam->quadro, altura, largura);
+      //otsu_binarizacao(cam->quadro, cam->quadro, altura, largura);
+
       for (int i = 0; i < altura; i++)
       {
         for (int j = 0; j < largura; j++)
         {
 
+          euclidiana = distancia_euclidiana(fundo[i][j][0], fundo[i][j][1], fundo[i][j][2],
+                          cam->quadro[i][j][0], cam->quadro[i][j][1], cam->quadro[i][j][2]);
 
-          soma_r = cam->quadro[i][j][0] - fundo[i][j][0];
-          soma_g = cam->quadro[i][j][1] - fundo[i][j][1];
-          soma_b = cam->quadro[i][j][2] - fundo[i][j][2];
-
-          quadrado = (soma_r * soma_r) + (soma_g * soma_g) + (soma_b * soma_b) ;
-
-          euclidiana = sqrt(quadrado);
-
-          if(euclidiana > 10) {
+          if(euclidiana > 200) {
            max_x = i;
            max_y = j;
            matriz[i][j][0] = 0;
@@ -152,7 +165,6 @@ int main() {
 
      }
       /**********/
-     euclidiana = 0;
      camera_copia(cam, cam->quadro, esquerda);
      camera_copia(cam, matriz, direita);
        //camera_copia(cam, fundo, direita);
