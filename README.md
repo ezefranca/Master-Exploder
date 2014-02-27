@@ -28,8 +28,29 @@ Requisitos de instalação
 
 Allegro 5.x e OpenCV instalados no sistema.
 
-Cópia do código fonte:
+Windows
+--------
+(adicionar)
 
+Linux
+--------
+Consulte o projeto:
+
+OSX
+--------
+Com o brew:
+
+```
+$ brew install opencv
+$ brew install homebrew/versions/allegro5
+```
+
+Cópia do código fonte:
+```
+$ git clone
+
+```
+ou baixe o projeto todo compactado em zip aqui.
 
 
 Como compilar
