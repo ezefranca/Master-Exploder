@@ -148,16 +148,16 @@ int main() {
           if(euclidiana > 200) {
            max_x = i;
            max_y = j;
-           matriz[i][j][0] = 0;
-           matriz[i][j][1] = 0;
-           matriz[i][j][2] = 0;
+           matriz[i][j][0] = 255;
+           matriz[i][j][1] = 255;
+           matriz[i][j][2] = 255;
 
          }
 
          else {
-           matriz[i][j][0] = 255;
-           matriz[i][j][1] = 255;
-           matriz[i][j][2] = 255;
+           matriz[i][j][0] = 0;
+           matriz[i][j][1] = 0;
+           matriz[i][j][2] = 0;
          }
 
 
