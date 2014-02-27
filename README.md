@@ -75,3 +75,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unpor
 
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ezefranca/bcc-1s14-pi3-master-exploder/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
