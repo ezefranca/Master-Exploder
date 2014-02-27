@@ -1,3 +1,7 @@
+ifeq ($(OS),Windows_NT)
+SHELL = cmd
+endif
+
 CC= gcc -std=c99
 
 CFLAGS= -W -Wall -pedantic
@@ -10,14 +14,23 @@ SOURCES = $(wildcard $(SOURCEDIR)/*.c)
 
 BUILDDIR = bin
 
-EXECUTABLE = main
+ifeq ($(OS),Windows_NT)
+	EXECUTABLE = main.exe
+else
+	EXECUTABLE = main
+endif
 
 OBJECTS = $(patsubst $(SOURCEDIR)/%.c,$(BUILDDIR)/%.o,$(SOURCES))
 
 all: dir $(BUILDDIR)/$(EXECUTABLE)
 
+ifeq ($(OS),Windows_NT)
 dir:
-	mkdir -p $(BUILDDIR)
+		mkdir $(BUILDDIR)
+else
+dir:
+		mkdir -p $(BUILDDIR)
+endif
 
 $(BUILDDIR)/$(EXECUTABLE): $(OBJECTS)
 	$(CC) -o $@ $^ $(LIBS)
@@ -27,5 +40,10 @@ $(OBJECTS): $(BUILDDIR)/%.o : $(SOURCEDIR)/%.c
 
 .PHONY: clean
 
+ifeq ($(OS),Windows_NT)
 clean:
-	rm -f $(BUILDDIR)/*o $(BUILDDIR)/$(EXECUTABLE)
+		RMDIR /S $(BUILDDIR)/*o $(BUILDDIR)/$(EXECUTABLE)
+else
+clean:
+		rm -f $(BUILDDIR)/*o $(BUILDDIR)/$(EXECUTABLE)
+endif
