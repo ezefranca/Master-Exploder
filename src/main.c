@@ -89,7 +89,13 @@ int main() {
   int desenhar = 0;
   int terminar = 0;
 
-     for (int i = 0; i < altura; i++)
+   
+    //otsu_binarizacao(fundo, fundo, altura, largura);
+    //limiarizacao(fundo, altura, largura);
+
+  while(1) {
+
+      for (int i = 0; i < altura; i++)
     {
       for (int j = 0; j < largura; j++)
       {
@@ -99,13 +105,6 @@ int main() {
         }
       }
     }
-    otsu_binarizacao(fundo, fundo, altura, largura);
-    limiarizacao(fundo, altura, largura);
-
-  while(1) {
-
-
-
 
     ALLEGRO_EVENT event;
 
@@ -145,17 +144,17 @@ int main() {
           euclidiana = distancia_euclidiana(fundo[i][j][0], fundo[i][j][1], fundo[i][j][2],
                           cam->quadro[i][j][0], cam->quadro[i][j][1], cam->quadro[i][j][2]);
 
-          if(euclidiana > 200) {
+          if(euclidiana > 50) {
            max_x = i;
            max_y = j;
-           matriz[i][j][0] = 255;
+           matriz[i][j][0] = 0;
            matriz[i][j][1] = 255;
            matriz[i][j][2] = 255;
 
          }
 
          else {
-           matriz[i][j][0] = 0;
+           matriz[i][j][0] = 255;
            matriz[i][j][1] = 0;
            matriz[i][j][2] = 0;
          }
@@ -165,8 +164,10 @@ int main() {
 
      }
       /**********/
+     //limiarizacao(fundo, altura, largura);
+     otsu_binarizacao(fundo, fundo, altura, largura);
      camera_copia(cam, cam->quadro, esquerda);
-     camera_copia(cam, matriz, direita);
+     camera_copia(cam, fundo, direita);
        //camera_copia(cam, fundo, direita);
       /**********/
 

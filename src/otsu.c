@@ -9,6 +9,7 @@ void otsu_binarizacao(unsigned char ***matriz, unsigned char ***saida, int altur
   double max_sigma, sigma[256];
   int i, x, y, z; /* variaveis para os loops for */
   int limiar; /* limiar para binarização */
+  int r = 0, g = 0, b = 0, media = 0;
 
   /* geração do histograma */
   for (i = 0; i < 256; i++) histograma[i] = 0;
@@ -49,10 +50,24 @@ void otsu_binarizacao(unsigned char ***matriz, unsigned char ***saida, int altur
   /* saida da binarização */
 
       for (y = 0; y < altura; y++)
-        for (x = 0; x < largura; x++)
-          for(z = 0; z < 3; z++)
-            if (matriz[y][x][z] > limiar)
-             saida[y][x][z] = 255;
-           else
-             saida[y][x][z] = 0;
-         }
+        for (x = 0; x < largura; x++){
+          r = matriz[y][x][0];
+          g = matriz[y][x][1];
+          b = matriz[y][x][2];
+
+        media = (r + g + b) / 3;
+        //printf("%d\n", media);
+
+        if(media > limiar) {
+          matriz[y][x][0] = 0;
+          matriz[y][x][1] = 0;
+          matriz[y][x][2] = 0;
+        }
+        else{
+          matriz[y][x][0] = 255;
+          matriz[y][x][1] = 255;
+          matriz[y][x][2] = 255;
+        }
+      }
+
+}
