@@ -136,6 +136,11 @@ int main() {
       //limiarizacao(cam->quadro, altura, largura);
       //otsu_binarizacao(cam->quadro, cam->quadro, altura, largura);
 
+      max_x = 0;
+      max_y = 0;
+      min_x = altura;
+      min_y = largura;
+
       for (int i = 0; i < altura; i++)
       {
         for (int j = 0; j < largura; j++)
@@ -152,11 +157,11 @@ int main() {
            matriz[i][j][2] = 255;
 
          }
-
+        
          else {
-           matriz[i][j][0] = 255;
-           matriz[i][j][1] = 0;
-           matriz[i][j][2] = 0;
+           matriz[i][j][0] = cam->quadro[i][j][0];
+           matriz[i][j][1] = cam->quadro[i][j][1];
+           matriz[i][j][2] = cam->quadro[i][j][2];
          }
 
 
@@ -165,9 +170,9 @@ int main() {
      }
       /**********/
      //limiarizacao(fundo, altura, largura);
-     otsu_binarizacao(fundo, fundo, altura, largura);
+     //otsu_binarizacao(fundo, fundo, altura, largura);
      camera_copia(cam, cam->quadro, esquerda);
-     camera_copia(cam, fundo, direita);
+     camera_copia(cam, matriz, direita);
        //camera_copia(cam, fundo, direita);
       /**********/
 
