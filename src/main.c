@@ -34,7 +34,7 @@ int main() {
 
   //Bloco de variaveis
   int euclidiana = 0;
-  int max_x = 0, max_y = 0, min_x = 0, min_y = 0;
+  float max_x = 0, max_y = 0, min_x = 0, min_y = 0;
   camera *cam = camera_inicializa(0);
   //Fim do bloco de variaveis
 
@@ -89,19 +89,22 @@ int main() {
   int desenhar = 0;
   int terminar = 0;
 
-   
+
     //otsu_binarizacao(fundo, fundo, altura, largura);
     //limiarizacao(fundo, altura, largura);
-
+  int atualiza = 0;
   while(1) {
 
+    if((atualiza%20) == 0){
+      atualiza = 0;
       for (int i = 0; i < altura; i++)
-    {
-      for (int j = 0; j < largura; j++)
       {
-        for (int k = 0; k < 3; k++)
+        for (int j = 0; j < largura; j++)
         {
-          fundo[i][j][k] = cam->quadro[i][j][k];
+          for (int k = 0; k < 3; k++)
+          {
+            fundo[i][j][k] = cam->quadro[i][j][k];
+          }
         }
       }
     }
@@ -140,71 +143,86 @@ int main() {
       max_y = 0;
       min_x = altura;
       min_y = largura;
-
+      atualiza ++;
+      
+      int r, g ,b;
       for (int i = 0; i < altura; i++)
       {
         for (int j = 0; j < largura; j++)
         {
 
           euclidiana = distancia_euclidiana(fundo[i][j][0], fundo[i][j][1], fundo[i][j][2],
-                          cam->quadro[i][j][0], cam->quadro[i][j][1], cam->quadro[i][j][2]);
-
+            cam->quadro[i][j][0], cam->quadro[i][j][1], cam->quadro[i][j][2]);
           if(euclidiana > 50) {
-           max_x = i;
-           max_y = j;
-           matriz[i][j][0] = 0;
-           matriz[i][j][1] = 255;
-           matriz[i][j][2] = 255;
 
-         }
-        
-         else {
-           matriz[i][j][0] = cam->quadro[i][j][0];
-           matriz[i][j][1] = cam->quadro[i][j][1];
-           matriz[i][j][2] = cam->quadro[i][j][2];
-         }
+           matriz[i][j][0] = 255;
+           matriz[i][j][1] = 0;
+           matriz[i][j][2] = 0;
 
+           r = matriz[i][j][0];
+           g = matriz[i][j][1];
+           b = matriz[i][j][2];
 
+           if(r > g + b) {
+            cy += i;
+            cx += j;
+            cn++;
+          }
+
+        }
+
+        else {
+         matriz[i][j][0] = cam->quadro[i][j][0];
+         matriz[i][j][1] = cam->quadro[i][j][1];
+         matriz[i][j][2] = cam->quadro[i][j][2];
        }
 
+
      }
+
+   }
+
+
+
       /**********/
      //limiarizacao(fundo, altura, largura);
      //otsu_binarizacao(fundo, fundo, altura, largura);
-     camera_copia(cam, cam->quadro, esquerda);
-     camera_copia(cam, matriz, direita);
+   camera_copia(cam, cam->quadro, esquerda);
+   if(cn > 0)
+    al_draw_circle(cx / cn, cy / cn, 100, cor, 1);
+  camera_copia(cam, matriz, direita);
        //camera_copia(cam, fundo, direita);
       /**********/
 
 
-     al_flip_display();
-   }
- }
+  al_flip_display();
+}
+}
 
   /**********/
 
- al_destroy_bitmap(direita);
+al_destroy_bitmap(direita);
 
- al_destroy_bitmap(esquerda);
+al_destroy_bitmap(esquerda);
 
- camera_libera_matriz(cam, matriz);
+camera_libera_matriz(cam, matriz);
 
   /**********/
 
- al_stop_timer(timer);
+al_stop_timer(timer);
 
- al_unregister_event_source(queue, al_get_display_event_source(display));
- al_unregister_event_source(queue, al_get_timer_event_source(timer));
+al_unregister_event_source(queue, al_get_display_event_source(display));
+al_unregister_event_source(queue, al_get_timer_event_source(timer));
 
- al_destroy_event_queue(queue);
- al_destroy_display(display);
- al_destroy_timer(timer);
+al_destroy_event_queue(queue);
+al_destroy_display(display);
+al_destroy_timer(timer);
 
- al_shutdown_primitives_addon();
- al_shutdown_image_addon();
- al_uninstall_system();
+al_shutdown_primitives_addon();
+al_shutdown_image_addon();
+al_uninstall_system();
 
- camera_finaliza(cam);
+camera_finaliza(cam);
 
- return EXIT_SUCCESS;
+return EXIT_SUCCESS;
 }
