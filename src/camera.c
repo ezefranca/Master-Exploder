@@ -34,8 +34,8 @@ camera *camera_inicializa(int i) {
       cam = malloc(sizeof(camera));
 
       cam->capture = capture;
-      cam->altura = (image->height)/2;
-      cam->largura = (image->width)/2;
+      cam->altura = (image->height)/1.5;
+      cam->largura = (image->width)/1.5;
       cam->quadro = camera_aloca_matriz(cam);
 
       camera_converte(cam, image);
