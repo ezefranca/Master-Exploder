@@ -88,11 +88,8 @@ int main() {
 
   int desenhar = 0;
   int terminar = 0;
-
-
-    //otsu_binarizacao(fundo, fundo, altura, largura);
-    //limiarizacao(fundo, altura, largura);
   int atualiza = 0;
+  
   while(1) {
 
     if((atualiza%20) == 0){
