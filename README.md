@@ -17,7 +17,7 @@ Alunos:
 
 Orientador:
 
-[![cv](http://gediscursivos.files.wordpress.com/2012/12/lattes.png?w=869)](http://lattes.cnpq.br/5909154335340519)[Profº Marcelo Hashimoto](https://www.github.com/mhsenac)
+[![cv](http://gediscursivos.files.wordpress.com/2012/12/lattes.png?w=869)](http://lattes.cnpq.br/5909154335340519)  [Profº Marcelo Hashimoto](https://www.github.com/mhsenac)
 
 
 Requisitos de instalação
@@ -40,7 +40,10 @@ Linux
 --------
 ![Linux](http://www.freecultureproject.com/img/logo_linux.png)
 
-Consulte o projeto: (colocar link script)
+Consulte o projeto: [> EnviromentSetup](https://github.com/senacbcc/OpenCV-Allegro5-InstallScript)
+
+
+Agradecimentos a [Gabriel Garcia](https://github.com/GabrielGarcia1)
 
 OSX
 --------
