@@ -1,0 +1,94 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		28C4D16518C94808006F7947 /* camera.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = camera.c; sourceTree = "<group>"; };
+		28C4D16618C94808006F7947 /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
+		28C4D16718C94808006F7947 /* LEIAME.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LEIAME.txt; sourceTree = "<group>"; };
+		28C4D16818C94808006F7947 /* limiarizacao.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = limiarizacao.c; sourceTree = "<group>"; };
+		28C4D16918C94808006F7947 /* limiarizacao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = limiarizacao.h; sourceTree = "<group>"; };
+		28C4D16A18C94808006F7947 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		28C4D16B18C94808006F7947 /* otsu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = otsu.c; sourceTree = "<group>"; };
+		28C4D16C18C94808006F7947 /* otsu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = otsu.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		28C4D15D18C946B3006F7947 = {
+			isa = PBXGroup;
+			children = (
+				28C4D16418C94808006F7947 /* src */,
+			);
+			sourceTree = "<group>";
+		};
+		28C4D16418C94808006F7947 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				28C4D16518C94808006F7947 /* camera.c */,
+				28C4D16618C94808006F7947 /* camera.h */,
+				28C4D16718C94808006F7947 /* LEIAME.txt */,
+				28C4D16818C94808006F7947 /* limiarizacao.c */,
+				28C4D16918C94808006F7947 /* limiarizacao.h */,
+				28C4D16A18C94808006F7947 /* main.c */,
+				28C4D16B18C94808006F7947 /* otsu.c */,
+				28C4D16C18C94808006F7947 /* otsu.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		28C4D15E18C946B3006F7947 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
+			buildConfigurationList = 28C4D16118C946B3006F7947 /* Build configuration list for PBXProject "BCC-1s14-PI3-Master-Exploder" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 28C4D15D18C946B3006F7947;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		28C4D16218C946B3006F7947 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		28C4D16318C946B3006F7947 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		28C4D16118C946B3006F7947 /* Build configuration list for PBXProject "BCC-1s14-PI3-Master-Exploder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28C4D16218C946B3006F7947 /* Debug */,
+				28C4D16318C946B3006F7947 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 28C4D15E18C946B3006F7947 /* Project object */;
+}
