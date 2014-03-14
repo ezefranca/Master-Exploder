@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "otsu.h"
 #include "limiarizacao.h"
+#include "normalizacaorgb.h"
 
 #define FPS 60
 
@@ -184,6 +185,7 @@ int main() {
       /**********/
      //limiarizacao(fundo, altura, largura);
      //otsu_binarizacao(fundo, fundo, altura, largura);
+   normalizacaorgb(matriz, altura, largura);
    camera_copia(cam, cam->quadro, esquerda);
    if(cn > 0)
     al_draw_circle(cx / cn, cy / cn, 100, cor, 1);
