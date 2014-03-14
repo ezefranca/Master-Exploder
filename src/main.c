@@ -106,7 +106,7 @@ int main() {
         }
       }
     }
-
+    //normalizacaorgb(fundo, altura, largura);
     ALLEGRO_EVENT event;
 
     al_wait_for_event(queue, &event);
@@ -143,7 +143,8 @@ int main() {
       min_y = largura;
       atualiza ++;
       
-      int r, g ,b;
+      int r, g ,b, media;
+
       for (int i = 0; i < altura; i++)
       {
         for (int j = 0; j < largura; j++)
@@ -162,17 +163,26 @@ int main() {
            b = matriz[i][j][2];
 
            if(r > g + b) {
+            if (i > cy && j > cx)
+            {
             cy += i;
             cx += j;
             cn++;
+            }
           }
 
         }
 
         else {
-         matriz[i][j][0] = cam->quadro[i][j][0];
-         matriz[i][j][1] = cam->quadro[i][j][1];
-         matriz[i][j][2] = cam->quadro[i][j][2];
+         media = r + g + b;
+         /*
+         matriz[i][j][0] = cam->quadro[i][j][0] / media;
+         matriz[i][j][1] = cam->quadro[i][j][1] / media;
+         matriz[i][j][2] = cam->quadro[i][j][2] / media;
+          */
+        matriz[i][j][0] = r / media;
+        matriz[i][j][1] = g / media;
+        matriz[i][j][2] = b / media;
        }
 
 
@@ -185,7 +195,7 @@ int main() {
       /**********/
      //limiarizacao(fundo, altura, largura);
      //otsu_binarizacao(fundo, fundo, altura, largura);
-   normalizacaorgb(matriz, altura, largura);
+   
    camera_copia(cam, cam->quadro, esquerda);
    if(cn > 0)
     al_draw_circle(cx / cn, cy / cn, 100, cor, 1);
