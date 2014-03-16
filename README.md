@@ -34,7 +34,8 @@ Windows
 --------
 ![Windows](http://images.dailytech.com/frontpage/fp__Windows-8-logo-100x100.jpg)
 
-(adicionar)
+Compile o Allegro e OpenCV para usar por prompt de comando seguindo o tutorial: [Compilando no Windows](https://github.com/ezefranca/BCC-1s14-PI3-Master-Exploder/wiki/Compila%C3%A7%C3%A3o-e-Instala%C3%A7%C3%A3o-Allegro-5-e-OpenCV-no-Windows)
+
 
 Linux
 --------
@@ -70,6 +71,12 @@ Como compilar
 
 ```
 $ make
+```
+
+No Windows com MinGW:
+
+```
+$ mingw32-make
 ```
 
 Master Exploder
