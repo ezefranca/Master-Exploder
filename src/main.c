@@ -5,6 +5,7 @@
 #include <math.h>
 #include "camera.h"
 #include "otsu.h"
+#include "config.h"
 #include "utils.h"
 #include "limiarizacao.h"
 #include "normalizacaorgb.h"
