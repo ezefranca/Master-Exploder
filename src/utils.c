@@ -11,3 +11,10 @@ void erro(char *mensagem) {
 
   exit(EXIT_FAILURE);
 }
+
+float string2float(char *string){
+	float valor;
+
+	sscanf(string, "%f", &valor);
+	return valor;	
+}

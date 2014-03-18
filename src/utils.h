@@ -3,4 +3,6 @@
 
 void erro(char *mensagem);
 
+float string2float(char *string);
+
 #endif
