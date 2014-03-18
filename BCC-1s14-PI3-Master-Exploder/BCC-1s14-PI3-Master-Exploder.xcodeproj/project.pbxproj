@@ -11,6 +11,9 @@
 		2815F0E518D767DC0083CCA1 /* limiarizacao.c in Sources */ = {isa = PBXBuildFile; fileRef = 2815F0DF18D767DC0083CCA1 /* limiarizacao.c */; };
 		2815F0E618D767DC0083CCA1 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 2815F0E118D767DC0083CCA1 /* main.c */; };
 		2815F0E718D767DC0083CCA1 /* otsu.c in Sources */ = {isa = PBXBuildFile; fileRef = 2815F0E218D767DC0083CCA1 /* otsu.c */; };
+		283D514E18D7D40A00DB184F /* config.c in Sources */ = {isa = PBXBuildFile; fileRef = 283D514C18D7D40A00DB184F /* config.c */; };
+		283D515118D7D41900DB184F /* normalizacaorgb.c in Sources */ = {isa = PBXBuildFile; fileRef = 283D514F18D7D41900DB184F /* normalizacaorgb.c */; };
+		283D515418D7D42900DB184F /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 283D515218D7D42900DB184F /* utils.c */; };
 		28C4D1F518C953CC006F7947 /* Allegro-5.1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C4D1EA18C953CC006F7947 /* Allegro-5.1.framework */; };
 		28C4D1F618C953CC006F7947 /* AllegroAcodec-5.1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C4D1EB18C953CC006F7947 /* AllegroAcodec-5.1.framework */; };
 		28C4D1F718C953CC006F7947 /* AllegroAudio-5.1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C4D1EC18C953CC006F7947 /* AllegroAudio-5.1.framework */; };
@@ -67,6 +70,12 @@
 		2815F0E118D767DC0083CCA1 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../src/main.c; sourceTree = "<group>"; };
 		2815F0E218D767DC0083CCA1 /* otsu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = otsu.c; path = ../src/otsu.c; sourceTree = "<group>"; };
 		2815F0E318D767DC0083CCA1 /* otsu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = otsu.h; path = ../src/otsu.h; sourceTree = "<group>"; };
+		283D514C18D7D40A00DB184F /* config.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = config.c; path = ../src/config.c; sourceTree = "<group>"; };
+		283D514D18D7D40A00DB184F /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../src/config.h; sourceTree = "<group>"; };
+		283D514F18D7D41900DB184F /* normalizacaorgb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = normalizacaorgb.c; path = ../src/normalizacaorgb.c; sourceTree = "<group>"; };
+		283D515018D7D41900DB184F /* normalizacaorgb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = normalizacaorgb.h; path = ../src/normalizacaorgb.h; sourceTree = "<group>"; };
+		283D515218D7D42900DB184F /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils.c; path = ../src/utils.c; sourceTree = "<group>"; };
+		283D515318D7D42900DB184F /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utils.h; path = ../src/utils.h; sourceTree = "<group>"; };
 		28C4D1DE18C94F27006F7947 /* BCC-1s14-PI3-Master-Exploder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "BCC-1s14-PI3-Master-Exploder"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C4D1EA18C953CC006F7947 /* Allegro-5.1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Allegro-5.1.framework"; path = "/Library/Frameworks/Allegro-5.1.framework"; sourceTree = "<absolute>"; };
 		28C4D1EB18C953CC006F7947 /* AllegroAcodec-5.1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AllegroAcodec-5.1.framework"; path = "/Library/Frameworks/AllegroAcodec-5.1.framework"; sourceTree = "<absolute>"; };
@@ -106,6 +115,12 @@
 		28B4C31518D76847002D3756 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				283D515218D7D42900DB184F /* utils.c */,
+				283D515318D7D42900DB184F /* utils.h */,
+				283D514F18D7D41900DB184F /* normalizacaorgb.c */,
+				283D515018D7D41900DB184F /* normalizacaorgb.h */,
+				283D514C18D7D40A00DB184F /* config.c */,
+				283D514D18D7D40A00DB184F /* config.h */,
 				2815F0DC18D767DC0083CCA1 /* camera.c */,
 				2815F0DD18D767DC0083CCA1 /* camera.h */,
 				2815F0DE18D767DC0083CCA1 /* LEIAME.txt */,
@@ -206,9 +221,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2815F0E518D767DC0083CCA1 /* limiarizacao.c in Sources */,
+				283D515418D7D42900DB184F /* utils.c in Sources */,
 				2815F0E418D767DC0083CCA1 /* camera.c in Sources */,
 				2815F0E718D767DC0083CCA1 /* otsu.c in Sources */,
 				2815F0E618D767DC0083CCA1 /* main.c in Sources */,
+				283D514E18D7D40A00DB184F /* config.c in Sources */,
+				283D515118D7D41900DB184F /* normalizacaorgb.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
