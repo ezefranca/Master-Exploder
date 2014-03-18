@@ -5,16 +5,11 @@
 #include <math.h>
 #include "camera.h"
 #include "otsu.h"
+#include "utils.h"
 #include "limiarizacao.h"
 #include "normalizacaorgb.h"
 
 #define FPS 60
-
-void erro(char *mensagem) {
-  fputs(mensagem, stderr);
-
-  exit(EXIT_FAILURE);
-}
 
 int distancia_euclidiana(unsigned char r_velho, unsigned char g_velho, unsigned char b_velho, unsigned char r_atual, unsigned char g_atual, unsigned char b_atual){
 
@@ -66,6 +61,10 @@ int main() {
   if(!queue)
     erro("erro na criacao da fila\n");
 
+  ALLEGRO_CONFIG *config = carregar_configuracao("configuration.conf");
+  if(!config)
+	criar_configuracao("configuration.conf");
+	
   al_register_event_source(queue, al_get_timer_event_source(timer));
   al_register_event_source(queue, al_get_display_event_source(display));
 
