@@ -11,10 +11,9 @@ Integrantes
 ---------------------
 Alunos:
 
-[![Ezequiel França](https://0.gravatar.com/avatar/3b4da2efb9fda1566a2907dd551fc907?d=https%3A%2F%2Fidenticons.github.com%2F3a716d3607e5bf63ee1c167fa81c8f5d.png&r=x&s=100)](https://github.com/ezefranca) | [![Gabriel Fontenelle](http://www.gravatar.com/avatar/.png)](https://github.com/OdnaropX) | [![Eryckson Magno](https://2.gravatar.com/avatar/0fd66c4aa854213fcd775f34c41d9414?d=https%3A%2F%2Fidenticons.github.com%2F7715c71e8dd7e36002865e63a975843a.png&r=x&s=100)](http://github.com/eryckson) | [![Ivan Probst](http://m.c.lnkd.licdn.com/mpr/pub/image-BuKiTUmt49Y4eE_bkOrrlmdwEApJipI8Xurfl0YnE-8JjUHdBuKfc8KtEGCxxkD60U3X/ivan-probst.jpg)](https://github.com/20ivan)
+[![Ezequiel França](https://0.gravatar.com/avatar/3b4da2efb9fda1566a2907dd551fc907?d=https%3A%2F%2Fidenticons.github.com%2F3a716d3607e5bf63ee1c167fa81c8f5d.png&r=x&s=100)](https://github.com/ezefranca) | [![Gabriel Fontenelle](http://www.gravatar.com/avatar/.png)](https://github.com/OdnaropX) | [![Eryckson Magno](https://2.gravatar.com/avatar/0fd66c4aa854213fcd775f34c41d9414?d=https%3A%2F%2Fidenticons.github.com%2F7715c71e8dd7e36002865e63a975843a.png&r=x&s=100)](http://github.com/eryckson)
 --- | --- | --- | --- | --- | --- | ---
-[Ezequiel França](github.com/ezefranca) | [Gabriel Fontenelle](https://github.com/OdnaropX) | [Eryckson Magno](https://github.com/eryckson) | [Ivan Probst](https://github.com/20ivan)
-
+[Ezequiel França](github.com/ezefranca) | [Gabriel Fontenelle](https://github.com/OdnaropX) | [Eryckson Magno](https://github.com/eryckson)
 Orientador:
 
 [![cv](http://gediscursivos.files.wordpress.com/2012/12/lattes.png?w=869)](http://lattes.cnpq.br/5909154335340519)  [Profº Marcelo Hashimoto](https://www.github.com/mhsenac)
@@ -69,13 +68,19 @@ ou baixe o projeto todo compactado em zip [![Download Zip](https://raw.github.co
 Como compilar
 ----------------------
 
-```
+Linux / MacOSX
+
+Navegue até o diretório do projeto e digite:
+
+```bash
 $ make
 ```
 
-No Windows com MinGW:
+Windows com MinGW:
 
-```
+Navegue até o diretório do projeto e digite:
+
+```bash
 $ mingw32-make
 ```
 
@@ -94,8 +99,4 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unpor
 
 ![My image](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)
 
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ezefranca/bcc-1s14-pi3-master-exploder/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
