@@ -183,27 +183,28 @@ al_start_timer(timer);
 return true;
 }
 
-// void extremamente_rudimentar_fecho_convexo(unsigned char ***matriz, int vizinhos, int localX, int localY){
-//     int teste = 0;
-//      ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
-//     for (int k = 0; k < 3; k++)
-//         {
+void extremamente_rudimentar_fecho_convexo(unsigned char ***matriz, int vizinhos, int localX, int localY){
+  ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
+  int teste = 0;
+  for (int k = 0; k < 3; k++)
+  {
 
-//             if ((matriz [localX][localY][k] == 255) && (matriz [localX + 1][localY + 1][k] == 255))
-//             {
-//                 teste++;
-//                 //printf("somando");
-//             }
-//             if (teste == 3)
-//             {
-//                 //printf("carajo");
-//                 al_draw_line(localX, localY, (localX + 3), localY, vermelho, 5);
-//                 //printf("%d, %d e %d, %d\n", localX, localY, localX+1, localY);
-//                 al_draw_triangle(localX, localY, localX+1, localY+1, localX+2, localY+2, vermelho, 5);
-//             }
-//         }
-//     return;
-// }
+   if ((matriz [localY][localX][k] == 255) && (matriz [localY + 1][localX + 1][k] == 255))
+   {
+       teste++;
+                 //printf("somando");
+   }
+   if (teste == 3)
+   {
+       //printf("carajo");
+      // al_draw_line(localX, localY, (localX + 5), localY, vermelho, 5);
+       //al_draw_line(localX, localY, localX, (localY + 5), vermelho, 5);
+                 //printf("%d, %d e %d, %d\n", localX, localY, localX+1, localY);
+      al_draw_triangle(localX, localY, (localX + 5) , (localY - 5), (localX - 5), (localY + 5), vermelho, 5);
+   }
+}
+return;
+}
 
 
 int main() {
@@ -374,13 +375,6 @@ int main() {
             //     }
             // }
 
-            //   for (int i = 0; i < altura - 1; i++)
-            // {
-            //     for (int j = 0; j < largura - 1; j++)
-            //     {
-            //         extremamente_rudimentar_fecho_convexo(matriz, 5, i, j);
-            //     }
-            // }
 
 
             /**********/
@@ -402,38 +396,47 @@ int main() {
             if(x >= 720)
                 x = 0;
 
-        al_draw_bitmap_region(teste_imagem, frame_atual * frame_largura, 0, frame_largura, frame_altura, x, y, 0);
-        al_draw_line(20, 20, 20, 720, al_map_rgb_f(255,0,0), 10);
-        al_flip_display();
+            al_draw_bitmap_region(teste_imagem, frame_atual * frame_largura, 0, frame_largura, frame_altura, x, y, 0);
+        //al_draw_line(20, 20, 20, 720, al_map_rgb_f(255,0,0), 10);
+            for (int i = 0; i < altura - 1; i++)
+            {
+               for (int j = 0; j < largura - 1; j++)
+               {
+                    // para rotacionar a mao
+                   //extremamente_rudimentar_fecho_convexo(matriz, 5, i, j);
 
-    }
-}
+                    extremamente_rudimentar_fecho_convexo(matriz, 5, j, i);
+               }
+           }
+           al_flip_display();
+       }
+   }
 
     /**********/
 
-al_destroy_bitmap(direita);
+   al_destroy_bitmap(direita);
 
-al_destroy_bitmap(esquerda);
+   al_destroy_bitmap(esquerda);
 
-camera_libera_matriz(cam, matriz);
+   camera_libera_matriz(cam, matriz);
 
     /**********/
 
-al_stop_timer(timer);
+   al_stop_timer(timer);
 
-al_unregister_event_source(queue, al_get_display_event_source(display));
-al_unregister_event_source(queue, al_get_timer_event_source(timer));
+   al_unregister_event_source(queue, al_get_display_event_source(display));
+   al_unregister_event_source(queue, al_get_timer_event_source(timer));
 
-al_destroy_event_queue(queue);
-al_destroy_display(display);
-al_destroy_timer(timer);
+   al_destroy_event_queue(queue);
+   al_destroy_display(display);
+   al_destroy_timer(timer);
 
-al_shutdown_primitives_addon();
-al_shutdown_image_addon();
-al_uninstall_system();
+   al_shutdown_primitives_addon();
+   al_shutdown_image_addon();
+   al_uninstall_system();
 
-camera_finaliza(cam);
+   camera_finaliza(cam);
 
-return 1;
+   return 1;
     //return EXIT_SUCCESS;
 }
