@@ -1,21 +1,60 @@
+
+/*--------------------------------------------------------------*/
+/* Bibliotecas */
+
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
+
+
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-#include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_primitives.h>
+#include <stdio.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 #include <math.h>
-#include "camera.h"
 #include "otsu.h"
 #include "config.h"
 #include "utils.h"
 #include "limiarizacao.h"
 #include "normalizacaorgb.h"
 
+/*----------------------------------------------------------------- */
+/* Camera e OpenCV */
+
+#include <opencv/highgui.h>
+#include "camera.h"
+
+/*------------------------------------------------------------------*/
+/* Constantes */
+
 #define FPS 60
 
-ALLEGRO_BITMAP *fundo_teste;
+/*------------------------------------------------------------------*/
+/* Globais */
+
+ALLEGRO_FONT *fonte = NULL;
+ALLEGRO_BITMAP *teste_imagem = NULL;
+ALLEGRO_TIMER *timer = NULL;
+ALLEGRO_DISPLAY *display = NULL;
+ALLEGRO_CONFIG *config = NULL;
+ALLEGRO_EVENT_QUEUE *queue = NULL;
+
+camera *cam;
+
+int largura;
+int altura;
 
 int distancia_euclidiana(unsigned char r_velho, unsigned char g_velho, unsigned char b_velho, unsigned char r_atual, unsigned char g_atual, unsigned char b_atual){
 
@@ -68,6 +107,82 @@ void valorizador_de_bordas(unsigned char ***matriz, int vizinhos, int localX, in
     }
     return;
 }
+
+/*------------------------------------------------------------------*/
+/* Inicialializa Allegro 5 */
+
+bool init() {
+
+    cam = camera_inicializa(0);
+    if(!cam)
+        erro("erro na inicializacao da camera\n");
+
+    largura = cam->largura;
+    altura = cam->altura;
+
+    if(!al_init())
+        erro("erro na inicializacao do allegro\n");
+
+    if(!al_init_image_addon())
+        erro("erro na inicializacao do adicional de imagem\n");
+
+    if(!al_init_primitives_addon())
+        erro("erro na inicializacao do adicional de primitivas\n");
+
+    if (!al_install_keyboard())
+        erro("erro ao inicializar o teclado.\n");
+
+    if(!al_install_audio())
+        erro("erro ao inicializar o audio.\n");
+
+    if(!al_init_acodec_addon())
+        erro("erro ao iniciar o audio codec.!\n");
+
+    if(!al_reserve_samples(1))
+        erro("Falha ao alocar canais de audio.\n");
+
+    timer = al_create_timer(1.0 / FPS);
+    if(!timer)
+        erro("erro na criacao do relogio\n");
+
+    display = al_create_display(2 * largura, altura);
+    if(!display)
+        erro("erro na criacao da janela\n");
+
+    queue = al_create_event_queue();
+    if(!queue)
+        erro("erro na criacao da fila\n");
+
+    config = carregar_configuracao("configuration.conf");
+    if(!config)
+        criar_configuracao("configuration.conf");
+
+    teste_imagem = al_load_bitmap("../resource/img/teste.png");
+    if(!teste_imagem)
+      erro("Falha ao carregar imagem teste\n");
+
+    // Inicialização do add-on para uso de fontes
+  al_init_font_addon();
+
+  if (!al_init_ttf_addon())
+    erro("erro ao inicializar add-on allegro_ttf.\n");
+
+fonte = al_load_font("../resource/fonte/Cartoon.ttf", 50, 10);
+if(!fonte)
+    erro("erro no carregamento da fonte\n");
+    /*
+
+    */
+
+al_register_event_source(queue, al_get_timer_event_source(timer));
+al_register_event_source(queue, al_get_display_event_source(display));
+
+al_start_timer(timer);
+
+    /**********/
+return true;
+}
+
 // void extremamente_rudimentar_fecho_convexo(unsigned char ***matriz, int vizinhos, int localX, int localY){
 //     int teste = 0;
 //      ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
@@ -95,62 +210,20 @@ int main() {
 
     //Bloco de variaveis
     int euclidiana = 0;
-    float max_x = 0, max_y = 0, min_x = 0, min_y = 0;
-    fundo_teste = al_load_bitmap("teste.png");
-    camera *cam = camera_inicializa(0);
-    //Fim do bloco de variaveis
 
-    if(!cam)
-        erro("erro na inicializacao da camera\n");
+    //Variaveis de teste
+    const int maxFrame = 3;
+    int frame_atual = 0;
+    int frame_contador = 0;
+    int frame_delay = 3;
+    int frame_largura = 100;
+    int frame_altura = 150;
 
-    int largura = cam->largura;
-    int altura = cam->altura;
+    int x = largura;
+    int y = altura;
 
-    if(!al_init())
-        erro("erro na inicializacao do allegro\n");
-
-    if(!al_init_image_addon())
-        erro("erro na inicializacao do adicional de imagem\n");
-
-    if(!al_init_primitives_addon())
-        erro("erro na inicializacao do adicional de primitivas\n");
-
-    if (!al_init_ttf_addon())
-        erro("erro ao inicializar add-on allegro_ttf.\n");
-
-    if (!al_install_keyboard())
-        erro("erro ao inicializar o teclado.\n");
-
-    if(!al_install_audio())
-        erro("erro ao inicializar o audio.\n");
-
-    if(!al_init_acodec_addon())
-        erro("erro ao iniciar o audio codec.!\n");
-
-    if(!al_reserve_samples(1))
-        erro("Falha ao alocar canais de audio.\n");
-
-    ALLEGRO_TIMER *timer = al_create_timer(1.0 / FPS);
-    if(!timer)
-        erro("erro na criacao do relogio\n");
-
-    ALLEGRO_DISPLAY *display = al_create_display(2 * largura, altura);
-    if(!display)
-        erro("erro na criacao da janela\n");
-
-    ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
-    if(!queue)
-        erro("erro na criacao da fila\n");
-
-    ALLEGRO_CONFIG *config = carregar_configuracao("configuration.conf");
-    if(!config)
-        criar_configuracao("configuration.conf");
-
-    ALLEGRO_FONT *fonte = al_load_font("fonte.ttf", 50, 10);
-    if(!fonte)
-        erro("erro no carregamento da fonte\n");
-
-
+    //Inicializa Allegro / OpenCV
+    init();
 
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
@@ -167,18 +240,17 @@ int main() {
 
     ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
 
-    //ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
+    ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
 
     ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
-
-    ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(fundo_teste, 0, 0, largura, altura);
-
 
     /**********/
 
     int desenhar = 0;
     int terminar = 0;
     int atualiza = 0;
+
+    int andar = 1;
 
     while(1) {
 
@@ -217,6 +289,7 @@ int main() {
         if(desenhar && al_is_event_queue_empty(queue)) {
             desenhar = 0;
             camera_atualiza(cam);
+
             /**********/
 
             float cy = 0;
@@ -225,17 +298,13 @@ int main() {
 
             //limiarizacao(cam->quadro, altura, largura);
             //otsu_binarizacao(cam->quadro, cam->quadro, altura, largura);
-
-            max_x = 0;
-            max_y = 0;
-            min_x = altura;
-            min_y = largura;
             atualiza ++;
 
             int r, g ,b, media;
 
             for (int i = 0; i < altura; i++)
             {
+
                 for (int j = 0; j < largura; j++)
                 {
 
@@ -319,36 +388,52 @@ int main() {
             //otsu_binarizacao(fundo, fundo, altura, largura);
             camera_copia(cam, matriz, direita);
             camera_copia(cam, cam->quadro, esquerda);
-            //camera_copia(cam, cam->quadro, fundo_teste);
-           // al_draw_bitmap(fundo_teste, 2, 2, 0);
-            al_flip_display();
-        }
+
+            if(++frame_contador >= frame_delay)
+            {
+                if(++frame_atual >= maxFrame)
+                    frame_atual = 0;
+
+                frame_contador = 0;
+            }
+
+            x += 3;
+
+            if(x >= 720)
+                x = 0;
+
+        al_draw_bitmap_region(teste_imagem, frame_atual * frame_largura, 0, frame_largura, frame_altura, x, y, 0);
+        al_draw_line(20, 20, 20, 720, al_map_rgb_f(255,0,0), 10);
+        al_flip_display();
+
     }
+}
 
     /**********/
 
-    al_destroy_bitmap(direita);
+al_destroy_bitmap(direita);
 
-    al_destroy_bitmap(esquerda);
+al_destroy_bitmap(esquerda);
 
-    camera_libera_matriz(cam, matriz);
+camera_libera_matriz(cam, matriz);
 
     /**********/
 
-    al_stop_timer(timer);
+al_stop_timer(timer);
 
-    al_unregister_event_source(queue, al_get_display_event_source(display));
-    al_unregister_event_source(queue, al_get_timer_event_source(timer));
+al_unregister_event_source(queue, al_get_display_event_source(display));
+al_unregister_event_source(queue, al_get_timer_event_source(timer));
 
-    al_destroy_event_queue(queue);
-    al_destroy_display(display);
-    al_destroy_timer(timer);
+al_destroy_event_queue(queue);
+al_destroy_display(display);
+al_destroy_timer(timer);
 
-    al_shutdown_primitives_addon();
-    al_shutdown_image_addon();
-    al_uninstall_system();
+al_shutdown_primitives_addon();
+al_shutdown_image_addon();
+al_uninstall_system();
 
-    camera_finaliza(cam);
+camera_finaliza(cam);
 
-    return EXIT_SUCCESS;
+return 1;
+    //return EXIT_SUCCESS;
 }
