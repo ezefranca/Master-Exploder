@@ -12,6 +12,8 @@
 
 #define FPS 60
 
+ALLEGRO_BITMAP *fundo_teste;
+
 int distancia_euclidiana(unsigned char r_velho, unsigned char g_velho, unsigned char b_velho, unsigned char r_atual, unsigned char g_atual, unsigned char b_atual){
 
     int soma_r = r_velho - r_atual;
@@ -63,26 +65,27 @@ void valorizador_de_bordas(unsigned char ***matriz, int vizinhos, int localX, in
     }
     return;
 }
-void extremamente_rudimentar_fecho_convexo(unsigned char ***matriz, int vizinhos, int localX, int localY){
-    int teste = 0;
-     ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
-    for (int k = 0; k < 3; k++)
-        {
+// void extremamente_rudimentar_fecho_convexo(unsigned char ***matriz, int vizinhos, int localX, int localY){
+//     int teste = 0;
+//      ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
+//     for (int k = 0; k < 3; k++)
+//         {
 
-            if ((matriz [localX][localY][k] == 255) && (matriz [localX + 1][localY + 1][k] == 255))
-            {
-                teste++;
-                //printf("somando");
-            }
-            if (teste == 3)
-            {
-                //printf("carajo");
-                al_draw_line(localX, localY, (localX + 3), localY, vermelho, 5);
-                printf("%d, %d e %d, %d\n", localX, localY, localX+1, localY);
-            }
-        }
-    return;
-}
+//             if ((matriz [localX][localY][k] == 255) && (matriz [localX + 1][localY + 1][k] == 255))
+//             {
+//                 teste++;
+//                 //printf("somando");
+//             }
+//             if (teste == 3)
+//             {
+//                 //printf("carajo");
+//                 al_draw_line(localX, localY, (localX + 3), localY, vermelho, 5);
+//                 //printf("%d, %d e %d, %d\n", localX, localY, localX+1, localY);
+//                 al_draw_triangle(localX, localY, localX+1, localY+1, localX+2, localY+2, vermelho, 5);
+//             }
+//         }
+//     return;
+// }
 
 
 int main() {
@@ -90,6 +93,7 @@ int main() {
     //Bloco de variaveis
     int euclidiana = 0;
     float max_x = 0, max_y = 0, min_x = 0, min_y = 0;
+    fundo_teste = al_load_bitmap("teste.png");
     camera *cam = camera_inicializa(0);
     //Fim do bloco de variaveis
     
@@ -274,27 +278,22 @@ int main() {
             //     }
             // }
             
-              for (int i = 0; i < altura - 1; i++)
-            {
-                for (int j = 0; j < largura - 1; j++)
-                {
-                    extremamente_rudimentar_fecho_convexo(matriz, 5, i, j);
-                }
-            }
+            //   for (int i = 0; i < altura - 1; i++)
+            // {
+            //     for (int j = 0; j < largura - 1; j++)
+            //     {
+            //         extremamente_rudimentar_fecho_convexo(matriz, 5, i, j);
+            //     }
+            // }
             
             
             /**********/
             //limiarizacao(fundo, altura, largura);
             //otsu_binarizacao(fundo, fundo, altura, largura);
-            
-            camera_copia(cam, cam->quadro, esquerda);
-            if(cn > 0)
-                al_draw_circle(cx / cn, cy / cn, 100, cor, 1);
-            camera_copia(cam, matriz, direita);
-            //camera_copia(cam, fundo, direita);
-            /**********/
-            
-            
+            camera_copia(cam, matriz, esquerda);
+            camera_copia(cam, cam->quadro, direita);
+            //camera_copia(cam, cam->quadro, fundo_teste);
+            al_draw_bitmap(fundo_teste, 0, 0, 0);
             al_flip_display();
         }
     }
