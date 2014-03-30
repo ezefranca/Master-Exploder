@@ -2,6 +2,8 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 #include <math.h>
 #include "camera.h"
 #include "otsu.h"
@@ -111,6 +113,21 @@ int main() {
     
     if(!al_init_primitives_addon())
         erro("erro na inicializacao do adicional de primitivas\n");
+
+    if (!al_init_ttf_addon())
+        erro("erro ao inicializar add-on allegro_ttf.\n");
+
+    if (!al_install_keyboard())
+        erro("erro ao inicializar o teclado.\n");
+
+    if(!al_install_audio())
+        erro("erro ao inicializar o audio.\n");
+
+    if(!al_init_acodec_addon())
+        erro("erro ao iniciar o audio codec.!\n");
+
+    if(!al_reserve_samples(1))
+        erro("Falha ao alocar canais de audio.\n");
     
     ALLEGRO_TIMER *timer = al_create_timer(1.0 / FPS);
     if(!timer)
@@ -123,10 +140,16 @@ int main() {
     ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
     if(!queue)
         erro("erro na criacao da fila\n");
-    
+
     ALLEGRO_CONFIG *config = carregar_configuracao("configuration.conf");
     if(!config)
         criar_configuracao("configuration.conf");
+
+    ALLEGRO_FONT *fonte = al_load_font("fonte.ttf", 50, 10);
+    if(!fonte)
+        erro("erro no carregamento da fonte\n");
+
+
 
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
@@ -143,9 +166,12 @@ int main() {
     
     ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
     
-    ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
+    //ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
     
     ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
+
+    ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(fundo_teste, 0, 0, largura, altura);
+    
     
     /**********/
     
@@ -290,10 +316,10 @@ int main() {
             /**********/
             //limiarizacao(fundo, altura, largura);
             //otsu_binarizacao(fundo, fundo, altura, largura);
-            camera_copia(cam, matriz, esquerda);
-            camera_copia(cam, cam->quadro, direita);
+            camera_copia(cam, matriz, direita);
+            camera_copia(cam, cam->quadro, esquerda);
             //camera_copia(cam, cam->quadro, fundo_teste);
-            al_draw_bitmap(fundo_teste, 0, 0, 0);
+           // al_draw_bitmap(fundo_teste, 2, 2, 0);
             al_flip_display();
         }
     }
