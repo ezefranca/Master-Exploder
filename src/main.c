@@ -13,7 +13,7 @@
 #define FPS 60
 
 int distancia_euclidiana(unsigned char r_velho, unsigned char g_velho, unsigned char b_velho, unsigned char r_atual, unsigned char g_atual, unsigned char b_atual){
-    
+
     int soma_r = r_velho - r_atual;
     int soma_g = g_velho - g_atual;
     int soma_b = b_velho - b_atual;
@@ -22,13 +22,51 @@ int distancia_euclidiana(unsigned char r_velho, unsigned char g_velho, unsigned 
     int euclidiana = sqrt(quadrado);
     
     return euclidiana;
-    
-    
+}
+
+void removedor_ruidos(unsigned char ***matriz, int vizinhos, int localX, int localY){
+
+    for (int k = 0; k < 3; k++)
+    {
+        if ((matriz [localX][localY][k] == 255) && 
+            (matriz [localX - vizinhos][localY - vizinhos][k] != 255) && 
+            (matriz [localX + vizinhos][localY + vizinhos][k] != 255))
+        {
+            matriz[localX][localY][k] = 0;
+               // printf("vizinho FDP");
+        }
+    }
+    return;
+}
+
+void valorizador_de_bordas(unsigned char ***matriz, int vizinhos, int localX, int localY){
+
+    for (int i = 1; i < vizinhos; ++i)
+    {
+        for (int k = 0; k < 2; k++)
+        {
+            if ((matriz [localX][localY][k] == 255) && 
+                (matriz [localX - i][localY - i][k] == 255) && 
+                (matriz [localX + i][localY + i][k] == 255))
+            {
+                matriz[localX][localY][k] = 255;
+                matriz[localX][localY][k] = 255;
+                matriz[localX + 5][localY][k] = 255;
+                matriz[localX][localY + 5][k] = 255;
+                matriz[localX + 6][localY][k] = 0;
+                matriz[localX][localY + 6][k] = 0;
+                matriz[localX + 7][localY][k] = 0;
+                matriz[localX][localY + 7][k] = 0;
+                   // printf("vizinho FDP");
+            }
+        }
+    }
+    return;
 }
 
 
 int main() {
-    
+
     //Bloco de variaveis
     int euclidiana = 0;
     float max_x = 0, max_y = 0, min_x = 0, min_y = 0;
@@ -65,7 +103,7 @@ int main() {
     ALLEGRO_CONFIG *config = carregar_configuracao("configuration.conf");
     if(!config)
         criar_configuracao("configuration.conf");
-	
+
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
     
@@ -92,7 +130,7 @@ int main() {
     int atualiza = 0;
     
     while(1) {
-        
+
         if((atualiza % 2) == 0){
             atualiza = 0;
             for (int i = 0; i < altura; i++)
@@ -113,13 +151,13 @@ int main() {
         
         switch(event.type) {
             case ALLEGRO_EVENT_TIMER:
-                desenhar = 1;
-                break;
+            desenhar = 1;
+            break;
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                terminar = 1;
-                break;
+            terminar = 1;
+            break;
             default:
-                printf("evento desconhecido\n");
+            printf("evento desconhecido\n");
         }
         
         if(terminar)
@@ -149,11 +187,11 @@ int main() {
             {
                 for (int j = 0; j < largura; j++)
                 {
-                    
+
                     euclidiana = distancia_euclidiana(fundo[i][j][0], fundo[i][j][1], fundo[i][j][2],
-                                                      cam->quadro[i][j][0], cam->quadro[i][j][1], cam->quadro[i][j][2]);
+                      cam->quadro[i][j][0], cam->quadro[i][j][1], cam->quadro[i][j][2]);
                     if(euclidiana > 50) {
-                        
+
                         matriz[i][j][0] = 255;
                         matriz[i][j][1] = 255;
                         matriz[i][j][2] = 255;
@@ -180,7 +218,7 @@ int main() {
                          matriz[i][j][1] = cam->quadro[i][j][1] / media;
                          matriz[i][j][2] = cam->quadro[i][j][2] / media;
                          */
-                        if (media != 0) {
+                         if (media != 0) {
                             matriz[i][j][0] = r / media;
                             matriz[i][j][1] = g / media;
                             matriz[i][j][2] = b / media;
@@ -195,10 +233,34 @@ int main() {
                     }
                     
                     
+                    
                 }
                 
             }
+
+            for (int i = 5; i < altura - 5; i++)
+            {
+                for (int j = 5; j < largura - 5; j++)
+                {
+                    removedor_ruidos(matriz, 5, i, j);
+                }
+            }
+
+            // for (int i = 5; i < altura - 7; i++)
+            // {
+            //     for (int j = 5; j < largura - 7; j++)
+            //     {
+            //         valorizador_de_bordas(matriz, 5, i, j);
+            //     }
+            // }
             
+              for (int i = 5; i < altura - 5; i++)
+            {
+                for (int j = 5; j < largura - 5; j++)
+                {
+                    removedor_ruidos(matriz, 5, i, j);
+                }
+            }
             
             
             /**********/
