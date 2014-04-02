@@ -7,7 +7,9 @@ Projeto Integrador III, do Bacharelado em Ciência da Computação do Centro Uni
 
 O Projeto Integrador III, tem como objetivo o desenvolvimento de um jogo em linguagem C, utlizando a biblioteca Allegro 5, e sua iteração seja feira através de visão computacional.
 
-Apesar de utilizar o OpenCV para aquisição das imagens, todo tratamento e algoritmos para processamento de imagens e reconhecimento de padrões foi feito em linguagem C sem uso de funções prontas do OpenCV.
+Apesar de utilizar o OpenCV para aquisição das imagens, todo tratamento e algoritmos para processamento de imagens e reconhecimento de padrões foi feito em linguagem C sem uso de funções de processamento do OpenCV.
+
+A biblioteca para aquisição da câmera fornecida pelo [Profº Marcelo Hashimoto](https://www.github.com/mhsenac) para este trabalho pode ser encontrada [neste repositório](https://github.com/senacbcc/Hashimoto-Camera-lib).
 
 ####Integrantes
 ---------------------
@@ -103,7 +105,7 @@ O nome "Master Exploder" é uma referência a uma das músicas da banda [Tenaciu
 ####Licença e Créditos
 ----------------------
 
-Este obra foi licenciado sob uma [Licença Creative Commons Atribuição-CompartilhaIgual 3.0 Brasil.](http://creativecommons.org/choose/results-one?license_code=by-sa&jurisdiction=br&version=2.5&lang=pt_BR)
+Este trabalho foi licenciado sob uma [Licença Creative Commons Atribuição-CompartilhaIgual 3.0 Brasil.](http://creativecommons.org/choose/results-one?license_code=by-sa&jurisdiction=br&version=2.5&lang=pt_BR)
 
 This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unported License.](http://creativecommons.org/licenses/by-sa/3.0/)
 
