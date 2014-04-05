@@ -14,5 +14,5 @@ int normalizacao_preto_e_branco(unsigned char ***matriz, int altura, int largura
             matriz[i][j][2] = preto_e_branco;
         }
     }
-    return;
+    return 0;
 }
