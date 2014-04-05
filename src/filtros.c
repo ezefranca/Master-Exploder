@@ -1,6 +1,6 @@
 #include "filtros.h"
 
-void criar_filtro(unsigned char **filtro, int id_filtro){
+void criar_filtro(unsigned char filtro[][3], int id_filtro){
 	switch (id_filtro){
 		case LAPLACE:
 		filtro[0][0] = -1;
@@ -65,12 +65,13 @@ int aplica_filtro(unsigned char ***matriz, int altura, int largura, int id_filtr
 
 	criar_filtro(filtro, id_filtro);
 	int auxiliar[9];
-	for (int i = 1; i < altura - 1; i++)
+	for (int i = 10; i < altura - 10; i++)
 	{
-		for (int j = 1; j < largura - 1; j++)
+		for (int j = 10; j < largura - 10; j++)
 		{
 			for (int k = 0; k < 3; k++)
 			{
+				//printf("%d, %d, %d\n", i, j, k);
 				auxiliar[0] = matriz[i-1][j-1][k] * filtro[0][0];
 				auxiliar[1] = matriz[i-1][j][k] * filtro[0][1];
 				auxiliar[2] = matriz[i-1][j+1][k] * filtro[0][2];

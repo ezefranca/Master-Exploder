@@ -268,7 +268,8 @@ int main() {
             /**********/
             //limiarizacao(fundo, altura, largura);
             //otsu_binarizacao(fundo, fundo, altura, largura);
-
+            normalizacao_preto_e_branco(cam->quadro, altura, largura);
+            aplica_filtro(cam->quadro, altura, largura, 0);
             camera_copia(cam, cam->quadro, esquerda);
             if(cn > 0)
                 al_draw_circle(cx / cn, cy / cn, 100, cor, 1);
