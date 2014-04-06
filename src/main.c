@@ -11,6 +11,7 @@
 #include "normalizacaorgb.h"
 #include "normalizacao.h"
 #include "filtros.h"
+#include "matrizes.h"
 
 #define FPS 60
 
@@ -183,70 +184,70 @@ int main() {
             min_y = largura;
             atualiza ++;
 
-            int r, g ,b, media;
+            // int r, g ,b, media;
+            //
+            // for (int i = 0; i < altura; i++)
+            // {
+            //     for (int j = 0; j < largura; j++)
+            //     {
+            //
+            //         euclidiana = distancia_euclidiana(fundo[i][j][0], fundo[i][j][1], fundo[i][j][2],
+            //           cam->quadro[i][j][0], cam->quadro[i][j][1], cam->quadro[i][j][2]);
+            //         if(euclidiana > 50) {
+            //
+            //             matriz[i][j][0] = 255;
+            //             matriz[i][j][1] = 255;
+            //             matriz[i][j][2] = 255;
+            //
+            //             r = matriz[i][j][0];
+            //             g = matriz[i][j][1];
+            //             b = matriz[i][j][2];
+            //
+            //             if(r > g + b) {
+            //                 if (i > cy && j > cx)
+            //                 {
+            //                     cy += i;
+            //                     cx += j;
+            //                     cn++;
+            //                 }
+            //             }
+            //
+            //         }
+            //
+            //         else {
+            //             media = r + g + b;
+            //             /*
+            //              matriz[i][j][0] = cam->quadro[i][j][0] / media;
+            //              matriz[i][j][1] = cam->quadro[i][j][1] / media;
+            //              matriz[i][j][2] = cam->quadro[i][j][2] / media;
+            //              */
+            //              if (media != 0) {
+            //                 matriz[i][j][0] = r / media;
+            //                 matriz[i][j][1] = g / media;
+            //                 matriz[i][j][2] = b / media;
+            //             }
+            //             else {
+            //                 matriz[i][j][0] = 0;
+            //                 matriz[i][j][1] = 0;
+            //                 matriz[i][j][2] = 0;
+            //
+            //             }
+            //
+            //         }
+            //
+            //
+            //
+            //     }
+            //
+            // }
 
-            for (int i = 0; i < altura; i++)
-            {
-                for (int j = 0; j < largura; j++)
-                {
-
-                    euclidiana = distancia_euclidiana(fundo[i][j][0], fundo[i][j][1], fundo[i][j][2],
-                      cam->quadro[i][j][0], cam->quadro[i][j][1], cam->quadro[i][j][2]);
-                    if(euclidiana > 50) {
-
-                        matriz[i][j][0] = 255;
-                        matriz[i][j][1] = 255;
-                        matriz[i][j][2] = 255;
-
-                        r = matriz[i][j][0];
-                        g = matriz[i][j][1];
-                        b = matriz[i][j][2];
-
-                        if(r > g + b) {
-                            if (i > cy && j > cx)
-                            {
-                                cy += i;
-                                cx += j;
-                                cn++;
-                            }
-                        }
-
-                    }
-
-                    else {
-                        media = r + g + b;
-                        /*
-                         matriz[i][j][0] = cam->quadro[i][j][0] / media;
-                         matriz[i][j][1] = cam->quadro[i][j][1] / media;
-                         matriz[i][j][2] = cam->quadro[i][j][2] / media;
-                         */
-                         if (media != 0) {
-                            matriz[i][j][0] = r / media;
-                            matriz[i][j][1] = g / media;
-                            matriz[i][j][2] = b / media;
-                        }
-                        else {
-                            matriz[i][j][0] = 0;
-                            matriz[i][j][1] = 0;
-                            matriz[i][j][2] = 0;
-
-                        }
-
-                    }
-
-
-
-                }
-
-            }
-
-            for (int i = 5; i < altura - 5; i++)
-            {
-                for (int j = 5; j < largura - 5; j++)
-                {
-                    removedor_ruidos(matriz, 5, i, j);
-                }
-            }
+            // for (int i = 5; i < altura - 5; i++)
+            // {
+            //     for (int j = 5; j < largura - 5; j++)
+            //     {
+            //         removedor_ruidos(matriz, 5, i, j);
+            //     }
+            // }
 
             // for (int i = 5; i < altura - 7; i++)
             // {
@@ -256,23 +257,23 @@ int main() {
             //     }
             // }
 
-              for (int i = 5; i < altura - 5; i++)
-            {
-                for (int j = 5; j < largura - 5; j++)
-                {
-                    removedor_ruidos(matriz, 5, i, j);
-                }
-            }
+
 
 
             /**********/
             //limiarizacao(fundo, altura, largura);
             //otsu_binarizacao(fundo, fundo, altura, largura);
             normalizacao_preto_e_branco(cam->quadro, altura, largura);
-            aplica_filtro(cam->quadro, altura, largura, 0);
+            matriz_copia(cam->quadro, matriz, altura, largura);
+            limiarizacao(matriz, altura, largura);
+            laplaciano(cam->quadro, matriz, altura, largura);
+            filtro_mediana(matriz, matriz, altura, largura);
+
+
+            //cruzamento_de_zero(cam->quadro, cam->quadro, altura, largura, 1);
             camera_copia(cam, cam->quadro, esquerda);
             if(cn > 0)
-                al_draw_circle(cx / cn, cy / cn, 100, cor, 1);
+                al_draw_circle(cx / cn, cy / cn, 100, cor, 50);
             camera_copia(cam, matriz, direita);
             //camera_copia(cam, fundo, direita);
             /**********/

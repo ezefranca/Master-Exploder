@@ -1,106 +1,67 @@
-#include "filtros.h"
+	#include "filtros.h"
 
-void criar_filtro(unsigned char filtro[][3], int id_filtro){
-	switch (id_filtro){
-		case LAPLACE:
-		filtro[0][0] = -1;
-		filtro[0][1] = -1;
-		filtro[0][2] = -1;
-		filtro[1][0] = -1;
-		filtro[1][1] =  8;
-		filtro[1][2] = -1;
-		filtro[2][0] = -1;
-		filtro[2][1] = -1;
-		filtro[2][2] = -1;
-		break;
-		case FOURIER:
-		filtro[0][0] = -1;
-		filtro[0][1] = -1;
-		filtro[0][2] = -1;
-		filtro[1][0] = -1;
-		filtro[1][1] =  8;
-		filtro[1][2] = -1;
-		filtro[2][0] = -1;
-		filtro[2][1] = -1;
-		filtro[2][2] = -1;
-		break;
-		case SOBEL:
-		filtro[0][0] = -1;
-		filtro[0][1] = -1;
-		filtro[0][2] = -1;
-		filtro[1][0] = -1;
-		filtro[1][1] =  8;
-		filtro[1][2] = -1;
-		filtro[2][0] = -1;
-		filtro[2][1] = -1;
-		filtro[2][2] = -1;
-		break;
-		case PREWITT:
-		filtro[0][0] = -1;
-		filtro[0][1] = -1;
-		filtro[0][2] = -1;
-		filtro[1][0] = -1;
-		filtro[1][1] =  8;
-		filtro[1][2] = -1;
-		filtro[2][0] = -1;
-		filtro[2][1] = -1;
-		filtro[2][2] = -1;
-		break;
-		default:
-		filtro[0][0] = 1;
-		filtro[0][1] = 1;
-		filtro[0][2] = 1;
-		filtro[1][0] = 1;
-		filtro[1][1] = 1;
-		filtro[1][2] = 1;
-		filtro[2][0] = 1;
-		filtro[2][1] = 1;
-		filtro[2][2] = 1;
-		break;
-	}
-return;
-}
-
-int aplica_filtro(unsigned char ***matriz, int altura, int largura, int id_filtro){
-
-	criar_filtro(filtro, id_filtro);
-	int auxiliar[9];
-	for (int i = 10; i < altura - 10; i++)
-	{
-		for (int j = 10; j < largura - 10; j++)
+	//Matriz do Laplaciano
+	/*
+	| 0 -1  0|
+	|-1  4 -1|
+	| 0 -1  0|
+	*/
+	void laplaciano(unsigned char ***matriz, unsigned char ***saida, int altura, int largura){
+		int l;
+		for (int i = 1; i < altura - 1; i++)
+		for (int j = 1; j< largura - 1; j++)
+		for (int k = 0; k < 3; k++)
 		{
-			for (int k = 0; k < 3; k++)
-			{
-				//printf("%d, %d, %d\n", i, j, k);
-				auxiliar[0] = matriz[i-1][j-1][k] * filtro[0][0];
-				auxiliar[1] = matriz[i-1][j][k] * filtro[0][1];
-				auxiliar[2] = matriz[i-1][j+1][k] * filtro[0][2];
-				auxiliar[3] = matriz[i][j-1][k] * filtro[1][0];
-				auxiliar[4] = matriz[i][j][k] * filtro[1][1];
-				auxiliar[5] = matriz[i+1][j][k] * filtro[1][2];
-				auxiliar[6] = matriz[i][j+1][k] * filtro[2][0];
-				auxiliar[7] = matriz[i+1][j+1][k] * filtro[2][1];
-				auxiliar[8] = matriz[i+1][j-1][k] * filtro[2][2];
+			l = (matriz[i-1][j][k] + matriz[i][j-1][k] + matriz[i][j+1][k] + matriz[i+1][j][k] - 4*matriz[i][j][k]);
+			//Normalizacao, menor que zero eh preto, maior que zero eh branco
+			if( l > 255 || l < 0 ){
+				if(l > 255) l = 255;
+				else l = 0;
+			}
+			else saida[i][j][k] = l;
+		}
+	}
 
-				for(int p=0; p<=8; p++){
-					if(auxiliar[p] < 0)
-					auxiliar[p] = 0;
-					if(auxiliar[p] > 255)
-					auxiliar[p] = 255;
+	void filtro_mediana(unsigned char ***matriz, unsigned char ***saida, int altura, int largura){
+
+		unsigned char buffer[9];
+		int k = 0, n = 0;
+
+		for (int i = 0; i < altura; i++) {
+			for(int j = 0; j < largura; j++)
+
+			if(i > 0 && i < altura - 1 && j > 0 && j < largura - 1) {
+
+				k = 0;
+
+				for(int di = -1; di <= 1; di++)
+				for(int dj = -1; dj <= 1; dj++) {
+
+					buffer[k] = matriz[i + di][j + dj][0];
+					// buffer[k] = imagem[i + di][j + dj][1];
+					// buffer[k] = imagem[i + di][j + dj][2];
+					k++;
 				}
 
+				for(int k = 8; k > 0; k--)
+				for(int l = 0; l < k; l++){
 
-				matriz[i-1][j-1][k] = auxiliar[0];
-				matriz[i-1][j][k]   = auxiliar[1];
-				matriz[i-1][j+1][k] = auxiliar[2];
-				matriz[i][j-1][k]   = auxiliar[3];
-				matriz[i][j][k]     = auxiliar[4];
-				matriz[i+1][j][k]   = auxiliar[5];
-				matriz[i][j+1][k]   = auxiliar[6];
-				matriz[i+1][j+1][k] = auxiliar[7];
-				matriz[i+1][j-1][k] = auxiliar[8];
+					if(buffer[l] > buffer[l + 1]) {
+						n = buffer[l];
+						buffer[l] = buffer[l + 1];
+						buffer[l + 1] = n;
+					}
+
+					saida[i][j][0] = buffer[4];
+					saida[i][j][1] = buffer[4];
+					saida[i][j][2] = buffer[4];
+				}
+
+			}
+			else{
+				saida[i][j][0] = matriz[i][j][0];
+				saida[i][j][1] = matriz[i][j][1];
+				saida[i][j][2] = matriz[i][j][2];
 			}
 		}
 	}
-	return 0;
-}

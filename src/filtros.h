@@ -7,10 +7,7 @@
 #define PREWITT 3
 #define LINEAR  4
 
-unsigned char filtro[3][3];
-
-
-int aplica_filtro(unsigned char ***matriz, int altura, int largura, int id_filtro);
-void criar_filtro(unsigned char filtro[][3], int id_filtro);
+void laplaciano(unsigned char ***matriz, unsigned char ***saida, int altura, int largura);
+void filtro_mediana(unsigned char ***matriz, unsigned char ***saida, int altura, int largura);
 
 #endif
