@@ -7,7 +7,9 @@
 #define PREWITT 3
 #define LINEAR  4
 
-void laplaciano(unsigned char ***matriz, unsigned char ***saida, int altura, int largura);
+void filtro_laplaciano(unsigned char ***matriz, unsigned char ***saida, int altura, int largura);
 void filtro_mediana(unsigned char ***matriz, unsigned char ***saida, int altura, int largura);
+void filtro_media(unsigned char ***matriz, unsigned char ***saida, int altura, int largura);
+void filtro_borda(unsigned char ***matriz, unsigned char ***saida, int altura, int largura);
 
 #endif
