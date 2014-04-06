@@ -31,6 +31,16 @@ bool criar_configuracao(char *name){
 	setar_configuracao("CAM_DIVISOR", "1.5", "camera", new_config);
 	setar_configuracao("TIMER_DIVIDENDO", "1.0", "allegro", new_config);
 	
+	setar_configuracao("euclidiana", "0", "init", new_config);
+	
+	setar_configuracao("frame_max", "3", "teste", new_config);//3
+    setar_configuracao("frame_atual", "0", "teste", new_config);//0;
+    setar_configuracao("frame_contador", "0", "teste", new_config);//0;
+    setar_configuracao("frame_delay", "3", "teste", new_config);//3;
+    setar_configuracao("frame_largura", "200", "teste", new_config);//200;
+    setar_configuracao("frame_altura", "250", "teste", new_config);//250;
+	
+	
 	if(!al_save_config_file(name, new_config)) {
 		free(new_config);
 		erro("Erro na criacao do arquivo de configuracao inicial\n");

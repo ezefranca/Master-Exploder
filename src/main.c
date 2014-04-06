@@ -103,7 +103,8 @@ bool init() {
         erro("erro na criacao da fila\n");
 
     config = carregar_configuracao("configuration.conf");
-    if(!config)
+    
+	if(!config)
         criar_configuracao("configuration.conf");
 
     teste_imagem = al_load_bitmap("../resource/img/teste.png");
@@ -111,14 +112,15 @@ bool init() {
       erro("Falha ao carregar imagem teste\n");
 
     // Inicialização do add-on para uso de fontes
-  al_init_font_addon();
+	al_init_font_addon();
 
-  if (!al_init_ttf_addon())
-    erro("erro ao inicializar add-on allegro_ttf.\n");
+	if (!al_init_ttf_addon())
+		erro("erro ao inicializar add-on allegro_ttf.\n");
 
-fonte = al_load_font("../resource/fonte/Cartoon.ttf", 50, 10);
-if(!fonte)
-    erro("erro no carregamento da fonte\n");
+	fonte = al_load_font("../resource/fonte/Cartoon.ttf", 50, 10);
+
+	if(!fonte)
+		erro("erro no carregamento da fonte\n");
     /*
 
     */
@@ -159,22 +161,35 @@ return;
 int main() {
 
     //Bloco de variaveis
-    int euclidiana = 0;
+    int euclidiana;
 
     //Variaveis de teste
-    const int maxFrame = 3;
-    int frame_atual = 0;
-    int frame_contador = 0;
-    int frame_delay = 3;
-    int frame_largura = 100;
-    int frame_altura = 150;
+    /*const*/ int maxFrame;
+    int frame_atual;
+    int frame_contador;
+    int frame_delay;
+    int frame_largura;
+    int frame_altura;
 
-    int x = largura;
-    int y = altura;
-
+    int x, y;
+	
     //Inicializa Allegro / OpenCV
+	
     init();
 
+	euclidiana = string_para_int(pegar_configuracao("euclidiana", "INIT", config));
+
+    //Variaveis de teste
+    maxFrame = string_para_int(pegar_configuracao("frame_max", "teste", config));//3
+    frame_atual = string_para_int(pegar_configuracao("frame_atual", "teste", config));//0;
+    frame_contador = string_para_int(pegar_configuracao("frame_contador", "teste", config));//0;
+    frame_delay = string_para_int(pegar_configuracao("frame_delay", "teste", config));//3;
+    frame_largura = string_para_int(pegar_configuracao("frame_largura", "teste", config));//200;
+    frame_altura = string_para_int(pegar_configuracao("frame_altura", "teste", config));//250;
+
+    x = largura;
+    y = altura;
+	
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
 
