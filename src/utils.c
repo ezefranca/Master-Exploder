@@ -16,12 +16,12 @@ float string_para_float(char *string){
 	float valor;
 
 	sscanf(string, "%f", &valor);
-	return valor;
+	return valor;	
 }
 
 int string_para_int(char *string){
 	int valor;
 
 	sscanf(string, "%d", &valor);
-	return valor;
+	return valor;	
 }
