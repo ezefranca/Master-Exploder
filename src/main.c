@@ -6,15 +6,12 @@ int main() {
     inicializar_allegro();
 
     unsigned char ***matriz = camera_aloca_matriz(cam);
-    unsigned char ***matriz_pb = camera_aloca_matriz(cam);
-    unsigned char ***matriz2 = camera_aloca_matriz(cam);
+
     //ALLEGRO_COLOR cor = al_map_rgb_f(0, 0, 1);
 
     ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
     ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
     ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
-
-    ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
 
     int desenhar = 0;
     int terminar = 0;
@@ -48,25 +45,14 @@ int main() {
             //limiarizacao(fundo, altura, largura);
             //otsu_binarizacao(fundo, fundo, altura, largura);
             normalizacao_preto_e_branco(cam->quadro, altura, largura);
-            matriz_copia(cam->quadro, matriz_pb, altura, largura);
-            otsu_binarizacao(matriz_pb, matriz_pb, altura, largura);
-            //filtro_borda(cam->quadro, matriz_pb, altura, largura);
-           // laplaciano(cam->quadro, matriz, altura, largura);
-            filtro_borda(matriz_pb, matriz, altura, largura);
-            //limiarizacao(matriz_pb, altura, largura);
-            //filtro_mediana(matriz, matriz, altura, largura);
-            //filtro_mediana(matriz, matriz, altura, largura);
-            // laplaciano(matriz, matriz, altura, largura);
-            //filtro_media(matriz, matriz, altura, largura);
-            //
-            camera_copia(cam, matriz, esquerda);
+            matriz_copia(cam->quadro, matriz, altura, largura);
+            limiarizacao(matriz, altura, largura);
+            laplaciano(cam->quadro, matriz, altura, largura);
+            filtro_mediana(matriz, matriz, altura, largura);
+            camera_copia(cam, cam->quadro, esquerda);
             camera_copia(cam, matriz, direita);
-            //al_draw_circle(300, 300, 10, vermelho, 10);
-            GRAHAM(matriz, altura, largura);
-            
             //camera_copia(cam, fundo, direita);
             /**********/
-            
             al_flip_display();
         }
     }

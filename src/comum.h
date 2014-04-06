@@ -16,7 +16,6 @@
 #include "filtros.h"
 #include "matrizes.h"
 #include "ezequiel.h"
-#include "fecho.h"
 
 /*Constantes*/
 #define FPS 60
@@ -34,5 +33,5 @@ ALLEGRO_TIMER *timer;
 ALLEGRO_DISPLAY *display;
 ALLEGRO_EVENT_QUEUE *queue;
 ALLEGRO_CONFIG *config;
-ALLEGRO_COLOR vermelho;// = al_map_rgb_f(255, 0, 0);
+
 #endif
