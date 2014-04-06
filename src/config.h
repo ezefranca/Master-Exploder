@@ -11,5 +11,4 @@ bool salvar_configuracao(char *name, ALLEGRO_CONFIG *config);
 ALLEGRO_CONFIG *carregar_configuracao(const char *name);
 
 char *pegar_configuracao(const char *conf_key, const char *section, const ALLEGRO_CONFIG *config);
-
 #endif

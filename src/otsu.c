@@ -1,4 +1,5 @@
 #include "otsu.h"
+#include <math.h>
 
 void otsu_binarizacao(unsigned char ***matriz, unsigned char ***saida, int altura, int largura)
 /* método de otsu - referencia teórica wiki.icmc.usp.br/images/b/bb/Otsu_e_derivadas.pdf‎ */
@@ -59,14 +60,14 @@ void otsu_binarizacao(unsigned char ***matriz, unsigned char ***saida, int altur
         //printf("%d\n", media);
 
         if(media > limiar) {
-          matriz[y][x][0] = 0;
-          matriz[y][x][1] = 0;
-          matriz[y][x][2] = 0;
+          saida[y][x][0] = 0;
+          saida[y][x][1] = 0;
+          saida[y][x][2] = 0;
         }
         else{
-          matriz[y][x][0] = 255;
-          matriz[y][x][1] = 255;
-          matriz[y][x][2] = 255;
+          saida[y][x][0] = 255;
+          saida[y][x][1] = 255;
+          saida[y][x][2] = 255;
         }
       }
 

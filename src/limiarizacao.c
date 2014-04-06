@@ -2,7 +2,6 @@
 
 int limiarizacao(unsigned char ***matriz, int altura, int largura){
 	int r = 0, g = 0, b = 0, media = 0;
-	int i, j;
 	for(int i = 0; i < altura; i++) {
 		for(int j = 0; j < largura; j++){
 

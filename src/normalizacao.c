@@ -11,7 +11,7 @@ int normalizacao_preto_e_branco(unsigned char ***matriz, int altura, int largura
             preto_e_branco = (matriz[i][j][0] + matriz[i][j][1] + matriz[i][j][2]) / 3;
 						if(preto_e_branco < 0)
 						preto_e_branco = preto_e_branco * -1;
-						
+
             matriz[i][j][0] = preto_e_branco;
             matriz[i][j][1] = preto_e_branco;
             matriz[i][j][2] = preto_e_branco;
