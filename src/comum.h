@@ -16,6 +16,7 @@
 #include "filtros.h"
 #include "matrizes.h"
 #include "ezequiel.h"
+#include "fecho.h"
 
 /*Constantes*/
 #define FPS 60

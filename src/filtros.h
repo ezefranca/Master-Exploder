@@ -1,6 +1,8 @@
 #ifndef FILTROS_H
 #define FILTROS_H
 
+#include <stdlib.h>
+
 #define LAPLACE 0
 #define FOURIER 1
 #define SOBEL	 2

@@ -7,9 +7,26 @@ void copia_ponto(ponto a, ponto b)
     }
 }
 
+void ponto_extremo(ponto entrada[], ponto ponto_inicial, int n){
+    int menor_X = MAXIMO;
+    int menor_Y = MAXIMO;
+    ponto menor_ponto;
+    for(int i = 0; i < n-1; i++){
+        if(entrada[i][X] < menor_X && entrada[i][Y] < menor_Y)
+        {
+            menor_X = entrada[i][X];
+            menor_Y = entrada[i][Y];
+            //menor_ponto = entrada[i];
+            copia_ponto(menor_ponto, entrada[i]);
+        }
+    }
+    copia_ponto(menor_ponto,ponto_inicial);
+    return;
+}
+
 void swap_ponto(ponto a, ponto b)
 {
-    ponto c;  
+    ponto c;
     copia_ponto(a,c);
     copia_ponto(b,a);
     copia_ponto(c,b);
@@ -27,7 +44,7 @@ double distancia(ponto a, ponto b)
 
 double area_triangulo_com_sinal(ponto a, ponto b, ponto c)
 {
-    float area = ((a[X]*b[Y] - a[Y]*b[X] + a[Y]*c[X] 
+    float area = ((a[X]*b[Y] - a[Y]*b[X] + a[Y]*c[X]
         - a[X]*c[Y] + b[X]*c[Y] - c[X]*b[Y]) / 2.0 );
     return area ;
 }
@@ -61,23 +78,65 @@ bool colinear(ponto a, ponto b, ponto c)
 void print_poligono(poligono *p)
 {
     ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
-    
-        for (int i=0; i<p->n - 1; i++){
-               //printf("(%lf,%lf)\n",p->p[i][X],p->p[i][Y]);
+    int d = 1000, menor_distancia = 0;
+//    ponto temp;
+    printf("%d\n", p->n);
+    for (int i = 0; i < p->n - 1; i++){
+        for (int j = 0; j < p->n - 1; j++){
+               d = distancia(p->p[i], p->p[j]);
+               if (d < menor_distancia)
+               {
+                   menor_distancia = d;
+                   copia_ponto(p->p[j], p->p[i+1]);
 
-                al_draw_filled_circle(p->p[i][X], p->p[i][Y], 1, vermelho);
+               }
+               printf("(%lf,%lf)\n",p->p[i][X],p->p[i][Y]);
+
+
+                //al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
                 //al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 1);
 
             }
+            if(d > 300){
+                printf("Naruto\n");
+            if (i == 0 || i == 1)
+            {
+                al_draw_filled_circle(p->p[i][X], p->p[i][Y], 10, vermelho);
+            }else
+            al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
+            //al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 1);
+            }
+        }
+}
+
+void ordena_e_remove_duplicados(ponto entrada[], int *n)
+{
+    int old_n;               // numero n de pontos antes de deletar
+    int del;                 // intervalo para deletar pontos
+    bool mais_a_esquerda();
+
+    qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
+
+    old_n = *n;
+    del = 1;
+        for (int i=1; i<old_n; i++) {
+        if ((entrada[del-1][X] == entrada[i][X]) && (entrada[del-1][Y] == entrada[i][Y]))
+                        (*n)--;
+                else {
+                        copia_ponto(entrada[i],entrada[del]);
+                        del = del + 1;
+                }
+        }
+        copia_ponto(entrada[old_n-1],entrada[del]);
 }
 
 void fecho_convexo(ponto entrada[], int n, poligono *fecho)
 {
 
     int k;          //outro contador
-    int i;          
+    int i;
     int top;        // tamanho (qtd de pontos) atual do fecho
-    bool menor_angulo();
+    int menor_angulo();
 
     if (n <= 3) {       // todos os pontos no fecho, ou seja fecho eh uma linha ou triangulo
         for (i=0; i<n; i++)
@@ -88,6 +147,8 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
 
     ordena_e_remove_duplicados(entrada,&n);
     copia_ponto(entrada[0],&primeiro_ponto);
+
+    //printf("primeiro ponto %d, %d\n", primeiro_ponto[X], primeiro_ponto[Y]);
 
     qsort(&entrada[1], n-1, sizeof(ponto), menor_angulo);
 
@@ -101,9 +162,9 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
 
     while (i <= n && k <= n) {
         if (!sentido_anti_horario(fecho->p[top-1], fecho->p[top], entrada[i])){
-            if(top >= 2){ 
-            top = top-1; 
-            } 
+            if(top >= 2){
+            top = top-1;
+            }
         }else {
             top = top+1;
                         copia_ponto(entrada[i],fecho->p[top]);
@@ -115,40 +176,17 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     fecho->n = top;
 }
 
+void fecho(unsigned char ***matriz, int altura, int largura){
 
-void ordena_e_remove_duplicados(ponto entrada[], int *n)
-{                  
-    int old_n;               // numero n de pontos antes de deletar
-    int del;                 // intervalo para deletar pontos
-    bool mais_a_esquerda();
-
-    qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
-
-    old_n = *n;
-    del = 1;
-        for (int i=1; i<old_n; i++) {
-        if ((entrada[del-1][X] == entrada[i][X]) && (entrada[del-1][Y] == entrada[i][Y])) 
-                        (*n)--;
-                else {
-                        copia_ponto(entrada[i],entrada[del]);
-                        del = del + 1;
-                }
-        }
-        copia_ponto(entrada[old_n-1],entrada[del]);
-}
-
-
-int GRAHAM(unsigned char ***matriz, int altura, int largura){
-    
-    ponto entrada[MAX];      
+    ponto entrada[MAXIMO];
     poligono fecho;           \
     int n = 0;              //numero de pontos
 
-    int _vizinhos = 10;
+    int _vizinhos = 100;
 
-    for (int i = 10; i < altura - _vizinhos; i++)
+    for (int i = _vizinhos; i < altura - _vizinhos; i++)
     {
-    for (int j = 10; j < largura - _vizinhos; j++)
+    for (int j = _vizinhos; j < largura - _vizinhos; j++)
         {
            // removedor_ruidos(matriz, _vizinhos, i, j);
             if(matriz[i][j][0] == 255 && matriz[i][j][1] == 255 && matriz[i][j][2] == 255)
@@ -160,14 +198,14 @@ int GRAHAM(unsigned char ***matriz, int altura, int largura){
         }
     }
 
-    if (n > MAX)
+    if (n > MAXIMO)
     {
-        n = MAX;
+        n = MAXIMO;
     }
     //printf("Quantidade de pontos %d\n", n);
     fecho_convexo(entrada,n,&fecho);
     print_poligono(&fecho);
-    return 0;
+    return;
 }
 
 
@@ -182,17 +220,17 @@ bool mais_a_esquerda(ponto *p1, ponto *p2)
     return(0);
 }
 
-bool menor_angulo(ponto *p1, ponto *p2)
+int menor_angulo(ponto *p1, ponto *p2)
 {
     if (colinear(primeiro_ponto,*p1,*p2)) {
         if (distancia(primeiro_ponto,*p1) <= distancia(primeiro_ponto,*p2))
-            return(-1);
+            return -1;
         else
-            return(1);
+            return 1;
     }
 
     if (sentido_anti_horario(primeiro_ponto,*p1,*p2))
-        return(-1);
+        return -1;
     else
-        return(1);
+        return 1;
 }

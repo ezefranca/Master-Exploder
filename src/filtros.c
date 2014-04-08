@@ -12,12 +12,12 @@ void filtro_laplaciano(unsigned char ***matriz, unsigned char ***saida, int altu
     for (int j = 1; j< largura - 1; j++){
         //l = 128 + (matriz[i-1][j][0] + matriz[i][j-1][0] - 4*matriz[i][j][0] +  matriz[i][j+1][0] + matriz[i+1][j][0]);
         l=128+(matriz[i-1][j][0] + matriz[i][j-1][0] + matriz[i][j+1][0] + matriz[i+1][j][0] - 4*matriz[i][j][0]);
-        if( l > 255) l = 255;    
-        else{ 
+        if( l > 255) l = 255;
+        else{
           saida[i][j][0] = l;
           saida[i][j][1] = l;
           saida[i][j][2] = l;
-        
+
         }
     }
   }
@@ -27,7 +27,7 @@ void filtro_laplaciano(unsigned char ***matriz, unsigned char ***saida, int altu
 void filtro_borda(unsigned char ***matriz, unsigned char ***saida, int altura, int largura)
 {
 
-  int maximo, g1, g2;
+  int g1, g2;
   float divisor, **temp;
 
   divisor = 0;
@@ -48,7 +48,7 @@ void filtro_borda(unsigned char ***matriz, unsigned char ***saida, int altura, i
         g2 +=   matriz[i-1][j+1][0] -   matriz[i+1][j+1][0];
 
         temp[i][j] = sqrt(g1*g1 + g2*g2);
-        
+
         if(divisor < temp[i][j])
         {
           divisor = temp[i][j];
@@ -158,4 +158,3 @@ void filtro_media(unsigned char ***matriz, unsigned char ***saida, int altura, i
     }
   }
 }
-
