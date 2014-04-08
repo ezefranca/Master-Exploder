@@ -8,6 +8,7 @@ before_install:
   - sudo bash opencv_latest.sh -qq
   - cd ..
   - cd ..
+  - cd ..
 install:
 script:
   - make
