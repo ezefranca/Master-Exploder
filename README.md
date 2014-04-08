@@ -29,28 +29,28 @@ A biblioteca para aquisição da câmera fornecida pelo [Profº Marcelo Hashimot
 
 Git (opcional recomendado), Allegro 5.x e OpenCV instalados no sistema.
 
-[![Git](http://bin63.com/images/git_logo.png)](http://git-scm.com/) | [![OpenCV](https://raw.github.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/travis-install/opencv-logo.png)](http://www.opencv.org/) | [![Allegro5](https://raw.github.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/travis-install/allegro-logo.png)](http://alleg.sourceforge.net/)
+[![Git](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/git.png)](http://git-scm.com/) | [![OpenCV](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/opencv-logo.png)](http://www.opencv.org/) | [![Allegro5](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/allegro-logo.png)](http://alleg.sourceforge.net/)
 --- | --- | --- | --- | --- | --- | ---
 [Git](http://git-scm.com/) | [OpenCV](http://www.opencv.org/) | [Allegro5](http://alleg.sourceforge.net/)
 
 
 #### Windows
 -----------------------
-![Windows](http://images.dailytech.com/frontpage/fp__Windows-8-logo-100x100.jpg)
+![Windows](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/windows.png)
 
 ##### Compile o Allegro e OpenCV para usar por prompt de comando seguindo o tutorial: [Compilando no Windows](https://github.com/ezefranca/BCC-1s14-PI3-Master-Exploder/wiki/Compila%C3%A7%C3%A3o-e-Instala%C3%A7%C3%A3o-Allegro-5-e-OpenCV-no-Windows)
 
 
 #### Linux
 -----------------------
-![Linux](http://www.freecultureproject.com/img/logo_linux.png)
+![Linux](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/linux.png)
 
 ###### Consulte o projeto: [> EnviromentSetup](https://github.com/senacbcc/OpenCV-Allegro5-InstallScript)
 Agradecimentos a [Gabriel Garcia](https://github.com/GabrielGarcia1)
 
 #### OSX
 --------
-![OSX](http://www.ilexsoft.com/gfx/mavericks-logo.png)
+![OSX](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/osx.png)
 
 Utilizando [Homebrew](https://github.com/Homebrew/homebrew)
 
@@ -80,15 +80,25 @@ baixe o projeto todo compactado em zip [![Download Zip](https://raw.github.com/e
 
 #### Linux / MacOSX
 ----------------------------
+![Linux](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/linux.png)
+![OSX](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/osx.png)
+
 
 Navegue até o diretório do projeto e digite:
 
 ```bash
 $ make
 ```
+para executar
+
+```bash
+$ cd bin
+$ ./main
+```
 
 #### Windows com MinGW:
 -----------------------------
+![Windows](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/windows.png)
 
 Navegue até o diretório do projeto e digite:
 
