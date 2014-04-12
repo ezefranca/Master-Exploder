@@ -78,7 +78,7 @@ bool colinear(ponto a, ponto b, ponto c)
 void print_poligono(poligono *p)
 {
     ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
-    int d = 1000, menor_distancia = 0;
+    int d = 500, menor_distancia = 0;
 //    ponto temp;
     printf("%d\n", p->n);
     for (int i = 0; i < p->n - 1; i++){
@@ -90,22 +90,22 @@ void print_poligono(poligono *p)
                    copia_ponto(p->p[j], p->p[i+1]);
 
                }
-               printf("(%lf,%lf)\n",p->p[i][X],p->p[i][Y]);
+              // printf("(%lf,%lf)\n",p->p[i][X],p->p[i][Y]);
 
 
                 //al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
-                //al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 1);
+                al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 10);
 
             }
-            if(d > 300){
-                printf("Naruto\n");
-            if (i == 0 || i == 1)
-            {
-                al_draw_filled_circle(p->p[i][X], p->p[i][Y], 10, vermelho);
-            }else
-            al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
-            //al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 1);
-            }
+            // if(d > 300){
+            //     printf("Naruto\n");
+            // if (i == 0 || i == 1)
+            // {
+            //     al_draw_filled_circle(p->p[i][X], p->p[i][Y], 10, vermelho);
+            // }else
+            // al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
+            // //al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 1);
+            // }
         }
 }
 
@@ -140,7 +140,7 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
 
     if (n <= 3) {       // todos os pontos no fecho, ou seja fecho eh uma linha ou triangulo
         for (i=0; i<n; i++)
-                        copia_ponto(entrada[i],fecho->p[i]);
+            copia_ponto(entrada[i],fecho->p[i]);
         fecho->n = n;
         return;
     }
@@ -176,14 +176,17 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     fecho->n = top;
 }
 
-void fecho(unsigned char ***matriz, int altura, int largura){
+poligono* fecho(unsigned char ***matriz, int altura, int largura){
 
+    ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
+    ALLEGRO_COLOR azul = al_map_rgb_f(0, 0, 255);
     ponto entrada[MAXIMO];
-    poligono fecho;           \
+    poligono *fecho;
+    fecho = malloc(sizeof(poligono));
     int n = 0;              //numero de pontos
 
     int _vizinhos = 100;
-
+    al_draw_filled_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , verde);
     for (int i = _vizinhos; i < altura - _vizinhos; i++)
     {
     for (int j = _vizinhos; j < largura - _vizinhos; j++)
@@ -191,6 +194,12 @@ void fecho(unsigned char ***matriz, int altura, int largura){
            // removedor_ruidos(matriz, _vizinhos, i, j);
             if(matriz[i][j][0] == 255 && matriz[i][j][1] == 255 && matriz[i][j][2] == 255)
             {
+                al_draw_filled_circle(j, i, 5, azul);
+                // printf("pinta de verde\n");
+                // matriz[i][j][0] = 255;
+                // matriz[i][j][1] = 0;
+                // matriz[i][j][2] = 0;
+
                 entrada[i+j][X] = j;
                 entrada[i+j][Y] = i;
                 n++;
@@ -198,14 +207,31 @@ void fecho(unsigned char ***matriz, int altura, int largura){
         }
     }
 
+
+    // //pintar de preto o resto
+    // for (int i = 1; i < altura; i++)
+    // {
+    // for (int j = 1; j < largura; j++)
+    //     {
+    //        // removedor_ruidos(matriz, _vizinhos, i, j);
+    //         if(matriz[i][j][1] != 255){
+    //
+    //             matriz[i][j][0] = 0;
+    //             matriz[i][j][1] = 0;
+    //             matriz[i][j][2] = 0;
+    //
+    //         }
+    //     }
+    // }
+
     if (n > MAXIMO)
     {
         n = MAXIMO;
     }
     //printf("Quantidade de pontos %d\n", n);
-    fecho_convexo(entrada,n,&fecho);
-    print_poligono(&fecho);
-    return;
+    fecho_convexo(entrada, n, fecho);
+    //print_poligono(fecho);
+    return fecho;
 }
 
 

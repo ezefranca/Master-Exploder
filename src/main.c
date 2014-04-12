@@ -7,6 +7,7 @@ int main() {
 
     unsigned char ***matriz = camera_aloca_matriz(cam);
     unsigned char ***matriz_pb = camera_aloca_matriz(cam);
+    unsigned char ***matriz_verde = camera_aloca_matriz(cam);
     //unsigned char ***matriz2 = camera_aloca_matriz(cam);
     //ALLEGRO_COLOR cor = al_map_rgb_f(0, 0, 1);
 
@@ -59,15 +60,39 @@ int main() {
             // laplaciano(matriz, matriz, altura, largura);
             //filtro_media(matriz, matriz, altura, largura);
             //
+            matriz_copia(matriz_pb, matriz_verde, altura, largura);
+            poligono *f = fecho(matriz_verde,altura, largura);
             camera_copia(cam, matriz_pb, esquerda);
-            camera_copia(cam, matriz_pb, direita);
+            camera_copia(cam, matriz_verde, direita);
             //al_draw_circle(300, 300, 10, vermelho, 10);
-            fecho(matriz_pb, altura, largura);
+            //fecho(matriz_pb, altura, largura);
+            //------------------
+            int _vizinhos = 100;
+            //Teste
+            ALLEGRO_COLOR azul = al_map_rgb_f(0, 0, 255);
+            ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
 
+            al_draw_filled_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , verde);
+            for (int i = _vizinhos; i < altura - _vizinhos; i++)
+            {
+            for (int j = _vizinhos; j < largura - _vizinhos; j++)
+                {
+                   // removedor_ruidos(matriz, _vizinhos, i, j);
+                    if(matriz_verde[i][j][0] == 255 && matriz_verde[i][j][1] == 255 && matriz_verde[i][j][2] == 255)
+                    {
+                        al_draw_filled_circle(j, i, 5, azul);
+
+                    }
+                }
+            }
+
+
+            print_poligono(f);
             //camera_copia(cam, fundo, direita);
             /**********/
 
             al_flip_display();
+            free(f);
         }
     }
 

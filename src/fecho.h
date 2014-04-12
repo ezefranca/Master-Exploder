@@ -46,7 +46,7 @@ bool colinear(ponto a, ponto b, ponto c);
 void print_poligono(poligono *p);
 void ordena_e_remove_duplicados(ponto entrada[], int *n);
 void fecho_convexo(ponto entrada[], int n, poligono *fecho);
-void fecho(unsigned char ***matriz, int altura, int largura);
+poligono* fecho(unsigned char ***matriz, int altura, int largura);
 bool mais_a_esquerda(ponto *p1, ponto *p2);
 int menor_angulo(ponto *p1, ponto *p2);
 
