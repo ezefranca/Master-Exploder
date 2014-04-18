@@ -117,26 +117,26 @@ void ordena_e_remove_duplicados(ponto entrada[], int *n)
 
     qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
 
-    old_n = *n;
-    del = 1;
-        for (int i=1; i<old_n; i++) {
-        if ((entrada[del-1][X] == entrada[i][X]) && (entrada[del-1][Y] == entrada[i][Y]))
-                        (*n)--;
-                else {
-                        copia_ponto(entrada[i],entrada[del]);
-                        del = del + 1;
-                }
-        }
-        copia_ponto(entrada[old_n-1],entrada[del]);
+    // old_n = *n;
+    // del = 1;
+    //     for (int i=1; i<old_n; i++) {
+    //     if ((entrada[del-1][X] == entrada[i][X]) && (entrada[del-1][Y] == entrada[i][Y]))
+    //                     (*n)--;
+    //             else {
+    //                     copia_ponto(entrada[i],entrada[del]);
+    //                     del = del + 1;
+    //             }
+    //     }
+    //     copia_ponto(entrada[old_n-1],entrada[del]);
 }
 
 void fecho_convexo(ponto entrada[], int n, poligono *fecho)
 {
 
     int k;          //outro contador
-    int i;
+    int i, j;
     int top;        // tamanho (qtd de pontos) atual do fecho
-    int menor_angulo();
+    int menor_angulo(); // forward declaration
 
     if (n <= 3) {       // todos os pontos no fecho, ou seja fecho eh uma linha ou triangulo
         for (i=0; i<n; i++)
@@ -146,6 +146,23 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     }
 
     ordena_e_remove_duplicados(entrada,&n);
+    int h = 0;
+    copia_ponto(entrada[0], fecho->p[h]);
+    do {
+        for(i = 0; i < n; i++)
+            if(fecho->p[h][X] != entrada[i][X] || fecho->p[h][Y] != entrada[i][Y])
+                break;
+
+        for(j = 0; j < n; j++)
+            if(!sentido_anti_horario(fecho->p[h], entrada[i], entrada[j]))
+                i = j;
+
+        h++;
+        printf("H:%d N:%d\n",h, n );
+        copia_ponto(entrada[i], fecho->p[h]);
+    } while((fecho->p[0][X] != entrada[i][X] || fecho->p[0][Y] != entrada[i][Y]) && h <= n);
+    fecho->n = h - 1;
+/*
     copia_ponto(entrada[0],&primeiro_ponto);
 
     //printf("primeiro ponto %d, %d\n", primeiro_ponto[X], primeiro_ponto[Y]);
@@ -174,6 +191,7 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     }
 
     fecho->n = top;
+*/
 }
 
 poligono* fecho(unsigned char ***matriz, int altura, int largura){
@@ -200,8 +218,8 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
                 // matriz[i][j][1] = 0;
                 // matriz[i][j][2] = 0;
 
-                entrada[i+j][X] = j;
-                entrada[i+j][Y] = i;
+                entrada[n][X] = j;
+                entrada[n][Y] = i;
                 n++;
             }
         }
