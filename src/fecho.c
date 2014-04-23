@@ -78,23 +78,23 @@ bool colinear(ponto a, ponto b, ponto c)
 void print_poligono(poligono *p)
 {
     ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
-    int d = 500, menor_distancia = 0;
+    int d = 100, menor_distancia = 0;
 //    ponto temp;
     printf("%d\n", p->n);
     for (int i = 0; i < p->n - 1; i++){
         for (int j = 0; j < p->n - 1; j++){
-               d = distancia(p->p[i], p->p[j]);
-               if (d < menor_distancia)
-               {
-                   menor_distancia = d;
-                   copia_ponto(p->p[j], p->p[i+1]);
+               // d = distancia(p->p[i], p->p[j]);
+               // if (d < menor_distancia)
+               // {
+               //     menor_distancia = d;
+               //     copia_ponto(p->p[j], p->p[i+1]);
 
-               }
+               // }
               // printf("(%lf,%lf)\n",p->p[i][X],p->p[i][Y]);
 
 
                 //al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
-                al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 10);
+                al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 1);
 
             }
             // if(d > 300){
@@ -160,7 +160,7 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
         h++;
         printf("H:%d N:%d\n",h, n );
         copia_ponto(entrada[i], fecho->p[h]);
-    } while((fecho->p[0][X] != entrada[i][X] || fecho->p[0][Y] != entrada[i][Y]) && h <= n);
+    } while((primeiro_ponto[X] != entrada[i][X] || primeiro_ponto[Y] != entrada[i][Y]) && h <= n);
     fecho->n = h - 1;
 /*
     copia_ponto(entrada[0],&primeiro_ponto);
@@ -203,7 +203,7 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
     fecho = malloc(sizeof(poligono));
     int n = 0;              //numero de pontos
 
-    int _vizinhos = 100;
+    int _vizinhos = 10;
     al_draw_filled_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , verde);
     for (int i = _vizinhos; i < altura - _vizinhos; i++)
     {
@@ -267,7 +267,7 @@ bool mais_a_esquerda(ponto *p1, ponto *p2)
 int menor_angulo(ponto *p1, ponto *p2)
 {
     if (colinear(primeiro_ponto,*p1,*p2)) {
-        if (distancia(primeiro_ponto,*p1) <= distancia(primeiro_ponto,*p2))
+        if (distancia(primeiro_ponto,*p1) < distancia(primeiro_ponto,*p2))
             return -1;
         else
             return 1;
