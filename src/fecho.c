@@ -78,11 +78,15 @@ bool colinear(ponto a, ponto b, ponto c)
 void print_poligono(poligono *p)
 {
     ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
-    int d = 100, menor_distancia = 0;
-//    ponto temp;
-    printf("%d\n", p->n);
-    for (int i = 0; i < p->n - 1; i++){
-        for (int j = 0; j < p->n - 1; j++){
+    printf("comecou\n");
+    for (int k = 0; k < p->n ; k++)
+        for (int j = k; j < p->n; j++)
+            if (p->p[k][X] == p->p[j][X] && p->p[j][X] == p->p[j][Y])
+            {
+                printf("ALERTA DE REPETIDO, ALERTA DE REPETIDO\n");
+            }
+    for (int i = 0; i < p->n ; i++){
+        //for (int j = 0; j < p->n; j++){
                // d = distancia(p->p[i], p->p[j]);
                // if (d < menor_distancia)
                // {
@@ -90,13 +94,13 @@ void print_poligono(poligono *p)
                //     copia_ponto(p->p[j], p->p[i+1]);
 
                // }
-              // printf("(%lf,%lf)\n",p->p[i][X],p->p[i][Y]);
+              //printf("(%lf,%lf)\n",p->p[i][X],p->p[i][Y]);
 
-
+                int j = (i + 1) % p->n;
                 //al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
-                al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 1);
+                al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 10);
 
-            }
+            //}
             // if(d > 300){
             //     printf("Naruto\n");
             // if (i == 0 || i == 1)
@@ -107,6 +111,7 @@ void print_poligono(poligono *p)
             // //al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 1);
             // }
         }
+    printf("terminou\n");
 }
 
 void ordena_e_remove_duplicados(ponto entrada[], int *n)
@@ -148,19 +153,35 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     ordena_e_remove_duplicados(entrada,&n);
     int h = 0;
     copia_ponto(entrada[0], fecho->p[h]);
+    //printf("comecou\n");
     do {
-        for(i = 0; i < n; i++)
+        for(i = 1; i < n; i++)
             if(fecho->p[h][X] != entrada[i][X] || fecho->p[h][Y] != entrada[i][Y])
                 break;
 
         for(j = 0; j < n; j++)
-            if(!sentido_anti_horario(fecho->p[h], entrada[i], entrada[j]))
-                i = j;
-
+            if(fecho->p[h][X] != entrada[j][X] || fecho->p[h][Y] != entrada[j][Y]) {
+            if(entrada[i][X] != entrada[j][X] || entrada[i][Y] != entrada[j][Y]) {
+                if(area_triangulo_com_sinal(fecho->p[h], entrada[i], entrada[j]) > EPSILON)
+                   i = j;
+                else {
+                    if(area_triangulo_com_sinal(fecho->p[h], entrada[i], entrada[j]) > -EPSILON) {
+                        if((fecho->p[0][X] == entrada[j][X] && fecho->p[0][Y] == entrada[j][Y]))
+                            i = j;
+                        else
+                            if(distancia(fecho->p[h], entrada[i]) < distancia(fecho->p[h], entrada[j]))
+                                i = j;
+                    }
+                }
+            }
+            }
+                //if(!sentido_anti_horario(fecho->p[h], entrada[i], entrada[j]))
+        //printf("adicionar %d\n", i);
         h++;
-        printf("H:%d N:%d\n",h, n );
+        //printf("H:%d N:%d\n",h, n );
         copia_ponto(entrada[i], fecho->p[h]);
-    } while((primeiro_ponto[X] != entrada[i][X] || primeiro_ponto[Y] != entrada[i][Y]) && h <= n);
+    }while((fecho->p[0][X] != entrada[i][X] || fecho->p[0][Y] != entrada[i][Y]) && h < n);
+    //printf("terminou\n");
     fecho->n = h - 1;
 /*
     copia_ponto(entrada[0],&primeiro_ponto);
@@ -203,7 +224,7 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
     fecho = malloc(sizeof(poligono));
     int n = 0;              //numero de pontos
 
-    int _vizinhos = 10;
+    int _vizinhos = 100;
     al_draw_filled_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , verde);
     for (int i = _vizinhos; i < altura - _vizinhos; i++)
     {

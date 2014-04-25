@@ -18,7 +18,7 @@
 #define TRUE    1
 #define FALSE   0
 #define PI  3.1415926
-#define EPSILON 0.000001    /* paranaue que nao eh, mas eh suficiente para ser zero */
+#define EPSILON 0.00000001    /* paranaue que nao eh, mas eh suficiente para ser zero */
 
 typedef double ponto[DIMENSAO];
 
