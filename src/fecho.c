@@ -169,7 +169,7 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
                         if((fecho->p[0][X] == entrada[j][X] && fecho->p[0][Y] == entrada[j][Y]))
                             i = j;
                         else
-                            if(distancia(fecho->p[h], entrada[i]) < distancia(fecho->p[h], entrada[j]))
+                            if(distancia(fecho->p[h], entrada[i]) > distancia(fecho->p[h], entrada[j]))
                                 i = j;
                     }
                 }
