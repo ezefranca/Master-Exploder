@@ -7,9 +7,9 @@ CC= gcc -std=c99
 CFLAGS= -W -Wall -pedantic
 
 ifeq ($(OS),Windows_NT)
-	LIBS = -lallegro -lallegro_main -lallegro_primitives -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro -lallegro_font -lallegro_image -lopencv_core300 -lopencv_highgui300
+	LIBS = -lallegro_ttf-5.0.4-mt -lallegro_font-5.0.4-mt -lallegro-5.0.4-mt -lallegro_main -lallegro_primitives -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro -lallegro_font -lallegro_image -lopencv_core300 -lopencv_highgui300
 else
-	LIBS = -lallegro -lallegro_main -lallegro_primitives -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro -lallegro_font -lallegro_image -lopencv_core -lopencv_highgui
+	LIBS = -lallegro -lallegro_main -lallegro_primitives -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro -lallegro_ttf -lallegro_font -lallegro_image -lopencv_core -lopencv_highgui
 endif
 
 SOURCEDIR = src
