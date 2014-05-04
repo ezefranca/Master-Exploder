@@ -98,7 +98,7 @@ void print_poligono(poligono *p)
 
                 int j = (i + 1) % p->n;
                 //al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
-                al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 5);
+                al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 10);
 
             //}
             // if(d > 300){
@@ -123,16 +123,16 @@ void ordena_e_remove_duplicados(ponto entrada[], int *n)
     qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
 
     // old_n = *n;
-    //  del = 1;
-    //      for (int i=1; i<old_n; i++) {
-    //      if ((entrada[del-1][X] == entrada[i][X]) && (entrada[del-1][Y] == entrada[i][Y]))
-    //                      (*n)--;
-    //              else {
-    //                      copia_ponto(entrada[i],entrada[del]);
-    //                      del = del + 1;
-    //              }
-    //      }
-    //      copia_ponto(entrada[old_n-1],entrada[del]);
+    // del = 1;
+    //     for (int i=1; i<old_n; i++) {
+    //     if ((entrada[del-1][X] == entrada[i][X]) && (entrada[del-1][Y] == entrada[i][Y]))
+    //                     (*n)--;
+    //             else {
+    //                     copia_ponto(entrada[i],entrada[del]);
+    //                     del = del + 1;
+    //             }
+    //     }
+    //     copia_ponto(entrada[old_n-1],entrada[del]);
 }
 
 void fecho_convexo(ponto entrada[], int n, poligono *fecho)
@@ -169,7 +169,7 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
                         if((fecho->p[0][X] == entrada[j][X] && fecho->p[0][Y] == entrada[j][Y]))
                             i = j;
                         else
-                            if(distancia(fecho->p[h], entrada[i]) > distancia(fecho->p[h], entrada[j]))
+                            if(distancia(fecho->p[h], entrada[i]) < distancia(fecho->p[h], entrada[j]))
                                 i = j;
                     }
                 }

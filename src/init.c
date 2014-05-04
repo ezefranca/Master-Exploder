@@ -25,8 +25,7 @@ int inicializar_allegro(){
     if(!timer)
         erro("erro na criacao do relogio\n");
 
-    //display = al_create_display(2 * largura, altura);
-    display = al_create_display(largura, altura);
+    display = al_create_display(2 * largura, altura);
     if(!display)
         erro("erro na criacao da janela\n");
 
