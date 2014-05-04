@@ -13,7 +13,10 @@ int main() {
 
     ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
     ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
-    ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
+  //  ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
+
+    // Variável para a imagem da mao
+    ALLEGRO_BITMAP *imagem = NULL;// al_create_sub_bitmap(buffer, largura, 0, largura, altura);
 
 //    ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
 
@@ -22,7 +25,6 @@ int main() {
     //int atualiza = 0;
 
     while(1) {
-
         ALLEGRO_EVENT event;
 
         al_wait_for_event(queue, &event);
@@ -63,7 +65,7 @@ int main() {
             matriz_copia(matriz_pb, matriz_verde, altura, largura);
             poligono *f = fecho(matriz_verde,altura, largura);
             camera_copia(cam, matriz_pb, esquerda);
-            camera_copia(cam, matriz_verde, direita);
+            //camera_copia(cam, matriz_verde, imagem);
             //al_draw_circle(300, 300, 10, vermelho, 10);
             //fecho(matriz_pb, altura, largura);
             //------------------
@@ -90,7 +92,13 @@ int main() {
             print_poligono(f);
             //camera_copia(cam, fundo, direita);
             /**********/
-
+            
+            /*Por enquanto somente uma imagem, mas aqui vai ficar
+             a analise do fecho pra saber o que eh.
+            
+            */
+            imagem = al_load_bitmap("assets/mao.png");
+            al_draw_bitmap(imagem, largura/2, altura/2, 0);
             al_flip_display();
             free(f);
         }
@@ -98,9 +106,11 @@ int main() {
 
     /**********/
 
-    al_destroy_bitmap(direita);
+    //al_destroy_bitmap(direita);
 
     al_destroy_bitmap(esquerda);
+
+    al_destroy_bitmap(imagem);
 
     camera_libera_matriz(cam, matriz);
 
