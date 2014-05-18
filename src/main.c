@@ -15,9 +15,6 @@ int main() {
     ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
     ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
 
-    // Variável para a imagem da mao
-    ALLEGRO_BITMAP *imagem = NULL;// al_create_sub_bitmap(buffer, largura, 0, largura, altura);
-
 //    ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
 
     int desenhar = 0;
@@ -93,24 +90,6 @@ int main() {
             print_poligono(f);
             //camera_copia(cam, fundo, direita);
             /**********/
-
-
-            /*Por enquanto somente uma imagem, mas aqui vai ficar
-             a analise do fecho pra saber o que eh.
-            
-            */
-            imagem = al_load_bitmap("assets/mao.png");
-            al_draw_bitmap(imagem, largura/2, altura/2, 0);
-
-            /*Testes de textos para o jogo*/
-            // Texto alinhado à esquerda
-            al_draw_text(fonte, al_map_rgb(255, 0, 0), 10, 10, ALLEGRO_ALIGN_LEFT, "Pedra");
- 
-            // Texto alinhado à direita
-            al_draw_text(fonte, al_map_rgb(0, 255, 0), largura - 10, 50, ALLEGRO_ALIGN_RIGHT, "Papel");
- 
-            // Texto centralizado
-            al_draw_text(fonte, al_map_rgb(0, 0, 255), largura / 2, 90, ALLEGRO_ALIGN_CENTRE, "Tesoura");
 
             al_flip_display();
             free(f);

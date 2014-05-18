@@ -20,7 +20,7 @@
 #define PI  3.1415926
 #define EPSILON 0.00000001    /* paranaue que nao eh, mas eh suficiente para ser zero */
 
-typedef double ponto[DIMENSAO];
+typedef int ponto[DIMENSAO];
 
 typedef struct {
     int n;          /* numero de pontos no poligono */
@@ -38,8 +38,8 @@ void ponto_extremo(ponto entrada[], ponto ponto_inicial, int n);
 void copia_ponto(ponto a, ponto b);
 void swap_ponto(ponto a, ponto b);
 double distancia(ponto a, ponto b);
-double area_triangulo_com_sinal(ponto a, ponto b, ponto c);
-double triangulo_area(ponto a, ponto b, ponto c);
+int area_triangulo_com_sinal(ponto a, ponto b, ponto c);
+int triangulo_area(ponto a, ponto b, ponto c);
 bool sentido_anti_horario(ponto a, ponto b, ponto c);
 bool sentido_horario(ponto a, ponto b, ponto c);
 bool colinear(ponto a, ponto b, ponto c);

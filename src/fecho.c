@@ -42,37 +42,37 @@ double distancia(ponto a, ponto b)
         return( sqrt(d) );
 }
 
-double area_triangulo_com_sinal(ponto a, ponto b, ponto c)
+int area_triangulo_com_sinal(ponto a, ponto b, ponto c)
 {
-    float area = ((a[X]*b[Y] - a[Y]*b[X] + a[Y]*c[X]
-        - a[X]*c[Y] + b[X]*c[Y] - c[X]*b[Y]) / 2.0 );
+    int area = ((a[X]*b[Y] - a[Y]*b[X] + a[Y]*c[X]
+        - a[X]*c[Y] + b[X]*c[Y] - c[X]*b[Y]));
     return area ;
 }
 
-double triangulo_area(ponto a, ponto b, ponto c)
+int triangulo_area(ponto a, ponto b, ponto c)
 {
-    return( fabs(area_triangulo_com_sinal(a,b,c)) );
+    return(abs(area_triangulo_com_sinal(a,b,c)));
 }
 
 bool sentido_anti_horario(ponto a, ponto b, ponto c)
 {
-    double area_triangulo_com_sinal();
+    int area_triangulo_com_sinal();
 
-    return (area_triangulo_com_sinal(a,b,c) > EPSILON);
+    return (area_triangulo_com_sinal(a,b,c) > 0);
 }
 
 bool sentido_horario(ponto a, ponto b, ponto c)
 {
-    double area_triangulo_com_sinal();
+    int area_triangulo_com_sinal();
 
-    return (area_triangulo_com_sinal(a,b,c) < - EPSILON);
+    return (area_triangulo_com_sinal(a,b,c) < 0);
 }
 
 bool colinear(ponto a, ponto b, ponto c)
 {
-    double area_triangulo_com_sinal();
+    int area_triangulo_com_sinal();
 
-    return (fabs(area_triangulo_com_sinal(a,b,c)) <= EPSILON);
+    return (fabs(area_triangulo_com_sinal(a,b,c)) <= 0);
 }
 
 void print_poligono(poligono *p)
@@ -120,7 +120,33 @@ void ordena_e_remove_duplicados(ponto entrada[], int *n)
     int del;                 // intervalo para deletar pontos
     bool mais_a_esquerda();
 
-    qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
+    //qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
+
+    for (int i=*n-1; i>0; i--)
+        for (int j=0; j<i; j++) {
+            int resp;
+            if(entrada[j][X] < entrada[j+1][X])
+                resp = -1;
+            else if(entrada[j][X] > entrada[j+1][X])
+                resp = 1;
+            else if(entrada[j][Y] < entrada[j+1][Y])
+                resp = -1;
+            else if(entrada[j][Y] > entrada[j+1][Y])
+                resp = 1;
+            else
+                resp = 0;
+
+            if(resp > 0) {
+                int aux;
+                aux = entrada[j][X];
+                entrada[j][X] = entrada[j+1][X];
+                entrada[j+1][X] = aux;
+
+                aux = entrada[j][Y];
+                entrada[j][Y] = entrada[j+1][Y];
+                entrada[j+1][Y] = aux;
+            }
+        }
 
     // old_n = *n;
     // del = 1;
@@ -151,26 +177,27 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     }
 
     ordena_e_remove_duplicados(entrada,&n);
+    printf("imprimindo\n");
+    for(i = 0; i < n; i++)
+        printf("(%d, %d) ", entrada[i][X], entrada[i][Y]);
+    printf("\n");
     int h = 0;
     copia_ponto(entrada[0], fecho->p[h]);
     //printf("comecou\n");
     do {
-        for(i = 1; i < n; i++)
+        for(i = 0; i < n; i++)
             if(fecho->p[h][X] != entrada[i][X] || fecho->p[h][Y] != entrada[i][Y])
                 break;
 
         for(j = 0; j < n; j++)
             if(fecho->p[h][X] != entrada[j][X] || fecho->p[h][Y] != entrada[j][Y]) {
             if(entrada[i][X] != entrada[j][X] || entrada[i][Y] != entrada[j][Y]) {
-                if(area_triangulo_com_sinal(fecho->p[h], entrada[i], entrada[j]) > EPSILON)
+                if(area_triangulo_com_sinal(fecho->p[h], entrada[i], entrada[j]) > 0)
                    i = j;
                 else {
-                    if(area_triangulo_com_sinal(fecho->p[h], entrada[i], entrada[j]) > -EPSILON) {
-                        if((fecho->p[0][X] == entrada[j][X] && fecho->p[0][Y] == entrada[j][Y]))
+                    if(area_triangulo_com_sinal(fecho->p[h], entrada[i], entrada[j]) == 0) {
+                        if(distancia(fecho->p[h], entrada[i]) > distancia(fecho->p[h], entrada[j]))
                             i = j;
-                        else
-                            if(distancia(fecho->p[h], entrada[i]) < distancia(fecho->p[h], entrada[j]))
-                                i = j;
                     }
                 }
             }
@@ -233,7 +260,7 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
            // removedor_ruidos(matriz, _vizinhos, i, j);
             if(matriz[i][j][0] == 255 && matriz[i][j][1] == 255 && matriz[i][j][2] == 255)
             {
-                al_draw_filled_circle(j, i, 5, azul);
+             //   al_draw_filled_circle(j, i, 5, azul);
                 // printf("pinta de verde\n");
                 // matriz[i][j][0] = 255;
                 // matriz[i][j][1] = 0;
