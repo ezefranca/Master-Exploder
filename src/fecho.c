@@ -34,12 +34,12 @@ void swap_ponto(ponto a, ponto b)
 
 double distancia(ponto a, ponto b)
 {
-        double d=0.0;       // distancia  acumulada
+        int d = 0;       // distancia  acumulada
 
         for (int i=0; i<DIMENSAO; i++)
                 d = d + (a[i]-b[i]) * (a[i]-b[i]);
 
-        return( sqrt(d) );
+        return(sqrt(d));
 }
 
 int area_triangulo_com_sinal(ponto a, ponto b, ponto c)
@@ -85,7 +85,7 @@ void print_poligono(poligono *p)
             {
                 printf("ALERTA DE REPETIDO, ALERTA DE REPETIDO\n");
             }
-    for (int i = 0; i < p->n ; i++){
+    for (int i = 0; i < p->n -1 ; i++){
         //for (int j = 0; j < p->n; j++){
                // d = distancia(p->p[i], p->p[j]);
                // if (d < menor_distancia)
@@ -99,6 +99,8 @@ void print_poligono(poligono *p)
                 int j = (i + 1) % p->n;
                 //al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
                 al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 10);
+
+                al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 5);
 
             //}
             // if(d > 300){
@@ -177,10 +179,10 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     }
 
     ordena_e_remove_duplicados(entrada,&n);
-    printf("imprimindo\n");
-    for(i = 0; i < n; i++)
-        printf("(%d, %d) ", entrada[i][X], entrada[i][Y]);
-    printf("\n");
+    // printf("imprimindo\n");
+    // for(i = 0; i < n; i++)
+    //     printf("(%d, %d) \n", entrada[i][X], entrada[i][Y]);
+    // printf("\n");
     int h = 0;
     copia_ponto(entrada[0], fecho->p[h]);
     //printf("comecou\n");
@@ -210,6 +212,10 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     }while((fecho->p[0][X] != entrada[i][X] || fecho->p[0][Y] != entrada[i][Y]) && h < n);
     //printf("terminou\n");
     fecho->n = h - 1;
+    printf("imprimindo fecho\n");
+    for(i = 0; i < fecho->n; i++)
+        printf("(%d, %d) \n", fecho->p[i][X], fecho->p[i][Y]);
+    printf("\n");
 /*
     copia_ponto(entrada[0],&primeiro_ponto);
 
@@ -251,7 +257,7 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
     fecho = malloc(sizeof(poligono));
     int n = 0;              //numero de pontos
 
-    int _vizinhos = 100;
+    int _vizinhos = 1;
     al_draw_filled_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , verde);
     for (int i = _vizinhos; i < altura - _vizinhos; i++)
     {
