@@ -1,0 +1,151 @@
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include "comum.h"
+
+#define TRUE 1
+#define FALSE 0
+#define NUMERO_ALFABETO 24
+
+IDIOMA *aloca_idioma(){
+	IDIOMA *language = malloc(sizeof(IDIOMA));
+    language->hash = malloc(NUMERO_ALFABETO * sizeof(elemento_string*));
+	
+	for(int n = 0; n < NUMERO_ALFABETO; n++){
+		language->hash[n] = NULL;
+	}
+    return language;
+}
+
+int conta_linhas(ALLEGRO_FILE *entrada) {
+    int linhas;
+    char caractere, ultimo_caractere;
+    linhas = 1;
+
+    while ((caractere = al_fgetc(entrada)) != EOF) {
+        if (caractere == '\n')
+            linhas++;
+        ultimo_caractere = caractere;
+    }
+    if (ultimo_caractere == '\n') --linhas;
+
+    //Retorna o ponteiro para inicio do arquivo. Similar to rewind.
+    al_fseek(entrada, 0, ALLEGRO_SEEK_SET);
+    return linhas;
+}
+
+int conta_ate(ALLEGRO_FILE *entrada, char ate) {
+    int n;
+    char caractere;
+
+    for (n = 0; (caractere = al_fgetc(entrada)) != ate && caractere != EOF; n++);
+    
+	return n;
+}
+
+void insere_idioma(IDIOMA *idi, char *var, char *string) {
+    int hash_numero;
+	
+	elemento_string *e = malloc(sizeof(elemento_string));
+    e->var = var;
+    e->string = string;
+	
+    hash_numero = (int) var[0] % NUMERO_ALFABETO;
+	
+	if (idi->hash[hash_numero] == NULL) {
+        idi->hash[hash_numero] = e;
+        e->proximo = NULL;
+    } else {
+        e->proximo = idi->hash[hash_numero];
+        idi->hash[hash_numero] = e;
+    }
+}
+
+/* Fun;'oes visiveis no .h */
+
+void carregar_idioma(const char *arquivo){
+	ALLEGRO_FILE *entrada;
+	char **string, **var, c;
+	int i, linhas;
+	int *tvar, *tstring;
+	
+	idioma = aloca_idioma();
+	
+	entrada = al_fopen(arquivo, "r");
+
+    if (!entrada) {
+		aviso("erro na leitura do arquivo de idioma. idioma in code será usado.\n");
+		return;
+    }
+	
+    linhas = conta_linhas(entrada);
+    var = malloc(linhas * sizeof (char *));
+    string = malloc(linhas * sizeof (char *));
+    tvar = malloc(linhas * sizeof (int));
+    tstring = malloc(linhas * sizeof (int));
+
+    for (i = 0; i < linhas; i++) {
+		tvar[i] = conta_ate(entrada, '=');
+        tstring[i] = conta_ate(entrada, '\n');
+
+        var[i] = malloc(tvar[i] * sizeof (char));
+        string[i] = malloc(tstring[i] * sizeof (char));
+		
+    }
+
+    al_fseek(entrada, 0, ALLEGRO_SEEK_SET);
+
+	
+    for (i = 0; i < linhas; i++){
+		al_fgets(entrada, var[i], tvar[i] + 1);
+        al_fgetc(entrada);
+        al_fgets(entrada, string[i], tstring[i] + 1);
+		
+		do {
+			al_fgets(entrada, &c, 2);
+        } while (c != '\n');
+
+		printf("chegou %s = %s\n", var[i], string[i]);
+        if(strlen(var[i]) > 0 && strlen(string[i]) > 0)
+			insere_idioma(idioma, var[i], string[i]);
+	}
+    
+	al_fclose(entrada);
+
+    free(string);
+    free(var);
+
+    free(tstring);
+    free(tvar);
+
+    //loaded_idioma = 1;
+    return;
+}
+
+char *pegar_idioma(const char *key, IDIOMA *idioma){
+	elemento_string *anterior, *atual;
+
+    anterior = idioma->hash[key[0] % NUMERO_ALFABETO];
+		
+	if (anterior == NULL) {
+        aviso("lista de idioma vazio\n");
+        return key;
+    } else if (strcmp(key, anterior->var) == 0) {
+        return (anterior->string);
+    } else {
+        atual = anterior->proximo;
+        while (atual != NULL && strcmp(key, atual->var) != 0) {
+            anterior = atual;
+            atual = anterior->proximo;
+        }
+
+        if (atual != NULL) {
+            return (atual->string);
+        }
+    }
+	return key;
+}
+
+void destroi_idioma(IDIOMA *language){
+	free(language->hash);
+	free(language);
+}
