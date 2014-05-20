@@ -25,6 +25,17 @@ int ganhador_rodada(int jogador_1, int jogador_2){
 		return JOGADOR_2;
 }
 
+int ganhador_jogo(int jogador_1, int jogador_2){
+	if(jogador_1 == jogador_2){
+		return EMPATE;
+	}
+	if(jogador_1 > jogador_2){
+		return JOGADOR_1;
+	}
+	else 
+		return JOGADOR_2;
+}
+
 int fim_de_jogo(int pontos_jogador_1, int pontos_jogador_2, int melhor_jogo){
 	//Verifica se jogadas sao impares.
 	if((melhor_jogo % 2) > 0)
