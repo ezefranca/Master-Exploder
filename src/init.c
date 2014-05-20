@@ -2,6 +2,7 @@
 
 int inicializar_allegro(){
 
+	char *local_idioma;
     cam = camera_inicializa(0);
 
 
@@ -12,7 +13,7 @@ int inicializar_allegro(){
     altura = cam->altura;
 
 
-  if(!al_init())
+	if(!al_init())
         erro("erro na inicializacao do allegro\n");
 
     if(!al_init_image_addon())
@@ -34,9 +35,20 @@ int inicializar_allegro(){
         erro("erro na criacao da fila\n");
 
     config = carregar_configuracao("configuration.conf");
-    if(!config)
+    
+	if(!config)
         criar_configuracao("configuration.conf");
 
+	local_idioma = pegar_configuracao("IDIOMA","user", config);
+	
+	if(local_idioma != NULL)
+        carregar_idioma(local_idioma);
+	else
+		carregar_idioma("data/idiomas/pt_br.conf");
+	
+	//char *test = pegar_idioma("test", idioma);
+	//printf("%s", test);
+	
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
 
