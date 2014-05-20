@@ -30,7 +30,8 @@ bool criar_configuracao(char *name){
 
 	setar_configuracao("CAM_DIVISOR", "1.5", "camera", new_config);
 	setar_configuracao("TIMER_DIVIDENDO", "1.0", "allegro", new_config);
-
+	setar_configuracao("IDIOMA", "data/idiomas/pt_br.conf", "system", new_config);
+	
 	if(!al_save_config_file(name, new_config)) {
 		free(new_config);
 		erro("Erro na criacao do arquivo de configuracao inicial\n");
