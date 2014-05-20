@@ -122,9 +122,10 @@ void ordena_e_remove_duplicados(ponto entrada[], int *n)
     int del;                 // intervalo para deletar pontos
     bool mais_a_esquerda();
 
-    //qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
+    qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
 
-    for (int i=*n-1; i>0; i--)
+    /*
+	for (int i=*n-1; i>0; i--)
         for (int j=0; j<i; j++) {
             int resp;
             if(entrada[j][X] < entrada[j+1][X])
@@ -149,7 +150,8 @@ void ordena_e_remove_duplicados(ponto entrada[], int *n)
                 entrada[j+1][Y] = aux;
             }
         }
-
+	*/
+	
     // old_n = *n;
     // del = 1;
     //     for (int i=1; i<old_n; i++) {
