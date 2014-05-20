@@ -12,6 +12,10 @@ void erro(char *mensagem) {
   exit(EXIT_FAILURE);
 }
 
+void aviso(char *mensagem){
+	fputs(mensagem, stderr);
+}
+
 float string_para_float(char *string){
 	float valor;
 
