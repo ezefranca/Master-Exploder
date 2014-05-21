@@ -2,7 +2,7 @@
 
 int inicializar_allegro(){
 
-	char *local_idioma;
+	const char *local_idioma;
     cam = camera_inicializa(0);
 
     if(!cam)

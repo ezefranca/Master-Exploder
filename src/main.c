@@ -74,7 +74,7 @@ int main() {
 
             al_draw_filled_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , verde);
 			
-            for (int i = _vizinhos; i < altura - _vizinhos; i+=10){
+            /*for (int i = _vizinhos; i < altura - _vizinhos; i+=10){
 				for (int j = _vizinhos; j < largura - _vizinhos; j+=10){
                     // removedor_ruidos(matriz, _vizinhos, i, j);
                     if(matriz_verde[i][j][0] == 255 && matriz_verde[i][j][1] == 255 && matriz_verde[i][j][2] == 255)
@@ -83,7 +83,7 @@ int main() {
 
                     }
                 }
-            }
+            }*/
 
 
             print_poligono(f);
