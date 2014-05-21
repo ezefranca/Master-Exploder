@@ -60,13 +60,15 @@ void filtro_borda(unsigned char ***matriz, unsigned char ***saida, int altura, i
     }
   }
 
-    for(int i = 0; i < altura; i++) {
+  for(int i = 0; i < altura; i++) {
     for(int j = 0; j < largura; j++) {
       saida[i][j][0] = (temp[i][j] / divisor) * 255 + 0.5;
       saida[i][j][1] = (temp[i][j] / divisor) * 255 + 0.5;
       saida[i][j][2] = (temp[i][j] / divisor) * 255 + 0.5;
     }
+	free(temp[i]);
   }
+  free(temp);
 
 }
 
