@@ -36,6 +36,13 @@ int ganhador_jogo(int jogador_1, int jogador_2){
 		return JOGADOR_2;
 }
 
+//Retorna a jogada vencedora. Exemplo: Se jogador colocar tesoura, a funcao retorna Pedra.
+int fazer_jogada_melhor(int jogador){
+	if(jogador == PEDRA)
+		return PAPEL;
+	return jogador + 1;
+}
+
 int fim_de_jogo(int pontos_jogador_1, int pontos_jogador_2, int melhor_jogo){
 	//Verifica se jogadas sao impares.
 	if((melhor_jogo % 2) > 0)
