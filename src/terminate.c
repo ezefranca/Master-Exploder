@@ -22,4 +22,5 @@ int finalizar_allegro(){
 	
 	destroi_idioma(idioma);
 	
+	return 1;
 }

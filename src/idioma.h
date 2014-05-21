@@ -13,7 +13,7 @@ typedef struct {
  
 void carregar_idioma(const char *arquivo);
 
-char *pegar_idioma(const char *key, IDIOMA *idioma);
+const char *pegar_idioma(const char *key, IDIOMA *idioma);
 
 void destroi_idioma(IDIOMA *language);
 

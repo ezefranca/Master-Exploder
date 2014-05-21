@@ -7,7 +7,7 @@
 #define FALSE 0
 
 bool setar_configuracao(const char *conf_key, const char *conf_value, const char *section, ALLEGRO_CONFIG *config) {
-	char *value;
+	const char *value;
 
 	al_add_config_section(config, section);
 
@@ -48,6 +48,6 @@ ALLEGRO_CONFIG *carregar_configuracao(const char *name) {
 	return al_load_config_file(name);
 }
 
-char *pegar_configuracao(const char *conf_key, const char *section, const ALLEGRO_CONFIG *config){
+const char *pegar_configuracao(const char *conf_key, const char *section, const ALLEGRO_CONFIG *config){
 	return al_get_config_value(config, section, conf_key);
 }

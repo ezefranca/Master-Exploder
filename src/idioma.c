@@ -121,7 +121,7 @@ void carregar_idioma(const char *arquivo){
     return;
 }
 
-char *pegar_idioma(const char *key, IDIOMA *idioma){
+const char *pegar_idioma(const char *key, IDIOMA *idioma){
 	elemento_string *anterior, *atual;
 
     anterior = idioma->hash[key[0] % NUMERO_ALFABETO];
