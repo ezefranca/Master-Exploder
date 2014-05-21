@@ -5,13 +5,11 @@ int inicializar_allegro(){
 	char *local_idioma;
     cam = camera_inicializa(0);
 
-
     if(!cam)
         erro("erro na inicializacao da camera\n");
 
     largura = cam->largura;
     altura = cam->altura;
-
 
 	if(!al_init())
         erro("erro na inicializacao do allegro\n");

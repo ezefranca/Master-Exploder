@@ -73,11 +73,10 @@ int main() {
             ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
 
             al_draw_filled_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , verde);
-            for (int i = _vizinhos; i < altura - _vizinhos; i++)
-            {
-            for (int j = _vizinhos; j < largura - _vizinhos; j++)
-                {
-                   // removedor_ruidos(matriz, _vizinhos, i, j);
+			
+            for (int i = _vizinhos; i < altura - _vizinhos; i+=10){
+				for (int j = _vizinhos; j < largura - _vizinhos; j+=10){
+                    // removedor_ruidos(matriz, _vizinhos, i, j);
                     if(matriz_verde[i][j][0] == 255 && matriz_verde[i][j][1] == 255 && matriz_verde[i][j][2] == 255)
                     {
                         al_draw_filled_circle(j, i, 5, azul);
@@ -95,8 +94,8 @@ int main() {
             free(f);
         }
     }
-
-    /**********/
+	
+	/**********/
 
     al_destroy_bitmap(direita);
 
@@ -106,20 +105,7 @@ int main() {
 
     /**********/
 
-    al_stop_timer(timer);
-
-    al_unregister_event_source(queue, al_get_display_event_source(display));
-    al_unregister_event_source(queue, al_get_timer_event_source(timer));
-
-    al_destroy_event_queue(queue);
-    al_destroy_display(display);
-    al_destroy_timer(timer);
-
-    al_shutdown_primitives_addon();
-    al_shutdown_image_addon();
-    al_uninstall_system();
-
-    camera_finaliza(cam);
+    finalizar_allegro();
 
     return EXIT_SUCCESS;
 }

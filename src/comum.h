@@ -21,10 +21,18 @@
 
 /*Constantes*/
 #define FPS 60
+#define PEDRA 2
+#define TESOURA 1
+#define PAPEL 0
+#define EMPATE 0
+#define JOGADOR_2 2
+#define JOGADOR_1 1
+
 
 //Bloco de variaveis
 int euclidiana;
 camera *cam;
+
 //Fim do bloco de variaveis
 
 int largura;
@@ -35,5 +43,6 @@ ALLEGRO_TIMER *timer;
 ALLEGRO_DISPLAY *display;
 ALLEGRO_EVENT_QUEUE *queue;
 ALLEGRO_CONFIG *config;
+IDIOMA *idioma;
 
 #endif
