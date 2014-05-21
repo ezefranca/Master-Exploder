@@ -61,7 +61,7 @@ int main() {
             // laplaciano(matriz, matriz, altura, largura);
             //filtro_media(matriz, matriz, altura, largura);
             //
-            matriz_copia(matriz_pb, matriz_verde, altura, largura);
+           matriz_copia(matriz_pb, matriz_verde, altura, largura);
             poligono *f = fecho(matriz_verde,altura, largura);
             camera_copia(cam, matriz_pb, esquerda);
             camera_copia(cam, matriz_verde, direita);
@@ -75,8 +75,8 @@ int main() {
 
             al_draw_filled_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , verde);
 			
-            /*for (int i = _vizinhos; i < altura - _vizinhos; i+=10){
-				for (int j = _vizinhos; j < largura - _vizinhos; j+=10){
+            for (int i = _vizinhos; i < altura - _vizinhos; i++){
+				for (int j = _vizinhos; j < largura - _vizinhos; j++){
                     // removedor_ruidos(matriz, _vizinhos, i, j);
                     if(matriz_verde[i][j][0] == 255 && matriz_verde[i][j][1] == 255 && matriz_verde[i][j][2] == 255)
                     {
@@ -84,7 +84,7 @@ int main() {
 
                     }
                 }
-            }*/
+            }
 
 
             print_poligono(f);
