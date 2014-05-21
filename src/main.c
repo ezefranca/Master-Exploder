@@ -1,5 +1,6 @@
 #include "init.h"
 #include "comum.h"
+#include "terminate.h"
 
 int main() {
 
