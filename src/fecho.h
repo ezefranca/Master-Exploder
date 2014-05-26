@@ -11,9 +11,10 @@
 
 #define MAXIMO     10000 /* numero maximo de pontos no poligono do fecho convexo */
 
-#define DIMENSAO   2 // DIMENSAO 2
+#define DIMENSAO   3 // DIMENSAO 3
 #define X       0    // indice coordenada X
 #define Y       1    // indice coordenada Y
+#define Z       2    // indice coordenada Z
 
 #define TRUE    1
 #define FALSE   0
