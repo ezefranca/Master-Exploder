@@ -3,7 +3,13 @@
 int inicializar_allegro(){
 
 	const char *local_idioma;
-    cam = camera_inicializa(0);
+    
+	config = carregar_configuracao("configuration.conf");
+    
+	if(!config)
+        criar_configuracao("configuration.conf");
+		
+	cam = camera_inicializa(0);
 
     if(!cam)
         erro("erro na inicializacao da camera\n");
@@ -32,10 +38,7 @@ int inicializar_allegro(){
     if(!queue)
         erro("erro na criacao da fila\n");
 
-    config = carregar_configuracao("configuration.conf");
     
-	if(!config)
-        criar_configuracao("configuration.conf");
 
 	local_idioma = pegar_configuracao("IDIOMA","user", config);
 	
