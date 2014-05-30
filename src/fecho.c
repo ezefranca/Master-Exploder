@@ -190,8 +190,9 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     //     printf("(%d, %d) \n", entrada[i][X], entrada[i][Y]);
     // printf("\n");
     int h = 0;
-    copia_ponto(entrada[0], fecho->p[h]);
     entrada[0][Z] = 1;
+    copia_ponto(entrada[0], fecho->p[h]);
+    copia_ponto(entrada[0], primeiro_ponto);
     //printf("comecou\n");
     do {
         for(i = 0; i < n; i++)
@@ -222,18 +223,16 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
         h++;
         //printf("H:%d N:%d\n",h, n );
         copia_ponto(entrada[i], fecho->p[h]);
-    entrada[i][Z] = 1;
+    entrada[i][Z] = 1; // "visitado"
     }while((fecho->p[0][X] != entrada[i][X] || fecho->p[0][Y] != entrada[i][Y]));
-    //printf("terminou\n");
+    copia_ponto(fecho->p[0],fecho->p[h]);
     fecho->n = h;
+
     printf("imprimindo fecho\n");
     for(i = 0; i < fecho->n; i++)
         printf("(%d, %d) \n", fecho->p[i][X], fecho->p[i][Y]);
     printf("\n");
 
-    copia_ponto(fecho->p[0],primeiro_ponto);
-    printf("primeiro ponto ooooohhh (%lf,%lf)\n",entrada[0][X],entrada[0][Y]);
-    copia_ponto(primeiro_ponto,fecho->p[0]);
 /*
     copia_ponto(entrada[0],&primeiro_ponto);
 
