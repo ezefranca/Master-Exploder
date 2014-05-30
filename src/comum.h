@@ -9,7 +9,6 @@
 #include "camera.h"
 #include "otsu.h"
 #include "config.h"
-#include "frames.h"
 #include "idioma.h"
 #include "utils.h"
 #include "limiarizacao.h"

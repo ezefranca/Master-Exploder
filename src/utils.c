@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
@@ -18,9 +17,15 @@ void aviso(char *mensagem){
 }
 
 float string_para_float(char *string){
-	return strtof(string, NULL);
+	float valor;
+
+	sscanf(string, "%f", &valor);
+	return valor;
 }
 
 int string_para_int(char *string){
-	return atoi(string);
+	int valor;
+
+	sscanf(string, "%d", &valor);
+	return valor;
 }

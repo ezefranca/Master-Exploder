@@ -3,13 +3,7 @@
 int inicializar_allegro(){
 
 	const char *local_idioma;
-    
-	config = carregar_configuracao("configuration.conf");
-    
-	if(!config)
-        criar_configuracao("configuration.conf");
-		
-	cam = camera_inicializa(0);
+    cam = camera_inicializa(0);
 
     if(!cam)
         erro("erro na inicializacao da camera\n");
@@ -26,9 +20,6 @@ int inicializar_allegro(){
     if(!al_init_primitives_addon())
         erro("erro na inicializacao do adicional de primitivas\n");
 
-	if(!al_install_audio())
-    	erro("erro na inicializacao do audio.\n");
-		
     timer = al_create_timer(1.0 / FPS);
     if(!timer)
         erro("erro na criacao do relogio\n");
@@ -41,6 +32,10 @@ int inicializar_allegro(){
     if(!queue)
         erro("erro na criacao da fila\n");
 
+    config = carregar_configuracao("configuration.conf");
+    
+	if(!config)
+        criar_configuracao("configuration.conf");
 
 	local_idioma = pegar_configuracao("IDIOMA","user", config);
 	
@@ -48,6 +43,9 @@ int inicializar_allegro(){
         carregar_idioma(local_idioma);
 	else
 		carregar_idioma("data/idiomas/pt_br.conf");
+	
+	//char *test = pegar_idioma("test", idioma);
+	//printf("%s", test);
 	
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));

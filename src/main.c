@@ -1,14 +1,11 @@
 #include "init.h"
 #include "comum.h"
-#include "frames.h"
 #include "terminate.h"
 
 int main() {
 
     inicializar_allegro();
 
-	tela_sprite();
-	
     unsigned char ***matriz = camera_aloca_matriz(cam);
     unsigned char ***matriz_pb = camera_aloca_matriz(cam);
     unsigned char ***matriz_verde = camera_aloca_matriz(cam);
