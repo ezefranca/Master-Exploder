@@ -96,7 +96,7 @@ void print_poligono(poligono *p)
                // }
               //printf("(%lf,%lf)\n",p->p[i][X],p->p[i][Y]);
 
-                int j = (i + 1) % p->n;
+                int j = (i + 1); // % p->n;
                 //al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
                 al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 10);
 
@@ -222,7 +222,7 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
         //printf("H:%d N:%d\n",h, n );
         copia_ponto(entrada[i], fecho->p[h]);
     entrada[i][Z] = 1;
-    }while((fecho->p[0][X] != entrada[i][X] || fecho->p[0][Y] != entrada[i][Y]));
+    }while((fecho->p[0][X] != entrada[i][X] && fecho->p[0][Y] != entrada[i][Y]));
     //printf("terminou\n");
     fecho->n = h;
     printf("imprimindo fecho\n");
