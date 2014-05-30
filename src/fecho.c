@@ -120,7 +120,7 @@ void ordena_e_remove_duplicados(ponto entrada[], int *n)
 {
     int old_n;               // numero n de pontos antes de deletar
     int del;                 // intervalo para deletar pontos
-    bool mais_a_esquerda();
+    int mais_a_esquerda();
 
     qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
 
@@ -320,7 +320,7 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
 }
 
 
-bool mais_a_esquerda(ponto *p1, ponto *p2)
+int mais_a_esquerda(ponto *p1, ponto *p2)
 {
     if ((*p1)[X] < (*p2)[X]) return (-1);
     if ((*p1)[X] > (*p2)[X]) return (1);
@@ -329,6 +329,10 @@ bool mais_a_esquerda(ponto *p1, ponto *p2)
         if ((*p1)[Y] > (*p2)[Y]) return (1);
 
     return(0);
+
+  //     if ( Area2(a,b,c) > 0 )
+  //   return (1);
+  // return (0);
 }
 
 int menor_angulo(ponto *p1, ponto *p2)
