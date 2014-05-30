@@ -323,10 +323,10 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
 int mais_a_esquerda(ponto *p1, ponto *p2)
 {
     if ((*p1)[X] < (*p2)[X]) return (-1);
-    if ((*p1)[X] > (*p2)[X]) return (1);
+    if ((*p1)[X] >= (*p2)[X]) return (1);
 
         if ((*p1)[Y] < (*p2)[Y]) return (-1);
-        if ((*p1)[Y] > (*p2)[Y]) return (1);
+        if ((*p1)[Y] >= (*p2)[Y]) return (1);
 
     return(0);
 
