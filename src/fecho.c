@@ -96,7 +96,7 @@ void print_poligono(poligono *p)
                // }
               //printf("(%lf,%lf)\n",p->p[i][X],p->p[i][Y]);
 
-                int j = (i + 1); // % p->n;
+                int j = (i + 1) ;//% p->n;
                 //al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
                 al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 25);
 
@@ -113,6 +113,7 @@ void print_poligono(poligono *p)
             // //al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 1);
             // }
         }
+        al_draw_line(p->p[p->n][X], p->p[p->n][Y], primeiro_ponto[X], primeiro_ponto[Y], vermelho, 25);
     printf("terminou\n");
 }
 
@@ -229,6 +230,10 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     for(i = 0; i < fecho->n; i++)
         printf("(%d, %d) \n", fecho->p[i][X], fecho->p[i][Y]);
     printf("\n");
+
+    copia_ponto(fecho->p[0],primeiro_ponto);
+    printf("primeiro ponto ooooohhh (%lf,%lf)\n",entrada[0][X],entrada[0][Y]);
+    copia_ponto(primeiro_ponto,fecho->p[0]);
 /*
     copia_ponto(entrada[0],&primeiro_ponto);
 
