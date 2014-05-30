@@ -222,7 +222,7 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
         //printf("H:%d N:%d\n",h, n );
         copia_ponto(entrada[i], fecho->p[h]);
     entrada[i][Z] = 1;
-    }while((fecho->p[0][X] != entrada[i][X] && fecho->p[0][Y] != entrada[i][Y]));
+    }while((fecho->p[0][X] != entrada[i][X] || fecho->p[0][Y] != entrada[i][Y]));
     //printf("terminou\n");
     fecho->n = h;
     printf("imprimindo fecho\n");
