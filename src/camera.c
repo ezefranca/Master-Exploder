@@ -1,4 +1,4 @@
-#include "camera.h"
+#include "comum.h"
 
 void camera_converte(camera *cam, IplImage *image) {
   char *row = image->imageData;
@@ -33,9 +33,13 @@ camera *camera_inicializa(int i) {
     if(image) {
       cam = malloc(sizeof(camera));
 
+	  float divisor;
+	  
+	  divisor = string_para_float(pegar_configuracao("CAM_DIVISOR", "camera", config));
+	  
       cam->capture = capture;
-      cam->altura = (image->height)/1.5;
-      cam->largura = (image->width)/1.5;
+      cam->altura = (image->height)/divisor;
+      cam->largura = (image->width)/divisor;
       cam->quadro = camera_aloca_matriz(cam);
 
       camera_converte(cam, image);
