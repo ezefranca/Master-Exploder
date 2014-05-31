@@ -1,6 +1,7 @@
 ### Projeto Integrador III - [![Build Status](https://travis-ci.org/ezefranca/BCC-1s14-PI3-Master-Exploder.png?branch=master)](https://travis-ci.org/ezefranca/BCC-1s14-PI3-Master-Exploder)
 ===
 
+![Logo](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/bin/assets/image/intro/logo2.jpg)
 #### Sobre o Projeto Integrador
 ---------------------
 Projeto Integrador III, do Bacharelado em Ciência da Computação do Centro Universitário Senac - Campus São Paulo. 
