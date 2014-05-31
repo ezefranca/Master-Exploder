@@ -68,7 +68,7 @@ int main() {
             //al_draw_circle(300, 300, 10, vermelho, 10);
             //fecho(matriz_pb, altura, largura);
             //------------------
-            int _vizinhos = 1;
+            int _vizinhos = 100;
             //Teste
             ALLEGRO_COLOR azul = al_map_rgb_f(0, 0, 255);
             ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
