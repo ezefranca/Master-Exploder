@@ -275,7 +275,6 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
     int n = 0;              //numero de pontos
     
     int _vizinhos = 100;
-    al_draw_filled_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , verde);
     for (int i = _vizinhos; i < altura - _vizinhos; i++)
     {
         for (int j = _vizinhos; j < largura - _vizinhos; j++)

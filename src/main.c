@@ -72,15 +72,17 @@ int main() {
             //Teste
             ALLEGRO_COLOR azul = al_map_rgb_f(0, 0, 255);
             ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
+            ALLEGRO_COLOR preto = al_map_rgb_f(0, 0, 0);
 
-            al_draw_filled_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , verde);
+            al_draw_filled_rectangle(1, 1, largura, altura, verde);
+            al_draw_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , preto, 3);
 			
             for (int i = _vizinhos; i < altura - _vizinhos; i++){
 				for (int j = _vizinhos; j < largura - _vizinhos; j++){
                     // removedor_ruidos(matriz, _vizinhos, i, j);
                     if(matriz_verde[i][j][0] == 255 && matriz_verde[i][j][1] == 255 && matriz_verde[i][j][2] == 255)
                     {
-                        al_draw_filled_circle(j, i, 5, azul);
+                        al_draw_filled_circle(j, i, 2, azul);
 
                     }
                 }
