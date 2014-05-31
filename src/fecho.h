@@ -34,8 +34,12 @@ typedef struct {
 #define min(A, B)       ((A) < (B) ? (A) : (B))
 
 ponto primeiro_ponto;      //primeiro ponto no fecho;
+ponto menor_x;
+ponto maior_x; 
+ponto menor_y;
+ponto maior_y;
 
-void ponto_extremo(ponto entrada[], ponto ponto_inicial, int n);
+void pontos_extremo(poligono *p, ponto menor_x, ponto maior_x, ponto menor_y, ponto maior_y);
 void copia_ponto(ponto a, ponto b);
 void swap_ponto(ponto a, ponto b);
 double distancia(ponto a, ponto b);
