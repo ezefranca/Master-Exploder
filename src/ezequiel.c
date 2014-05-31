@@ -53,3 +53,44 @@ void valorizador_de_bordas(unsigned char ***matriz, int vizinhos, int localX, in
     }
     return;
 }
+
+void rgb_para_hsv(Rgb *cores, Hsv *cores_hsv){
+
+  float vermelho = (float)cores->r/255;
+  float verde = (float)cores->g/255;
+  float azul = (float)cores->b/255;
+  
+  float cMax, cMin;
+  
+  if(vermelho >= azul && vermelho >= verde){
+    if(verde > azul) cMin = azul;
+    else cMin = verde;
+    cMax = vermelho;
+  }else if(azul >= verde){
+    if(verde > vermelho) cMin = vermelho;
+    else cMin = verde;
+    cMax = azul;
+  }else{
+    if(vermelho > azul) cMin = azul;
+    else cMin = vermelho;
+    cMax = verde;
+  }
+  
+  float delta = cMax - cMin;
+
+  if(delta != 0){
+    if(cMax == vermelho){
+      if(verde >= azul) cores_hsv->h = 60 * ((verde - azul) / delta);
+      else cores_hsv->h = 60 * ((verde - azul) / delta) + 360;
+    }
+    
+    else if(cMax == verde) cores_hsv->h = 60 * ((azul - vermelho) / delta) + 120;
+    else cores_hsv->h = 60 * ((vermelho - verde) / delta) + 240;
+  }
+  else cores_hsv->h = 0;
+  
+  cores_hsv->s = delta/cMax * 100;
+  cores_hsv->v = cMax * 100;
+  return;
+}
+

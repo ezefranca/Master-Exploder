@@ -6,6 +6,7 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <math.h>
+#include <stdlib.h>
 #include "camera.h"
 #include "otsu.h"
 #include "config.h"
