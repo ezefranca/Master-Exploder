@@ -1,16 +1,13 @@
-#include "ezequiel.h"
+#include "comum.h"
 
 //Funcoes de teste em processamento de imagens
 
-int distancia_euclidiana(unsigned char r_velho, unsigned char g_velho, unsigned char b_velho, unsigned char r_atual, unsigned char g_atual, unsigned char b_atual){
-
-    int soma_r = r_velho - r_atual;
-    int soma_g = g_velho - g_atual;
-    int soma_b = b_velho - b_atual;
-
+int distancia_euclidiana(unsigned char ***primeiro, unsigned char ***atual, int i, int j){
+    int soma_r = primeiro[i][j][0] - atual[i][j][0];
+    int soma_g = primeiro[i][j][1] - atual[i][j][1];
+    int soma_b = primeiro[i][j][2] - atual[i][j][2];
     int quadrado = (soma_r * soma_r) + (soma_g * soma_g) + (soma_b * soma_b) ;
     int euclidiana = sqrt(quadrado);
-
     return euclidiana;
 }
 
@@ -92,5 +89,34 @@ void rgb_para_hsv(Rgb *cores, Hsv *cores_hsv){
   cores_hsv->s = delta/cMax * 100;
   cores_hsv->v = cMax * 100;
   return;
+}
+
+void overlay_frame(camera *cam, Hsv *quadro, unsigned char ***primeiro, int frame_limite) {
+    int x, y;
+    unsigned char hue, saturation, value;
+
+    for(x = 0; x < cam->altura; x++) {
+        for(y = 0; y < cam->largura; y++) {
+            hue = quadro->h;
+            saturation = quadro->s;
+            value = quadro->v;
+
+            hue -= primeiro[x][y][0];
+            saturation -= primeiro[x][y][1];
+            value -= primeiro[x][y][2];
+
+            hue *= hue;
+            saturation *= saturation;
+            value *= value;
+
+            hue = hue + saturation + value;
+            frame_limite *= frame_limite;
+
+            cam->quadro[x][y][0] = (hue > frame_limite) ? cam->quadro[x][y][0] : 0;
+            cam->quadro[x][y][1] = (hue > frame_limite) ? cam->quadro[x][y][1] : 0;
+            cam->quadro[x][y][2] = (hue > frame_limite) ? cam->quadro[x][y][2] : 0;
+
+        }
+    }
 }
 

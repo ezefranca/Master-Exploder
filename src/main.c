@@ -2,6 +2,7 @@
 #include "comum.h"
 #include "terminate.h"
 
+
 void testeRGB(Rgb *cores){
     cores->r = 200;
    // printf("---------------------------------%d\n",cores->r);
@@ -10,6 +11,8 @@ void testeRGB(Rgb *cores){
 int main() {
 
     inicializar_allegro();
+
+    unsigned char ***p = camera_aloca_matriz(cam);
 
     unsigned char ***matriz = camera_aloca_matriz(cam);
     unsigned char ***matriz_pb = camera_aloca_matriz(cam);
@@ -30,65 +33,91 @@ int main() {
     int desenhar = 0;
     int terminar = 0;
     //int atualiza = 0;
+    //  guarda o p quadro para usar na sobreposição de frames
+
+    int y , x;
+    camera_atualiza(cam);
+    for(y = 0; y < altura; y++) {
+        for(x = 0; x < largura; x++) {
+            p[y][x][0] = cam->quadro[y][x][0];
+            p[y][x][1] = cam->quadro[y][x][1];
+            p[y][x][2] = cam->quadro[y][x][2];
+        }
+    }
 
     while(1) {
 
-        testeRGB(cores_rgb);
-        for(int y = 0; y < altura; y++)
-            for(int x = 0; x < largura; x++) {
-                cores_rgb->r = cam->quadro[y][x][0];
-                cores_rgb->g = cam->quadro[y][x][1];
-                cores_rgb->b = cam->quadro[y][x][2];
+        
+        
 
-                rgb_para_hsv(cores_rgb, cores_hsv);
-               // printf("R:%d G:%d B:%d ----- H:%f S:%f V:%f\n",cores_rgb->r, cores_rgb->g, cores_rgb->b, cores_hsv->h, cores_hsv->s, cores_hsv->v );
-         }
 
-        ALLEGRO_EVENT event;
 
-        al_wait_for_event(queue, &event);
+        // for(y = 0; y < altura; y++) {
+        //     for(x = 0; x < largura; x++) {
+        //         p[y][x][0] = cam->quadro[y][x][0];
+        //         p[y][x][1] = cam->quadro[y][x][1];
+        //         p[y][x][2] = cam->quadro[y][x][2];
 
-        switch(event.type) {
-            case ALLEGRO_EVENT_TIMER:
-            desenhar = 1;
-            break;
-            case ALLEGRO_EVENT_DISPLAY_CLOSE:
-            terminar = 1;
-            break;
-            default:
-            printf("evento desconhecido\n");
-        }
+        //         cores_rgb->r = cam->quadro[y][x][0];
+        //         cores_rgb->g = cam->quadro[y][x][1];
+        //         cores_rgb->b = cam->quadro[y][x][2];
 
-        if(terminar)
-            break;
+        //         rgb_para_hsv(cores_rgb, cores_hsv);
+        //     }
+        // }
 
-        if(desenhar && al_is_event_queue_empty(queue)) {
-            desenhar = 0;
-            camera_atualiza(cam);
-            /**********/
-            /**********/
-            //limiarizacao(fundo, altura, largura);
-            //otsu_binarizacao(fundo, fundo, altura, largura);
+            ALLEGRO_EVENT event;
+
+            al_wait_for_event(queue, &event);
+
+            switch(event.type) {
+                case ALLEGRO_EVENT_TIMER:
+                desenhar = 1;
+                break;
+                case ALLEGRO_EVENT_DISPLAY_CLOSE:
+                terminar = 1;
+                break;
+                default:
+                printf("evento desconhecido\n");
+            }
+
+            if(terminar)
+                break;
+
+            if(desenhar && al_is_event_queue_empty(queue)) {
+                desenhar = 0;
+                camera_atualiza(cam);
+                for(y = 0; y < altura; y++) {
+                    for(x = 0; x < largura; x++) {
+                        //euclidiana();
+                    }
+                }
+
+                // Normaliza o frame atual e o p frame salvo para preto e branco (tons de cinza)
                 normalizacao_preto_e_branco(cam->quadro, altura, largura);
+                normalizacao_preto_e_branco(p, altura, largura);
+
+                // copia o frame normalizado para o matriz_pb
                 matriz_copia(cam->quadro, matriz_pb, altura, largura);
+
+                // binariza a matriz_pb e a primeira matriz
                 otsu_binarizacao(matriz_pb, matriz_pb, altura, largura);
-            //filtro_borda(cam->quadro, matriz_pb, altura, largura);
-            //filtro_laplaciano(cam->quadro, matriz, altura, largura);
-                filtro_borda(matriz_pb, matriz_pb, (altura - 100), (largura - 100));
-            //limiarizacao(matriz_pb, altura, largura);
-            //filtro_mediana(matriz, matriz, altura, largura);
-            //filtro_mediana(matriz, matriz, altura, largura);
-            // laplaciano(matriz, matriz, altura, largura);
-            //filtro_media(matriz, matriz, altura, largura);
-            //
+                otsu_binarizacao(p, p, altura, largura);
+
+                //filtro_mediana(matriz_pb, matriz_pb, altura, largura);
+                
+                // aplica um filtro de sobel para detcção de bordas
+                filtro_borda(matriz_pb, matriz_pb, (altura - 10), (largura - 10));
+
+                // copia a matriz_pb para matriz_verde, a matriz_verde eh utilizada em diversas operacoes
                 matriz_copia(matriz_pb, matriz_verde, altura, largura);
+                
                 poligono *f = fecho(matriz_verde,altura, largura);
                 camera_copia(cam, matriz_pb, esquerda);
                 camera_copia(cam, matriz_verde, direita);
-            //al_draw_circle(300, 300, 10, vermelho, 10);
-            //fecho(matriz_pb, altura, largura);
+
             //------------------
-                int _vizinhos = 100;
+                int _vizinhos = 10;
             //Teste
                 ALLEGRO_COLOR azul = al_map_rgb_f(0, 0, 255);
                 ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
@@ -100,6 +129,8 @@ int main() {
                 for (int i = _vizinhos; i < altura - _vizinhos; i++){
                     for (int j = _vizinhos; j < largura - _vizinhos; j++){
                     // removedor_ruidos(matriz, _vizinhos, i, j);
+                        int distancia_euclidiana(p, matriz_verde, i, j);
+
                         if(matriz_verde[i][j][0] == 255 && matriz_verde[i][j][1] == 255 && matriz_verde[i][j][2] == 255)
                         {
                             al_draw_filled_circle(j, i, 2, azul);
