@@ -108,7 +108,8 @@ int main() {
                     }
                 }
 
-                pontos_extremo(f, menor_x, maior_x, menor_y, maior_y);
+                //pontos_extremo(f, menor_x, maior_x, menor_y, maior_y);
+                printf("\nArea do fecho: %f\n", area_do_fecho(f));
                 print_poligono(f);
             //camera_copia(cam, fundo, direita);
             /**********/

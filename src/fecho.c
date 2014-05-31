@@ -7,6 +7,24 @@ void copia_ponto(ponto a, ponto b)
     }
 }
 
+double area_do_fecho(poligono *f)
+{
+   int i,j;
+   double area = 0;
+
+   for (i=0; i < f->n ;i++) {
+      j = (i + 1) % f->n;
+      area += f->p[i][X] * f->p[j][Y];
+      area -= f->p[i][Y] * f->p[j][X];
+   }
+
+   area /= 2;
+   if (area < 0)
+       area = area * -1;
+
+   return area;
+}
+
 void pontos_extremo(poligono *p, ponto menor_x, ponto maior_x, ponto menor_y, ponto maior_y){
     
     menor_x[X] = MAXIMO;
@@ -21,7 +39,6 @@ void pontos_extremo(poligono *p, ponto menor_x, ponto maior_x, ponto menor_y, po
     maior_y[X] = 0;
     maior_y[Y] = 0;
 
-    //ponto menor_ponto;
     for(int i = 0; i < p->n; i++){
         if(p->p[i][X] < menor_x[X])
         {

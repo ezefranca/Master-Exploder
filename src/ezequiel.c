@@ -91,4 +91,6 @@ void rgb_para_hsv(Rgb *cores, Hsv *cores_hsv){
   
   cores_hsv->s = delta/cMax * 100;
   cores_hsv->v = cMax * 100;
+  return;
 }
+

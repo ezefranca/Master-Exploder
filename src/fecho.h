@@ -40,6 +40,7 @@ ponto menor_y;
 ponto maior_y;
 
 void pontos_extremo(poligono *p, ponto menor_x, ponto maior_x, ponto menor_y, ponto maior_y);
+double area_do_fecho(poligono *f);
 void copia_ponto(ponto a, ponto b);
 void swap_ponto(ponto a, ponto b);
 double distancia(ponto a, ponto b);
