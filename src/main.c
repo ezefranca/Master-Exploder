@@ -3,9 +3,65 @@
 #include "terminate.h"
 
 
-void testeRGB(Rgb *cores){
-    cores->r = 200;
-   // printf("---------------------------------%d\n",cores->r);
+void teste_erosao(unsigned char ***imagem, int altura, int largura){
+    unsigned char mascara[9] = {0,255,0,255,255,0,0,255,0};
+    int ok = 1;
+   for (int i = 2; i < altura - 2; i++)
+   {
+       for (int j = 2; j < largura - 2; j++)
+       {
+
+               if(imagem[i][j][0]     != 255 && imagem[i][j][1]     != 255 && imagem[i][j][2]     != 255) 
+                    ok = 0;
+               if(imagem[i][j+1][0]   != 255 && imagem[i][j+1][1]   != 255 && imagem[i][j+1][2]   != 255)
+                    ok = 0;
+               if(imagem[i][j-1][0]   != 255 && imagem[i][j-1][1]   != 255 && imagem[i][j-1][2]   != 255)
+                    ok = 0;
+               if(imagem[i+1][j][0]   != 255 && imagem[i+1][j][1]   != 255 && imagem[i+1][j][2]   != 255)
+                    ok = 0;
+               if(imagem[i-1][j+1][0] != 255 && imagem[i-1][j+1][1] != 255 && imagem[i-1][j+1][2] != 255)
+                    ok = 0;
+
+                if(!ok)
+                {
+                  imagem[i][j][0] = imagem[i][j][0];
+                  imagem[i][j][1] = imagem[i][j][1];
+                  imagem[i][j][1] = imagem[i][j][2];
+
+                  imagem[i+1][j][0] = 0;  
+                  imagem[i+1][j][1] = 0;  
+                  imagem[i+1][j][2] = 0;
+
+                  imagem[i][j+1][0] = 0;  
+                  imagem[i][j+1][1] = 0;  
+                  imagem[i][j+1][2] = 0;
+
+                  imagem[i+1][j+1][0] = 0;  
+                  imagem[i+1][j+1][1] = 0;  
+                  imagem[i+1][j+1][2] = 0;
+                }
+                else
+                {
+                    printf("MORFOU MORFOU MORFOU\n");
+                  imagem[i][j][0] = 255;  
+                  imagem[i][j][1] = 255;  
+                  imagem[i][j][2] = 255;  
+
+                  imagem[i+1][j][0] = 0;  
+                  imagem[i+1][j][1] = 0;  
+                  imagem[i+1][j][2] = 0;
+
+                  imagem[i][j+1][0] = 0;  
+                  imagem[i][j+1][1] = 0;  
+                  imagem[i][j+1][2] = 0;
+
+                  imagem[i+1][j+1][0] = 0;  
+                  imagem[i+1][j+1][1] = 0;  
+                  imagem[i+1][j+1][2] = 0;
+                }
+                ok = 1;
+        }
+    }
 }
 
 int main() {
@@ -44,6 +100,9 @@ int main() {
             p[y][x][2] = cam->quadro[y][x][2];
         }
     }
+    normalizacao_preto_e_branco(p, altura, largura);
+    otsu_binarizacao(p, p, altura, largura);
+
 
     while(1) {
 
@@ -95,14 +154,13 @@ int main() {
 
                 // Normaliza o frame atual e o p frame salvo para preto e branco (tons de cinza)
                 normalizacao_preto_e_branco(cam->quadro, altura, largura);
-                normalizacao_preto_e_branco(p, altura, largura);
 
                 // copia o frame normalizado para o matriz_pb
                 matriz_copia(cam->quadro, matriz_pb, altura, largura);
 
                 // binariza a matriz_pb e a primeira matriz
                 otsu_binarizacao(matriz_pb, matriz_pb, altura, largura);
-                otsu_binarizacao(p, p, altura, largura);
+               
 
                 //filtro_mediana(matriz_pb, matriz_pb, altura, largura);
                 
@@ -111,10 +169,10 @@ int main() {
 
                 // copia a matriz_pb para matriz_verde, a matriz_verde eh utilizada em diversas operacoes
                 matriz_copia(matriz_pb, matriz_verde, altura, largura);
-                
+                teste_erosao(matriz_pb, altura, largura);
                 poligono *f = fecho(matriz_verde,altura, largura);
                 camera_copia(cam, matriz_pb, esquerda);
-                camera_copia(cam, matriz_verde, direita);
+                camera_copia(cam, matriz_pb, direita);
 
             //------------------
                 int _vizinhos = 10;
@@ -128,9 +186,7 @@ int main() {
 
                 for (int i = _vizinhos; i < altura - _vizinhos; i++){
                     for (int j = _vizinhos; j < largura - _vizinhos; j++){
-                    // removedor_ruidos(matriz, _vizinhos, i, j);
-                        int distancia_euclidiana(p, matriz_verde, i, j);
-
+                        //removedor_ruidos(matriz_verde, 2, i, j);
                         if(matriz_verde[i][j][0] == 255 && matriz_verde[i][j][1] == 255 && matriz_verde[i][j][2] == 255)
                         {
                             al_draw_filled_circle(j, i, 2, azul);
