@@ -146,7 +146,7 @@ void print_poligono(poligono *p)
         
         int j = (i + 1) ;//% p->n;
         //al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
-        al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 5);
+        al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 1);
         
         // al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 5);
         

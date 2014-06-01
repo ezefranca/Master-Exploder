@@ -15,7 +15,7 @@ typedef struct {
     double v;       //
 } Hsv;
 
-int distancia_euclidiana(unsigned char r_velho, unsigned char g_velho, unsigned char b_velho, unsigned char r_atual, unsigned char g_atual, unsigned char b_atual);
+int distancia_euclidiana(unsigned char ***primeiro, unsigned char ***atual, int i, int j);
 void removedor_ruidos(unsigned char ***matriz, int vizinhos, int localX, int localY);
 void valorizador_de_bordas(unsigned char ***matriz, int vizinhos, int localX, int localY);
 void rgb_para_hsv(Rgb *cores, Hsv *cores_hsv);
