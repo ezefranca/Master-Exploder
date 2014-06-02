@@ -30,7 +30,6 @@ all: dir $(BUILDDIR)/$(EXECUTABLE)
 
 ifeq ($(OS),Windows_NT)
 dir:
-		mkdir $(BUILDDIR)
 else
 dir:
 		mkdir -p $(BUILDDIR)
