@@ -1,0 +1,204 @@
+\documentclass[12pt]{article}
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[brazil]{babel}   
+\usepackage[utf8]{inputenc}  
+
+\title{Uma implementação do jogo pedra, papel e tesoura utilizando visão computacional}
+\author{Ezequiel França dos Santos\inst{1}, Gabriel Fontenelle\inst{1}}
+\address 
+{Centro Universitário Senac - Campus Santo Amaro
+  (SENAC-SP)\\
+  Av. Engenheiro Eusébio Stevaux, 823 -- São Paulo -- CEP 04696-000 -- SP -- Brasil
+%\nextinstitute
+%  Departamento de Tecnologia da Informação\\
+%  Bacharelado em Ciência da Computação
+  \email{{ezefranca.br,colecionador.gabriel},{(@gmail.com})}
+}
+
+\begin{document} 
+\maketitle
+
+\begin{abstract}
+Space for translation, when resumo is final version % if you want translate, go ahead
+\end{abstract}
+     
+\begin{resumo} 
+Este trabalho apresenta um jogo, controlado por um algoritmo de visão computacional de identificação da mão (hand-tracking). O algoritmo proposto baseia-se na segmentação da imagem e construção de um fecho convexo com algoritmo de Jarvis e determinação do padrão com base em sua área e quantidade de vértices.
+\end{resumo}
+
+
+\section{Introdução}
+
+A busca por meios que tornem os jogos mais interativos tem sido muito explorada na industria atual de games. Entre muitos meios e dispositivos a visão computacional tem se destacado por pode ser utilizada para capturar gestos e criar interfaces de interação e controle. Os dispositivos comerciais atuais de interação baseados em gestos utilizam equipamentos caros e
+muitas vezes requerem ambientes especiais que dificultam a difusão destas interfaces de controle.
+Este trabalho apresenta um estudo sobre a viabilidade de utilizarmos uma webcam como dispositivo de interação baseado em gestos da mão, especificamente para o jogo pedra, papel e tesoura.
+
+\section{Elaboração técnica}
+\subsection{Aquisição da imagem}
+Falar da aquisição da imagem, opencv, etc.
+
+\subsection{Segmentação da imagem}
+Falar sobre binarizacao (otsu), filtros (sobel, gauss)
+
+\subsection{Reconhecimento de padrões}
+Falar brevemente, e apresentar a idéia utilizada
+
+\subsubsection{Determinação do fecho convexo}
+\begin{itemize}
+
+\item Um conjunto ${\cal S} \subset {\cal R}^d$ é {\em convexo} se $\lambda
+z_1 + (1-\lambda)z_2 \in {\cal S}$ sempre $z_1, z_2 \in{\cal S}$,
+e $0 \le \lambda \le 1$. Resumidamente, ${\cal S}$ contém todos os segmentos de linha que conectam pares de pontos em ${\cal S}$.
+
+\item O {\em fecho convexo} gerado por um conjunto de pontos ${\cal P}$ é
+a intersecção de todos conjuntos convexos ${\cal S}$ que contem ${\cal P}$.
+Se ${\cal P} = \{z_i\in{\cal R}^d, i=1\ldots, n\}$ é finito, pode ser expresso da seguinte como:
+
+$${\cal S} = \{ \sum_{i=1}^n \lambda_i z_i \;|\; 0 \le \lambda_i \le
+1, \; \sum \lambda_i = 1\}.$$
+
+\begin{center}
+\scalebox{.7}{\includegraphics{fig5.pdf}}
+\end{center}
+
+\item Se ${\cal P}$ é finito, existe um único subconjunto ${\cal
+P}^* \subset {\cal P}$ de tamanho mínimo de tal modo que o fecho convexo de
+${\cal P}^*$ é indentico ao fecho convexo de ${\cal P}$.  O conjunto
+${\cal P}^*$ é chamado de conjunto {\em gerador de fecho convexo}.
+
+\item Encontrar o conjunto de gerador do fecho convexo de um conjunto finito ponto
+${\cal P}$ é um problema computacional difícil quando a dimensão $d$
+é maior que $2$.  Se a $d = 2$ existem vários algoritmos eficientes.
+\end{itemize}
+
+\bigskip
+\subsubsection{Algortimo da embrulho de presente}
+
+\begin{itemize}
+
+\item O {\em algoritmo da marcha de Jarvis}, popularmente conhecido como {\em gift
+wrapping algorithm / algoritmo do embrulho de presente} , visita os pontos do fecho convexo de maneira ordenada.
+
+\begin{enumerate}
+
+\item Começamos com qualquer ponto do fecho. O ponto com maior coordenada em x é uma escolha natural. Chamamos esse ponto de $(X_0, Y_0)$.
+
+\item Varremos ("marchamos") através de todos os pontos $(X_i, Y_i)$ e localizamos o ponto tal que o ângulo a partir da coordenada $(1,0)$ para $(X_i - X_0, Y_i - Y_0)$ é minímo.
+TEste é o próximo ponto de sentido anti-horário a partir de $(X_0,Y_0)$ no fecho, chamamos-o de $(X_1, Y_1)$.
+
+\item Suponhamos que tenhamos localizado o ponto $(X_i,Y_i)$, $i=1, \ldots, m$ que ocorrem no sentido anti-horário ao fecho onde $m \ge 2$.
+Calculamos todos os ângulos entre os vetores $(X_i - X_m, Y_i - Y_m)$ e
+$(X_{m-1} - X_m, Y_{m-1} - Y_m)$, e procuramos o ponto $i$ que tenha o menor âgulo positivo.  Adicionamos este ponto ao fecho.
+
+\item Retornarmos a etapa 3 até que $(X_m,Y_m) = (X_0,Y_0)$.
+
+\end{enumerate}
+
+\begin{center}
+\scalebox{.7}{\includegraphics{figura7.pdf}}
+\end{center}
+
+\item O algoritmo de marcha Jarvis tem no pior caso complexidade O($n^2$), o que ocorre se todos os pontos estão no fecho. Em geral, se $h$ pontos estã no fecho, a complexidade é O($nh$).
+
+
+\end{itemize}
+
+\subsubsection{Calculo da área do fecho convexo}
+
+Descrever o que inicialmente estava sendo feito (uma busca em largura), ele ficou lenta, e por isso procuramos outra alternativa, sendo o {\em shoelace} perfeito para este caso.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.7\textwidth]{equacao1.png}
+\label{fig:fig}
+\end{figure}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.7\textwidth]{equcao2.png}
+\label{fig:fig}
+\end{figure}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.7\textwidth]{equacao4.png}
+\label{fig:fig}
+\end{figure}
+\begin{figure}
+\includegraphics[width=.7\textwidth]{equacao4.png}
+\label{fig:fig}
+\end{figure}
+\begin{figure}
+\includegraphics[width=.7\textwidth]{equacao5.png}
+\label{fig:fig}
+\end{figure}
+\begin{center}
+\begin{figure}
+\includegraphics[width=.7\textwidth]{equacao6.png}
+\label{fig:fig}
+\end{figure}
+\end{center}
+
+
+\subsection{Biblioteca Allegro5}
+
+nem sei se precisa
+
+\subsection{Desenvolvimento de uma Engine utilizando structs}
+
+dasdasdasdadasdas
+
+\section{Imagens do Jogo}\label{sec:figs}
+
+
+Figure and table captions should be centered if less than one line
+(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
+both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
+be Helvetica, 10 point, boldface, with 6 points of space before and after each
+caption.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{fig1.jpg}
+\caption{A typical figure}
+\label{fig:fig}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.3\textwidth]{fig2.jpg}
+\caption{This figure is an example of a figure caption taking more than one
+  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
+\label{fig:exampleFig2}
+\end{figure}
+
+In tables, try to avoid the use of colored or shaded backgrounds, and avoid
+thick, doubled, or unnecessary framing lines. When reporting empirical data,
+do not use more decimal digits than warranted by their precision and
+reproducibility. Table caption must be placed before the table (see Table 1)
+and the font used must also be Helvetica, 10 point, boldface, with 6 points of
+space before and after each caption.
+
+\begin{table}[ht]
+\centering
+\caption{Variables to be considered on the evaluation of interaction
+  techniques}
+\label{tab:exTable1}
+\includegraphics[width=.7\textwidth]{table.jpg}
+\end{table}
+
+\section{Conclusão}
+gkgkjgkjhkjhk
+hhghgjhgjhghb
+
+\section{References}
+
+Bibliographic references must be unambiguous and uniform.  We recommend giving
+the author names references, and \cite{smith:99} \cite{barbosa:97} e \cite{rau:11}.
+\cite{kishimoto:08}
+
+SÓ LEMBRE DE ADICIONAR A BIBLIOGRAFIA CERTINHA NO ARQUIVO *.bib
+
+\bibliographystyle{sbc}
+\bibliography{sbc-template}
+
+\end{document}
