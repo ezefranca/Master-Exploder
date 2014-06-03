@@ -1,4 +1,4 @@
-### Projeto Integrador III - [![Build Status](https://travis-ci.org/ezefranca/BCC-1s14-PI3-Master-Exploder.png?branch=master)](https://travis-ci.org/ezefranca/BCC-1s14-PI3-Master-Exploder)
+### Projeto Integrador III - [![Build Status](http://img.shields.io/travis/ezefranca/BCC-1s14-PI3-Master-Exploder.svg?style=flat)](https://travis-ci.org/ezefranca/BCC-1s14-PI3-Master-Exploder)
 ===
 
 ![Logo](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/bin/assets/image/intro/logo2.jpg)
@@ -11,6 +11,14 @@ O Projeto Integrador III, tem como objetivo o desenvolvimento de um jogo em ling
 Apesar de utilizar o OpenCV para aquisição das imagens, todo tratamento e algoritmos para processamento de imagens e reconhecimento de padrões foi feito em linguagem C sem uso de funções de processamento do OpenCV.
 
 A biblioteca para aquisição da câmera fornecida pelo [Profº Marcelo Hashimoto](https://www.github.com/mhsenac) para este trabalho pode ser encontrada [neste repositório](https://github.com/senacbcc/Hashimoto-Camera-lib).
+
+
+#### Funcionamento
+
+![fluxo](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/banca/src/artigo/fluxo.png)
+
+![tesoura](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/banca/src/artigo/tesoura-artigo.png)
+![papel](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/banca/src/artigo/papel-artigo.png)
 
 ####Integrantes
 ---------------------
