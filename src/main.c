@@ -102,7 +102,8 @@ int main() {
     }
     normalizacao_preto_e_branco(p, altura, largura);
     otsu_binarizacao(p, p, altura, largura);
-
+	
+	tela_sprite();
 
     while(1) {
 
@@ -206,7 +207,7 @@ int main() {
             }
         }
 
-	/**********/
+		/**********/
 
         al_destroy_bitmap(direita);
 
@@ -214,7 +215,7 @@ int main() {
 
         camera_libera_matriz(cam, matriz);
 
-    /**********/
+		/**********/
 
         finalizar_allegro();
 

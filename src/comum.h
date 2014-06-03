@@ -10,6 +10,7 @@
 #include "camera.h"
 #include "otsu.h"
 #include "config.h"
+#include "frames.h"
 #include "idioma.h"
 #include "utils.h"
 #include "limiarizacao.h"
@@ -39,6 +40,8 @@ camera *cam;
 int largura;
 int altura;
 
+int largura_imagem;
+int altura_imagem;
 
 ALLEGRO_TIMER *timer;
 ALLEGRO_DISPLAY *display;

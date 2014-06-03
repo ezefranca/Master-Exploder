@@ -5,12 +5,19 @@ int inicializar_allegro(){
 	const char *local_idioma;
     cam = camera_inicializa(0);
 
+	config = carregar_configuracao("configuration.conf");
+    
+	if(!config)
+        criar_configuracao("configuration.conf");
+
     if(!cam)
         erro("erro na inicializacao da camera\n");
 
     largura = cam->largura;
     altura = cam->altura;
-
+	largura_imagem = string_para_int(pegar_configuracao("ALTURA","allegro", config)); 
+	altura_imagem = string_para_int(pegar_configuracao("LARGURA","allegro", config));
+	
 	if(!al_init())
         erro("erro na inicializacao do allegro\n");
 
@@ -24,7 +31,7 @@ int inicializar_allegro(){
     if(!timer)
         erro("erro na criacao do relogio\n");
 
-    display = al_create_display(2 * largura, altura);
+    display = al_create_display(1280, 720);
     if(!display)
         erro("erro na criacao da janela\n");
 
@@ -32,11 +39,7 @@ int inicializar_allegro(){
     if(!queue)
         erro("erro na criacao da fila\n");
 
-    config = carregar_configuracao("configuration.conf");
     
-	if(!config)
-        criar_configuracao("configuration.conf");
-
 	local_idioma = pegar_configuracao("IDIOMA","user", config);
 	
 	if(local_idioma != NULL)

@@ -2,7 +2,7 @@
 
 void fadeout(int velocidade) {
     ALLEGRO_BITMAP *buffer = NULL;
-    buffer = al_create_bitmap(800, 600);
+    buffer = al_create_bitmap(largura_imagem, altura_imagem);
     al_set_target_bitmap(buffer);
 	
     al_draw_bitmap(al_get_backbuffer(display), 0, 0, 0);
@@ -38,10 +38,11 @@ void fadein(ALLEGRO_BITMAP *imagem, int velocidade)
     }
 
     int alfa;
+	
     for (alfa = 0; alfa <= 255; alfa += velocidade)
     {
         al_clear_to_color(al_map_rgb(255, 255, 255));
-        al_draw_tinted_bitmap(imagem, al_map_rgba(alfa, alfa, alfa, alfa), 80, 100, 0);
+        al_draw_tinted_bitmap(imagem, al_map_rgba(alfa, alfa, alfa, alfa), 0, 0, 0);
         al_flip_display();
         al_rest(0.005); // Não é necessário caso haja controle de FPS
     }
@@ -49,22 +50,22 @@ void fadein(ALLEGRO_BITMAP *imagem, int velocidade)
 
 void tela_sprite(){
 
-	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/senac.png");
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/senac.jpg");
     fadein(tela, 7);
     al_rest(2.0);
     fadeout(8);
 
-    tela = al_load_bitmap("assets/image/intro/pi.png");
+    tela = al_load_bitmap("assets/image/intro/pi.jpg");
     fadein(tela, 7);
     al_rest(2.0);
     fadeout(8);
 
-    tela = al_load_bitmap("assets/image/intro/allegro.png");
+    tela = al_load_bitmap("assets/image/intro/allegro.jpg");
     fadein(tela, 7);
     al_rest(2.0);
     fadeout(8);
 
-    tela = al_load_bitmap("assets/image/intro/github.png");
+    tela = al_load_bitmap("assets/image/intro/github.jpg");
     fadein(tela, 7);
     al_rest(2.0);
     fadeout(8);
@@ -74,3 +75,20 @@ void tela_sprite(){
     al_rest(2.0);
 }
 
+/* Funções para single player */
+void tela_vencedor(){
+
+}
+
+void tela_perdedor(){
+
+}
+
+void tela_abertura(){
+
+}
+
+void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, int contador){
+
+
+}
