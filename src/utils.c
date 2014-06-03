@@ -17,9 +17,17 @@ void aviso(char *mensagem){
 }
 
 float string_para_float(char *string){
+	if(string == NULL) {
+		aviso("Não pegou a configuração correta.");
+		return 1;
+	}
 	return strtod(string, NULL);
 }
 
 int string_para_int(char *string){
+	if(string == NULL) {
+		aviso("Não pegou a configuração correta.");
+		return 1;
+	}
 	return atoi(string);
 }

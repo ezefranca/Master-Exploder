@@ -15,6 +15,7 @@ int inicializar_allegro(){
 
     largura = cam->largura;
     altura = cam->altura;
+	
 	largura_imagem = string_para_int(pegar_configuracao("ALTURA","allegro", config)); 
 	altura_imagem = string_para_int(pegar_configuracao("LARGURA","allegro", config));
 	
