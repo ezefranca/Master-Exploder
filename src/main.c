@@ -14,7 +14,7 @@ void remove_fundo(unsigned char ***atual, unsigned char ***primeiro, unsigned ch
 
   int r , g , b;
 
-
+	printf("luminus %s %d", pegar_configuracao("LUMINUS", "camera", config), string_para_int(pegar_configuracao("LUMINUS", "camera", config)));
   for (int y = _vizinhos; y < altura - _vizinhos; y++){
     for (int x = _vizinhos; x < largura - _vizinhos; x++){
   // for(int y = 0; y < altura; y++){
@@ -23,7 +23,8 @@ void remove_fundo(unsigned char ***atual, unsigned char ***primeiro, unsigned ch
       g = abs(atual[y][x][1] -  primeiro[y][x][1]);
       b = abs(atual[y][x][2] -  primeiro[y][x][2]);
 
-      if ((r + g + b) > 50)
+	  //Verificação da luminosidade.
+      if ((r + g + b) > string_para_int(pegar_configuracao("LUMINUS", "camera", config)))
       {
         matriz[y][x][0] = 255;
         matriz[y][x][1] = 255;

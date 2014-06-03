@@ -29,6 +29,7 @@ bool criar_configuracao(char *name){
 	new_config = al_create_config();
 
 	setar_configuracao("CAM_DIVISOR", "1.5", "camera", new_config);
+	setar_configuracao("LUMINUS", "80", "camera", new_config);
 	setar_configuracao("TIMER_DIVIDENDO", "1.0", "allegro", new_config);
 	setar_configuracao("LARGURA", "1280", "allegro", new_config);
 	setar_configuracao("ALTURA", "720", "allegro", new_config);
