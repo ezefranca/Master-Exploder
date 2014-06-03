@@ -2,6 +2,9 @@
 #include "comum.h"
 #include "terminate.h"
 
+//Global
+int _vizinhos = 100;
+
 void testeRGB(Rgb *cores){
   cores->r = 200;
    // printf("---------------------------------%d\n",cores->r);
@@ -11,8 +14,11 @@ void remove_fundo(unsigned char ***atual, unsigned char ***primeiro, unsigned ch
 
   int r , g , b;
 
-  for(int y = 0; y < altura; y++){
-    for(int x = 0; x < largura; x++) {
+
+  for (int y = _vizinhos; y < altura - _vizinhos; y++){
+    for (int x = _vizinhos; x < largura - _vizinhos; x++){
+  // for(int y = 0; y < altura; y++){
+  //   for(int x = 0; x < largura; x++) {
       r = abs(atual[y][x][0] -  primeiro[y][x][0]);
       g = abs(atual[y][x][1] -  primeiro[y][x][1]);
       b = abs(atual[y][x][2] -  primeiro[y][x][2]);
@@ -58,6 +64,7 @@ int main() {
 
   int desenhar = 0;
   int terminar = 0;
+
     //int atualiza = 0;
 
   camera_atualiza(cam);
@@ -126,7 +133,6 @@ int main() {
             //al_draw_circle(300, 300, 10, vermelho, 10);
             //fecho(matriz_pb, altura, largura);
             //------------------
-        int _vizinhos = 100;
             //Teste
         ALLEGRO_COLOR azul = al_map_rgb_f(0, 0, 255);
         ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
