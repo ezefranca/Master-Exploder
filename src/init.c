@@ -7,7 +7,7 @@ int inicializar_allegro(){
 
 	config = carregar_configuracao("configuration.conf");
     
-	if(!config)
+	if(config == NULL)
         criar_configuracao("configuration.conf");
 
     if(!cam)
@@ -50,6 +50,12 @@ int inicializar_allegro(){
 	
 	//char *test = pegar_idioma("test", idioma);
 	//printf("%s", test);
+	
+	pontos = malloc(sizeof(Pontuacao));
+	
+	pontos->numero_partidas = 0;
+	pontos->jogador_1 = 0;
+	pontos->jogador_2 = 0;
 	
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
