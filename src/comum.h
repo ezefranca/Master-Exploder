@@ -3,7 +3,10 @@
 
 #include <stdio.h>
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_primitives.h>
 #include <math.h>
 #include <stdlib.h>
@@ -49,4 +52,26 @@ ALLEGRO_EVENT_QUEUE *queue;
 ALLEGRO_CONFIG *config;
 IDIOMA *idioma;
 
+typedef struct _pontos {
+	int numero_partidas;
+	int jogador_1;
+	int jogador_2;
+} Pontuacao;
+
+typedef struct _game {
+	int largura_imagem;
+	int altura_imagem;
+	
+	Pontuacao *pontos;
+	camera *cam;
+	
+	ALLEGRO_FONT *fonte;
+ 	ALLEGRO_TIMER *timer;
+ 	ALLEGRO_DISPLAY *display;
+ 	ALLEGRO_EVENT_QUEUE *queue;
+	ALLEGRO_CONFIG *config;
+} Game;
+
+Game game;
+  
 #endif

@@ -77,18 +77,19 @@ void tela_sprite(){
 
 /* Funções para single player */
 void tela_vencedor(){
-
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/win.jpg");
+	
 }
 
 void tela_perdedor(){
-
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/perdeu.jpg");
 }
 
 void tela_abertura(){
-
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/menu.jpg");
 }
 
 void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, int contador){
-
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/jogada.jpg");
 
 }
