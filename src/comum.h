@@ -46,6 +46,7 @@ int altura;
 int largura_imagem;
 int altura_imagem;
 
+ALLEGRO_FONT *fonte;
 ALLEGRO_TIMER *timer;
 ALLEGRO_DISPLAY *display;
 ALLEGRO_EVENT_QUEUE *queue;
@@ -58,20 +59,6 @@ typedef struct _pontos {
 	int jogador_2;
 } Pontuacao;
 
-typedef struct _game {
-	int largura_imagem;
-	int altura_imagem;
-	
-	Pontuacao *pontos;
-	camera *cam;
-	
-	ALLEGRO_FONT *fonte;
- 	ALLEGRO_TIMER *timer;
- 	ALLEGRO_DISPLAY *display;
- 	ALLEGRO_EVENT_QUEUE *queue;
-	ALLEGRO_CONFIG *config;
-} Game;
-
-Game game;
+Pontuacao *pontos;
   
 #endif
