@@ -176,8 +176,6 @@ int main() {
 		/**********/
 
     finalizar_allegro();
-
-	free(pontos);
 	
     return EXIT_SUCCESS;
 }
