@@ -2,8 +2,6 @@
 
 int finalizar_allegro(){
 
-	
-
     al_stop_timer(timer);
 
     al_unregister_event_source(queue, al_get_display_event_source(display));
@@ -21,6 +19,9 @@ int finalizar_allegro(){
     camera_finaliza(cam);
 	
 	destroi_idioma(idioma);
+	
+	free(game->pontos);
+	free(game);
 	
 	return 1;
 }

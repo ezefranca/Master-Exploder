@@ -43,9 +43,6 @@ camera *cam;
 int largura;
 int altura;
 
-int largura_imagem;
-int altura_imagem;
-
 ALLEGRO_FONT *fonte;
 ALLEGRO_TIMER *timer;
 ALLEGRO_DISPLAY *display;
@@ -59,6 +56,21 @@ typedef struct _pontos {
 	int jogador_2;
 } Pontuacao;
 
-Pontuacao *pontos;
+typedef struct _game {
+	int largura_camera;
+	int altura_camera;
+	int largura_tela;
+	int altura_tela;
+	
+	float divisor_tempo;
+	float divisor_camera;
+	int luminus;
+	bool debug;
+	
+	const char *idioma_setado;
+	Pontuacao *pontos;
+} Game;
+
+Game *game;
   
 #endif

@@ -2,7 +2,7 @@
 
 void fadeout(int velocidade) {
     ALLEGRO_BITMAP *buffer = NULL;
-    buffer = al_create_bitmap(largura_imagem, altura_imagem);
+    buffer = al_create_bitmap(game->largura_tela, game->altura_tela);
     al_set_target_bitmap(buffer);
 	
     al_draw_bitmap(al_get_backbuffer(display), 0, 0, 0);
