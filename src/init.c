@@ -21,7 +21,7 @@ int inicializar_allegro(){
 	
 	game->divisor_tempo = 1;
 	game->divisor_camera = 1;
-	game->luminus = 80;
+	game->luminus = 120;
 	game->debug = TRUE;
 	
 	game->pontos->numero_partidas = 0;
@@ -69,8 +69,8 @@ int inicializar_allegro(){
 	else
 		carregar_idioma("data/idiomas/pt_br.conf");
 	
-	//char *test = pegar_idioma("test", idioma);
-	//printf("%s", test);
+	char *test = pegar_idioma("test", idioma);
+	printf("%s", test);
 	
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));

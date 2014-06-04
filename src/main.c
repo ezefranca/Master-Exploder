@@ -14,7 +14,7 @@ void remove_fundo(unsigned char ***atual, unsigned char ***primeiro, unsigned ch
 
   int r , g , b;
 
-	printf("luminus %s %d", pegar_configuracao("LUMINUS", "camera", config), string_para_int(pegar_configuracao("LUMINUS", "camera", config)));
+	//printf("luminus %s %d", pegar_configuracao("LUMINUS", "camera", config), string_para_int(pegar_configuracao("LUMINUS", "camera", config)));
   for (int y = _vizinhos; y < altura - _vizinhos; y++){
     for (int x = _vizinhos; x < largura - _vizinhos; x++){
   // for(int y = 0; y < altura; y++){
@@ -24,7 +24,7 @@ void remove_fundo(unsigned char ***atual, unsigned char ***primeiro, unsigned ch
       b = abs(atual[y][x][2] -  primeiro[y][x][2]);
 
 	  //Verificação da luminosidade.
-      if ((r + g + b) > string_para_int(pegar_configuracao("LUMINUS", "camera", config)))
+      if ((r + g + b) > game->luminus)
       {
         matriz[y][x][0] = 255;
         matriz[y][x][1] = 255;
@@ -82,18 +82,6 @@ int main() {
   tela_sprite();
 
   while(1) {
-
-    testeRGB(cores_rgb);
-    for(int y = 0; y < altura; y++)
-      for(int x = 0; x < largura; x++) {
-        cores_rgb->r = cam->quadro[y][x][0];
-        cores_rgb->g = cam->quadro[y][x][1];
-        cores_rgb->b = cam->quadro[y][x][2];
-
-        rgb_para_hsv(cores_rgb, cores_hsv);
-               // printf("R:%d G:%d B:%d ----- H:%f S:%f V:%f\n",cores_rgb->r, cores_rgb->g, cores_rgb->b, cores_hsv->h, cores_hsv->s, cores_hsv->v );
-      }
-
       ALLEGRO_EVENT event;
 
       al_wait_for_event(queue, &event);
@@ -113,6 +101,7 @@ int main() {
         break;
 
       if(desenhar && al_is_event_queue_empty(queue)) {
+
         desenhar = 0;
         camera_atualiza(cam);
         remove_fundo(cam->quadro, primeiro, matriz);

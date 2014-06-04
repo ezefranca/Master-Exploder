@@ -73,6 +73,8 @@ void tela_sprite(){
 	tela = al_load_bitmap("assets/image/intro/logo2.jpg");
     fadein(tela, 7);
     al_rest(2.0);
+
+    return;
 }
 
 /* Funções para single player */
