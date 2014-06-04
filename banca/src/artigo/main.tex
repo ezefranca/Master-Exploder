@@ -3,6 +3,10 @@
 \usepackage{graphicx,url}
 \usepackage[brazil]{babel}   
 \usepackage[utf8]{inputenc}  
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{bbm}
 
 \title{Uma implementação do jogo pedra, papel e tesoura utilizando visão computacional}
 \author{Ezequiel França dos Santos\inst{1}, Gabriel Fontenelle\inst{1}}
@@ -34,18 +38,82 @@ A busca por meios que tornem os jogos mais interativos tem sido muito explorada 
 muitas vezes requerem ambientes especiais que dificultam a difusão destas interfaces de controle.
 Este trabalho apresenta um estudo sobre a viabilidade de utilizarmos uma webcam como dispositivo de interação baseado em gestos da mão, especificamente para o jogo pedra, papel e tesoura.
 
-\section{Elaboração técnica}
+
+\section{titulo provisorio Elaboração técnica}
+
+Para reconhecer os gestos da mão foi nescessário submeter a imagem da camera a algumas fases de pré-processamento. O diagrama 1, mostra a sequência adotada e cada etapa será brevemente descrita no decorrer deste trabalho.  
+
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.7\textwidth]{fluxo.png}
-\label{fig:fig}
+\caption{Fluxo no processamento da imagem} \label{fig1}
 \end{figure}
 \subsection{Aquisição da imagem}
 Falar da aquisição da imagem, opencv, etc.
 
 \subsection{Segmentação da imagem}
-Falar sobre binarizacao (otsu), filtros (sobel, gauss)
+
+\subsubsection{Normalização para escala de cinza}
+A primeira fase de pré-processamento trata-se da normalização da imagem colorida para tons de cinza. A normalização foi feita com base no valor médio dos canais de cores da imagem, conforme a equação \ref{eq:normalizacao}.
+
+
+
+\begin{equation} \label{eq:normalizacao}
+Valor{_{cinza}}{_{i, j}}= \sum_{1}^{n} \left |\frac{R + G + B}{3}\right |{_{i, j}}
+\end{equation}
+
+$Onde:\\$
+$Valor{_{cinza}} -\; valor\,entre\,0\,-\,255\,para\,a\,escala\,de\,cinza$\\
+$R -\; valor\,vermelho\,do\,ponto$\\
+$G -\; valor\,verde\,do\,ponto$\\
+$B -\; valor\,azul\,do\,ponto$\\
+$n -\; quantidade\,de\,pontos\,da\,imagem$\\
+$i, j \,-\;coordenadas\, (x,y)\, do\, ponto\, na\, imagem$\\
+
+A Figura \ref{fig2} apresenta o resultado deste processo.
+
+\begin{figure}[ht]
+\centering
+\mbox{\subfigure{\includegraphics[width=3in]{normal.jpg}}\quad
+\subfigure{\includegraphics[width=3in]{cinza.jpg} }}
+\caption{Imagem normal e imagem normalizada em cinza} \label{fig2}
+\end{figure}
+
+
+\subsubsection{Binarização da imagem}
+
+Existem diversos algoritmos para binarização de imagens, dentre a lista de soluções para este  o algoritmo de Otsu, por ser de fácil implementação e apresentar resultados satisfatórios nos experimentos realizados. O algoritmo de Otsu encontra um nível de cinza $t$ tal que a soma ponderada da variância dentro das classes.
+Uma desvantagem de utilizar este algoritmo é a influência da média de todo os pixeis da imagem. Isto pode fazer com que o limiar ótimo para a página toda não seja o mesmo que o de dentro de uma janela.
+
+    \subsection{Implementação}
+
+
+
+\subsubsection{Detecção de bordas com filtro Sobel}
+
+O filtro Sobel calcula o gradiente da intensidade da imagem em cada ponto, dando a direcção da maior variação de claro para escuro e a quantidade de variação nessa direcção, através de duas matrizes 3x3, que são convoluídas com a imagem original para calcular aproximações das derivadas - uma para as variações horizontais $Gx$ e uma para as verticais $Gy$.
+\begin{center}{Máscara de Sobel 3x3}
+$$
+Gx=\left[\begin{array}{rrr}
+-1&0&+1\\
+-2&0&+2 \\
+-1&0&+1
+\end{array}\right]\quad
+Gy=\left[\begin{array}{ccc}
+-1&-2&-1\\
+0& 0& 0 \\
++1&+2&+1
+\end{array}\right]
+$$
+\end{center}
+A magnitude do gradiente é dado por:
+
+$$
+|G|=\sqrt{Gx^2 + Gy^2}
+$$	
+
+
 
 \subsection{Reconhecimento de padrões}
 Falar brevemente, e apresentar a idéia utilizada
@@ -113,6 +181,7 @@ $(X_{m-1} - X_m, Y_{m-1} - Y_m)$, e procuramos o ponto $i$ que tenha o menor âg
 \subsubsection{Calculo da área do fecho convexo}
 
 Descrever o que inicialmente estava sendo feito (uma busca em largura), ele ficou lenta, e por isso procuramos outra alternativa, sendo o {\em shoelace} perfeito para este caso.
+
 
 \begin{figure}[ht]
 \centering
