@@ -59,15 +59,50 @@ int fazer_jogada_melhor(int jogador){
 	return jogador + 1;
 }
 
+/**
+ *  <#Description#>
+ *
+ *  @param jogador <#jogador description#>
+ *
+ *  @return <#return value description#>
+ */
 int fazer_jogada_pior(int jogador) {
 	if(jogador == PAPEL)
 		return PEDRA;
 	return jogador - 1;
 }
 
-int rand_boss() {
-	int randomic = srand(abs(time(NULL))); 
+/**
+ *  <#Description#>
+ *
+ *  @return <#return value description#>
+ */
+int rand_boss(){
+	double resultado;
+	int randomic;
 	
+	//Usado loop para caso caia no minion_4 e esse já foi usado tentar até não cair no 4.
+	while(1) {
+		randomic = srand(abs(time(NULL)));
+		resultado = (randomic % 11)/10;
+	
+		if(resultado <= minion_1) {
+			return MINION_1;
+		}
+		else if(resultado <= minion_2) {
+			return MINION_2;
+		}
+		else if(resultado <= minion_3) {
+			return MINION_3;
+		}
+		else if(!minion_4_usado && resultado <= minion_4) {
+			minion_4_usado = TRUE;
+			return MINION_4;
+		}
+		else if(resultado <= minion_5){
+			return MINION_5;
+		}
+	}
 }
 
 /**
