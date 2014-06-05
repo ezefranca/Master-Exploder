@@ -25,7 +25,8 @@ double area_do_fecho(poligono *f)
    return area;
 }
 
-void pontos_extremo(poligono *p, ponto menor_x, ponto maior_x, ponto menor_y, ponto maior_y){
+void pontos_extremo(poligono *p){
+    ponto menor_x, maior_x, menor_y, maior_y;
     
     menor_x[X] = MAXIMO;
     menor_x[Y] = MAXIMO;

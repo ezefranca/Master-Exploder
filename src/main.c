@@ -5,83 +5,108 @@
 //Global
 int _vizinhos = 100;
 
-void testeRGB(Rgb *cores){
-  cores->r = 200;
-   // printf("---------------------------------%d\n",cores->r);
+void interpolacao(int n, double *x, double *fx){
+     double somax = 0;//inicializando os valores dos somatorios.
+     double somax2 = 0;
+     double somaf = 0;
+     double somaxf = 0;
+     
+     for(int i=1;i<=10;i++){//Somatorios de x, x², f(x) e x*f(x)
+      somax = somax + x[i];
+      somax2 = somax2 + x[i]* x[i];
+      somaf = somaf + fx[i];
+      somaxf = somaxf + x[i]* fx[i];
+    }              
+
+    //calculo dos valores de a e b da regressão linear.
+    double a = (somaf * somax2 - somax * somaxf)/(n * somax2 - somax *somax);
+    double b = (n * somaxf - somax * somaf)/(n * somax2 - somax * somax);
+
+    //printf ("\nA curva que melhor ajusta os 10 dados fornecidos eh \ng(x)= %f + %f*x\n\n", a, b);
+    double c = (a * 42) + b;
+    printf("%f, %f = %f\n",a, b, c);
 }
 
-void remove_fundo(unsigned char ***atual, unsigned char ***primeiro, unsigned char ***matriz){
+  void testeRGB(Rgb *cores){
+    cores->r = 200;
+   // printf("---------------------------------%d\n",cores->r);
+  }
 
-  int r , g , b;
+  void remove_fundo(unsigned char ***atual, unsigned char ***primeiro, unsigned char ***matriz){
+
+    int r , g , b;
 
 	//printf("luminus %s %d", pegar_configuracao("LUMINUS", "camera", config), string_para_int(pegar_configuracao("LUMINUS", "camera", config)));
-  for (int y = _vizinhos; y < altura - _vizinhos; y++){
-    for (int x = _vizinhos; x < largura - _vizinhos; x++){
+    for (int y = _vizinhos; y < altura - _vizinhos; y++){
+      for (int x = _vizinhos; x < largura - _vizinhos; x++){
   // for(int y = 0; y < altura; y++){
   //   for(int x = 0; x < largura; x++) {
-      r = abs(atual[y][x][0] -  primeiro[y][x][0]);
-      g = abs(atual[y][x][1] -  primeiro[y][x][1]);
-      b = abs(atual[y][x][2] -  primeiro[y][x][2]);
+        r = abs(atual[y][x][0] -  primeiro[y][x][0]);
+        g = abs(atual[y][x][1] -  primeiro[y][x][1]);
+        b = abs(atual[y][x][2] -  primeiro[y][x][2]);
 
 	  //Verificação da luminosidade.
-      if ((r + g + b) > game->luminus)
-      {
-        matriz[y][x][0] = 255;
-        matriz[y][x][1] = 255;
-        matriz[y][x][2] = 255;
+        if ((r + g + b) > game->luminus)
+        {
+          matriz[y][x][0] = 255;
+          matriz[y][x][1] = 255;
+          matriz[y][x][2] = 255;
+        }
+
+        else
+        {
+          matriz[y][x][0] = 0;
+          matriz[y][x][1] = 0;
+          matriz[y][x][2] = 0;
+        }   
       }
-
-      else
-      {
-        matriz[y][x][0] = 0;
-        matriz[y][x][1] = 0;
-        matriz[y][x][2] = 0;
-      }   
     }
-}
 
-}
+  }
 
-int main() {
+  int main() {
 
-  inicializar_allegro();
+    inicializar_allegro();
 
-  unsigned char ***matriz = camera_aloca_matriz(cam);
-  unsigned char ***matriz_pb = camera_aloca_matriz(cam);
-  unsigned char ***matriz_verde = camera_aloca_matriz(cam);
+    unsigned char ***matriz = camera_aloca_matriz(cam);
+    unsigned char ***matriz_pb = camera_aloca_matriz(cam);
+    unsigned char ***matriz_verde = camera_aloca_matriz(cam);
 
-  unsigned char ***primeiro = camera_aloca_matriz(cam);
+    unsigned char ***primeiro = camera_aloca_matriz(cam);
     //unsigned char ***matriz2 = camera_aloca_matriz(cam);
     //ALLEGRO_COLOR cor = al_map_rgb_f(0, 0, 1);
 
-  ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
-  ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
-  ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
+    ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
+    ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
+    ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
 
     //ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
 
-  Rgb *cores_rgb = malloc(sizeof(Rgb));
-  Hsv *cores_hsv = malloc(sizeof(Hsv));
+    Rgb *cores_rgb = malloc(sizeof(Rgb));
+    Hsv *cores_hsv = malloc(sizeof(Hsv));
 
 
-  int desenhar = 0;
-  int terminar = 0;
+    int desenhar = 0;
+    int terminar = 0;
+    int amostragem = 0;
+    double x[10]; 
+    double fx[10];
 
     //int atualiza = 0;
 
-  camera_atualiza(cam);
+    camera_atualiza(cam);
 
-  for(int y = 0; y < altura; y++){
-    for(int x = 0; x < largura; x++) {
-      primeiro[y][x][0] = cam->quadro[y][x][0];
-      primeiro[y][x][1] = cam->quadro[y][x][1];
-      primeiro[y][x][2] = cam->quadro[y][x][2];
+    for(int y = 0; y < altura; y++){
+      for(int x = 0; x < largura; x++) {
+        primeiro[y][x][0] = cam->quadro[y][x][0];
+        primeiro[y][x][1] = cam->quadro[y][x][1];
+        primeiro[y][x][2] = cam->quadro[y][x][2];
+      }
     }
-  }
-  
-  tela_sprite();
 
-  while(1) {
+    //tela_sprite();
+
+    while(1) {
       ALLEGRO_EVENT event;
 
       al_wait_for_event(queue, &event);
@@ -146,7 +171,26 @@ int main() {
         }
 
                 //pontos_extremo(f, menor_x, maior_x, menor_y, maior_y);
-        printf("\nArea do fecho: %2f Pontos %d\n", area_do_fecho(f), f->n);
+        /*
+        Tesoura, 20000 - 36000
+
+        Pedra,   15000 - 45000
+
+        Papel, 40000 - 120000
+        */
+        if(amostragem < 10){
+          fx[amostragem] = area_do_fecho(f);
+          x[amostragem] = f->n;
+        }else{
+          interpolacao(10, x, fx);
+          pontos_extremo(f);
+            amostragem = -1;
+        }
+        amostragem++;
+
+
+
+       // printf("\nArea do fecho: %2f Pontos %d\n", area_do_fecho(f), f->n);
         print_poligono(f);
             //camera_copia(cam, fundo, direita);
             /**********/
@@ -165,6 +209,6 @@ int main() {
 		/**********/
 
     finalizar_allegro();
-	
+
     return EXIT_SUCCESS;
-}
+  }
