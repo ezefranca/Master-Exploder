@@ -23,6 +23,7 @@
 #include "matrizes.h"
 #include "ezequiel.h"
 #include "fecho.h"
+#include "controle.h"
 
 /*Constantes*/
 #define FPS 60
