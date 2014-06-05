@@ -96,11 +96,9 @@ int rand_boss(){
 		else if(resultado <= minion_4) {
 			if(!minion_4_usado) {
 				minion_4_usado = TRUE;
+				return MINION_4;
 			}
-			else {
-				return MINION_1;
-			}
-			return MINION_4;
+			return MINION_1;
 		}
 		else if(resultado <= minion_5){
 			return MINION_5;
