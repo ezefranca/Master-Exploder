@@ -1,6 +1,13 @@
 #include "otsu.h"
 #include <math.h>
-
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param saida   <#saida description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ */
 void otsu_binarizacao(unsigned char ***matriz, unsigned char ***saida, int altura, int largura)
 /* método de otsu - referencia teórica wiki.icmc.usp.br/images/b/bb/Otsu_e_derivadas.pdf‎ */
 {

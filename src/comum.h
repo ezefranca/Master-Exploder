@@ -51,12 +51,18 @@ ALLEGRO_EVENT_QUEUE *queue;
 ALLEGRO_CONFIG *config;
 IDIOMA *idioma;
 
+/**
+ *  <#Description#>
+ */
 typedef struct _pontos {
 	int numero_partidas;
 	int jogador_1;
 	int jogador_2;
 } Pontuacao;
 
+/**
+ *  <#Description#>
+ */
 typedef struct _game {
 	int largura_camera;
 	int altura_camera;

@@ -1,7 +1,16 @@
 #include "comum.h"
 
 //Funcoes de teste em processamento de imagens
-
+/**
+ *  <#Description#>
+ *
+ *  @param primeiro <#primeiro description#>
+ *  @param atual    <#atual description#>
+ *  @param i        <#i description#>
+ *  @param j        <#j description#>
+ *
+ *  @return <#return value description#>
+ */
 int distancia_euclidiana(unsigned char ***primeiro, unsigned char ***atual, int i, int j){
     int soma_r = primeiro[i][j][0] - atual[i][j][0];
     int soma_g = primeiro[i][j][1] - atual[i][j][1];
@@ -10,7 +19,14 @@ int distancia_euclidiana(unsigned char ***primeiro, unsigned char ***atual, int 
     int euclidiana = sqrt(quadrado);
     return euclidiana;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param matriz   <#matriz description#>
+ *  @param vizinhos <#vizinhos description#>
+ *  @param localX   <#localX description#>
+ *  @param localY   <#localY description#>
+ */
 void removedor_ruidos(unsigned char ***matriz, int vizinhos, int localX, int localY){
 
     for (int k = 0; k < 3; k++)
@@ -25,7 +41,14 @@ void removedor_ruidos(unsigned char ***matriz, int vizinhos, int localX, int loc
     }
     return;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param matriz   <#matriz description#>
+ *  @param vizinhos <#vizinhos description#>
+ *  @param localX   <#localX description#>
+ *  @param localY   <#localY description#>
+ */
 void valorizador_de_bordas(unsigned char ***matriz, int vizinhos, int localX, int localY){
 
     for (int i = 1; i < vizinhos; ++i)
@@ -50,7 +73,12 @@ void valorizador_de_bordas(unsigned char ***matriz, int vizinhos, int localX, in
     }
     return;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param cores     <#cores description#>
+ *  @param cores_hsv <#cores_hsv description#>
+ */
 void rgb_para_hsv(Rgb *cores, Hsv *cores_hsv){
 
   float vermelho = (float)cores->r/255;
@@ -90,33 +118,3 @@ void rgb_para_hsv(Rgb *cores, Hsv *cores_hsv){
   cores_hsv->v = cMax * 100;
   return;
 }
-
-void overlay_frame(camera *cam, Hsv *quadro, unsigned char ***primeiro, int frame_limite) {
-    int x, y;
-    unsigned char hue, saturation, value;
-
-    for(x = 0; x < cam->altura; x++) {
-        for(y = 0; y < cam->largura; y++) {
-            hue = quadro->h;
-            saturation = quadro->s;
-            value = quadro->v;
-
-            hue -= primeiro[x][y][0];
-            saturation -= primeiro[x][y][1];
-            value -= primeiro[x][y][2];
-
-            hue *= hue;
-            saturation *= saturation;
-            value *= value;
-
-            hue = hue + saturation + value;
-            frame_limite *= frame_limite;
-
-            cam->quadro[x][y][0] = (hue > frame_limite) ? cam->quadro[x][y][0] : 0;
-            cam->quadro[x][y][1] = (hue > frame_limite) ? cam->quadro[x][y][1] : 0;
-            cam->quadro[x][y][2] = (hue > frame_limite) ? cam->quadro[x][y][2] : 0;
-
-        }
-    }
-}
-

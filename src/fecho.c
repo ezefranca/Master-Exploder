@@ -1,12 +1,23 @@
 #include "fecho.h"
-
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ */
 void copia_ponto(ponto a, ponto b)
 {
     for (int i=0; i<DIMENSAO; i++){
         b[i] = a[i];
     }
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param f <#f description#>
+ *
+ *  @return <#return value description#>
+ */
 double area_do_fecho(poligono *f)
 {
    int i,j;
@@ -24,7 +35,11 @@ double area_do_fecho(poligono *f)
 
    return area;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param p <#p description#>
+ */
 void pontos_extremo(poligono *p){
     ponto menor_x, maior_x, menor_y, maior_y;
     
@@ -72,7 +87,12 @@ void pontos_extremo(poligono *p){
     printf("maior ponto Y(%d,%d)\n",maior_y[X], maior_y[Y]);
     return;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ */
 void swap_ponto(ponto a, ponto b)
 {
     ponto c;
@@ -80,7 +100,14 @@ void swap_ponto(ponto a, ponto b)
     copia_ponto(b,a);
     copia_ponto(c,b);
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *
+ *  @return <#return value description#>
+ */
 double distancia(ponto a, ponto b)
 {
     double d = 0.0;       // distancia  acumulada
@@ -90,40 +117,84 @@ double distancia(ponto a, ponto b)
     
     return(sqrt(d));
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *  @param c <#c description#>
+ *
+ *  @return <#return value description#>
+ */
 int area_triangulo_com_sinal(ponto a, ponto b, ponto c)
 {
     int area = ((a[X]*b[Y] - a[Y]*b[X] + a[Y]*c[X]
                  - a[X]*c[Y] + b[X]*c[Y] - c[X]*b[Y]));
     return area ;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *  @param c <#c description#>
+ *
+ *  @return <#return value description#>
+ */
 int triangulo_area(ponto a, ponto b, ponto c)
 {
     return(abs(area_triangulo_com_sinal(a,b,c)));
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *  @param c <#c description#>
+ *
+ *  @return <#return value description#>
+ */
 bool sentido_anti_horario(ponto a, ponto b, ponto c)
 {
     int area_triangulo_com_sinal();
     
     return (area_triangulo_com_sinal(a,b,c) > 0);
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *  @param c <#c description#>
+ *
+ *  @return <#return value description#>
+ */
 bool sentido_horario(ponto a, ponto b, ponto c)
 {
     int area_triangulo_com_sinal();
     
     return (area_triangulo_com_sinal(a,b,c) < 0);
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *  @param c <#c description#>
+ *
+ *  @return <#return value description#>
+ */
 bool colinear(ponto a, ponto b, ponto c)
 {
     int area_triangulo_com_sinal();
     
     return (fabs(area_triangulo_com_sinal(a,b,c)) <= 0);
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param p <#p description#>
+ */
 void print_poligono(poligono *p)
 {
     ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
@@ -164,7 +235,12 @@ void print_poligono(poligono *p)
     }
     //al_draw_line(p->p[p->n][X], p->p[p->n][Y], primeiro_ponto[X], primeiro_ponto[Y], vermelho, 25);
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param entrada <#entrada description#>
+ *  @param n       <#n description#>
+ */
 void ordena_e_remove_duplicados(ponto entrada[], int *n)
 {
     int old_n;               // numero n de pontos antes de deletar
@@ -173,7 +249,13 @@ void ordena_e_remove_duplicados(ponto entrada[], int *n)
     
     qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param entrada <#entrada description#>
+ *  @param n       <#n description#>
+ *  @param fecho   <#fecho description#>
+ */
 void fecho_convexo(ponto entrada[], int n, poligono *fecho)
 {
     
@@ -233,7 +315,15 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho)
     //copia_ponto(fecho->p[0],fecho->p[h]);
     fecho->n = h;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ *
+ *  @return <#return value description#>
+ */
 poligono* fecho(unsigned char ***matriz, int altura, int largura){
     
     ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
@@ -260,7 +350,14 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
     return fecho;
 }
 
-
+/**
+ *  <#Description#>
+ *
+ *  @param p1 <#p1 description#>
+ *  @param p2 <#p2 description#>
+ *
+ *  @return <#return value description#>
+ */
 int mais_a_esquerda(ponto *p1, ponto *p2)
 {
     if ((*p1)[X] < (*p2)[X]) return (-1);
@@ -271,7 +368,14 @@ int mais_a_esquerda(ponto *p1, ponto *p2)
     
     return(0);
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param p1 <#p1 description#>
+ *  @param p2 <#p2 description#>
+ *
+ *  @return <#return value description#>
+ */
 int menor_angulo(ponto *p1, ponto *p2)
 {
     if (colinear(primeiro_ponto,*p1,*p2)) {

@@ -1,5 +1,9 @@
 #include "terminate.h"
-
+/**
+ *  <#Description#>
+ *
+ *  @return <#return value description#>
+ */
 int finalizar_allegro(){
 
     al_stop_timer(timer);

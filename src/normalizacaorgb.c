@@ -1,3 +1,12 @@
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ *
+ *  @return <#return value description#>
+ */
 int normalizacaorgb(unsigned char ***matriz, int altura, int largura){
 	unsigned char r = 0, g = 0, b = 0, media = 0;
 	for(int i = 0; i < altura; i++) {

@@ -5,7 +5,11 @@
 #define TRUE 1
 #define FALSE 0
 #define NUMERO_ALFABETO 24
-
+/**
+ *  <#Description#>
+ *
+ *  @return <#return value description#>
+ */
 IDIOMA *aloca_idioma(){
 	IDIOMA *language = malloc(sizeof(IDIOMA));
     language->hash = malloc(NUMERO_ALFABETO * sizeof(elemento_string*));
@@ -15,7 +19,13 @@ IDIOMA *aloca_idioma(){
 	}
     return language;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param entrada <#entrada description#>
+ *
+ *  @return <#return value description#>
+ */
 int conta_linhas(ALLEGRO_FILE *entrada) {
     int linhas;
     char caractere, ultimo_caractere;
@@ -32,7 +42,14 @@ int conta_linhas(ALLEGRO_FILE *entrada) {
     al_fseek(entrada, 0, ALLEGRO_SEEK_SET);
     return linhas;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param entrada <#entrada description#>
+ *  @param ate     <#ate description#>
+ *
+ *  @return <#return value description#>
+ */
 int conta_ate(ALLEGRO_FILE *entrada, char ate) {
     int n;
     char caractere;
@@ -41,7 +58,13 @@ int conta_ate(ALLEGRO_FILE *entrada, char ate) {
     
 	return n;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param idi    <#idi description#>
+ *  @param var    <#var description#>
+ *  @param string <#string description#>
+ */
 void insere_idioma(IDIOMA *idi, char *var, char *string) {
     int hash_numero;
 	
@@ -61,7 +84,11 @@ void insere_idioma(IDIOMA *idi, char *var, char *string) {
 }
 
 /* Fun;'oes visiveis no .h */
-
+/**
+ *  <#Description#>
+ *
+ *  @param arquivo <#arquivo description#>
+ */
 void carregar_idioma(const char *arquivo){
 	ALLEGRO_FILE *entrada;
 	char **string, **var, c;
@@ -120,7 +147,14 @@ void carregar_idioma(const char *arquivo){
     //loaded_idioma = 1;
     return;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param key    <#key description#>
+ *  @param idioma <#idioma description#>
+ *
+ *  @return <#return value description#>
+ */
 const char *pegar_idioma(const char *key, IDIOMA *idioma){
 	elemento_string *anterior, *atual;
 
@@ -144,7 +178,11 @@ const char *pegar_idioma(const char *key, IDIOMA *idioma){
     }
 	return key;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param language <#language description#>
+ */
 void destroi_idioma(IDIOMA *language){
 	free(language->hash);
 	free(language);

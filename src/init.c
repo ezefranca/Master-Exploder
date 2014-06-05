@@ -1,5 +1,9 @@
 #include "init.h"
-
+/**
+ *  <#Description#>
+ *
+ *  @return <#return value description#>
+ */
 int inicializar_allegro(){	
 	game = malloc(sizeof(Game));
 	game->pontos = malloc(sizeof(Pontuacao));
@@ -16,8 +20,8 @@ int inicializar_allegro(){
 	
 	game->largura_camera = cam->largura;
 	game->altura_camera = cam->largura;
-	game->largura_tela = 1280;
-	game->altura_tela = 720;
+	game->largura_tela = 2000;
+	game->altura_tela = 800;
 	
 	game->divisor_tempo = 1;
 	game->divisor_camera = 1;
@@ -51,7 +55,7 @@ int inicializar_allegro(){
     if(!timer)
         erro("erro na criacao do relogio\n");
 
-    display = al_create_display(1280, 720);
+    display = al_create_display(game->largura_tela, game->altura_tela);
     if(!display)
         erro("erro na criacao da janela\n");
 
