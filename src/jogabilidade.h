@@ -17,6 +17,7 @@
 #define MINION_5 4
 
 int minion_4_usado = FALSE;
+double minions_probabilidade[] = {0.4, 0.75, 0.9,0.95, 1};
 
 /**
  *  <#Description#>
@@ -71,7 +72,5 @@ int rand_boss();
  *  @return <#return value description#>
  */
 int fim_de_jogo(int pontos_jogador_1, int pontos_jogador_2, int melhor_jogo);
-
-enum minions {minion_1 = 0.4, minion_2 = 0.75, minion_3 = 0.9, minion_4 = 0.95, minion_5 = 100};
 
 #endif

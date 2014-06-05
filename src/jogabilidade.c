@@ -80,29 +80,29 @@ int fazer_jogada_pior(int jogador) {
 int rand_boss(){
 	double resultado;
 	int randomic;
+	srand(abs(time(NULL)));
+	randomic = rand();
+	resultado = (double) (randomic % 11)/10;
 	
-		randomic = srand(abs(time(NULL)));
-		resultado = (double) (randomic % 11)/10;
-	
-		if(resultado <= minion_1) {
-			return MINION_1;
+	if(resultado <= minions_probabilidade[MINION_1]) {
+		return MINION_1;
+	}
+	else if(resultado <= minions_probabilidade[MINION_2]) {
+		return MINION_2;
+	}
+	else if(resultado <= minions_probabilidade[MINION_3]) {
+		return MINION_3;
+	}
+	else if(resultado <= minions_probabilidade[MINION_4]) {
+		if(!minion_4_usado) {
+			minion_4_usado = TRUE;
+			return MINION_4;
 		}
-		else if(resultado <= minion_2) {
-			return MINION_2;
-		}
-		else if(resultado <= minion_3) {
-			return MINION_3;
-		}
-		else if(resultado <= minion_4) {
-			if(!minion_4_usado) {
-				minion_4_usado = TRUE;
-				return MINION_4;
-			}
-			return MINION_1;
-		}
-		else if(resultado <= minion_5){
-			return MINION_5;
-		}
+		return MINION_1;
+	}
+	else {
+		return MINION_5;
+	}
 }
 
 /**
