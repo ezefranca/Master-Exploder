@@ -2,13 +2,13 @@
 \usepackage{sbc-template}
 \usepackage{graphicx,url}
 \usepackage[brazil]{babel}   
-\usepackage[utf8]{inputenc}  
+\usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{amsmath}
 \usepackage{bbm}
 
-\title{Uma implementação do jogo pedra, papel e tesoura utilizando visão computacional}
+\title{Uma implementação do jogo Pedra, Papel e Tesoura utilizando Visão Computacional}
 \author{Ezequiel França dos Santos\inst{1}, Gabriel Fontenelle\inst{1}}
 \address 
 {Centro Universitário Senac - Campus Santo Amaro
@@ -28,33 +28,42 @@ Space for translation, when resumo is final version % if you want translate, go 
 \end{abstract}
      
 \begin{resumo} 
-Este trabalho apresenta um jogo, controlado por um algoritmo de visão computacional de identificação da mão (hand-tracking). O algoritmo proposto baseia-se na segmentação da imagem e construção de um fecho convexo com algoritmo de Jarvis e determinação do padrão com base em sua área e quantidade de vértices.
+Este trabalho apresenta um jogo, controlado por um algoritmo de Visão Computacional de identificação da mão (hand-tracking). O algoritmo proposto baseia-se na segmentação da imagem e construção de um fecho convexo com algoritmo de Jarvis e determinação do padrão com base em sua área e quantidade de vértices.
 \end{resumo}
 
 
 \section{Introdução}
 
-A busca por meios que tornem os jogos mais interativos tem sido muito explorada na industria atual de games. Entre muitos meios e dispositivos a visão computacional tem se destacado por pode ser utilizada para capturar gestos e criar interfaces de interação e controle. Os dispositivos comerciais atuais de interação baseados em gestos utilizam equipamentos caros e
+A busca por meios que tornem os jogos mais interativos tem sido muito explorada na industria atual de jogos eletrônicos. Nessa área a Visão Computacional tem se destacado, permitindo a captura de gestos para uso como controle em interfaces interativas. Os dispositivos comerciais atuais de interação baseados em gestos utilizam equipamentos caros e
 muitas vezes requerem ambientes especiais que dificultam a difusão destas interfaces de controle.
-Este trabalho apresenta um estudo sobre a viabilidade de utilizarmos uma webcam como dispositivo de interação baseado em gestos da mão, especificamente para o jogo pedra, papel e tesoura.
+Este trabalho apresenta um estudo sobre a viabilidade de utilização de uma webcam como dispositivo de interação baseado em gestos da mão, especificamente para o jogo Pedra, Papel e Tesoura.
 
 
-\section{titulo provisorio Elaboração técnica}
+\section{Objetivos}
 
-Para reconhecer os gestos da mão foi nescessário submeter a imagem da camera a algumas fases de pré-processamento. O diagrama 1, mostra a sequência adotada e cada etapa será brevemente descrita no decorrer deste trabalho.  
+O objetivo é o desenvolvilmento de um jogo interativo controlado utilizando a webcam. 
 
+\section{Desenvolvimento}
+
+
+\subsection{Controle do Jogo}
+
+Para reconhecer os gestos da mão foi necessário submeter a imagem da camera a algumas fases de pré-processamento. O diagrama 1, mostra a sequência adotada e cada etapa será brevemente descrita no decorrer deste trabalho.  
+
+\subsubsection{Reconhecimento de padrões}
+Falar brevemente, e apresentar a idéia utilizada
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.7\textwidth]{fluxo.png}
 \caption{Fluxo no processamento da imagem} \label{fig1}
 \end{figure}
-\subsection{Aquisição da imagem}
+\subsubsection{Aquisição da imagem}
 Falar da aquisição da imagem, opencv, etc.
 
-\subsection{Segmentação da imagem}
+\subsubsection{Segmentação da imagem}
 
-\subsubsection{Normalização para escala de cinza}
+\subsubitem{Normalização para escala de cinza}
 A primeira fase de pré-processamento trata-se da normalização da imagem colorida para tons de cinza. A normalização foi feita com base no valor médio dos canais de cores da imagem, conforme a equação \ref{eq:normalizacao}.
 
 
@@ -79,7 +88,6 @@ A Figura \ref{fig2} apresenta o resultado deste processo.
 \subfigure{\includegraphics[width=3in]{cinza.jpg} }}
 \caption{Imagem normal e imagem normalizada em cinza} \label{fig2}
 \end{figure}
-
 
 \subsubsection{Binarização da imagem}
 
@@ -113,10 +121,6 @@ $$
 |G|=\sqrt{Gx^2 + Gy^2}
 $$	
 
-
-
-\subsection{Reconhecimento de padrões}
-Falar brevemente, e apresentar a idéia utilizada
 
 \subsubsection{Determinação do fecho convexo}
 \begin{itemize}
@@ -213,6 +217,21 @@ Descrever o que inicialmente estava sendo feito (uma busca em largura), ele fico
 \end{figure}
 \end{center}
 
+\subsubsection{Multilinguagem}
+
+Uso do Hash.
+
+\subsubsection{Probabilidade Inimigo}
+
+Minions.
+
+\subsubsection{Pontuação}
+
+Sobre a pontuação
+
+\section{Resultados}
+
+\section{Imagens do Jogo}\label{sec:figs}
 
 \subsection{Biblioteca Allegro5}
 
@@ -221,8 +240,6 @@ nem sei se precisa
 \subsection{Desenvolvimento de uma Engine utilizando structs}
 
 dasdasdasdadasdas
-
-\section{Imagens do Jogo}\label{sec:figs}
 
 
 Figure and table captions should be centered if less than one line
@@ -262,6 +279,7 @@ space before and after each caption.
 \end{table}
 
 \section{Conclusão}
+
 gkgkjgkjhkjhk
 hhghgjhgjhghb
 
