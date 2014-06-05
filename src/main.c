@@ -52,7 +52,7 @@ void interpolacao(int n, double *x, double *fx){
         b = abs(atual[y][x][2] -  primeiro[y][x][2]);
 
 	  //Verificação da luminosidade.
-        if ((r + g + b) > game->luminus)
+        if ((r + g + b) > game->luminus+30)
         {
           matriz[y][x][0] = 255;
           matriz[y][x][1] = 255;
@@ -156,7 +156,7 @@ void interpolacao(int n, double *x, double *fx){
             //filtro_media(matriz, matriz, altura, largura);
         matriz_copia(matriz_pb, matriz_verde, altura, largura);
         poligono *f = fecho(matriz_verde,altura, largura);
-        camera_copia(cam, matriz_pb, esquerda);
+        camera_copia(cam, matriz, esquerda);
         camera_copia(cam, matriz_verde, direita);
             //al_draw_circle(300, 300, 10, vermelho, 10);
             //fecho(matriz_pb, altura, largura);
@@ -193,7 +193,7 @@ void interpolacao(int n, double *x, double *fx){
           x[amostragem] = f->n;
         }else{
           interpolacao(10, x, fx);
-          pontos_extremo(f);
+          pontos_extremo(f, altura, largura);
             amostragem = -1;
         }
         amostragem++;
@@ -202,6 +202,9 @@ void interpolacao(int n, double *x, double *fx){
 
        // printf("\nArea do fecho: %2f Pontos %d\n", area_do_fecho(f), f->n);
         print_poligono(f);
+        ponto laranja;
+        centroide(f, laranja);
+        printf("%d, %d\n",laranja[X], laranja[Y]);
             //camera_copia(cam, fundo, direita);
             /**********/
 

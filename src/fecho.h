@@ -41,12 +41,16 @@ ponto maior_x;
 ponto menor_y;
 ponto maior_y;
 
+void centroide(poligono *f, ponto centroide);
+
 /**
  *  <#Description#>
  *
  *  @param p <#p description#>
+ *	@param altura
+ *	@param largura
  */
-void pontos_extremo(poligono *p);
+void pontos_extremo(poligono *p, int altura, int largura);
 /**
  *  <#Description#>
  *

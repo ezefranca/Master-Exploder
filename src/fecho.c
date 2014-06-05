@@ -1,4 +1,18 @@
 #include "fecho.h"
+void centroide(poligono *f, ponto centroide){
+    int x = 0, y = 0;
+    int n = f->n;
+
+    if (n == 0)
+        n = 1;
+
+    for (int i=0; i < f->n ;i++) {
+        x = x + f->p[i][X];
+        y = y + f->p[i][Y]; 
+   }
+  centroide[X] = x / n;
+  centroide[Y] = x / n;
+}
 /**
  *  <#Description#>
  *
@@ -40,7 +54,7 @@ double area_do_fecho(poligono *f)
  *
  *  @param p <#p description#>
  */
-void pontos_extremo(poligono *p){
+void pontos_extremo(poligono *p, int largura, int altura){
     ponto menor_x, maior_x, menor_y, maior_y;
     
     menor_x[X] = MAXIMO;
