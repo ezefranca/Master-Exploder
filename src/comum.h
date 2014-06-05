@@ -27,12 +27,7 @@
 
 /*Constantes*/
 #define FPS 60
-#define PEDRA 2
-#define TESOURA 1
-#define PAPEL 0
-#define EMPATE 0
-#define JOGADOR_2 2
-#define JOGADOR_1 1
+
 
 
 //Bloco de variaveis

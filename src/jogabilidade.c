@@ -81,8 +81,6 @@ int rand_boss(){
 	double resultado;
 	int randomic;
 	
-	//Usado loop para caso caia no minion_4 e esse já foi usado tentar até não cair no 4.
-	while(1) {
 		randomic = srand(abs(time(NULL)));
 		resultado = (randomic % 11)/10;
 	
@@ -95,14 +93,18 @@ int rand_boss(){
 		else if(resultado <= minion_3) {
 			return MINION_3;
 		}
-		else if(!minion_4_usado && resultado <= minion_4) {
-			minion_4_usado = TRUE;
+		else if(resultado <= minion_4) {
+			if(!minion_4_usado) {
+				minion_4_usado = TRUE;
+			}
+			else {
+				return MINION_1;
+			}
 			return MINION_4;
 		}
 		else if(resultado <= minion_5){
 			return MINION_5;
 		}
-	}
 }
 
 /**
