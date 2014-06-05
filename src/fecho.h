@@ -97,7 +97,7 @@ int area_triangulo_com_sinal(ponto a, ponto b, ponto c);
  *
  *  @return <#return value description#>
  */
-int triangulo_area(ponto a, ponto b, ponto c)
+int triangulo_area(ponto a, ponto b, ponto c);
 /**
  *  <#Description#>
  *
