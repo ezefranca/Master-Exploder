@@ -5,7 +5,16 @@
 
 #define TRUE 1
 #define FALSE 0
-
+/**
+ *  <#Description#>
+ *
+ *  @param conf_key   <#conf_key description#>
+ *  @param conf_value <#conf_value description#>
+ *  @param section    <#section description#>
+ *  @param config     <#config description#>
+ *
+ *  @return <#return value description#>
+ */
 bool setar_configuracao(const char *conf_key, const char *conf_value, const char *section, ALLEGRO_CONFIG *config) {
 	const char *value;
 
@@ -21,7 +30,13 @@ bool setar_configuracao(const char *conf_key, const char *conf_value, const char
 	}
 	return FALSE;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param name <#name description#>
+ *
+ *  @return <#return value description#>
+ */
 bool criar_configuracao(char *name){
 	/** Colocar a lista de configuracoes padroes aqui. */
 	ALLEGRO_CONFIG *new_config;
@@ -43,15 +58,36 @@ bool criar_configuracao(char *name){
 	free(new_config);
 	return TRUE;
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param name   <#name description#>
+ *  @param config <#config description#>
+ *
+ *  @return <#return value description#>
+ */
 bool salvar_configuracao(char *name, ALLEGRO_CONFIG *config){
 	return al_save_config_file(name, config);
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param name <#name description#>
+ *
+ *  @return <#return value description#>
+ */
 ALLEGRO_CONFIG *carregar_configuracao(const char *name) {
 	return al_load_config_file(name);
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param conf_key <#conf_key description#>
+ *  @param section  <#section description#>
+ *  @param config   <#config description#>
+ *
+ *  @return <#return value description#>
+ */
 const char *pegar_configuracao(const char *conf_key, const char *section, const ALLEGRO_CONFIG *config){
 	return al_get_config_value(config, section, conf_key);
 }

@@ -6,6 +6,14 @@
  |-1  4 -1|
  | 0 -1  0|
  *******************/
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param saida   <#saida description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ */
 void filtro_laplaciano(unsigned char ***matriz, unsigned char ***saida, int altura, int largura){
   int l;
   for (int i = 1; i < altura - 1; i++){
@@ -23,7 +31,14 @@ void filtro_laplaciano(unsigned char ***matriz, unsigned char ***saida, int altu
   }
 }
 
-//----------------------------------------------------------------------------------------------------------//
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param saida   <#saida description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ */
 void filtro_borda(unsigned char ***matriz, unsigned char ***saida, int altura, int largura)
 {
 
@@ -72,7 +87,14 @@ void filtro_borda(unsigned char ***matriz, unsigned char ***saida, int altura, i
 
 }
 
-
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param saida   <#saida description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ */
 void filtro_mediana(unsigned char ***matriz, unsigned char ***saida, int altura, int largura){
 
   unsigned char buffer[9];
@@ -115,7 +137,14 @@ void filtro_mediana(unsigned char ***matriz, unsigned char ***saida, int altura,
     }
   }
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param saida   <#saida description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ */
 void filtro_media(unsigned char ***matriz, unsigned char ***saida, int altura, int largura){
   unsigned char buffer[9];
   int k = 0, n = 0;

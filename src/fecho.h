@@ -22,7 +22,9 @@
 #define EPSILON 0.00000001    /* paranaue que nao eh, mas eh suficiente para ser zero */
 
 typedef int ponto[DIMENSAO];
-
+/**
+ *  <#Description#>
+ */
 typedef struct {
     int n;          /* numero de pontos no poligono */
     ponto p[MAXIMO];   /* array que vira uma matriz 10000x2 com os pontos do poligono */
@@ -39,21 +41,141 @@ ponto maior_x;
 ponto menor_y;
 ponto maior_y;
 
+/**
+ *  <#Description#>
+ *
+ *  @param p <#p description#>
+ */
 void pontos_extremo(poligono *p);
+/**
+ *  <#Description#>
+ *
+ *  @param f <#f description#>
+ *
+ *  @return <#return value description#>
+ */
 double area_do_fecho(poligono *f);
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ */
 void copia_ponto(ponto a, ponto b);
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ */
 void swap_ponto(ponto a, ponto b);
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *
+ *  @return <#return value description#>
+ */
 double distancia(ponto a, ponto b);
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *  @param c <#c description#>
+ *
+ *  @return <#return value description#>
+ */
 int area_triangulo_com_sinal(ponto a, ponto b, ponto c);
-int triangulo_area(ponto a, ponto b, ponto c);
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *  @param c <#c description#>
+ *
+ *  @return <#return value description#>
+ */
+int triangulo_area(ponto a, ponto b, ponto c)
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *  @param c <#c description#>
+ *
+ *  @return <#return value description#>
+ */
 bool sentido_anti_horario(ponto a, ponto b, ponto c);
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *  @param c <#c description#>
+ *
+ *  @return <#return value description#>
+ */
 bool sentido_horario(ponto a, ponto b, ponto c);
+/**
+ *  <#Description#>
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *  @param c <#c description#>
+ *
+ *  @return <#return value description#>
+ */
 bool colinear(ponto a, ponto b, ponto c);
+/**
+ *  <#Description#>
+ *
+ *  @param p <#p description#>
+ */
 void print_poligono(poligono *p);
+/**
+ *  <#Description#>
+ *
+ *  @param entrada <#entrada description#>
+ *  @param n       <#n description#>
+ */
 void ordena_e_remove_duplicados(ponto entrada[], int *n);
+/**
+ *  <#Description#>
+ *
+ *  @param entrada <#entrada description#>
+ *  @param n       <#n description#>
+ *  @param fecho   <#fecho description#>
+ */
 void fecho_convexo(ponto entrada[], int n, poligono *fecho);
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ *
+ *  @return <#return value description#>
+ */
 poligono* fecho(unsigned char ***matriz, int altura, int largura);
+/**
+ *  <#Description#>
+ *
+ *  @param p1 <#p1 description#>
+ *  @param p2 <#p2 description#>
+ *
+ *  @return <#return value description#>
+ */
 int mais_a_esquerda(ponto *p1, ponto *p2);
+/**
+ *  <#Description#>
+ *
+ *  @param p1 <#p1 description#>
+ *  @param p2 <#p2 description#>
+ *
+ *  @return <#return value description#>
+ */
 int menor_angulo(ponto *p1, ponto *p2);
 
 #endif

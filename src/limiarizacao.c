@@ -1,5 +1,13 @@
 #include "limiarizacao.h"
-
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ *
+ *  @return <#return value description#>
+ */
 int limiarizacao(unsigned char ***matriz, int altura, int largura){
 	int r = 0, g = 0, b = 0, media = 0;
 	for(int i = 0; i < altura; i++) {

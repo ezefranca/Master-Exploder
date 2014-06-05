@@ -1,5 +1,10 @@
 #include "camera.h"
-
+/**
+ *  <#Description#>
+ *
+ *  @param cam   <#cam description#>
+ *  @param image <#image description#>
+ */
 void camera_converte(camera *cam, IplImage *image) {
   char *row = image->imageData;
 
@@ -47,7 +52,11 @@ camera *camera_inicializa(int i) {
   return cam;
 }
 
-
+/**
+ *  <#Description#>
+ *
+ *  @param cam <#cam description#>
+ */
 void camera_finaliza(camera *cam) {
   camera_libera_matriz(cam, cam->quadro);
 
@@ -56,14 +65,24 @@ void camera_finaliza(camera *cam) {
   free(cam);
 }
 
-
+/**
+ *  <#Description#>
+ *
+ *  @param cam <#cam description#>
+ */
 void camera_atualiza(camera *cam) {
   IplImage *image = cvQueryFrame(cam->capture);
 
   camera_converte(cam, image);
 }
 
-
+/**
+ *  <#Description#>
+ *
+ *  @param cam    <#cam description#>
+ *  @param matriz <#matriz description#>
+ *  @param bitmap <#bitmap description#>
+ */
 void camera_copia(camera *cam, unsigned char ***matriz, ALLEGRO_BITMAP *bitmap) {
   ALLEGRO_LOCKED_REGION *region = al_lock_bitmap(bitmap, ALLEGRO_PIXEL_FORMAT_ARGB_8888, ALLEGRO_LOCK_WRITEONLY);
 
@@ -89,7 +108,13 @@ void camera_copia(camera *cam, unsigned char ***matriz, ALLEGRO_BITMAP *bitmap) 
   al_unlock_bitmap(bitmap);
 }
 
-
+/**
+ *  <#Description#>
+ *
+ *  @param cam <#cam description#>
+ *
+ *  @return <#return value description#>
+ */
 unsigned char ***camera_aloca_matriz(camera *cam) {
   unsigned char ***matriz = malloc(cam->altura * sizeof(unsigned char **));
 
@@ -103,7 +128,12 @@ unsigned char ***camera_aloca_matriz(camera *cam) {
   return matriz;
 }
 
-
+/**
+ *  <#Description#>
+ *
+ *  @param cam    <#cam description#>
+ *  @param matriz <#matriz description#>
+ */
 void camera_libera_matriz(camera *cam, unsigned char ***matriz) {
   for(int y = 0; y < cam->altura; y++) {
     for(int x = 0; x < cam->largura; x++)

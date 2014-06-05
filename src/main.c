@@ -4,7 +4,13 @@
 
 //Global
 int _vizinhos = 100;
-
+/**
+ *  <#Description#>
+ *
+ *  @param n  <#n description#>
+ *  @param x  <#x description#>
+ *  @param fx <#fx description#>
+ */
 void interpolacao(int n, double *x, double *fx){
      double somax = 0;//inicializando os valores dos somatorios.
      double somax2 = 0;
@@ -63,7 +69,11 @@ void interpolacao(int n, double *x, double *fx){
     }
 
   }
-
+/**
+ *  <#Description#>
+ *
+ *  @return <#return value description#>
+ */
   int main() {
 
     inicializar_allegro();

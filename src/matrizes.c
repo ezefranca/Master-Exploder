@@ -1,5 +1,12 @@
 #include "matrizes.h"
-
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param saida   <#saida description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ */
 void matriz_copia(unsigned char ***matriz, unsigned char ***saida, int altura, int largura){
 for (int i = 0; i < altura; i++)
       {

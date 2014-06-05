@@ -3,7 +3,9 @@
 
 #include <math.h>
 #include "fecho.h"
-
+/**
+ *  <#Description#>
+ */
 typedef struct {
     //poligono fecho;          
     int selecionado;

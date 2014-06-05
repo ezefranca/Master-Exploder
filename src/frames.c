@@ -1,5 +1,9 @@
 #include "comum.h"
-
+/**
+ *  <#Description#>
+ *
+ *  @param velocidade <#velocidade description#>
+ */
 void fadeout(int velocidade) {
     ALLEGRO_BITMAP *buffer = NULL;
     buffer = al_create_bitmap(game->largura_tela, game->altura_tela);
@@ -25,7 +29,12 @@ void fadeout(int velocidade) {
 
     al_destroy_bitmap(buffer);
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param imagem     <#imagem description#>
+ *  @param velocidade <#velocidade description#>
+ */
 void fadein(ALLEGRO_BITMAP *imagem, int velocidade)
 {
     if (velocidade < 0)
@@ -47,7 +56,9 @@ void fadein(ALLEGRO_BITMAP *imagem, int velocidade)
         al_rest(0.005); // Não é necessário caso haja controle de FPS
     }
 }
-
+/**
+ *  <#Description#>
+ */
 void tela_sprite(){
 
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/senac.jpg");
@@ -78,19 +89,32 @@ void tela_sprite(){
 }
 
 /* Funções para single player */
+/**
+ *  <#Description#>
+ */
 void tela_vencedor(){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/win.jpg");
 	
 }
-
+/**
+ *  <#Description#>
+ */
 void tela_perdedor(){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/perdeu.jpg");
 }
-
+/**
+ *  <#Description#>
+ */
 void tela_abertura(){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/menu.jpg");
 }
-
+/**
+ *  <#Description#>
+ *
+ *  @param pontos_jogador_1 <#pontos_jogador_1 description#>
+ *  @param pontos_jogador_2 <#pontos_jogador_2 description#>
+ *  @param contador         <#contador description#>
+ */
 void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, int contador){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/jogada.jpg");
 
