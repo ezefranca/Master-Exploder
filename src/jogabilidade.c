@@ -1,5 +1,4 @@
 #include "jogabilidade.h"
-#include <time.h>
 
 /**
  *  <#Description#>

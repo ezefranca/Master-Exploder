@@ -1,6 +1,7 @@
 #ifndef JOGABILIDADE_H
 #define JOGABILIDADE_H
 
+#include <time.h>
 #include "comum.h"
 
 /* Constantes */
