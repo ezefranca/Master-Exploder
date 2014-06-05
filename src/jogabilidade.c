@@ -82,7 +82,7 @@ int rand_boss(){
 	int randomic;
 	
 		randomic = srand(abs(time(NULL)));
-		resultado = (randomic % 11)/10;
+		resultado = (double) (randomic % 11)/10;
 	
 		if(resultado <= minion_1) {
 			return MINION_1;

@@ -1,6 +1,8 @@
 #ifndef JOGABILIDADE_H
 #define JOGABILIDADE_H
 
+#include "comum.h"
+
 /* Constantes */
 #define PEDRA 2
 #define TESOURA 1
@@ -16,7 +18,6 @@
 
 int minion_4_usado = FALSE;
 
-#include "comum.h"
 /**
  *  <#Description#>
  *
