@@ -40,6 +40,7 @@ ponto menor_x;
 ponto maior_x; 
 ponto menor_y;
 ponto maior_y;
+
 int qtd_branco;
 int qtd_preto;
 
@@ -184,6 +185,15 @@ int mais_a_esquerda(ponto *p1, ponto *p2);
  */
 int menor_angulo(ponto *p1, ponto *p2);
 
+/**
+ *  <#Description#>
+ *
+ *  @param x <#x description#>
+ *  @param y <#y description#>
+ *	@param matriz_pb_cor <#matriz_pb_cor description#>
+ 
+ *  @return <#return value description#>
+ */
 void visitar(int x, int y, unsigned char ***matriz_pb_cor);
 
 #endif

@@ -7,8 +7,8 @@ void centroide(poligono *f, ponto centroide){
         n = 1;
 
     for (int i=0; i < f->n ;i++) {
-        x = x + f->p[i][X];
-        y = y + f->p[i][Y]; 
+        x += f->p[i][X];
+        y += f->p[i][Y]; 
    }
   centroide[X] = x / n;
   centroide[Y] = y / n;
@@ -404,22 +404,30 @@ int menor_angulo(ponto *p1, ponto *p2)
         return 1;
 }
 
+/**
+ *  <#Description#>
+ *
+ *  @param x <#x description#>
+ *  @param y <#y description#>
+ *	@param matriz_pb_cor <#matriz_pb_cor description#>
+ 
+ *  @return <#return value description#>
+ */
 void visitar(int x, int y, unsigned char ***matriz_pb_cor) {
-	printf("centro (%d, %d)\n limite  %d < x < %d \nlimite %d < y < %d\n", y, x, menor_x[X], maior_x[X], menor_y[X], maior_y[Y]);
-/*	if(x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && x < maior_y[Y]){
-		printf("dentro\n");
-	
-		if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 0 &&  matriz_pb_cor[y][x][2] == 0){
-			printf("visitado\n");
-		}
-		else {
-			
-			if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255){
-				qtd_branco +=1;
+	//printf("centro (%d, %d)\n limite  %d < x < %d \nlimite %d < y < %d\n", y, x, menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
+	if(x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && x < maior_y[Y] && x < largura && y < altura){
+		
+		if(matriz_pb_cor[y][x][0] != 255 || matriz_pb_cor[y][x][1] != 0){
+			//printf("aqui novo\n");
+			if(matriz_pb_cor[y][x][1] == 255){
+				qtd_branco = qtd_branco + 1;
+				//printf("branco preto %d, %d\n", qtd_branco, qtd_preto);
 			}			
 			else {
-				qtd_preto +=1;
+				qtd_preto = qtd_preto + 1;
+				//printf("branco preto %d, %d\n", qtd_branco, qtd_preto);
 			}
+			
 			matriz_pb_cor[y][x][0] = 255;
 			matriz_pb_cor[y][x][1] = 0;
 			matriz_pb_cor[y][x][2] = 0;
@@ -434,7 +442,6 @@ void visitar(int x, int y, unsigned char ***matriz_pb_cor) {
 			//if(matriz_pb_cor[y + 1][x][0] != 255 && matriz_pb_cor[y][x][1] != 0)
 				visitar(x, y + 1, matriz_pb_cor);
 		}
-		
-	}*/
+	}
 	return;
 }

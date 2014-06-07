@@ -95,7 +95,6 @@ void interpolacao(int n, double *x, double *fx){
     Rgb *cores_rgb = malloc(sizeof(Rgb));
     Hsv *cores_hsv = malloc(sizeof(Hsv));
 
-
     int desenhar = 0;
     int terminar = 0;
     int amostragem = 0;
@@ -117,6 +116,9 @@ void interpolacao(int n, double *x, double *fx){
     //tela_sprite();
 
     while(1) {
+		qtd_branco = 0;
+		qtd_preto = 0;
+		
       ALLEGRO_EVENT event;
 
       al_wait_for_event(queue, &event);
@@ -210,7 +212,7 @@ void interpolacao(int n, double *x, double *fx){
         print_poligono(f);
         ponto laranja;
         centroide(f, laranja);
-        printf("%d, %d\n",laranja[X], laranja[Y]);
+        //printf("%d, %d\n",laranja[X], laranja[Y]);
 		//al_draw_filled_rectangle(menor_x[X], maior_y[Y], maior_x[X], menor_y[Y], azul);
 
             //camera_copia(cam, fundo, direita);
@@ -218,6 +220,8 @@ void interpolacao(int n, double *x, double *fx){
 		
         al_flip_display();
         free(f);
+		visitar(laranja[X], laranja[Y], matriz_contagem);
+		printf("branco preto %d, %d\n", qtd_branco, qtd_preto);
       }
     }
 
