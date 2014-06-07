@@ -32,14 +32,6 @@ int inicializar_allegro(){
 	game->pontos->respeito_jogador_1 = 0;
 	game->pontos->respeito_jogador_2 = 0;
 	
-	game->fontes->h1 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->h2 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->h3 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->h4 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->h5 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->h6 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->p = al_load_font("assets/font/h1.ttf", 50, 10);
-	
 	game->tela_sprite = false;
 	cam = camera_inicializa(0);
 
@@ -79,6 +71,13 @@ int inicializar_allegro(){
 	//game->idioma_setado = pegar_configuracao("IDIOMA","user", config);
 	game->idioma_setado = NULL;
 	
+	game->fontes->h1 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h2 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h3 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h4 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h5 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h6 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->p = al_load_font("assets/font/h1.ttf", 50, 10);
 	
 	if(game->idioma_setado != NULL)
         carregar_idioma(game->idioma_setado);
