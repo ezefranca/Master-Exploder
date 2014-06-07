@@ -1,10 +1,5 @@
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_primitives.h>
 #include "config.h"
-#include "utils.h"
 
-#define TRUE 1
-#define FALSE 0
 /**
  *  <#Description#>
  *
