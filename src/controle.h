@@ -14,4 +14,6 @@ typedef struct {
     int selecionado;
 } controle;
 
+int calcula_padrao(poligono *fecho, unsigned char ***imagem_da_mao);
+
 #endif

@@ -1,6 +1,7 @@
 #include "init.h"
 #include "comum.h"
 #include "terminate.h"
+#include "controle.h"
 
 //Global
 //int _vizinhos = 100;
@@ -52,7 +53,7 @@ void interpolacao(int n, double *x, double *fx){
     unsigned char ***matriz = camera_aloca_matriz(cam);
     unsigned char ***matriz_pb = camera_aloca_matriz(cam);
     unsigned char ***matriz_verde = camera_aloca_matriz(cam);
-	unsigned char ***matriz_contagem = camera_aloca_matriz(cam);
+	  unsigned char ***matriz_contagem = camera_aloca_matriz(cam);
     unsigned char ***primeiro = camera_aloca_matriz(cam);
     //unsigned char ***matriz2 = camera_aloca_matriz(cam);
     //ALLEGRO_COLOR cor = al_map_rgb_f(0, 0, 1);
@@ -69,7 +70,7 @@ void interpolacao(int n, double *x, double *fx){
     int desenhar = 0;
     int terminar = 0;
     int amostragem = 0;
-	int tela = 0;
+	  int tela = 0;
     double x[10]; 
     double fx[10];
 
@@ -148,7 +149,7 @@ void interpolacao(int n, double *x, double *fx){
         matriz_copia(matriz_pb, matriz_verde, altura, largura);
         poligono *f = fecho(matriz_verde,altura, largura);
         camera_copia(cam, matriz, esquerda);
-		matriz_copia(matriz, matriz_contagem, altura, largura);
+		    matriz_copia(matriz, matriz_contagem, altura, largura);
 		
         camera_copia(cam, matriz_contagem, direita);
             //al_draw_circle(300, 300, 10, vermelho, 10);
@@ -207,14 +208,14 @@ void interpolacao(int n, double *x, double *fx){
             //camera_copia(cam, fundo, direita);
             /**********/
 		
-		al_draw_filled_rectangle(laranja[X], laranja[Y], laranja[X] + 5, laranja[Y] + 5, azul);
+		// al_draw_filled_rectangle(laranja[X], laranja[Y], laranja[X] + 5, laranja[Y] + 5, azul);
         al_flip_display();
         free(f);
-		qtd_branco = 0;
-		qtd_preto = 0;
-		//printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
-		//conta_pb(laranja[X], laranja[Y], matriz_contagem);
-		printf("PB %d %d\n", qtd_branco, qtd_preto);
+		// qtd_branco = 0;
+		// qtd_preto = 0;
+		// //printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
+		// //conta_pb(laranja[X], laranja[Y], matriz_contagem);
+		// printf("PB %d %d\n", qtd_branco, qtd_preto);
       }
     }
 
