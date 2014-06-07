@@ -41,8 +41,8 @@ ponto maior_x;
 ponto menor_y;
 ponto maior_y;
 
-int qtd_branco;
-int qtd_preto;
+double qtd_branco;
+double qtd_preto;
 
 /**
  *  <#Description#>
