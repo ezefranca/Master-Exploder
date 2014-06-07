@@ -1,4 +1,11 @@
 #include "fecho.h"
+
+/**
+ *  <#Description#>
+ *
+ *  @param f <#f description#>
+ *  @param centroide <#centroide description#>
+ */
 void centroide(poligono *f, ponto centroide){
     int x = 0, y = 0;
     int n = f->n;
@@ -9,9 +16,9 @@ void centroide(poligono *f, ponto centroide){
     for (int i=0; i < f->n ;i++) {
         x += f->p[i][X];
         y += f->p[i][Y]; 
-   }
-  centroide[X] = x / n;
-  centroide[Y] = y / n;
+	}
+	centroide[X] = x / n;
+	centroide[Y] = y / n;
 }
 /**
  *  <#Description#>
@@ -19,8 +26,7 @@ void centroide(poligono *f, ponto centroide){
  *  @param a <#a description#>
  *  @param b <#b description#>
  */
-void copia_ponto(ponto a, ponto b)
-{
+void copia_ponto(ponto a, ponto b){
     for (int i=0; i<DIMENSAO; i++){
         b[i] = a[i];
     }
@@ -32,8 +38,7 @@ void copia_ponto(ponto a, ponto b)
  *
  *  @return <#return value description#>
  */
-double area_do_fecho(poligono *f)
-{
+double area_do_fecho(poligono *f){
    int i,j;
    double area = 0;
 
@@ -45,7 +50,7 @@ double area_do_fecho(poligono *f)
 
    area /= 2;
    if (area < 0)
-       area = area * -1;
+       area *= -1;
 
    return area;
 }
@@ -143,7 +148,7 @@ int area_triangulo_com_sinal(ponto a, ponto b, ponto c)
 {
     int area = ((a[X]*b[Y] - a[Y]*b[X] + a[Y]*c[X]
                  - a[X]*c[Y] + b[X]*c[Y] - c[X]*b[Y]));
-    return area ;
+    return area;
 }
 /**
  *  <#Description#>
@@ -154,8 +159,7 @@ int area_triangulo_com_sinal(ponto a, ponto b, ponto c)
  *
  *  @return <#return value description#>
  */
-int triangulo_area(ponto a, ponto b, ponto c)
-{
+int triangulo_area(ponto a, ponto b, ponto c){
     return(abs(area_triangulo_com_sinal(a,b,c)));
 }
 /**
@@ -167,8 +171,7 @@ int triangulo_area(ponto a, ponto b, ponto c)
  *
  *  @return <#return value description#>
  */
-bool sentido_anti_horario(ponto a, ponto b, ponto c)
-{
+bool sentido_anti_horario(ponto a, ponto b, ponto c){
     int area_triangulo_com_sinal();
     
     return (area_triangulo_com_sinal(a,b,c) > 0);
@@ -182,8 +185,7 @@ bool sentido_anti_horario(ponto a, ponto b, ponto c)
  *
  *  @return <#return value description#>
  */
-bool sentido_horario(ponto a, ponto b, ponto c)
-{
+bool sentido_horario(ponto a, ponto b, ponto c){
     int area_triangulo_com_sinal();
     
     return (area_triangulo_com_sinal(a,b,c) < 0);
@@ -197,8 +199,7 @@ bool sentido_horario(ponto a, ponto b, ponto c)
  *
  *  @return <#return value description#>
  */
-bool colinear(ponto a, ponto b, ponto c)
-{
+bool colinear(ponto a, ponto b, ponto c){
     int area_triangulo_com_sinal();
     
     return (fabs(area_triangulo_com_sinal(a,b,c)) <= 0);
@@ -208,45 +209,13 @@ bool colinear(ponto a, ponto b, ponto c)
  *
  *  @param p <#p description#>
  */
-void print_poligono(poligono *p)
-{
+void print_poligono(poligono *p){
     ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
-    //printf("comecou\n");
-    for (int k = 0; k < p->n ; k++)
-        for (int j = k; j < p->n; j++)
-            if (p->p[k][X] == p->p[j][X] && p->p[j][X] == p->p[j][Y])
-            {
-                //printf("ALERTA DE REPETIDO, ALERTA DE REPETIDO\n");
-            }
-    for (int i = 0; i < p->n ; i++){
-        //for (int j = 0; j < p->n; j++){
-        // d = distancia(p->p[i], p->p[j]);
-        // if (d < menor_distancia)
-        // {
-        //     menor_distancia = d;
-        //     copia_ponto(p->p[j], p->p[i+1]);
-        
-        // }
-        //printf("(%lf,%lf)\n",p->p[i][X],p->p[i][Y]);
-        
+
+    for (int i = 0; i < p->n ; i++){       
         int j = (i + 1) ;//% p->n;
-        //al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
         al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 1);
-        
-        // al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 5);
-        
-        //}
-        // if(d > 300){
-        //     printf("Naruto\n");
-        // if (i == 0 || i == 1)
-        // {
-        //     al_draw_filled_circle(p->p[i][X], p->p[i][Y], 10, vermelho);
-        // }else
-        // al_draw_filled_circle(p->p[i+1][X], p->p[i+1][Y], 1, vermelho);
-        // //al_draw_line(p->p[i][X], p->p[i][Y], p->p[i+1][X], p->p[i+1][Y], vermelho, 1);
-        // }
     }
-    //al_draw_line(p->p[p->n][X], p->p[p->n][Y], primeiro_ponto[X], primeiro_ponto[Y], vermelho, 25);
 }
 /**
  *  <#Description#>
@@ -254,8 +223,7 @@ void print_poligono(poligono *p)
  *  @param entrada <#entrada description#>
  *  @param n       <#n description#>
  */
-void ordena_e_remove_duplicados(ponto entrada[], int *n)
-{
+void ordena_e_remove_duplicados(ponto entrada[], int *n){
     int old_n;               // numero n de pontos antes de deletar
     int del;                 // intervalo para deletar pontos
     int mais_a_esquerda();
@@ -269,9 +237,7 @@ void ordena_e_remove_duplicados(ponto entrada[], int *n)
  *  @param n       <#n description#>
  *  @param fecho   <#fecho description#>
  */
-void fecho_convexo(ponto entrada[], int n, poligono *fecho)
-{
-    
+void fecho_convexo(ponto entrada[], int n, poligono *fecho){
     int k;          //outro contador
     int i, j;
     int top;        // tamanho (qtd de pontos) atual do fecho
@@ -346,9 +312,9 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
     fecho = malloc(sizeof(poligono));
     int n = 0;              //numero de pontos
     
-    int _vizinhos = 100;
-    for (int i = _vizinhos; i < altura - _vizinhos; i++)
-        for (int j = _vizinhos; j < largura - _vizinhos; j++)
+    //int _vizinhos = 100;
+    for (int i = game->_vizinhos; i < altura - game->_vizinhos; i++)
+        for (int j = game->_vizinhos; j < largura - game->_vizinhos; j++)
             if(matriz[i][j][0] == 255 && matriz[i][j][1] == 255 && matriz[i][j][2] == 255)
             {                
                 entrada[n][X] = j;
@@ -389,8 +355,7 @@ int mais_a_esquerda(ponto *p1, ponto *p2)
  *
  *  @return <#return value description#>
  */
-int menor_angulo(ponto *p1, ponto *p2)
-{
+int menor_angulo(ponto *p1, ponto *p2){
     if (colinear(primeiro_ponto,*p1,*p2)) {
         if (distancia(primeiro_ponto,*p1) < distancia(primeiro_ponto,*p2))
             return -1;
@@ -413,34 +378,22 @@ int menor_angulo(ponto *p1, ponto *p2)
  
  *  @return <#return value description#>
  */
-void visitar(int x, int y, unsigned char ***matriz_pb_cor) {
-	//printf("centro (%d, %d)\n limite  %d < x < %d \nlimite %d < y < %d\n", y, x, menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
+void conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
 	if(x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && x < maior_y[Y] && x < largura && y < altura){
-		
 		if(matriz_pb_cor[y][x][0] != 255 || matriz_pb_cor[y][x][1] != 0){
-			//printf("aqui novo\n");
-			if(matriz_pb_cor[y][x][1] == 255){
-				qtd_branco = qtd_branco + 1;
-				//printf("branco preto %d, %d\n", qtd_branco, qtd_preto);
-			}			
-			else {
+			if(matriz_pb_cor[y][x][1] == 255) 
+				qtd_branco = qtd_branco + 1;		
+			else 
 				qtd_preto = qtd_preto + 1;
-				//printf("branco preto %d, %d\n", qtd_branco, qtd_preto);
-			}
-			
+				
 			matriz_pb_cor[y][x][0] = 255;
 			matriz_pb_cor[y][x][1] = 0;
 			matriz_pb_cor[y][x][2] = 0;
 			
-	//		printf("visitando ponto\n");
-			//if(matriz_pb_cor[y][x - 1][0] != 255 && matriz_pb_cor[y][x][1] != 0)
-				visitar(x - 1, y, matriz_pb_cor);
-			//if(matriz_pb_cor[y][x + 1][0] != 255 && matriz_pb_cor[y][x][1] != 0)
-				visitar(x + 1, y, matriz_pb_cor);
-			//if(matriz_pb_cor[y - 1][x][0] != 255 && matriz_pb_cor[y][x][1] != 0)
-				visitar(x, y - 1, matriz_pb_cor);
-			//if(matriz_pb_cor[y + 1][x][0] != 255 && matriz_pb_cor[y][x][1] != 0)
-				visitar(x, y + 1, matriz_pb_cor);
+			conta_pb(x - 1, y, matriz_pb_cor);
+			conta_pb(x + 1, y, matriz_pb_cor);
+			conta_pb(x, y - 1, matriz_pb_cor);
+			conta_pb(x, y + 1, matriz_pb_cor);
 		}
 	}
 	return;

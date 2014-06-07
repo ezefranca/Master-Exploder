@@ -2,8 +2,7 @@
 #define FECHO_H
 
 #include "comum.h"
-#include <math.h>
-#include <stdlib.h>
+
 // Referencia teorica
 // http://www.cs.princeton.edu/courses/archive/spr03/cs226/lectures/geo.4up.pdf
 // http://www.ime.usp.br/~cris/aulas/09_2_331/slides/aula18.pdf
@@ -44,6 +43,12 @@ ponto maior_y;
 int qtd_branco;
 int qtd_preto;
 
+/**
+ *  <#Description#>
+ *
+ *  @param f <#f description#>
+ *  @param centroide <#centroide description#>
+ */
 void centroide(poligono *f, ponto centroide);
 
 /**
@@ -194,6 +199,6 @@ int menor_angulo(ponto *p1, ponto *p2);
  
  *  @return <#return value description#>
  */
-void visitar(int x, int y, unsigned char ***matriz_pb_cor);
+void conta_pb(int x, int y, unsigned char ***matriz_pb_cor);
 
 #endif
