@@ -114,10 +114,21 @@ int rand_boss(){
  *  @return <#return value description#>
  */
 
-int fim_de_jogo(int pontos_jogador_1, int pontos_jogador_2, int melhor_jogo){
+int fim_jogada(int pontos_jogador_1, int pontos_jogador_2, int melhor_jogo){
 	//Verifica se jogadas sao impares.
 	if((melhor_jogo % 2) > 0)
 		return (pontos_jogador_1 > (melhor_jogo/2) || pontos_jogador_2 > (melhor_jogo/2));
 	else
 		return (pontos_jogador_1 > (melhor_jogo/2) || pontos_jogador_2 > (melhor_jogo/2) || (pontos_jogador_1 + pontos_jogador_2) == melhor_jogo);
+}
+
+/**
+ *  <#Description#>
+ *
+ *  @param respeito      <#respeito description#>
+ *
+ *  @return <#return value description#>
+ */
+int fim_de_jogo(int respeito){
+	return (respeito >= game->maximo_respeito);
 }
