@@ -40,6 +40,8 @@ ponto menor_x;
 ponto maior_x; 
 ponto menor_y;
 ponto maior_y;
+int qtd_branco;
+int qtd_preto;
 
 void centroide(poligono *f, ponto centroide);
 
@@ -181,5 +183,7 @@ int mais_a_esquerda(ponto *p1, ponto *p2);
  *  @return <#return value description#>
  */
 int menor_angulo(ponto *p1, ponto *p2);
+
+void visitar(int x, int y, unsigned char ***matriz_pb_cor);
 
 #endif

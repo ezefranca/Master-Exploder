@@ -11,7 +11,7 @@ void centroide(poligono *f, ponto centroide){
         y = y + f->p[i][Y]; 
    }
   centroide[X] = x / n;
-  centroide[Y] = x / n;
+  centroide[Y] = y / n;
 }
 /**
  *  <#Description#>
@@ -93,11 +93,11 @@ void pontos_extremo(poligono *p, int largura, int altura){
         }
     }
     //copia_ponto(menor_ponto,ponto_inicial);
-    printf("menor ponto X(%d,%d)\n",menor_x[X], menor_x[Y]);
-    printf("maior ponto X(%d,%d)\n",maior_x[X], maior_x[Y]);
-    printf("menor ponto Y(%d,%d)\n",menor_y[X], menor_y[Y]);
-    printf("maior ponto Y(%d,%d)\n",maior_y[X], maior_y[Y]);
-	printf("ponto teste (%d,%d) (%d,%d)", menor_x[X], maior_y[Y], maior_x[X], menor_y[Y]);
+    //printf("menor ponto X(%d,%d)\n",menor_x[X], menor_x[Y]);
+    //printf("maior ponto X(%d,%d)\n",maior_x[X], maior_x[Y]);
+    //printf("menor ponto Y(%d,%d)\n",menor_y[X], menor_y[Y]);
+    //printf("maior ponto Y(%d,%d)\n",maior_y[X], maior_y[Y]);
+	//printf("ponto teste (%d,%d) (%d,%d)", menor_x[X], maior_y[Y], maior_x[X], menor_y[Y]);
     return;
 }
 /**
@@ -404,33 +404,37 @@ int menor_angulo(ponto *p1, ponto *p2)
         return 1;
 }
 
-void visitar(int x, int y, char ***matriz_pb_cor, int *preto, int *branco) {
-	//printf("aqui2 x = %d > %d y = %d\n", x, menor_x[X], y, );
-	printf("menor X = %d, maior X = %d", menor_x[X], maior_x[X]);
-	printf(" (%d, %d) \n", x,y);
-	if(x > menor_x[X] && x < maior_x[X]) {
-		printf("X dentro\n");
-	}
-	if(y > menor_y[Y] && x < maior_y[Y]) {
-		printf("X dentro\n");
-	}
+void visitar(int x, int y, unsigned char ***matriz_pb_cor) {
+	printf("centro (%d, %d)\n limite  %d < x < %d \nlimite %d < y < %d\n", y, x, menor_x[X], maior_x[X], menor_y[X], maior_y[Y]);
+/*	if(x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && x < maior_y[Y]){
+		printf("dentro\n");
 	
-	if(x > menor_x[X] && x < maior_x[X] && y < maior_y[Y] && y > menor_y[Y]){
-		printf("aqui");
-		if(matriz_pb_cor[y][x][0] != 255 && matriz_pb_cor[y][x][0] != 0){
-		
+		if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 0 &&  matriz_pb_cor[y][x][2] == 0){
+			printf("visitado\n");
+		}
+		else {
+			
+			if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255){
+				qtd_branco +=1;
+			}			
+			else {
+				qtd_preto +=1;
+			}
 			matriz_pb_cor[y][x][0] = 255;
 			matriz_pb_cor[y][x][1] = 0;
 			matriz_pb_cor[y][x][2] = 0;
 			
-			printf("visitando ponto\n");
-			//if(matriz_pb_cor[i][j][0] != 0 && matriz_pb_cor[i][j][0] != 0 && matriz_pb_cor[i][j][0] != 255){
-				visitar(x -1, y, matriz_pb_cor, preto, branco);
-				visitar(x + 1, y, matriz_pb_cor, preto, branco);
-				visitar(x, y - 1, matriz_pb_cor, preto, branco);
-				visitar(x, y + 1, matriz_pb_cor, preto, branco);
-			//}
+	//		printf("visitando ponto\n");
+			//if(matriz_pb_cor[y][x - 1][0] != 255 && matriz_pb_cor[y][x][1] != 0)
+				visitar(x - 1, y, matriz_pb_cor);
+			//if(matriz_pb_cor[y][x + 1][0] != 255 && matriz_pb_cor[y][x][1] != 0)
+				visitar(x + 1, y, matriz_pb_cor);
+			//if(matriz_pb_cor[y - 1][x][0] != 255 && matriz_pb_cor[y][x][1] != 0)
+				visitar(x, y - 1, matriz_pb_cor);
+			//if(matriz_pb_cor[y + 1][x][0] != 255 && matriz_pb_cor[y][x][1] != 0)
+				visitar(x, y + 1, matriz_pb_cor);
 		}
-	}
+		
+	}*/
 	return;
 }
