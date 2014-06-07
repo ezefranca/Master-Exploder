@@ -15,6 +15,14 @@ void matriz_copia(unsigned char ***matriz, unsigned char ***saida, int altura, i
 /**
  *  <#Description#>
  *
+ *  @param bitmap  <#bitmap description#>
+ *  @param matriz   <#matriz description#>
+ */
+void bitmap_para_matriz(ALLEGRO_BITMAP *bitmap, unsigned char ***matriz);
+
+/**
+ *  <#Description#>
+ *
  *  @param atual  <#atual description#>
  *  @param primeiro   <#primeiro description#>
  *  @param matriz  <#matriz description#>

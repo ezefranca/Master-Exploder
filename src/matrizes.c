@@ -21,7 +21,7 @@ for (int i = 0; i < altura; i++)
 }
 
 void bitmap_para_matriz(ALLEGRO_BITMAP *bitmap, unsigned char ***matriz){
-	ALLEGRO_LOCKED_REGION *region = al_lock_bitmap(bitmap, ALLEGRO_PIXEL_FORMAT_ARGB_8888, ALLEGRO_LOCK_WRITEONLY);
+	ALLEGRO_LOCKED_REGION *region = al_lock_bitmap(bitmap, ALLEGRO_PIXEL_FORMAT_ARGB_8888, ALLEGRO_LOCK_READWRITE);
 	
 	char *row = region->data;
 

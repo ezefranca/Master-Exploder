@@ -200,6 +200,6 @@ int menor_angulo(ponto *p1, ponto *p2);
  
  *  @return <#return value description#>
  */
-int conta_pb(int x, int y, unsigned char ***matriz_pb_cor);
+void conta_pb(int x, int y, unsigned char ***matriz_pb_cor);
 
 #endif

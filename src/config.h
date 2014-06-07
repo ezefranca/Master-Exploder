@@ -111,7 +111,7 @@ typedef struct _game {
 	float divisor_camera;
 	int luminus;
 	bool debug;
-	bool tela_sprite;
+	bool usa_fecho;
 	int _vizinhos;
 	int maximo_respeito;
 	const char *idioma_setado;

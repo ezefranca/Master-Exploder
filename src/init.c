@@ -27,6 +27,7 @@ int inicializar_allegro(){
 	game->debug = TRUE;
 	game->maximo_respeito = 10; 
 	game->_vizinhos = 100;
+	game->usa_fecho = false;
 	
 	game->pontos->numero_partidas = 0;
 	game->pontos->jogador_1 = 0;

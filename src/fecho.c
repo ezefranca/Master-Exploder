@@ -378,19 +378,34 @@ int menor_angulo(ponto *p1, ponto *p2){
  
  *  @return <#return value description#>
  */
-int conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
+void conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
+	bool verificacao;
 	//printf("ENTROU\n");
-	if(x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && x < maior_y[Y] && x < largura && y < altura){
-		if(matriz_pb_cor[y][x][0] != 255 || matriz_pb_cor[y][x][1] != 0){
+	if(x >= largura - 2 || y >= altura - 2 || x <= 2 || y <= 2){
+		return;
+	}
+	
+	//printf("%d < x < %d, %d < y < %d", menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
+	if(game->usa_fecho){
+		verificacao = (matriz_pb_cor[y][x][0] != 0 || matriz_pb_cor[y][x][1] != 0 || matriz_pb_cor[y][x][2] != 255);
+	}
+	else 
+		verificacao = (x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && y < maior_y[Y]);
+	
+	if(verificacao) {
+		//printf("Entrou\n");
+		
+		if(matriz_pb_cor[y][x][1] != 0 || matriz_pb_cor[y][x][2] != 255){
 			//printf("entrou ");
-			if(matriz_pb_cor[y][x][1] == 255) 
-				qtd_branco = qtd_branco + 1;		
+			if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255) 
+				qtd_branco = qtd_branco + 1;
 			else 
 				qtd_preto = qtd_preto + 1;
-			//printf("%d %d\n", qtd_branco, qtd_preto);				
-			matriz_pb_cor[y][x][0] = 255;
+			//printf("%d %d\n", qtd_branco, qtd_preto);	
+			
+			matriz_pb_cor[y][x][0] = 0;
 			matriz_pb_cor[y][x][1] = 0;
-			matriz_pb_cor[y][x][2] = 0;
+			matriz_pb_cor[y][x][2] = 255;
 			
 			conta_pb(x - 1, y, matriz_pb_cor);
 			conta_pb(x + 1, y, matriz_pb_cor);
@@ -399,5 +414,5 @@ int conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
 		}
 	}
 	//printf("PB %d, %d", qtd_branco, qtd_preto);
-	return qtd_branco;
+	return;
 }
