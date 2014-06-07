@@ -24,15 +24,16 @@ typedef int ponto[DIMENSAO];
 /**
  *  <#Description#>
  */
-typedef struct {
+ #pragma message "XXXXXXXXXXXX"
+typedef struct _poligono{
     int n;          /* numero de pontos no poligono */
     ponto p[MAXIMO];   /* array que vira uma matriz 10000x2 com os pontos do poligono */
 } poligono;
 
 // Macros para comparacao, encontrar valor maximo e minimo
 
-#define max(A, B)       ((A) > (B) ? (A) : (B))
-#define min(A, B)       ((A) < (B) ? (A) : (B))
+#define max(A, B) ((A) > (B) ? (A) : (B))
+#define min(A, B) ((A) < (B) ? (A) : (B))
 
 ponto primeiro_ponto;      //primeiro ponto no fecho;
 ponto menor_x;
