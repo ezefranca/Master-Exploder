@@ -380,20 +380,15 @@ int menor_angulo(ponto *p1, ponto *p2){
  */
 void conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
 	bool verificacao;
-	//printf("ENTROU\n");
-	if(x >= largura - 2 || y >= altura - 2 || x <= 2 || y <= 2){
+	if(x >= largura - 2 || y >= altura - 2 || x <= 2 || y <= 2)
 		return;
-	}
 	
-	//printf("%d < x < %d, %d < y < %d", menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
-	if(game->usa_fecho){
+	if(game->usa_fecho)
 		verificacao = (matriz_pb_cor[y][x][0] != 0 || matriz_pb_cor[y][x][1] != 0 || matriz_pb_cor[y][x][2] != 255);
-	}
 	else 
 		verificacao = (x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && y < maior_y[Y]);
 	
 	if(verificacao) {
-		//printf("Entrou\n");
 		
 		if(matriz_pb_cor[y][x][1] != 0 || matriz_pb_cor[y][x][2] != 255){
 			//printf("entrou ");
@@ -413,6 +408,5 @@ void conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
 			conta_pb(x, y + 1, matriz_pb_cor);
 		}
 	}
-	//printf("PB %d, %d", qtd_branco, qtd_preto);
 	return;
 }

@@ -208,6 +208,9 @@ void interpolacao(int n, double *x, double *fx){
 		// printf("PB %d %d\n", qtd_branco, qtd_preto);
 		//camera_copia(cam, matriz_contagem, direita);
 		bitmap_para_matriz(esquerda, matriz_contagem);
+		
+		conta_pb(laranja[X], laranja[Y], matriz_contagem);
+		printf("Brancos %d Pretos %d\n", qtd_branco, qtd_preto);
 		camera_copia(cam, matriz_contagem, direita);
 		al_flip_display();
         free(f);

@@ -27,7 +27,7 @@ int inicializar_allegro(){
 	game->debug = TRUE;
 	game->maximo_respeito = 10; 
 	game->_vizinhos = 100;
-	game->usa_fecho = false;
+	game->usa_fecho = true;
 	
 	game->pontos->numero_partidas = 0;
 	game->pontos->jogador_1 = 0;
@@ -36,8 +36,8 @@ int inicializar_allegro(){
 	game->pontos->respeito_jogador_2 = 0;
 	
 	game->carrega->musica = false;
-	game->carrega->musica = false;
-	game->carrega->musica = false;
+	game->carrega->fonte = false;
+	game->carrega->display = false;
 	
 	game->telas->sprite = false;
 	game->telas->gameover = true;
