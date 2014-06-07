@@ -3,7 +3,10 @@
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_ttf.h>
 #include "utils.h"
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -99,6 +102,7 @@ typedef struct _game {
 	const char *idioma_setado;
 	Pontuacao *pontos;
 	Fontes *fontes;
+	ALLEGRO_SAMPLE *musica;
 } Game;
 
 Game *game;

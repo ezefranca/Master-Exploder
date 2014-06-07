@@ -1,4 +1,5 @@
 #include "init.h"
+#include "comum.h"
 /**
  *  <#Description#>
  *
@@ -55,6 +56,15 @@ int inicializar_allegro(){
     if(!al_init_primitives_addon())
         erro("erro na inicializacao do adicional de primitivas\n");
 
+    if(!al_install_audio())
+      	erro("failed to initialize audio!\n");
+   
+    if(!al_init_acodec_addon())
+      erro("failed to initialize audio codecs!\n");
+ 
+   if (!al_reserve_samples(1))
+      erro("failed to reserve samples!\n");
+
     timer = al_create_timer(1.0 / FPS);
     if(!timer)
         erro("erro na criacao do relogio\n");
@@ -86,7 +96,16 @@ int inicializar_allegro(){
 	
 	char *test = pegar_idioma("test", linguagem);
 	printf("%s", test);
+
+	game->musica = al_load_sample("assets/sound/one.ogg");
+
+	if (!game->musica)
+	{
+		erro("Nao carregou o arquivo de musica game->musica");
+	}
 	
+    al_play_sample(game->musica, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
+
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
 
