@@ -7,6 +7,7 @@
 int inicializar_allegro(){	
 	game = malloc(sizeof(Game));
 	game->pontos = malloc(sizeof(Pontuacao));
+	game->fontes = malloc(sizeof(Fontes));
 	
 	//config = carregar_configuracao("configuration.conf");
     
@@ -24,9 +25,21 @@ int inicializar_allegro(){
 	game->debug = TRUE;
 	game->maximo_respeito = 10; 
 	game->_vizinhos = 100;
+	
 	game->pontos->numero_partidas = 0;
 	game->pontos->jogador_1 = 0;
 	game->pontos->jogador_2 = 0;
+	game->pontos->respeito_jogador_1 = 0;
+	game->pontos->respeito_jogador_2 = 0;
+	
+	game->fontes->h1 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h2 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h3 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h4 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h5 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h6 = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->p = al_load_font("assets/font/h1.ttf", 50, 10);
+	
 	game->tela_sprite = false;
 	cam = camera_inicializa(0);
 

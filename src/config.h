@@ -64,7 +64,21 @@ typedef struct _pontos {
 	int jogador_1;
 	int jogador_2;
 	int respeito_jogador_1;
+	int respeito_jogador_2;
 } Pontuacao;
+
+/**
+ *  <#Description#>
+ */
+typedef struct _fontes {
+	ALLEGRO_FONT *h1;
+	ALLEGRO_FONT *h2;
+	ALLEGRO_FONT *h3;
+	ALLEGRO_FONT *h4;
+	ALLEGRO_FONT *h5;
+	ALLEGRO_FONT *h6;
+	ALLEGRO_FONT *p;	
+} Fontes;
 
 /**
  *  <#Description#>
@@ -84,6 +98,7 @@ typedef struct _game {
 	int maximo_respeito;
 	const char *idioma_setado;
 	Pontuacao *pontos;
+	Fontes *fontes;
 } Game;
 
 Game *game;
