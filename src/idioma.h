@@ -1,5 +1,10 @@
 #ifndef IDIOMA_H
 #define IDIOMA_H
+
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include "comum.h"
+
 /**
  *  <#Description#>
  */
@@ -12,6 +17,9 @@ typedef struct _elemento_string {
 typedef struct {
 	elemento_string **hash;
 } IDIOMA;
+
+IDIOMA *linguagem;
+
 /**
  *  <#Description#>
  *

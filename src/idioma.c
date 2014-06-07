@@ -1,6 +1,4 @@
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_primitives.h>
-#include "comum.h"
+#include "idioma.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -95,7 +93,7 @@ void carregar_idioma(const char *arquivo){
 	int i, linhas;
 	int *tvar, *tstring;
 	
-	idioma = aloca_idioma();
+	linguagem = aloca_idioma();
 	
 	entrada = al_fopen(arquivo, "r");
 
@@ -133,7 +131,7 @@ void carregar_idioma(const char *arquivo){
 
 		printf("chegou %s = %s\n", var[i], string[i]);
         if(strlen(var[i]) > 0 && strlen(string[i]) > 0)
-			insere_idioma(idioma, var[i], string[i]);
+			insere_idioma(linguagem, var[i], string[i]);
 	}
     
 	al_fclose(entrada);
