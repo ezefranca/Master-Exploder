@@ -1,5 +1,7 @@
 #ifndef MATRIZES_H
 #define MATRIZES_H
+
+#include "comum.h"
 /**
  *  <#Description#>
  *
@@ -10,4 +12,12 @@
  */
 void matriz_copia(unsigned char ***matriz, unsigned char ***saida, int altura, int largura);
 
+/**
+ *  <#Description#>
+ *
+ *  @param atual  <#atual description#>
+ *  @param primeiro   <#primeiro description#>
+ *  @param matriz  <#matriz description#>
+ */
+void subtrai_matriz(unsigned char ***atual, unsigned char ***primeiro, unsigned char ***matriz);
 #endif
