@@ -6,8 +6,11 @@
 /**
  *  <#Description#>
  */
+
+typedef struct _poligono poligono;
+
 typedef struct {
-    //poligono fecho;          
+    poligono *fecho;          
     int selecionado;
 } controle;
 
