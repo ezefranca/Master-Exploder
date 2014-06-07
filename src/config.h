@@ -86,6 +86,21 @@ typedef struct _fontes {
 /**
  *  <#Description#>
  */
+typedef struct _carrega {
+	bool musica;
+	bool fonte;
+	bool display;
+} Carregamento;
+
+typedef struct _telas {
+	bool sprite;
+	bool gameover;
+	bool start;
+	bool game;
+} Telas;
+/**
+ *  <#Description#>
+ */
 typedef struct _game {
 	int largura_camera;
 	int altura_camera;
@@ -100,6 +115,8 @@ typedef struct _game {
 	int _vizinhos;
 	int maximo_respeito;
 	const char *idioma_setado;
+	Telas *telas;
+	Carregamento *carrega;
 	Pontuacao *pontos;
 	Fontes *fontes;
 	ALLEGRO_SAMPLE *musica;

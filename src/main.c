@@ -85,7 +85,7 @@ void interpolacao(int n, double *x, double *fx){
       }
     }
 
-	if(game->tela_sprite)
+	if(game->telas->sprite)
 		tela_sprite();
 
     while(1) {
@@ -213,9 +213,8 @@ void interpolacao(int n, double *x, double *fx){
 		qtd_branco = 0;
 		qtd_preto = 0;
 		//printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
-		conta_pb(laranja[X], laranja[Y], matriz_contagem);
+		//conta_pb(laranja[X], laranja[Y], matriz_contagem);
 		printf("PB %d %d\n", qtd_branco, qtd_preto);
-	
       }
     }
 

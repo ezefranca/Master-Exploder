@@ -20,6 +20,10 @@ for (int i = 0; i < altura; i++)
       }
 }
 
+void bitmap_para_matriz(unsigned char ***matriz){
+	
+	
+}
 /**
  *  <#Description#>
  *

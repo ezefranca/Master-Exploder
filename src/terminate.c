@@ -32,6 +32,8 @@ int finalizar_allegro(){
 	al_destroy_font(game->fontes->h6);
 	al_destroy_font(game->fontes->p);
 	
+	free(game->telas);
+	free(game->carrega);
 	free(game->fontes);
 	free(game->pontos);
 	free(game);

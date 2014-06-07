@@ -9,7 +9,8 @@ int inicializar_allegro(){
 	game = malloc(sizeof(Game));
 	game->pontos = malloc(sizeof(Pontuacao));
 	game->fontes = malloc(sizeof(Fontes));
-	
+	game->carrega = malloc(sizeof(Carregamento));
+	game->telas = malloc(sizeof(Telas));
 	//config = carregar_configuracao("configuration.conf");
     
 	//if(config == NULL)
@@ -33,7 +34,15 @@ int inicializar_allegro(){
 	game->pontos->respeito_jogador_1 = 0;
 	game->pontos->respeito_jogador_2 = 0;
 	
-	game->tela_sprite = false;
+	game->carrega->musica = false;
+	game->carrega->musica = false;
+	game->carrega->musica = false;
+	
+	game->telas->sprite = false;
+	game->telas->gameover = true;
+	game->telas->start = true;
+	game->telas->game = true;
+
 	cam = camera_inicializa(0);
 
 	game->largura_camera = cam->largura;
@@ -99,13 +108,15 @@ int inicializar_allegro(){
 
 	game->musica = al_load_sample("assets/sound/one.ogg");
 
-	if (!game->musica)
-	{
-		erro("Nao carregou o arquivo de musica game->musica");
+	if(game->carrega->musica) {
+		if (!game->musica)
+		{
+			erro("Nao carregou o arquivo de musica game->musica");
+		}
+	
+		al_play_sample(game->musica, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
 	}
 	
-    al_play_sample(game->musica, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
-
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
 
