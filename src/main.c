@@ -81,7 +81,7 @@ void interpolacao(int n, double *x, double *fx){
     unsigned char ***matriz = camera_aloca_matriz(cam);
     unsigned char ***matriz_pb = camera_aloca_matriz(cam);
     unsigned char ***matriz_verde = camera_aloca_matriz(cam);
-
+	unsigned char ***matriz_contagem = camera_aloca_matriz(cam);
     unsigned char ***primeiro = camera_aloca_matriz(cam);
     //unsigned char ***matriz2 = camera_aloca_matriz(cam);
     //ALLEGRO_COLOR cor = al_map_rgb_f(0, 0, 1);
@@ -157,6 +157,8 @@ void interpolacao(int n, double *x, double *fx){
         matriz_copia(matriz_pb, matriz_verde, altura, largura);
         poligono *f = fecho(matriz_verde,altura, largura);
         camera_copia(cam, matriz, esquerda);
+		matriz_copia(matriz, matriz_contagem, altura, largura);
+		
         camera_copia(cam, matriz_verde, direita);
             //al_draw_circle(300, 300, 10, vermelho, 10);
             //fecho(matriz_pb, altura, largura);
@@ -167,13 +169,17 @@ void interpolacao(int n, double *x, double *fx){
         ALLEGRO_COLOR preto = al_map_rgb_f(0, 0, 0);
 
         al_draw_filled_rectangle(1, 1, largura, altura, verde);
-        al_draw_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , preto, 3);
+		//al_draw_rectangle((float)menor_x[X],(float) menor_y[Y],(float) maior_x[X],(float) maior_y[Y], verde, 3);
+        //al_draw_rectangle(_vizinhos, _vizinhos, (largura - _vizinhos),(altura - _vizinhos) , preto, 3);
 
+		//al_draw_filled_rectangle(menor_x[X], maior_y[Y], maior_x[X], menor_y[Y], azul);
+		
         for (int i = _vizinhos; i < altura - _vizinhos; i++){
           for (int j = _vizinhos; j < largura - _vizinhos; j++){
                     // removedor_ruidos(matriz, _vizinhos, i, j);
             if(matriz_verde[i][j][0] == 255 && matriz_verde[i][j][1] == 255 && matriz_verde[i][j][2] == 255)
             {
+			
               al_draw_filled_circle(j, i, 2, azul);
 
             }
@@ -198,16 +204,18 @@ void interpolacao(int n, double *x, double *fx){
         }
         amostragem++;
 
-
-
+		
+		
        // printf("\nArea do fecho: %2f Pontos %d\n", area_do_fecho(f), f->n);
         print_poligono(f);
         ponto laranja;
         centroide(f, laranja);
         printf("%d, %d\n",laranja[X], laranja[Y]);
+		//al_draw_filled_rectangle(menor_x[X], maior_y[Y], maior_x[X], menor_y[Y], azul);
+
             //camera_copia(cam, fundo, direita);
             /**********/
-
+		
         al_flip_display();
         free(f);
       }
