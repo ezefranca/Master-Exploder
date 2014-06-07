@@ -3,7 +3,8 @@
 #include "terminate.h"
 
 //Global
-int _vizinhos = 100;
+//int _vizinhos = 100;
+
 /**
  *  <#Description#>
  *
@@ -38,37 +39,7 @@ void interpolacao(int n, double *x, double *fx){
    // printf("---------------------------------%d\n",cores->r);
   }
 
-  void remove_fundo(unsigned char ***atual, unsigned char ***primeiro, unsigned char ***matriz){
-
-    int r , g , b;
-
-	//printf("luminus %s %d", pegar_configuracao("LUMINUS", "camera", config), string_para_int(pegar_configuracao("LUMINUS", "camera", config)));
-    for (int y = _vizinhos; y < altura - _vizinhos; y++){
-      for (int x = _vizinhos; x < largura - _vizinhos; x++){
-  // for(int y = 0; y < altura; y++){
-  //   for(int x = 0; x < largura; x++) {
-        r = abs(atual[y][x][0] -  primeiro[y][x][0]);
-        g = abs(atual[y][x][1] -  primeiro[y][x][1]);
-        b = abs(atual[y][x][2] -  primeiro[y][x][2]);
-
-	  //Verificação da luminosidade.
-        if ((r + g + b) > game->luminus+30)
-        {
-          matriz[y][x][0] = 255;
-          matriz[y][x][1] = 255;
-          matriz[y][x][2] = 255;
-        }
-
-        else
-        {
-          matriz[y][x][0] = 0;
-          matriz[y][x][1] = 0;
-          matriz[y][x][2] = 0;
-        }   
-      }
-    }
-
-  }
+  
 /**
  *  <#Description#>
  *
@@ -98,6 +69,7 @@ void interpolacao(int n, double *x, double *fx){
     int desenhar = 0;
     int terminar = 0;
     int amostragem = 0;
+	int tela = 0;
     double x[10]; 
     double fx[10];
 
@@ -113,7 +85,8 @@ void interpolacao(int n, double *x, double *fx){
       }
     }
 
-    //tela_sprite();
+	if(game->tela_sprite)
+		tela_sprite();
 
     while(1) {
 		qtd_branco = 0;
@@ -138,10 +111,27 @@ void interpolacao(int n, double *x, double *fx){
         break;
 
       if(desenhar && al_is_event_queue_empty(queue)) {
-
+		
+		//Selecao de frames.
+		switch(tela){
+			case 0:
+				
+				break;
+			case 1:
+			
+				break;
+			case 2:
+			
+				break;
+			case 3:
+			
+				break;
+		}
+		
         desenhar = 0;
         camera_atualiza(cam);
-        remove_fundo(cam->quadro, primeiro, matriz);
+		//Antigo remove fundo
+        subtrai_matriz(cam->quadro, primeiro, matriz);
             /**********/
             /**********/
             //limiarizacao(fundo, altura, largura);
@@ -176,8 +166,8 @@ void interpolacao(int n, double *x, double *fx){
 
 		//al_draw_filled_rectangle(menor_x[X], maior_y[Y], maior_x[X], menor_y[Y], azul);
 		
-        for (int i = _vizinhos; i < altura - _vizinhos; i++){
-          for (int j = _vizinhos; j < largura - _vizinhos; j++){
+        for (int i = game->_vizinhos; i < altura - game->_vizinhos; i++){
+          for (int j = game->_vizinhos; j < largura - game->_vizinhos; j++){
                     // removedor_ruidos(matriz, _vizinhos, i, j);
             if(matriz_verde[i][j][0] == 255 && matriz_verde[i][j][1] == 255 && matriz_verde[i][j][2] == 255)
             {
@@ -220,8 +210,8 @@ void interpolacao(int n, double *x, double *fx){
 		
         al_flip_display();
         free(f);
-		visitar(laranja[X], laranja[Y], matriz_contagem);
-		printf("branco preto %d, %d\n", qtd_branco, qtd_preto);
+		//conta_pb(laranja[X], laranja[Y], matriz_contagem);
+		//printf("branco %d\n", conta_branco(laranja[X], laranja[Y], matriz_contagem));
       }
     }
 

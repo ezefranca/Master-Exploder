@@ -1,1 +1,1 @@
-#include "comum.h"
+#include "controle.h"

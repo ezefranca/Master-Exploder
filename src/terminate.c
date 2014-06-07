@@ -22,7 +22,7 @@ int finalizar_allegro(){
 
     camera_finaliza(cam);
 	
-	destroi_idioma(idioma);
+	destroi_idioma(linguagem);
 	
 	free(game->pontos);
 	free(game);

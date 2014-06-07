@@ -77,5 +77,4 @@ void otsu_binarizacao(unsigned char ***matriz, unsigned char ***saida, int altur
           saida[y][x][2] = 255;
         }
       }
-
 }

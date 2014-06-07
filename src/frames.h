@@ -1,5 +1,8 @@
 #ifndef FRAME_H
 #define FRAME_H
+
+#include "comum.h"
+
 /**
  *  <#Description#>
  */

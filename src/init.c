@@ -8,8 +8,6 @@ int inicializar_allegro(){
 	game = malloc(sizeof(Game));
 	game->pontos = malloc(sizeof(Pontuacao));
 	
-    cam = camera_inicializa(0);
-
 	//config = carregar_configuracao("configuration.conf");
     
 	//if(config == NULL)
@@ -18,22 +16,23 @@ int inicializar_allegro(){
 	//largura_imagem = string_para_int(pegar_configuracao("ALTURA","allegro", config)); 
 	//altura_imagem = string_para_int(pegar_configuracao("LARGURA","allegro", config));
 	
-	game->largura_camera = cam->largura;
-	game->altura_camera = cam->largura;
 	game->largura_tela = 2000;
 	game->altura_tela = 800;
-	
 	game->divisor_tempo = 1;
 	game->divisor_camera = 1;
-	game->luminus = 120;
+	game->luminus = 150;
 	game->debug = TRUE;
-	
+	game->maximo_respeito = 10; 
+	game->_vizinhos = 100;
 	game->pontos->numero_partidas = 0;
 	game->pontos->jogador_1 = 0;
 	game->pontos->jogador_2 = 0;
-	
-	
+	game->tela_sprite = false;
+	cam = camera_inicializa(0);
 
+	game->largura_camera = cam->largura;
+	game->altura_camera = cam->largura;
+	
     if(!cam)
         erro("erro na inicializacao da camera\n");
 
@@ -73,7 +72,7 @@ int inicializar_allegro(){
 	else
 		carregar_idioma("data/idiomas/pt_br.conf");
 	
-	char *test = pegar_idioma("test", idioma);
+	char *test = pegar_idioma("test", linguagem);
 	printf("%s", test);
 	
     al_register_event_source(queue, al_get_timer_event_source(timer));

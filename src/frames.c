@@ -1,4 +1,4 @@
-#include "comum.h"
+#include "frames.h"
 /**
  *  <#Description#>
  *
@@ -101,12 +101,14 @@ void tela_vencedor(){
  */
 void tela_perdedor(){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/perdeu.jpg");
+	
 }
 /**
  *  <#Description#>
  */
 void tela_abertura(){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/menu.jpg");
+	
 }
 /**
  *  <#Description#>

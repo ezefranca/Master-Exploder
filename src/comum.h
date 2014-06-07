@@ -17,7 +17,6 @@
 #include "idioma.h"
 #include "utils.h"
 #include "limiarizacao.h"
-#include "normalizacaorgb.h"
 #include "normalizacao.h"
 #include "filtros.h"
 #include "matrizes.h"
@@ -44,35 +43,6 @@ ALLEGRO_TIMER *timer;
 ALLEGRO_DISPLAY *display;
 ALLEGRO_EVENT_QUEUE *queue;
 ALLEGRO_CONFIG *config;
-IDIOMA *idioma;
 
-/**
- *  <#Description#>
- */
-typedef struct _pontos {
-	int numero_partidas;
-	int jogador_1;
-	int jogador_2;
-} Pontuacao;
-
-/**
- *  <#Description#>
- */
-typedef struct _game {
-	int largura_camera;
-	int altura_camera;
-	int largura_tela;
-	int altura_tela;
-	
-	float divisor_tempo;
-	float divisor_camera;
-	int luminus;
-	bool debug;
-	
-	const char *idioma_setado;
-	Pontuacao *pontos;
-} Game;
-
-Game *game;
   
 #endif
