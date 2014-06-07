@@ -1,4 +1,5 @@
 #include "camera.h"
+
 /**
  *  <#Description#>
  *
@@ -26,7 +27,13 @@ void camera_converte(camera *cam, IplImage *image) {
   }
 }
 
-
+/**
+ *  <#Description#>
+ *
+ *  @param i  <#i description#>
+ *
+ *  @return <#return value description#>
+ */
 camera *camera_inicializa(int i) {
   camera *cam = NULL;
 
@@ -39,8 +46,8 @@ camera *camera_inicializa(int i) {
       cam = malloc(sizeof(camera));
 
       cam->capture = capture;
-      cam->altura = (image->height)/1.5;
-      cam->largura = (image->width)/1.5;
+      cam->altura = (image->height)/game->divisor_camera;
+      cam->largura = (image->width)/game->divisor_camera;
       cam->quadro = camera_aloca_matriz(cam);
 
       camera_converte(cam, image);
@@ -135,12 +142,10 @@ unsigned char ***camera_aloca_matriz(camera *cam) {
  *  @param matriz <#matriz description#>
  */
 void camera_libera_matriz(camera *cam, unsigned char ***matriz) {
-  for(int y = 0; y < cam->altura; y++) {
-    for(int x = 0; x < cam->largura; x++)
-      free(matriz[y][x]);
-
-    free(matriz[y]);
-  }
-
-  free(matriz);
+	for(int y = 0; y < cam->altura; y++) {
+		for(int x = 0; x < cam->largura; x++)
+			free(matriz[y][x]);
+		free(matriz[y]);
+	}
+	free(matriz);
 }

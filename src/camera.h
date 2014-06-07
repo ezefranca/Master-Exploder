@@ -3,6 +3,8 @@
 
 #include <opencv/highgui.h>
 #include <allegro5/allegro.h>
+#include "config.h"
+
 /**
  *  <#Description#>
  */
