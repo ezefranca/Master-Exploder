@@ -91,7 +91,7 @@ void pontos_extremo(poligono *p, int largura, int altura){
             menor_y[Y] = p->p[i][Y];
         }
 
-        if(p->p[i][X] > maior_y[Y])
+        if(p->p[i][Y] > maior_y[Y])
         {
             maior_y[X] = p->p[i][X];
             maior_y[Y] = p->p[i][Y];
@@ -102,7 +102,7 @@ void pontos_extremo(poligono *p, int largura, int altura){
     //printf("maior ponto X(%d,%d)\n",maior_x[X], maior_x[Y]);
     //printf("menor ponto Y(%d,%d)\n",menor_y[X], menor_y[Y]);
     //printf("maior ponto Y(%d,%d)\n",maior_y[X], maior_y[Y]);
-	//printf("ponto teste (%d,%d) (%d,%d)", menor_x[X], maior_y[Y], maior_x[X], menor_y[Y]);
+	printf("ponto teste (%d,%d) (%d,%d)", menor_x[X], maior_y[Y], maior_x[X], menor_y[Y]);
     return;
 }
 /**
@@ -378,14 +378,16 @@ int menor_angulo(ponto *p1, ponto *p2){
  
  *  @return <#return value description#>
  */
-void conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
+int conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
+	//printf("ENTROU\n");
 	if(x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && x < maior_y[Y] && x < largura && y < altura){
 		if(matriz_pb_cor[y][x][0] != 255 || matriz_pb_cor[y][x][1] != 0){
+			//printf("entrou ");
 			if(matriz_pb_cor[y][x][1] == 255) 
 				qtd_branco = qtd_branco + 1;		
 			else 
 				qtd_preto = qtd_preto + 1;
-				
+			//printf("%d %d\n", qtd_branco, qtd_preto);				
 			matriz_pb_cor[y][x][0] = 255;
 			matriz_pb_cor[y][x][1] = 0;
 			matriz_pb_cor[y][x][2] = 0;
@@ -396,5 +398,6 @@ void conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
 			conta_pb(x, y + 1, matriz_pb_cor);
 		}
 	}
-	return;
+	//printf("PB %d, %d", qtd_branco, qtd_preto);
+	return qtd_branco;
 }

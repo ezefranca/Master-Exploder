@@ -89,8 +89,7 @@ void interpolacao(int n, double *x, double *fx){
 		tela_sprite();
 
     while(1) {
-		qtd_branco = 0;
-		qtd_preto = 0;
+
 		
       ALLEGRO_EVENT event;
 
@@ -151,7 +150,7 @@ void interpolacao(int n, double *x, double *fx){
         camera_copia(cam, matriz, esquerda);
 		matriz_copia(matriz, matriz_contagem, altura, largura);
 		
-        camera_copia(cam, matriz_verde, direita);
+        camera_copia(cam, matriz_contagem, direita);
             //al_draw_circle(300, 300, 10, vermelho, 10);
             //fecho(matriz_pb, altura, largura);
             //------------------
@@ -208,10 +207,15 @@ void interpolacao(int n, double *x, double *fx){
             //camera_copia(cam, fundo, direita);
             /**********/
 		
+		al_draw_filled_rectangle(laranja[X], laranja[Y], laranja[X] + 5, laranja[Y] + 5, azul);
         al_flip_display();
         free(f);
-		//conta_pb(laranja[X], laranja[Y], matriz_contagem);
-		//printf("branco %d\n", conta_branco(laranja[X], laranja[Y], matriz_contagem));
+		qtd_branco = 0;
+		qtd_preto = 0;
+		//printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
+		conta_pb(laranja[X], laranja[Y], matriz_contagem);
+		printf("PB %d %d\n", qtd_branco, qtd_preto);
+	
       }
     }
 

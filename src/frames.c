@@ -95,6 +95,8 @@ void tela_sprite(){
 void tela_vencedor(){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/win.jpg");
 	
+	//al_draw_textf(game.fonte_menu, al_map_rgb(0, 0, 0), 200, 570, ALLEGRO_ALIGN_CENTRE, get_idioma("Level: %d"), game.level);
+		
 }
 /**
  *  <#Description#>
