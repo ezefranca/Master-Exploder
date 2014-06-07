@@ -148,9 +148,11 @@ void interpolacao(int n, double *x, double *fx){
         matriz_copia(matriz_pb, matriz_verde, altura, largura);
         poligono *f = fecho(matriz_verde,altura, largura);
         camera_copia(cam, matriz, esquerda);
-		matriz_copia(matriz, matriz_contagem, altura, largura);
+		//matriz_copia(matriz, matriz_contagem, altura, largura);
 		
-        camera_copia(cam, matriz_contagem, direita);
+		
+		
+		
             //al_draw_circle(300, 300, 10, vermelho, 10);
             //fecho(matriz_pb, altura, largura);
             //------------------
@@ -176,7 +178,14 @@ void interpolacao(int n, double *x, double *fx){
             }
           }
         }
-
+		
+		bitmap_para_matriz(esquerda, matriz_contagem);
+	
+		matriz_contagem[100][100][0] = 255;
+		matriz_contagem[100][100][1] = 255;
+		matriz_contagem[100][100][2] = 255;
+        camera_copia(cam, matriz_contagem, direita);
+		
                 //pontos_extremo(f, menor_x, maior_x, menor_y, maior_y);
         /*
         Tesoura, 20000 - 36000

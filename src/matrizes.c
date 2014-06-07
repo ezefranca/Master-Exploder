@@ -20,9 +20,27 @@ for (int i = 0; i < altura; i++)
       }
 }
 
-void bitmap_para_matriz(unsigned char ***matriz){
+void bitmap_para_matriz(ALLEGRO_BITMAP *bitmap, unsigned char ***matriz){
+	ALLEGRO_LOCKED_REGION *region = al_lock_bitmap(bitmap, ALLEGRO_PIXEL_FORMAT_ARGB_8888, ALLEGRO_LOCK_WRITEONLY);
 	
-	
+	char *row = region->data;
+
+	for(int y = 0; y < altura; y++) {
+		char *pixel = row;
+
+		for(int x = 0; x < largura; x++) {
+			matriz[y][x][0] = *pixel;
+			pixel++;
+
+			matriz[y][x][1] = *pixel;
+			pixel++;
+
+			matriz[y][x][2] = *pixel;
+			pixel += 2;
+		}
+    row += region->pitch;
+  }
+  al_unlock_bitmap(bitmap);	
 }
 /**
  *  <#Description#>
