@@ -55,8 +55,6 @@ double area_do_fecho(poligono *f)
  *  @param p <#p description#>
  */
 void pontos_extremo(poligono *p, int largura, int altura){
-    ponto menor_x, maior_x, menor_y, maior_y;
-    
     menor_x[X] = MAXIMO;
     menor_x[Y] = MAXIMO;
 
@@ -404,4 +402,35 @@ int menor_angulo(ponto *p1, ponto *p2)
         return -1;
     else
         return 1;
+}
+
+void visitar(int x, int y, char ***matriz_pb_cor, int *preto, int *branco) {
+	//printf("aqui2 x = %d > %d y = %d\n", x, menor_x[X], y, );
+	printf("menor X = %d, maior X = %d", menor_x[X], maior_x[X]);
+	printf(" (%d, %d) \n", x,y);
+	if(x > menor_x[X] && x < maior_x[X]) {
+		printf("X dentro\n");
+	}
+	if(y > menor_y[Y] && x < maior_y[Y]) {
+		printf("X dentro\n");
+	}
+	
+	if(x > menor_x[X] && x < maior_x[X] && y < maior_y[Y] && y > menor_y[Y]){
+		printf("aqui");
+		if(matriz_pb_cor[y][x][0] != 255 && matriz_pb_cor[y][x][0] != 0){
+		
+			matriz_pb_cor[y][x][0] = 255;
+			matriz_pb_cor[y][x][1] = 0;
+			matriz_pb_cor[y][x][2] = 0;
+			
+			printf("visitando ponto\n");
+			//if(matriz_pb_cor[i][j][0] != 0 && matriz_pb_cor[i][j][0] != 0 && matriz_pb_cor[i][j][0] != 255){
+				visitar(x -1, y, matriz_pb_cor, preto, branco);
+				visitar(x + 1, y, matriz_pb_cor, preto, branco);
+				visitar(x, y - 1, matriz_pb_cor, preto, branco);
+				visitar(x, y + 1, matriz_pb_cor, preto, branco);
+			//}
+		}
+	}
+	return;
 }
