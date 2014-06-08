@@ -1,10 +1,10 @@
 #include "fecho.h"
 
 /**
- *  <#Description#>
+ *  Calcula o centroide do fecho convexo
  *
- *  @param f <#f description#>
- *  @param centroide <#centroide description#>
+ *  @param f recebe um fecho convexo
+ *  @param centroide recebe um ponto, onde será atribuido a coordenada centroide
  */
 void centroide(poligono *f, ponto centroide){
     int x = 0, y = 0;
@@ -21,10 +21,10 @@ void centroide(poligono *f, ponto centroide){
 	centroide[Y] = y / n;
 }
 /**
- *  <#Description#>
+ *  Copia pontos
  *
- *  @param a <#a description#>
- *  @param b <#b description#>
+ *  @param a ponto a ser copiado
+ *  @param b ponto a ser escrito
  */
 void copia_ponto(ponto a, ponto b){
     for (int i=0; i<DIMENSAO; i++){
@@ -32,11 +32,11 @@ void copia_ponto(ponto a, ponto b){
     }
 }
 /**
- *  <#Description#>
+ *  Calcula área do fecho convexo pelo método shoelace
  *
- *  @param f <#f description#>
+ *  @param f recebe um fecho convexo
  *
- *  @return <#return value description#>
+ *  @return retorna um double com o valor da área
  */
 double area_do_fecho(poligono *f){
    int i,j;
@@ -55,9 +55,11 @@ double area_do_fecho(poligono *f){
    return area;
 }
 /**
- *  <#Description#>
+ *  Encontra os pontos extremos do fecho convexo
  *
- *  @param p <#p description#>
+ *  @param p recebe um tipo poligono (fecho convexo)
+ *  @param largura largura da matriz/imagem
+ *  @param altura  altura da matriz/imagem
  */
 void pontos_extremo(poligono *p, int largura, int altura){
     menor_x[X] = MAXIMO;
@@ -106,10 +108,10 @@ void pontos_extremo(poligono *p, int largura, int altura){
     return;
 }
 /**
- *  <#Description#>
+ *  Troca a posicões dos pontos
  *
- *  @param a <#a description#>
- *  @param b <#b description#>
+ *  @param a ponto a
+ *  @param b ponto b
  */
 void swap_ponto(ponto a, ponto b)
 {
@@ -119,12 +121,12 @@ void swap_ponto(ponto a, ponto b)
     copia_ponto(c,b);
 }
 /**
- *  <#Description#>
+ *  Calcula a distancia entre dois pontos
  *
- *  @param a <#a description#>
- *  @param b <#b description#>
+ *  @param a ponto a
+ *  @param b ponto b
  *
- *  @return <#return value description#>
+ *  @return retorna a distancia entre os dois pontos
  */
 double distancia(ponto a, ponto b)
 {
@@ -136,13 +138,13 @@ double distancia(ponto a, ponto b)
     return(sqrt(d));
 }
 /**
- *  <#Description#>
+ *  Calcula a área do triangulo
  *
- *  @param a <#a description#>
- *  @param b <#b description#>
- *  @param c <#c description#>
+ *  @param a ponto da coordenada 1
+ *  @param b ponto da coordenada 2
+ *  @param c ponto da coordenada 3
  *
- *  @return <#return value description#>
+ *  @return retorna o valor da área
  */
 int area_triangulo_com_sinal(ponto a, ponto b, ponto c)
 {
@@ -151,25 +153,25 @@ int area_triangulo_com_sinal(ponto a, ponto b, ponto c)
     return area;
 }
 /**
- *  <#Description#>
+ *  Calcula a área total (sem sinal) do triangulo
  *
- *  @param a <#a description#>
- *  @param b <#b description#>
- *  @param c <#c description#>
+ *  @param a ponto da coordenada 1
+ *  @param b ponto da coordenada 2
+ *  @param c ponto da coordenada 3
  *
- *  @return <#return value description#>
+ *  @return retorna o valor da área
  */
 int triangulo_area(ponto a, ponto b, ponto c){
     return(abs(area_triangulo_com_sinal(a,b,c)));
 }
 /**
- *  <#Description#>
+ *  Verifica a tendencia dos pontos estarem anti-horarios
  *
- *  @param a <#a description#>
- *  @param b <#b description#>
- *  @param c <#c description#>
+ *  @param a ponto da coordenada 1
+ *  @param b ponto da coordenada 2
+ *  @param c ponto da coordenada 3
  *
- *  @return <#return value description#>
+ *  @return boleano 0 ou 1
  */
 bool sentido_anti_horario(ponto a, ponto b, ponto c){
     int area_triangulo_com_sinal();
@@ -177,37 +179,39 @@ bool sentido_anti_horario(ponto a, ponto b, ponto c){
     return (area_triangulo_com_sinal(a,b,c) > 0);
 }
 /**
- *  <#Description#>
+ *  Verifica a tendencia dos pontos estarem sentido horario.
  *
- *  @param a <#a description#>
- *  @param b <#b description#>
- *  @param c <#c description#>
+ *  @param a ponto da coordenada 1
+ *  @param b ponto da coordenada 2
+ *  @param c ponto da coordenada 3
  *
- *  @return <#return value description#>
+ *  @return boleano 0 ou 1
  */
 bool sentido_horario(ponto a, ponto b, ponto c){
     int area_triangulo_com_sinal();
     
     return (area_triangulo_com_sinal(a,b,c) < 0);
 }
+
 /**
- *  <#Description#>
+ *  Verifica se tres pontos estão colineares
  *
- *  @param a <#a description#>
- *  @param b <#b description#>
- *  @param c <#c description#>
+ *  @param a ponto da coordenada 1
+ *  @param b ponto da coordenada 2
+ *  @param c ponto da coordenada 3
  *
- *  @return <#return value description#>
+ *  @return boleano 0 ou 1 se estiverem ou não
  */
 bool colinear(ponto a, ponto b, ponto c){
     int area_triangulo_com_sinal();
     
     return (fabs(area_triangulo_com_sinal(a,b,c)) <= 0);
 }
+
 /**
- *  <#Description#>
+ *  Desenha na tela o fecho convexo
  *
- *  @param p <#p description#>
+ *  @param p recebe como parametro um fecho convexo.
  */
 void print_poligono(poligono *p){
     ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
@@ -218,10 +222,10 @@ void print_poligono(poligono *p){
     }
 }
 /**
- *  <#Description#>
+ *  Ordena os vertices do fecho convexo
  *
- *  @param entrada <#entrada description#>
- *  @param n       <#n description#>
+ *  @param entrada array de pontos do fecho
+ *  @param n       numero de pontos do fecho
  */
 void ordena_e_remove_duplicados(ponto entrada[], int *n){
     int old_n;               // numero n de pontos antes de deletar
@@ -231,11 +235,11 @@ void ordena_e_remove_duplicados(ponto entrada[], int *n){
     qsort(entrada, *n, sizeof(ponto), mais_a_esquerda);
 }
 /**
- *  <#Description#>
+ *  Função que calcula o fecho convexo
  *
- *  @param entrada <#entrada description#>
- *  @param n       <#n description#>
- *  @param fecho   <#fecho description#>
+ *  @param entrada array de pontos possiveis no fecho
+ *  @param n       quantidade do array acima
+ *  @param fecho   um tipo poligono, fecho
  */
 void fecho_convexo(ponto entrada[], int n, poligono *fecho){
     int k;          //outro contador
@@ -259,7 +263,6 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho){
     entrada[0][Z] = 1;
     copia_ponto(entrada[0], fecho->p[h]);
     copia_ponto(entrada[0], primeiro_ponto);
-    //printf("comecou\n");
     do {
         for(i = 0; i < n; i++)
             if((i == 0 || entrada[i][Z] == 0) && (fecho->p[h][X] != entrada[i][X] || fecho->p[h][Y] != entrada[i][Y]))
@@ -284,24 +287,20 @@ void fecho_convexo(ponto entrada[], int n, poligono *fecho){
                     }
                 }
             }
-        //if(!sentido_anti_horario(fecho->p[h], entrada[i], entrada[j]))
-        //printf("adicionar %d\n", i);
         h++;
-        //printf("H:%d N:%d\n",h, n );
         copia_ponto(entrada[i], fecho->p[h]);
         entrada[i][Z] = 1; // "visitado"
     }while((fecho->p[0][X] != entrada[i][X] || fecho->p[0][Y] != entrada[i][Y]));
-    //copia_ponto(fecho->p[0],fecho->p[h]);
     fecho->n = h;
 }
 /**
- *  <#Description#>
+ *  Função principal do fecho, prepara a execução do fecho
  *
- *  @param matriz  <#matriz description#>
- *  @param altura  <#altura description#>
- *  @param largura <#largura description#>
+ *  @param matriz  matriz com da tela
+ *  @param altura  altura da tela
+ *  @param largura largura da tela
  *
- *  @return <#return value description#>
+ *  @return ponteiro de poligono, ponteiro para um fecho convexo.
  */
 poligono* fecho(unsigned char ***matriz, int altura, int largura){
     
@@ -310,8 +309,7 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
     ponto entrada[MAXIMO];
     poligono *fecho;
     fecho = malloc(sizeof(poligono));
-    int n = 0;              //numero de pontos
-    
+    int n = 0; //numero de pontos
     //int _vizinhos = 100;
     for (int i = game->_vizinhos; i < altura - game->_vizinhos; i++)
         for (int j = game->_vizinhos; j < largura - game->_vizinhos; j++)
@@ -322,10 +320,7 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
                 n++;
             }        
     if (n > MAXIMO) n = MAXIMO;
-
-    //printf("Quantidade de pontos %d\n", n);
     fecho_convexo(entrada, n, fecho);
-    //ponto_extremo(fecho, menor_x, maior_x, menor_y, maior_y);
     return fecho;
 }
 
