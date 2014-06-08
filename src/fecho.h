@@ -30,6 +30,12 @@ typedef struct _poligono{
     ponto p[MAXIMO];   /* array que vira uma matriz 10000x2 com os pontos do poligono */
 } poligono;
 
+typedef struct _area
+{
+	long int qtd_preto;
+	long int qtd_branco;
+}area;
+
 // Macros para comparacao, encontrar valor maximo e minimo
 
 #define max(A, B) ((A) > (B) ? (A) : (B))
@@ -41,8 +47,8 @@ ponto maior_x;
 ponto menor_y;
 ponto maior_y;
 
-double qtd_branco;
-double qtd_preto;
+long int qtd_branco;
+long int qtd_preto;
 
 /**
  *  <#Description#>
@@ -194,12 +200,11 @@ int menor_angulo(ponto *p1, ponto *p2);
 /**
  *  <#Description#>
  *
- *  @param x <#x description#>
- *  @param y <#y description#>
+ *  @param centroide <#x description#>
  *	@param matriz_pb_cor <#matriz_pb_cor description#>
  
  *  @return <#return value description#>
  */
-void conta_pb(int x, int y, unsigned char ***matriz_pb_cor);
+area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor);
 
 #endif

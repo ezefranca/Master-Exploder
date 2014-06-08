@@ -214,7 +214,7 @@ void print_poligono(poligono *p){
 
     for (int i = 0; i < p->n ; i++){       
         int j = (i + 1) ;//% p->n;
-        al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 1);
+        al_draw_line(p->p[i][X], p->p[i][Y], p->p[j][X], p->p[j][Y], vermelho, 5);
     }
 }
 /**
@@ -378,33 +378,118 @@ int menor_angulo(ponto *p1, ponto *p2){
  
  *  @return <#return value description#>
  */
-void conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
-	bool verificacao;
-	if(x >= largura || y >= altura || x <= 1 || y <= 1)
-		return;
+area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor) {
+    area *a;
+    a->qtd_branco = 0;
+    a->qtd_preto = 0;
+	// bool verificacao;
+	// if(x >= 800 || y >= 600 || x <= 2 || y <= 2)
+	// 	return;
 	
-	if(game->usa_fecho)
-		verificacao = (matriz_pb_cor[y][x][0] != 0 || matriz_pb_cor[y][x][1] != 0 || matriz_pb_cor[y][x][2] != 255);
-	else 
-		verificacao = (x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && y < maior_y[Y]);
+	// if(game->usa_fecho)
+	// 	verificacao = (matriz_pb_cor[y][x][0] != 0 || matriz_pb_cor[y][x][1] != 0 || matriz_pb_cor[y][x][2] != 255);
+	// else 
+	// 	verificacao = (x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && y < maior_y[Y]);
 	
-	if(verificacao) {
+	// if(verificacao) {
 		
-		if(matriz_pb_cor[y][x][0] != 255 || matriz_pb_cor[y][x][1] != 0 || matriz_pb_cor[y][x][2] != 0){
-			if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255) 
-				qtd_branco = qtd_branco + 1;
-			else 
-				qtd_preto = qtd_preto + 1;
+	// 	if(matriz_pb_cor[y][x][0] != 255 || matriz_pb_cor[y][x][1] != 0 || matriz_pb_cor[y][x][2] != 0){
+	// 		if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255) 
+	// 			qtd_branco = qtd_branco + 1;
+	// 		else 
+	// 			qtd_preto = qtd_preto + 1;
 			
-			matriz_pb_cor[y][x][0] = 255;
-			matriz_pb_cor[y][x][1] = 0;
-			matriz_pb_cor[y][x][2] = 0;
+	// 		matriz_pb_cor[y][x][0] = 255;
+	// 		matriz_pb_cor[y][x][1] = 0;
+	// 		matriz_pb_cor[y][x][2] = 0;
 			
-			conta_pb(x - 1, y, matriz_pb_cor);
-			conta_pb(x + 1, y, matriz_pb_cor);
-			conta_pb(x, y - 1, matriz_pb_cor);
-			conta_pb(x, y + 1, matriz_pb_cor);
-		}
-	}
-	return;
+	// 		conta_pb(x - 1, y, matriz_pb_cor);
+	// 		conta_pb(x + 1, y, matriz_pb_cor);
+	// 		conta_pb(x, y - 1, matriz_pb_cor);
+	// 		conta_pb(x, y + 1, matriz_pb_cor);
+	// 	}
+	// }
+	// return;
+
+    /******************************** Marca todos como não visitados ********************************/
+    for(int y = 0; y < altura; y++){
+      for(int x = 0; x < largura; x++) {
+        matriz_pb_cor[y][x][3] = 0;
+      }
+    }
+    /************************************ Verificação para frente ***********************************/
+    for(int y = centroide[Y]; y < altura; y++){
+      for(int x = centroide[X]; x < largura; x++) {
+        //se encontra parede do fecho
+        if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 255){
+            break;
+        }    
+        else if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255){
+            printf("branco\n");
+            matriz_pb_cor[y][x][3] = 1;
+            a->qtd_branco++;
+        }
+        else if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0){
+            matriz_pb_cor[y][x][3] = 1;
+            a->qtd_preto++;
+        }
+      }
+    }
+
+    /************************************ Verificação para trás ***********************************/
+    for(int y = centroide[Y]; y > 1; y--){
+      for(int x = centroide[X]; x > 1; x--) {
+        //se encontra parede do fecho
+        if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 255){
+            break;
+        }    
+        else if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255 && matriz_pb_cor[y][x][3] == 0){
+            printf("%d\n", a->qtd_branco);
+            matriz_pb_cor[y][x][3] = 1;
+            a->qtd_branco++;
+        }
+        else if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0 && matriz_pb_cor[y][x][3] == 0){
+            matriz_pb_cor[y][x][3] = 1;
+            a->qtd_preto++;
+        }
+      }
+    }
+
+    /************************************ Verificação para cima ***********************************/
+    for(int x = centroide[X]; x < largura; x++){
+      for(int y = centroide[Y]; y < altura; y++) {
+        //se encontra parede do fecho
+        if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 255){
+            break;
+        }    
+        else if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255 && matriz_pb_cor[y][x][3] == 0){
+            matriz_pb_cor[y][x][3] = 1;
+            a->qtd_branco++;
+        }
+        else if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0){
+            matriz_pb_cor[y][x][3] = 1;
+            a->qtd_preto++;
+        }
+      }
+    }
+
+    /************************************ Verificação para baixo ***********************************/
+    for(int x = centroide[X]; x > 1; x--){
+      for(int y = centroide[Y]; y > 1; y--) {
+        //se encontra parede do fecho
+        if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 255){
+            break;
+        }    
+        else if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255 && matriz_pb_cor[y][x][3] == 0){
+            matriz_pb_cor[y][x][3] = 1;
+            printf("%d\n", a->qtd_branco);
+            a->qtd_branco++;
+        }
+        else if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0 && matriz_pb_cor[y][x][3] == 0){
+            matriz_pb_cor[y][x][3] = 1;
+            a->qtd_preto++;
+        }
+      }
+    }
+return a;
 }

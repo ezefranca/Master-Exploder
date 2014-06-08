@@ -173,16 +173,6 @@ void interpolacao(int n, double *x, double *fx){
 		ponto laranja;
         centroide(f, laranja);
 		
-        if(amostragem < 10){
-			fx[amostragem] = area_do_fecho(f);
-			x[amostragem] = f->n;
-        }else{
-			interpolacao(10, x, fx);
-			pontos_extremo(f, altura, largura);
-			amostragem = -1;
-        }
-        amostragem++;
-		
 		//printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
 		print_poligono(f);
 	
@@ -202,15 +192,14 @@ void interpolacao(int n, double *x, double *fx){
 		//al_draw_filled_rectangle(laranja[X], laranja[Y], laranja[X] + 5, laranja[Y] + 5, azul);
         
 		
-		qtd_branco = 0;
-		qtd_preto = 0;
+		
 		
 		// printf("PB %d %d\n", qtd_branco, qtd_preto);
 		//camera_copia(cam, matriz_contagem, direita);
 		bitmap_para_matriz(esquerda, matriz_contagem);
 		
-		conta_pb(laranja[X], laranja[Y], matriz_contagem);
-		printf("Brancos %f Pretos %f\n", qtd_branco, qtd_preto);
+		area *b = conta_pb(laranja, matriz_contagem);
+		printf("Brancos %d Pretos %d\n", b->qtd_branco, b->qtd_preto);
 		camera_copia(cam, matriz_contagem, direita);
 		al_flip_display();
         free(f);
