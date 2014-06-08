@@ -199,7 +199,8 @@ void interpolacao(int n, double *x, double *fx){
 		bitmap_para_matriz(esquerda, matriz_contagem);
 		
 		area *b = conta_pb(laranja, matriz_contagem);
-		printf("Brancos %d Pretos %d\n", b->qtd_branco, b->qtd_preto);
+		//printf("Brancos %d Pretos %d\n", b->qtd_branco, b->qtd_preto);
+		printf("Somada: %li Fecho %f\n", b->qtd_branco + b->qtd_preto, area_do_fecho(f));
 		camera_copia(cam, matriz_contagem, direita);
 		al_flip_display();
         free(f);
