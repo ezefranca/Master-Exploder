@@ -185,11 +185,6 @@ void interpolacao(int n, double *x, double *fx){
 		
 		//printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
 		print_poligono(f);
-	
-		matriz_contagem[100][100][0] = 255;
-		matriz_contagem[100][100][1] = 255;
-		matriz_contagem[100][100][2] = 255;
-        
 		
 		//bitmap_para_matriz(esquerda, matriz_contagem);
 		

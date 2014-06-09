@@ -380,13 +380,14 @@ int menor_angulo(ponto *p1, ponto *p2){
  */
 void conta_pb(int x, int y, unsigned char ***matriz_pb_cor) {
 	bool verificacao;
-	if(x >= largura || y >= altura || x <= 1 || y <= 1)
+	//printf("X %d Y %d\n", x, y);
+	if(x >= (largura - 10) || y >= (altura - 10) || x < 10 || y < 10)
 		return;
 	
 	if(game->usa_fecho)
-		verificacao = (matriz_pb_cor[y][x][0] != 0 || matriz_pb_cor[y][x][1] != 0 || matriz_pb_cor[y][x][2] != 255);
+		verificacao = (matriz_pb_cor[y][x][0] != 0 || matriz_pb_cor[y][x][1] != 0 || matriz_pb_cor[y][x][2] != 255);//Usa limite do fecho
 	else 
-		verificacao = (x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && y < maior_y[Y]);
+		verificacao = (x > menor_x[X] && x < maior_x[X] && y > menor_y[Y] && y < maior_y[Y]);//Usa quadrado.
 	
 	if(verificacao) {
 		
