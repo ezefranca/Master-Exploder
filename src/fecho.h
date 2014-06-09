@@ -205,7 +205,7 @@ int menor_angulo(ponto *p1, ponto *p2);
  
  *  @return <#return value description#>
  */
-voi conta_pb_recursivo(ponto centroide, unsigned char ***matriz_pb_cor, area *a);
+void conta_pb_recursivo(int x, int y, unsigned char ***matriz_pb_cor, area *a);
 
 /**
  *  <#Description#>

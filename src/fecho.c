@@ -377,7 +377,7 @@ int menor_angulo(ponto *p1, ponto *p2){
 
 void conta_pb_recursivo(int x, int y, unsigned char ***matriz_pb_cor, area *a) {
 	bool verificacao;
-	//printf("X %d Y %d\n", x, y);
+	
 	if(x >= (largura - 10) || y >= (altura - 10) || x < 10 || y < 10)
 		return;
 	
@@ -397,10 +397,10 @@ void conta_pb_recursivo(int x, int y, unsigned char ***matriz_pb_cor, area *a) {
 	 		matriz_pb_cor[y][x][1] = 0;
 	 		matriz_pb_cor[y][x][2] = 0;
 			
-	 		conta_pb(x - 1, y, matriz_pb_cor, a);
-	 		conta_pb(x + 1, y, matriz_pb_cor, a);
-	 		conta_pb(x, y - 1, matriz_pb_cor, a);
-	 		conta_pb(x, y + 1, matriz_pb_cor, a);
+	 		conta_pb_recursivo(x - 1, y, matriz_pb_cor, a);
+	 		conta_pb_recursivo(x + 1, y, matriz_pb_cor, a);
+	 		conta_pb_recursivo(x, y - 1, matriz_pb_cor, a);
+	 		conta_pb_recursivo(x, y + 1, matriz_pb_cor, a);
 	 	}
 	}
 	return;
