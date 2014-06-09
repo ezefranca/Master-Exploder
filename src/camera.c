@@ -1,10 +1,10 @@
 #include "camera.h"
 
 /**
- *  <#Description#>
+ *  Converte uma IplImage do openCV para tipo cam (Hashimoto)
  *
- *  @param cam   <#cam description#>
- *  @param image <#image description#>
+ *  @param cam   recebe um tipo camera
+ *  @param image recebe um tipo IplImage (OpenCV)
  */
 void camera_converte(camera *cam, IplImage *image) {
   char *row = image->imageData;
@@ -28,11 +28,11 @@ void camera_converte(camera *cam, IplImage *image) {
 }
 
 /**
- *  <#Description#>
+ *  Inicializa a camera
  *
- *  @param i  <#i description#>
+ *  @param i  numero da camera, voce pode inicializar diversas cameras
  *
- *  @return <#return value description#>
+ *  @return returna cam, um tipo camera (Hashimoto)
  */
 camera *camera_inicializa(int i) {
   camera *cam = NULL;
@@ -60,9 +60,9 @@ camera *camera_inicializa(int i) {
 }
 
 /**
- *  <#Description#>
+ *  Finaliza camera
  *
- *  @param cam <#cam description#>
+ *  @param cam cam para ser liberado da memória
  */
 void camera_finaliza(camera *cam) {
   camera_libera_matriz(cam, cam->quadro);
@@ -73,9 +73,9 @@ void camera_finaliza(camera *cam) {
 }
 
 /**
- *  <#Description#>
+ *  Atualiza o frame da camera
  *
- *  @param cam <#cam description#>
+ *  @param cam recebe um tipo camera, ao qual atribui a imagem da camera
  */
 void camera_atualiza(camera *cam) {
   IplImage *image = cvQueryFrame(cam->capture);
@@ -84,11 +84,11 @@ void camera_atualiza(camera *cam) {
 }
 
 /**
- *  <#Description#>
+ *  Copia imagem da camera para um allegro bitmap
  *
- *  @param cam    <#cam description#>
- *  @param matriz <#matriz description#>
- *  @param bitmap <#bitmap description#>
+ *  @param cam    tipo camera que vai contem a imagem
+ *  @param matriz matrix tridimensional sem sinal
+ *  @param bitmap allegro bitmap
  */
 void camera_copia(camera *cam, unsigned char ***matriz, ALLEGRO_BITMAP *bitmap) {
   ALLEGRO_LOCKED_REGION *region = al_lock_bitmap(bitmap, ALLEGRO_PIXEL_FORMAT_ARGB_8888, ALLEGRO_LOCK_WRITEONLY);
@@ -116,11 +116,11 @@ void camera_copia(camera *cam, unsigned char ***matriz, ALLEGRO_BITMAP *bitmap) 
 }
 
 /**
- *  <#Description#>
+ *  Aloca uma matriz com o conteudo da camera
  *
- *  @param cam <#cam description#>
+ *  @param cam ponteiro de camera que vai ser alocado
  *
- *  @return <#return value description#>
+ *  @return matriz com conteudo da camera
  */
 unsigned char ***camera_aloca_matriz(camera *cam) {
   unsigned char ***matriz = malloc(cam->altura * sizeof(unsigned char **));
@@ -136,10 +136,10 @@ unsigned char ***camera_aloca_matriz(camera *cam) {
 }
 
 /**
- *  <#Description#>
+ *  Desaloca a matriz
  *
- *  @param cam    <#cam description#>
- *  @param matriz <#matriz description#>
+ *  @param cam    tipo camera a ser desalocado
+ *  @param matriz matriz a ser desalocada
  */
 void camera_libera_matriz(camera *cam, unsigned char ***matriz) {
 	for(int y = 0; y < cam->altura; y++) {

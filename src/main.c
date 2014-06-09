@@ -2,45 +2,6 @@
 #include "comum.h"
 #include "terminate.h"
 #include "controle.h"
-
-//Global
-//int _vizinhos = 100;
-
-/**
- *  <#Description#>
- *
- *  @param n  <#n description#>
- *  @param x  <#x description#>
- *  @param fx <#fx description#>
- */
-void interpolacao(int n, double *x, double *fx){
-     double somax = 0;//inicializando os valores dos somatorios.
-     double somax2 = 0;
-     double somaf = 0;
-     double somaxf = 0;
-     
-     for(int i=1;i<=10;i++){//Somatorios de x, x², f(x) e x*f(x)
-      somax = somax + x[i];
-      somax2 = somax2 + x[i]* x[i];
-      somaf = somaf + fx[i];
-      somaxf = somaxf + x[i]* fx[i];
-    }              
-
-    //calculo dos valores de a e b da regressão linear.
-    double a = (somaf * somax2 - somax * somaxf)/(n * somax2 - somax *somax);
-    double b = (n * somaxf - somax * somaf)/(n * somax2 - somax * somax);
-
-    //printf ("\nA curva que melhor ajusta os 10 dados fornecidos eh \ng(x)= %f + %f*x\n\n", a, b);
-    double c = (a * 42) + b;
-    printf("%f, %f = %f\n",a, b, c);
-}
-
-  void testeRGB(Rgb *cores){
-    cores->r = 200;
-   // printf("---------------------------------%d\n",cores->r);
-  }
-
-  
 /**
  *  <#Description#>
  *
@@ -61,9 +22,6 @@ void interpolacao(int n, double *x, double *fx){
     ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
 
     //ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
-
-    Rgb *cores_rgb = malloc(sizeof(Rgb));
-    Hsv *cores_hsv = malloc(sizeof(Hsv));
 
     int desenhar = 0;
     int terminar = 0;
@@ -173,18 +131,9 @@ void interpolacao(int n, double *x, double *fx){
 		ponto laranja;
         centroide(f, laranja);
 		
-        if(amostragem < 10){
-			fx[amostragem] = area_do_fecho(f);
-			x[amostragem] = f->n;
-        }else{
-			interpolacao(10, x, fx);
-			pontos_extremo(f, altura, largura);
-			amostragem = -1;
-        }
-        amostragem++;
-		
 		//printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
 		print_poligono(f);
+
 		
 		//bitmap_para_matriz(esquerda, matriz_contagem);
 		
@@ -197,15 +146,15 @@ void interpolacao(int n, double *x, double *fx){
 		//al_draw_filled_rectangle(laranja[X], laranja[Y], laranja[X] + 5, laranja[Y] + 5, azul);
         
 		
-		qtd_branco = 0;
-		qtd_preto = 0;
+		
 		
 		// printf("PB %d %d\n", qtd_branco, qtd_preto);
 		//camera_copia(cam, matriz_contagem, direita);
 		bitmap_para_matriz(esquerda, matriz_contagem);
 		
-		conta_pb(laranja[X], laranja[Y], matriz_contagem);
-		printf("Brancos %f Pretos %f\n", qtd_branco, qtd_preto);
+		area *b = conta_pb(laranja, matriz_contagem);
+		//printf("Brancos %d Pretos %d\n", b->qtd_branco, b->qtd_preto);
+		printf("Somada: %li, Preto: %li, Branco: %li, Fecho: %2f\n", (b->qtd_branco + b->qtd_preto),b->qtd_preto, b->qtd_branco, area_do_fecho(f));
 		camera_copia(cam, matriz_contagem, direita);
 		al_flip_display();
         free(f);

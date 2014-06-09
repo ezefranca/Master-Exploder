@@ -37,6 +37,14 @@ void bitmap_para_matriz(ALLEGRO_BITMAP *bitmap, unsigned char ***matriz){
 
 			matriz[y][x][2] = *pixel;
 			pixel += 2;
+      // matriz[y][x][2] = *pixel;
+      // pixel++;
+
+      // matriz[y][x][1] = *pixel;
+      // pixel++;
+
+      // matriz[y][x][0] = *pixel;
+      // pixel++;
 		}
     row += region->pitch;
   }
