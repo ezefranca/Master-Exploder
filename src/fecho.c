@@ -1,5 +1,5 @@
 #include "fecho.h"
-int _vizinhos = 100;
+int _vizinhos = 10;
 
 /**
  *  Calcula o centroide do fecho convexo

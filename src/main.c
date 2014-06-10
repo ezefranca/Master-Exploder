@@ -93,7 +93,7 @@
         
 		matriz_copia(matriz_pb, matriz_verde, altura, largura);
         poligono *f = fecho(matriz_verde, altura, largura);
-		camera_copia(cam, matriz, esquerda);
+		camera_copia(cam, matriz_pb, esquerda);
 		
 		//matriz_copia(matriz, matriz_contagem, altura, largura);
 
@@ -154,7 +154,7 @@
 		area *b = conta_pb(laranja, matriz_contagem);
 		//printf("Brancos %d Pretos %d\n", b->qtd_branco, b->qtd_preto);
 		printf("Somada: %li, Preto: %li, Branco: %li, Fecho: %2f\n", (b->qtd_branco + b->qtd_preto),b->qtd_preto, b->qtd_branco, area_do_fecho(f));
-		camera_copia(cam, matriz_contagem, direita);
+		camera_copia(cam, matriz_pb, direita);
 		al_flip_display();
         free(f);
       }
