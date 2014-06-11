@@ -98,7 +98,7 @@ void subtrai_matriz(unsigned char ***atual, unsigned char ***primeiro, unsigned 
 void desenha_reta(ponto a, ponto b, char ***matriz){
 	double coeficiente_angular;
 	double coeficiente_linear;
-	int j, i, fim;
+	int j, ix, fimx, iy, fimy;
 	bool usar_y = false;
 	
 	coeficiente_angular = (double) (b[Y] - a[Y])/(b[X] - a[X]);
@@ -110,46 +110,51 @@ void desenha_reta(ponto a, ponto b, char ***matriz){
 	//Verificando se o coeficiente angular é positivo ou negativo, ou se é zero.
 	if(b[X] > a[X]){
 		//Coeficiente negativo
-		i = a[X];
-		fim = b[X];
+		ix = a[X];
+		fimx = b[X];
 	}
 	else if(b[X] < a[X]){
 		//Coeficiente positivo
-		i = b[X];
-		fim = a[X];
+		ix = b[X];
+		fimx = a[X];
 	}
 	else {
 		usar_y = true;
 		//Verificando qual Y é maior.
-		if(b[Y] > a[Y]){
-			i = a[Y];
-			fim = b[Y];
-		}
-		else {
-			i = b[Y];
-			fim = a[Y];
-		}
 	}
+	if(b[Y] > a[Y]){
+		iy = a[Y];
+		fimy = b[Y];
+	}
+	else {
+		iy = b[Y];
+		fimy = a[Y];
+	}
+		
 	//Se X de ambos é igual é necessário fazer o loop com Y.
 	if(!usar_y){
-		for(i; i <= fim; i++){
-			j = i * coeficiente_angular + coeficiente_linear;
-			
-			matriz[j][i][0] = 0;
-			matriz[j][i][1] = 0;
-			matriz[j][i][2] = 255;
-			matriz[j][i][3] = 0;
+		for(ix; ix <= fimx; ix++){
+			j = ix * coeficiente_angular + coeficiente_linear;
+			matriz[j][ix][0] = 0;
+			matriz[j][ix][1] = 0;
+			matriz[j][ix][2] = 255;
+			matriz[j][ix][3] = 1;
+		}
+		for(iy; iy < fimy; iy++){
+			j = (iy - coeficiente_linear) / coeficiente_angular;
+			matriz[iy][j][0] = 0;
+			matriz[iy][j][1] = 0;
+			matriz[iy][j][2] = 255;
+			matriz[iy][j][3] = 1;
 		}
 	}
 	else {
 		//i = ao eixo Y, j = eixo X.
-		for(i; i <= fim; i++){
-			j = (i - coeficiente_linear) / coeficiente_angular;
-			
-			matriz[i][j][0] = 0;
-			matriz[i][j][1] = 0;
-			matriz[i][j][2] = 255;
-			matriz[i][j][3] = 0;
+		for(iy; iy <= fimy; iy++){
+			matriz[iy][a[X]][0] = 0;
+			matriz[iy][a[X]][1] = 0;
+			matriz[iy][a[X]][2] = 255;
+			matriz[iy][a[X]][3] = 1;
 		}
 	}
 }

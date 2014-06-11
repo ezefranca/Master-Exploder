@@ -22,7 +22,7 @@ int inicializar_allegro(){
 	game->largura_tela = 1280;
 	game->altura_tela = 800;
 	game->divisor_tempo = 1;
-	game->divisor_camera = 2;
+	game->divisor_camera = 1;
 	game->luminus = 150;
 	game->debug = TRUE;
 	game->maximo_respeito = 10; 
