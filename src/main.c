@@ -171,8 +171,9 @@
 		
 		area *b = conta_pb(laranja, matriz_contagem);
 		printf("Brancos %d Pretos %d\n", b->qtd_branco, b->qtd_preto);
-		//printf("Somada: %li, Preto: %li, Branco: %li, Fecho: %2f\n", (b->qtd_branco + b->qtd_preto),b->qtd_preto, b->qtd_branco, area_do_fecho(f));
 		camera_copia(cam, matriz_contagem, direita);
+		
+		//printf("Somada: %li, Preto: %li, Branco: %li, Fecho: %2f\n", (b->qtd_branco + b->qtd_preto),b->qtd_preto, b->qtd_branco, area_do_fecho(f));
 		al_flip_display();
 		free(b);
         free(f);

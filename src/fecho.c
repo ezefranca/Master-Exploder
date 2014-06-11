@@ -414,18 +414,18 @@ void conta_pb_recursivo(int x, int y, unsigned char ***matriz_pb_cor, area *a) {
  *
  *  @return <#return value description#>
  */
-area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor) {
+area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
     area *a = malloc(sizeof(area));
 	
     a->qtd_branco = 0;
     a->qtd_preto = 0;
 
     /******************************** Marca todos como não visitados ********************************/
-    for(int y = 0; y < altura; y++){
+    /*for(int y = 0; y < altura; y++){
       for(int x = 0; x < largura; x++){
         matriz_pb_cor[y][x][3] = 0;
       }
-    }
+    }*/
 
     /* Vamos pensar no fecho convexo como um plano cartesiano X, Y
 
@@ -443,21 +443,19 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor) {
          | X  A |
     /*******************/
     for(int y = centroide[Y]; y < altura; y++){
-      for(int x = centroide[X]; x < largura; x++) {
+      for(int x = centroide[X]; x < largura; x++){
         //se encontra parede do fecho
-        if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 255){
+        if(matriz_pb_cor[y][x][3] == 1 && matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 255){
             break;
-        }    
-        else if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255 && matriz_pb_cor[y][x][3] == 0){
-            //printf("branco\n");
-            matriz_pb_cor[y][x][3] = 1;
-            a->qtd_branco++;
         }
-        else if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0 && matriz_pb_cor[y][x][3] == 0){
-            matriz_pb_cor[y][x][3] = 1;
+		
+		matriz_pb_cor[y][x][3] = 1;
+        
+		if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0)
             a->qtd_preto++;
-        }
-      }
+		else 
+			a->qtd_branco++;
+		}
     }
 
     /************************************ Verificação para trás + cima ***********************************/
@@ -469,18 +467,18 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor) {
     for(int y = centroide[Y]; y > 1; y--){
       for(int x = centroide[X]; x > 1; x--) {
         //se encontra parede do fecho
-        if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 255){
+        if(matriz_pb_cor[y][x][3] == 1 && matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0  && matriz_pb_cor[y][x][2] == 255){
             break;
         }    
-        else if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255 && matriz_pb_cor[y][x][3] == 0){
-            //printf("%d\n", a->qtd_branco);
-            matriz_pb_cor[y][x][3] = 1;
+		matriz_pb_cor[y][x][3] = 1;
+		matriz_pb_cor[y][x][0] = 0;
+		matriz_pb_cor[y][x][1] = 0;
+		matriz_pb_cor[y][x][2] = 255;
+		
+        if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
             a->qtd_branco++;
-        }
-        else if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0 && matriz_pb_cor[y][x][3] == 0){
-            matriz_pb_cor[y][x][3] = 1;
-            a->qtd_preto++;
-        }
+        else
+			a->qtd_preto++;
       }
     }
 
@@ -493,19 +491,20 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor) {
     for(int y = centroide[Y]; y < altura; y++){
       for(int x = centroide[X]; x > 1; x--) {
         //se encontra parede do fecho
-        if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 255){
+        if(matriz_pb_cor[y][x][3] == 1 && matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0  && matriz_pb_cor[y][x][2] == 255){
             break;
         }    
-        else if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255 && matriz_pb_cor[y][x][3] == 0){
+		matriz_pb_cor[y][x][3] = 1;
+        matriz_pb_cor[y][x][0] = 0;
+		matriz_pb_cor[y][x][1] = 0;
+		matriz_pb_cor[y][x][2] = 255;
+		
+		if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
             //printf("%d\n", a->qtd_branco);
-            matriz_pb_cor[y][x][3] = 1;
             a->qtd_branco++;
-        }
-        else if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0 && matriz_pb_cor[y][x][3] == 0){
-            matriz_pb_cor[y][x][3] = 1;
-            a->qtd_preto++;
-        }
-      }
+        else 
+			a->qtd_preto++;
+		}
     }
     /************************************ Verificação para frente + cima ***********************************/
     //Verifica o quadrante A
@@ -516,21 +515,19 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor) {
     for(int y = centroide[Y]; y > 1; y--){
       for(int x = centroide[X]; x < largura; x++) {
         //se encontra parede do fecho
-        if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 255){
+        if(matriz_pb_cor[y][x][3] == 1 && matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0  && matriz_pb_cor[y][x][2] == 255){
             break;
-        }    
-        else if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255 && matriz_pb_cor[y][x][3] == 0){
-            //printf("%d\n", a->qtd_branco);
-            matriz_pb_cor[y][x][3] = 1;
+        }
+		matriz_pb_cor[y][x][3] = 1;	
+		matriz_pb_cor[y][x][0] = 0;
+		matriz_pb_cor[y][x][1] = 0;
+		matriz_pb_cor[y][x][2] = 255;
+		
+        if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
             a->qtd_branco++;
-        }
-        else if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0 && matriz_pb_cor[y][x][3] == 0){
-            matriz_pb_cor[y][x][3] = 1;
-            a->qtd_preto++;
-        }
-      }
+        else 
+			a->qtd_preto++;
+		}
     }
 return a;
 }
-
-
