@@ -1,4 +1,5 @@
 #include "matrizes.h"
+
 /**
  *  <#Description#>
  *
@@ -85,3 +86,67 @@ void subtrai_matriz(unsigned char ***atual, unsigned char ***primeiro, unsigned 
       }
     }
   }
+  
+/**
+ *  Desenha na matriz a reta a partir de 2 pontos.
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *	@param matriz <#matriz description#>
+ *
+ */
+void desenha_reta(ponto a, ponto b, char ***matriz){
+	double coeficiente_angular;
+	double coeficiente_linear;
+	int j, i, fim;
+	bool usar_y = false;
+	
+	coeficiente_angular = (double) (b[Y] - a[Y])/(b[X] - a[X]);
+	coeficiente_linear = (double) a[Y] - (coeficiente_angular * a[X]);
+	
+	printf("Alfa %f\n", coeficiente_angular/*coeficiente_angular, coeficiente_linear*/);
+	printf("Beta %d\n", coeficiente_linear);
+	
+	//Menor pois <= é desnecessário, uma vez que a próxima linha do fecho desenhará a partir do b.
+	if(b[X] > a[X]){
+		i = a[X];
+		fim = b[X];
+	}
+	else if(b[X] < a[X]){
+		i = b[X];
+		fim = a[X];
+	}
+	else {
+		usar_y = true;
+		if(b[Y] > a[Y]){
+			i = a[Y];
+			fim = b[Y];
+		}
+		else {
+			i = b[Y];
+			fim = a[Y];
+		}
+	}
+	//Se X de ambos é igual é necessário fazer o loop com Y.
+	if(!usar_y){
+		for(i; i < fim; i++){
+			j = i * coeficiente_angular + coeficiente_linear;
+			
+			matriz[j][i][0] = 0;
+			matriz[j][i][1] = 0;
+			matriz[j][i][2] = 255;
+			matriz[j][i][3] = 0;
+		}
+	}
+	else {
+		//i = ao eixo Y, j = eixo X.
+		for(i; i < fim; i++){
+			j = (i - coeficiente_linear) / coeficiente_angular;
+			
+			matriz[i][j][0] = 0;
+			matriz[i][j][1] = 0;
+			matriz[i][j][2] = 255;
+			matriz[i][j][3] = 0;
+		}
+	}
+}

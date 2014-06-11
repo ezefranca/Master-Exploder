@@ -96,7 +96,7 @@
         poligono *f = fecho(matriz_verde, altura, largura);
 		camera_copia(cam, matriz, esquerda);
 		
-		//matriz_copia(matriz, matriz_contagem, altura, largura);
+		matriz_copia(matriz, matriz_contagem, altura, largura);
 
 		//camera_copia(cam, matriz_verde, direita);
 		
@@ -150,11 +150,28 @@
 		
 		// printf("PB %d %d\n", qtd_branco, qtd_preto);
 		//camera_copia(cam, matriz_contagem, direita);
-		bitmap_para_matriz(esquerda, matriz_contagem);
 		
-		area *b = conta_pb(laranja, matriz_contagem);
+		//bitmap_para_matriz(esquerda, matriz_contagem);
+		
+		
+		for(int i = 0; i < f->n; i++){
+			ponto b;
+			
+			if(i + 1 == f->n){
+				b[X] = f->p[0][X];
+				b[Y] = f->p[0][Y];
+			}
+			else {
+				b[X] = f->p[i+1][X];
+				b[Y] = f->p[i+1][Y];
+			}
+			//printf("Ponto A (%d, %d) Ponto B (%d, %d)", f->p[i][X], f->p[i][Y], b[X], b[Y]);
+			desenha_reta(f->p[i], b, matriz_contagem);
+		}
+		
+		//area *b = conta_pb(laranja, matriz_contagem);
 		//printf("Brancos %d Pretos %d\n", b->qtd_branco, b->qtd_preto);
-		printf("Somada: %li, Preto: %li, Branco: %li, Fecho: %2f\n", (b->qtd_branco + b->qtd_preto),b->qtd_preto, b->qtd_branco, area_do_fecho(f));
+		//printf("Somada: %li, Preto: %li, Branco: %li, Fecho: %2f\n", (b->qtd_branco + b->qtd_preto),b->qtd_preto, b->qtd_branco, area_do_fecho(f));
 		camera_copia(cam, matriz_contagem, direita);
 		al_flip_display();
         free(f);
