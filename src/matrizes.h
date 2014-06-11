@@ -42,5 +42,5 @@ void subtrai_matriz(unsigned char ***atual, unsigned char ***primeiro, unsigned 
  *	@param matriz <#matriz description#>
  *
  */
-void desenha_reta(ponto a, ponto b, char ***matriz);
+void desenha_reta(ponto a, ponto b, unsigned char ***matriz);
 #endif

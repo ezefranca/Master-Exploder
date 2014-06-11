@@ -95,7 +95,7 @@ void subtrai_matriz(unsigned char ***atual, unsigned char ***primeiro, unsigned 
  *	@param matriz <#matriz description#>
  *
  */
-void desenha_reta(ponto a, ponto b, char ***matriz){
+void desenha_reta(ponto a, ponto b, unsigned char ***matriz){
 	double coeficiente_angular;
 	double coeficiente_linear;
 	int j, ix, fimx, iy, fimy;
@@ -104,8 +104,8 @@ void desenha_reta(ponto a, ponto b, char ***matriz){
 	coeficiente_angular = (double) (b[Y] - a[Y])/(b[X] - a[X]);
 	coeficiente_linear = (double) a[Y] - (coeficiente_angular * a[X]);
 	
-	printf("Alfa %f\n", coeficiente_angular/*coeficiente_angular, coeficiente_linear*/);
-	printf("Beta %d\n", coeficiente_linear);
+	//printf("Alfa %f\n", coeficiente_angular/*coeficiente_angular, coeficiente_linear*/);
+	//printf("Beta %d\n", coeficiente_linear);
 	
 	//Verificando se o coeficiente angular é positivo ou negativo, ou se é zero.
 	if(b[X] > a[X]){
