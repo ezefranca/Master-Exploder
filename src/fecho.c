@@ -406,7 +406,14 @@ void conta_pb_recursivo(int x, int y, unsigned char ***matriz_pb_cor, area *a) {
 	return;
 }
 
-
+/**
+ *  Retorna área dos pontos brancos e pretos.
+ *
+ *  @param centroide <#centroide description#>
+ *	@param matriz_pb_cor <#matriz_pb_cor description#>
+ *
+ *  @return <#return value description#>
+ */
 area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor) {
     area *a;
     a->qtd_branco = 0;
@@ -523,4 +530,30 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor) {
       }
     }
 return a;
+}
+
+/**
+ *  Desenha na matriz a reta a partir de 2 pontos.
+ *
+ *  @param a <#a description#>
+ *  @param b <#b description#>
+ *	@param matriz <#matriz description#>
+ *
+ */
+void desenha_reta(ponto a, ponto b, char ***matriz){
+	double coeficiente_angular;
+	double coeficiente_linear;
+	int j;
+	
+	coeficiente_angular = (b[Y] - a[Y])/(b[X] - a[X]);
+	coeficiente_linear = a[Y] - coeficiente_angular * a[X];
+	
+	//Menor pois <= é desnecessário, uma vez que a próxima linha do fecho desenhará a partir do b.
+	for(int i = a[X]; a[X] < b[X]; i++){
+		j = i * coeficiente_angular + coeficiente_linear;
+		matriz[j][i][0] = 0;
+		matriz[j][i][1] = 0;
+		matriz[j][i][2] = 255;
+		matriz[j][i][3] = 0;
+	}	
 }
