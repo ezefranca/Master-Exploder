@@ -107,17 +107,20 @@ void desenha_reta(ponto a, ponto b, char ***matriz){
 	printf("Alfa %f\n", coeficiente_angular/*coeficiente_angular, coeficiente_linear*/);
 	printf("Beta %d\n", coeficiente_linear);
 	
-	//Menor pois <= é desnecessário, uma vez que a próxima linha do fecho desenhará a partir do b.
+	//Verificando se o coeficiente angular é positivo ou negativo, ou se é zero.
 	if(b[X] > a[X]){
+		//Coeficiente negativo
 		i = a[X];
 		fim = b[X];
 	}
 	else if(b[X] < a[X]){
+		//Coeficiente positivo
 		i = b[X];
 		fim = a[X];
 	}
 	else {
 		usar_y = true;
+		//Verificando qual Y é maior.
 		if(b[Y] > a[Y]){
 			i = a[Y];
 			fim = b[Y];
@@ -129,7 +132,7 @@ void desenha_reta(ponto a, ponto b, char ***matriz){
 	}
 	//Se X de ambos é igual é necessário fazer o loop com Y.
 	if(!usar_y){
-		for(i; i < fim; i++){
+		for(i; i <= fim; i++){
 			j = i * coeficiente_angular + coeficiente_linear;
 			
 			matriz[j][i][0] = 0;
@@ -140,7 +143,7 @@ void desenha_reta(ponto a, ponto b, char ***matriz){
 	}
 	else {
 		//i = ao eixo Y, j = eixo X.
-		for(i; i < fim; i++){
+		for(i; i <= fim; i++){
 			j = (i - coeficiente_linear) / coeficiente_angular;
 			
 			matriz[i][j][0] = 0;
