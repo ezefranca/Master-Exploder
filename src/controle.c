@@ -22,14 +22,18 @@ int calcula_padrao(poligono *f, area *b){
 			}
 		}
 		contador_global = -1;
-
-		for(int i = 0; i < 10; i++)
-			verificacoes[i] == 1;
 	}
 	contador_global++;
 
 	if(padrao >= 5){
 		printf("encontrado um padrao\n");
+
+		for(int i = 0; i < 10; i++){
+			printf("%d\n", verificacoes[i]);
+			verificacoes[i] == 1;
+
+		}
+
 		padrao = 0;
 	}
 
