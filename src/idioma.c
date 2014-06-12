@@ -182,6 +182,8 @@ const char *pegar_idioma(const char *key, IDIOMA *idioma){
  *  @param language <#language description#>
  */
 void destroi_idioma(IDIOMA *language){
-	free(language->hash);
-	free(language);
+	if(language->hash != NULL)
+		free(language->hash);
+	if(language != NULL)
+		free(language);
 }

@@ -1,5 +1,6 @@
 #include "init.h"
 #include "comum.h"
+
 /**
  *  <#Description#>
  *
@@ -49,11 +50,11 @@ int inicializar_allegro(){
 	//altura_imagem = string_para_int(pegar_configuracao("LARGURA","allegro", config));
 	
 	game->largura_tela = 1280;
-	game->altura_tela = 800;
+	game->altura_tela = 720;
 	game->divisor_tempo = 1;
 	game->divisor_camera = 1;
 	game->luminus = 80;
-	game->debug = TRUE;
+	game->debug = FALSE;
 	game->maximo_respeito = 10; 
 	game->_vizinhos = 100;
 	game->usa_fecho = TRUE;
@@ -85,10 +86,6 @@ int inicializar_allegro(){
     largura = cam->largura;
     altura = cam->altura;
 
-
-	
-	
-	
 	if(!al_init())
         erro("erro na inicializacao do allegro\n");
 
@@ -104,8 +101,11 @@ int inicializar_allegro(){
     if(!al_init_acodec_addon())
       erro("failed to initialize audio codecs!\n");
  
-   if (!al_reserve_samples(1))
-      erro("failed to reserve samples!\n");
+	al_init_font_addon();
+	al_init_ttf_addon();
+		
+	if(!al_reserve_samples(1))
+		erro("failed to reserve samples!\n");
 
     timer = al_create_timer(1.0 / FPS);
     if(!timer)

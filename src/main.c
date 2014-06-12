@@ -28,9 +28,10 @@
     unsigned char ***primeiro = camera_aloca_matriz(cam);
     
     ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
-    ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
-    ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
-
+	
+	ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
+	ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
+	
     //ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
 
     int desenhar = 0;
@@ -100,7 +101,7 @@
 		switch(tela){
 			case TELA_OPCAO:
 				//printf("Tela %d\n", tela);
-				tela_abertura();
+				tela_abertura(game, linguagem);
 				break;
 			case TELA_ABERTURA:
 				printf("Tela %d", tela);
@@ -181,7 +182,10 @@
         
 		matriz_copia(matriz_pb, matriz_verde, altura, largura);
         poligono *f = fecho(matriz_verde, altura, largura);
-		camera_copia(cam, matriz, esquerda);
+		
+		if(game->debug) {
+			camera_copia(cam, matriz, esquerda);
+		}
 		
 		matriz_copia(matriz, matriz_contagem, altura, largura);
 
@@ -224,7 +228,8 @@
 
 		calcula_padrao(f, b);
 
-		camera_copia(cam, matriz_contagem, direita);
+		if(game->debug)
+			camera_copia(cam, matriz_contagem, direita);
 		
 		al_flip_display();
 		free(b);
@@ -309,10 +314,11 @@
 	}
 }
 
-    al_destroy_bitmap(direita);
+	
+	al_destroy_bitmap(direita);
+	al_destroy_bitmap(esquerda);
 
-    al_destroy_bitmap(esquerda);
-
+	
     camera_libera_matriz(cam, matriz);
 
 	/**********/

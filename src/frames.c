@@ -1,4 +1,6 @@
 #include "frames.h"
+#include "comum.h"
+
 /**
  *  <#Description#>
  *
@@ -105,12 +107,25 @@ void tela_perdedor(){
 	//ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/perdeu.jpg");
 	
 }
+
 /**
  *  <#Description#>
  */
 void tela_abertura(){
-	//ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/menu.jpg");
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/menu.jpg");
+	//al_draw_bitmap(tela, 1, 1, 0);
 	
+	printf("%s", pegar_idioma("Play", linguagem));
+	
+	//al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 700, 50, ALLEGRO_ALIGN_CENTRE, "Play");
+	
+	if(game->fontes->h3 == NULL) {
+		printf("Nyll");
+	}
+	else {
+		printf("notnull");
+	}
+	al_destroy_bitmap(tela);
 }
 
 /**

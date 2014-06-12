@@ -1,7 +1,10 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-#include "comum.h"
+typedef struct _idioma IDIOMA;
+typedef struct _game Game;
+typedef struct _minion Minion;
+
 
 /**
  *  <#Description#>

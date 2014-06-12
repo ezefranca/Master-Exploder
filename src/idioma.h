@@ -14,11 +14,9 @@ typedef struct _elemento_string {
  	struct _elemento_string *proximo;
 } elemento_string;
 
-typedef struct {
+typedef struct _idioma {
 	elemento_string **hash;
 } IDIOMA;
-
-IDIOMA *linguagem;
 
 /**
  *  <#Description#>
@@ -26,6 +24,7 @@ IDIOMA *linguagem;
  *  @param arquivo <#arquivo description#>
  */
 void carregar_idioma(const char *arquivo);
+
 /**
  *  <#Description#>
  *
@@ -35,6 +34,7 @@ void carregar_idioma(const char *arquivo);
  *  @return <#return value description#>
  */
 const char *pegar_idioma(const char *key, IDIOMA *idioma);
+
 /**
  *  <#Description#>
  *
