@@ -317,13 +317,12 @@
 	
 	al_destroy_bitmap(direita);
 	al_destroy_bitmap(esquerda);
-
 	
     camera_libera_matriz(cam, matriz);
 
 	/**********/
 
-    finalizar_allegro();
+	finalizar_allegro();
 
     return EXIT_SUCCESS;
 }

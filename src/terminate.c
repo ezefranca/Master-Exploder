@@ -26,25 +26,27 @@ int finalizar_allegro(){
 	
 	destroi_idioma(linguagem);
 	
-	al_destroy_font(game->fontes->h1);
+	/*al_destroy_font(game->fontes->h1);
 	al_destroy_font(game->fontes->h2);
 	al_destroy_font(game->fontes->h3);
 	al_destroy_font(game->fontes->h4);
 	al_destroy_font(game->fontes->h5);
 	al_destroy_font(game->fontes->h6);
-	al_destroy_font(game->fontes->p);
+	al_destroy_font(game->fontes->p);*/
 	
+	
+	free(game->fontes);
 	free(game->telas);
 	free(game->carrega);
 	free(game->fontes);
 	free(game->pontos);
 	
-	
 	for(int i = 0; i < 5; i++){
 		free(game->minions->minion[i]);
 	}
-	free(game->minions);
 	free(game->minions->minion);
+	free(game->minions);
+	
 	free(game);
 	
 	return 1;
