@@ -1,6 +1,14 @@
 #include "init.h"
 #include "comum.h"
+#include "jogabilidade.h"
 #include "terminate.h"
+
+#define TELA_OPCAO 0
+#define TELA_ABERTURA 1
+#define TELA_JOGO 2
+#define TELA_VENCEDOR 3
+#define TELA_PERDEDOR 4
+
 /**
  *  <#Description#>
  *
@@ -34,6 +42,22 @@
 
     //int atualiza = 0;
 
+	//Configuracoes da jogabilidade
+	bool chefe = false;
+	bool sair = false;
+	bool introducao = true;
+	bool fim_introducao = false;
+	bool reinicio = false;
+	bool minion_4_usado = FALSE;
+	int rodada = 0;
+	int controle =- 1;
+	int mao_adversario = -1;
+	int pontos_jogador_1 = 0;
+	int pontos_jogador_2 = 0;
+	int pontos_respeito = 1;
+	int contador = 0;
+	Minion *minion_adversario;
+	
     camera_atualiza(cam);
 
     for(int y = 0; y < altura; y++){
@@ -47,6 +71,10 @@
 	if(game->telas->sprite)
 		tela_sprite();
 
+	
+	//Seleção do minion inicial.
+	minion_adversario = rand_boss(&minion_4_usado);
+	
     while(1) {
 		ALLEGRO_EVENT event;
 
@@ -68,22 +96,78 @@
 
 		if(desenhar && al_is_event_queue_empty(queue)) {
 		
-		//Selecao de frames.
+		/********** Exibição de tela ***********/ 
 		switch(tela){
-			case 0:
+			case TELA_OPCAO:
+				printf("Tela %d\n", tela);
+				tela_abertura();
+				break;
+			case TELA_ABERTURA:
+				printf("Tela %d", tela);
+				if(introducao) {
+					tela_introducao();
+					introducao = false;
+					}
+				else {
+					//tela de introducao do Minion.
+					tela_minion(minion_adversario);
+				}
+				//Sai da introducao e comeca o jogo.
+				if(controle == PEDRA){
+					fim_introducao = true;
+				}
+				break;
+			case TELA_JOGO:
+				printf("Tela %d", tela);
+				/*while*/
 				
+				tela_jogo(pontos_jogador_1, pontos_jogador_2, minion_adversario, contador);
+				//if()
 				break;
-			case 1:
-			
+			case TELA_VENCEDOR:
+				printf("Tela %d", tela);
+				if(chefe)
+					tela_vencedor_chefe();
+				else
+					tela_vencedor(minion_adversario);
+					
+				if(controle == PEDRA){
+					tela = TELA_OPCAO;
+					//Reinicia jogo
+					chefe = false;
+					introducao = true;
+					rodada = 0;
+					controle =-1;
+					pontos_jogador_1 = 0;
+					pontos_jogador_2 = 0;
+					pontos_respeito = 1;
+				}
+				else if(controle == TESOURA) {
+					sair = true;
+				}
 				break;
-			case 2:
-			
-				break;
-			case 3:
-			
+			case TELA_PERDEDOR:
+				printf("Tela %d", tela);
+				tela_perdedor();
+				if(controle == PEDRA) {
+					tela = TELA_OPCAO;
+					//Reinicia jogo
+					chefe = false;
+					introducao = true;
+					rodada = 0;
+					controle =-1;
+					pontos_jogador_1 = 0;
+					pontos_jogador_2 = 0;
+					pontos_respeito = 1;
+				}
+				else if(controle == TESOURA) {
+					sair = true;
+				}
 				break;
 		}
-		
+		if(sair)
+			break;
+			
         desenhar = 0;
         camera_atualiza(cam);
 		//Antigo remove fundo
@@ -105,22 +189,6 @@
 		ALLEGRO_COLOR azul = al_map_rgb_f(0, 0, 255);
         ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
         ALLEGRO_COLOR preto = al_map_rgb_f(0, 0, 0);
-
-        //al_draw_filled_rectangle(1, 1, largura, altura, verde);
-		
-		/*
-        for (int i = game->_vizinhos; i < altura - game->_vizinhos; i++){
-          for (int j = game->_vizinhos; j < largura - game->_vizinhos; j++){
-                    // removedor_ruidos(matriz, _vizinhos, i, j);
-            if(matriz_verde[i][j][0] == 255 && matriz_verde[i][j][1] == 255 && matriz_verde[i][j][2] == 255)
-            {
-			
-              al_draw_filled_circle(j, i, 2, azul);
-
-            }
-          }
-        }*/
-		
 		
 		
         /*
@@ -135,26 +203,6 @@
 		
 		//printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
 		print_poligono(f);
-
-		
-		//bitmap_para_matriz(esquerda, matriz_contagem);
-		
-		//conta_pb(laranja[X], laranja[Y], matriz_contagem);
-		
-		//printf("PB %d, %d", qtd_branco, qtd_preto);
-		//al_draw_filled_rectangle(menor_x[X], maior_y[Y], maior_x[X], menor_y[Y], azul);
-
-   
-		//al_draw_filled_rectangle(laranja[X], laranja[Y], laranja[X] + 5, laranja[Y] + 5, azul);
-        
-		
-		
-		
-		// printf("PB %d %d\n", qtd_branco, qtd_preto);
-		//camera_copia(cam, matriz_contagem, direita);
-		
-		//bitmap_para_matriz(esquerda, matriz_contagem);
-		
 		
 		for(int i = 0; i < f->n; i++){
 			ponto b;
@@ -170,21 +218,95 @@
 			//printf("Ponto A (%d, %d) Ponto B (%d, %d)", f->p[i][X], f->p[i][Y], b[X], b[Y]);
 			desenha_reta(f->p[i], b, matriz_contagem);
 		}
-		//area *b = malloc(sizeof(area));
 		
-		//conta_pb_recursivo(laranja[X], laranja[Y], matriz_contagem, b);
 		area *b = conta_pb(laranja, matriz_contagem);
 
 		calcula_padrao(f, b);
 
 		camera_copia(cam, matriz_contagem, direita);
 		
-		//printf("Somada: %li, Preto: %li, Branco: %li, Fecho: %2f\n", (b->qtd_branco + b->qtd_preto),b->qtd_preto, b->qtd_branco, area_do_fecho(f));
 		al_flip_display();
 		free(b);
         free(f);
-      }
-    }
+		
+
+		/*********** Ações do jogo. ************/
+		
+		//Tela de Abertura rodando.
+		if(tela == TELA_OPCAO){
+			if(reinicio){
+				reinicio = false;
+			}
+			else {
+				al_rest(1);
+				if(controle == TESOURA){
+					break;
+				}
+				else if(controle == PEDRA){
+					//Comeca introducao.
+					tela = 1;	
+					introducao = true;
+				}
+			}
+		} 
+		else if(tela == TELA_ABERTURA && fim_introducao){
+			tela = TELA_JOGO;
+		}
+		else if(tela == TELA_JOGO){
+			
+			if(ganhador_rodada(controle, mao_adversario) == JOGADOR_1){
+					pontos_jogador_1++;
+				}
+				else {
+					pontos_jogador_2++;
+				}
+				
+			if(fim_jogada(pontos_jogador_1, pontos_jogador_2, game->melhor_de)){
+				if(chefe){
+					//Chefe ganhou
+					if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == JOGADOR_2){
+						tela = TELA_PERDEDOR;
+					}
+					else {
+						tela = TELA_VENCEDOR;
+					}
+				}
+				else {
+					//Jogo contra minion.
+						//Ganhador do jogo atual.
+						if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == EMPATE) {
+							tela_empate();
+							//Reinicia a partida.
+							pontos_jogador_1 = 0;
+							pontos_jogador_2 = 0;
+						}
+						else if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == JOGADOR_1){
+							//Adiciona pontos de respeito.
+							pontos_respeito += minion_adversario->pontos_vencidos;
+							//Se acabou pontos de respeito exibe tela 4.
+							if(fim_de_jogo(pontos_respeito)){
+								//Jogo acabou contra minions, agora tem respeito suficiente para jogar contra o chefe. É tudo ou nada contra o chefe.
+								if(pontos_respeito >= 10){
+									chefe = true;
+								}
+							}
+							else {
+								//Selecao do próximo minion.
+								minion_adversario = rand_boss(&minion_4_usado);
+							}
+						}
+						else {
+							//Remove pontos de respeito.
+							pontos_respeito -= minion_adversario->pontos_perdidos;
+							if(fim_de_jogo(pontos_respeito)){
+								tela = TELA_PERDEDOR;
+							}
+						}
+					}
+			}
+		}
+	}
+}
 
     al_destroy_bitmap(direita);
 

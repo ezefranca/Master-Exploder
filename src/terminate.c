@@ -36,6 +36,13 @@ int finalizar_allegro(){
 	free(game->carrega);
 	free(game->fontes);
 	free(game->pontos);
+	
+	
+	for(int i = 0; i < 5; i++){
+		free(game->minions->minion[i]);
+	}
+	free(game->minions);
+	free(game->minions->minion);
 	free(game);
 	
 	return 1;

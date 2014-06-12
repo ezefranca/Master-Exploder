@@ -73,6 +73,22 @@ typedef struct _pontos {
 /**
  *  <#Description#>
  */
+typedef struct _minion {
+	double probabilidade;
+	int pontos_perdidos;
+	int pontos_vencidos;
+} Minion;
+
+/**
+ *  <#Description#>
+ */
+typedef struct _minions {
+	Minion **minion;
+} Minions;
+
+/**
+ *  <#Description#>
+ */
 typedef struct _fontes {
 	ALLEGRO_FONT *h1;
 	ALLEGRO_FONT *h2;
@@ -114,11 +130,13 @@ typedef struct _game {
 	bool usa_fecho;
 	int _vizinhos;
 	int maximo_respeito;
+	int melhor_de;
 	const char *idioma_setado;
 	Telas *telas;
 	Carregamento *carrega;
 	Pontuacao *pontos;
 	Fontes *fontes;
+	Minions *minions;
 	ALLEGRO_SAMPLE *musica;
 } Game;
 

@@ -76,31 +76,31 @@ int fazer_jogada_pior(int jogador) {
  *
  *  @return <#return value description#>
  */
-int rand_boss(){
+Minion *rand_boss(bool *minion_4_usado){
 	double resultado;
 	int randomic;
 	srand(abs(time(NULL)));
 	randomic = rand();
-	resultado = (double) (randomic % 11)/10;
+	resultado = (double) (randomic % 11)/ 10;
 	
-	if(resultado <= minions_probabilidade[MINION_1]) {
-		return MINION_1;
+	if(resultado <= game->minions->minion[MINION_1]->probabilidade) {
+		return game->minions->minion[MINION_1];
 	}
-	else if(resultado <= minions_probabilidade[MINION_2]) {
-		return MINION_2;
+	else if(resultado <= game->minions->minion[MINION_2]->probabilidade) {
+		return game->minions->minion[MINION_2];
 	}
-	else if(resultado <= minions_probabilidade[MINION_3]) {
-		return MINION_3;
+	else if(resultado <= game->minions->minion[MINION_3]->probabilidade) {
+		return game->minions->minion[MINION_3];
 	}
-	else if(resultado <= minions_probabilidade[MINION_4]) {
+	else if(resultado <= game->minions->minion[MINION_4]->probabilidade) {
 		if(!minion_4_usado) {
 			minion_4_usado = TRUE;
-			return MINION_4;
+			return game->minions->minion[MINION_4];
 		}
-		return MINION_1;
+		return game->minions->minion[MINION_1];
 	}
 	else {
-		return MINION_5;
+		return game->minions->minion[MINION_5];
 	}
 }
 
@@ -130,5 +130,5 @@ int fim_jogada(int pontos_jogador_1, int pontos_jogador_2, int melhor_jogo){
  *  @return <#return value description#>
  */
 int fim_de_jogo(int respeito){
-	return (respeito >= game->maximo_respeito);
+	return (respeito >= game->maximo_respeito || respeito <= 0);
 }

@@ -11,14 +11,12 @@
 #define EMPATE 0
 #define JOGADOR_2 2
 #define JOGADOR_1 1
+
 #define MINION_1 0
 #define MINION_2 1
 #define MINION_3 2
 #define MINION_4 3
 #define MINION_5 4
-
-int minion_4_usado = FALSE;
-double minions_probabilidade[] = {0.4, 0.75, 0.9,0.95, 1};
 
 /**
  *  <#Description#>
@@ -61,7 +59,7 @@ int fazer_jogada_pior(int jogador);
  *
  *  @return <#return value description#>
  */
-int rand_boss();
+Minion *rand_boss(bool *minion_4_usado);
 
 /**
  *  <#Description#>

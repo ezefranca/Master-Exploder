@@ -20,7 +20,7 @@
 #define PI  3.1415926
 #define EPSILON 0.00000001    /* paranaue que nao eh, mas eh suficiente para ser zero */
 
-typedef int ponto[DIMENSAO];
+//typedef int ponto[DIMENSAO];
 /**
  *  <#Description#>
  */

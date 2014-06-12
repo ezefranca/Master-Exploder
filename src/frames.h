@@ -19,6 +19,27 @@ void tela_perdedor();
  *  <#Description#>
  */
 void tela_abertura();
+
+/**
+ *  <#Description#>
+ */
+void tela_introducao();
+
+/**
+ *  <#Description#>
+ */
+void tela_minion(Minion *minion_adversario);
+
+/**
+ *  <#Description#>
+ */
+void tela_empate();
+
+/**
+ *  <#Description#>
+ */
+void tela_vencedor_chefe();
+
 /**
  *  <#Description#>
  *
@@ -26,6 +47,6 @@ void tela_abertura();
  *  @param pontos_jogador_2 <#pontos_jogador_2 description#>
  *  @param contador         <#contador description#>
  */
-void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, int contador);
+void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, Minion *minion_adversario, int contador);
 
 #endif

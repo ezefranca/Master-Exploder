@@ -4,14 +4,13 @@
 
 int calcula_padrao(poligono *f, area *b){
 
-
 	c = malloc(sizeof(controle));
 
 	c->razao = abs(area_do_fecho(f) / b->qtd_branco);
+	
 	if(contador_global < 10){
 		verificacoes[contador_global] = c->razao;
 	}else{
-
 		for(int i = 0; i < 10; i++){
 			for (int j = i+1; j < 9; j++)
 			{

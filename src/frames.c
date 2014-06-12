@@ -92,7 +92,7 @@ void tela_sprite(){
 /**
  *  <#Description#>
  */
-void tela_vencedor(){
+void tela_vencedor(int minion){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/win.jpg");
 	
 	//al_draw_textf(game.fonte_menu, al_map_rgb(0, 0, 0), 200, 570, ALLEGRO_ALIGN_CENTRE, get_idioma("Level: %d"), game.level);
@@ -112,6 +112,35 @@ void tela_abertura(){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/menu.jpg");
 	
 }
+
+/**
+ *  <#Description#>
+ */
+void tela_introducao(){
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/falas.jpg");
+}
+
+/**
+ *  <#Description#>
+ */
+void tela_minion(Minion minion_adversario){
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/falas.jpg");
+}
+
+/**
+ *  <#Description#>
+ */
+void tela_vencedor_chefe(){
+
+}
+
+/**
+ *  <#Description#>
+ */
+void tela_empate(){
+
+}
+
 /**
  *  <#Description#>
  *
@@ -119,7 +148,7 @@ void tela_abertura(){
  *  @param pontos_jogador_2 <#pontos_jogador_2 description#>
  *  @param contador         <#contador description#>
  */
-void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, int contador){
+void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, Minion *minion_adversario, int contador){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/jogada.jpg");
 
 }

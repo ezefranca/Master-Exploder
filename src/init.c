@@ -5,12 +5,41 @@
  *
  *  @return <#return value description#>
  */
-int inicializar_allegro(){	
+int inicializar_allegro(){
 	game = malloc(sizeof(Game));
 	game->pontos = malloc(sizeof(Pontuacao));
 	game->fontes = malloc(sizeof(Fontes));
 	game->carrega = malloc(sizeof(Carregamento));
 	game->telas = malloc(sizeof(Telas));
+	game->minions = malloc(sizeof(Minions));
+	game->minions->minion = malloc(5 * sizeof(Minion*));
+	
+	for(int i = 0; i < 5; i++){
+		game->minions->minion[i] = malloc(sizeof(Minion));
+	}
+	
+	game->minions->minion[0]->probabilidade = 0.4;
+	game->minions->minion[0]->pontos_perdidos = 1;
+	game->minions->minion[0]->pontos_vencidos = 1;
+		
+	game->minions->minion[1]->probabilidade = 0.75;
+	game->minions->minion[1]->pontos_perdidos = 2;
+	game->minions->minion[1]->pontos_vencidos = 3;
+	
+	game->minions->minion[2]->probabilidade = 0.9;
+	game->minions->minion[2]->pontos_perdidos = 3;
+	game->minions->minion[2]->pontos_vencidos = 2;
+	
+	game->minions->minion[3]->probabilidade = 0.95;
+	game->minions->minion[3]->pontos_perdidos = 10;
+	game->minions->minion[3]->pontos_vencidos = 0;
+		
+	game->minions->minion[4]->probabilidade = 1;
+	game->minions->minion[4]->pontos_perdidos = 3;
+	game->minions->minion[4]->pontos_vencidos = 2;
+	
+	int pontos_perdidos;
+	int pontos_vencidos;
 	//config = carregar_configuracao("configuration.conf");
     
 	//if(config == NULL)
@@ -23,11 +52,12 @@ int inicializar_allegro(){
 	game->altura_tela = 800;
 	game->divisor_tempo = 1;
 	game->divisor_camera = 1;
-	game->luminus = 120;
+	game->luminus = 80;
 	game->debug = TRUE;
 	game->maximo_respeito = 10; 
 	game->_vizinhos = 100;
 	game->usa_fecho = TRUE;
+	game->melhor_de = 3;
 	
 	game->pontos->numero_partidas = 0;
 	game->pontos->jogador_1 = 0;
