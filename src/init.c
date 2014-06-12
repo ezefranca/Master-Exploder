@@ -23,7 +23,7 @@ int inicializar_allegro(){
 	game->altura_tela = 800;
 	game->divisor_tempo = 1;
 	game->divisor_camera = 1;
-	game->luminus = 150;
+	game->luminus = 120;
 	game->debug = TRUE;
 	game->maximo_respeito = 10; 
 	game->_vizinhos = 100;
@@ -54,6 +54,8 @@ int inicializar_allegro(){
 
     largura = cam->largura;
     altura = cam->altura;
+
+
 	
 	
 	

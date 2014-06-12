@@ -9,11 +9,18 @@
 
 typedef struct _poligono poligono;
 
-typedef struct {
+typedef struct _controle{
     poligono *fecho;          
     int selecionado;
+    double razao;
 } controle;
 
-int calcula_padrao(poligono *fecho, unsigned char ***imagem_da_mao);
+controle *c;
+
+int verificacoes[10];
+int padrao;
+int contador_global;
+
+int calcula_padrao(poligono *fecho, area *b);
 
 #endif
