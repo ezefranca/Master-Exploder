@@ -129,7 +129,7 @@ unsigned char ***camera_aloca_matriz(camera *cam) {
     matriz[y] = malloc(cam->largura * sizeof(unsigned char *));
 
     for(int x = 0; x < cam->largura; x++)
-      matriz[y][x] = malloc(3 * sizeof(unsigned char));
+      matriz[y][x] = malloc(4 * sizeof(unsigned char));
   }
 
   return matriz;

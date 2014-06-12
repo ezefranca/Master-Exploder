@@ -17,6 +17,7 @@ for (int i = 0; i < altura; i++)
               {
                   saida[i][j][k] = matriz[i][j][k];
               }
+			  saida[i][j][3] = 0;
           }
       }
 }
@@ -122,6 +123,7 @@ void desenha_reta(ponto a, ponto b, unsigned char ***matriz){
 		usar_y = true;
 		//Verificando qual Y é maior.
 	}
+	
 	if(b[Y] > a[Y]){
 		iy = a[Y];
 		fimy = b[Y];
@@ -133,6 +135,15 @@ void desenha_reta(ponto a, ponto b, unsigned char ***matriz){
 		
 	//Se X de ambos é igual é necessário fazer o loop com Y.
 	if(!usar_y){
+		if(b[Y] == a[Y]){
+			for(ix; ix <= fimx; ix++){
+				matriz[b[Y]][ix][0] = 0;
+				matriz[b[Y]][ix][1] = 0;
+				matriz[b[Y]][ix][2] = 255;
+				matriz[b[Y]][ix][3] = 1;
+			}
+		}
+		else {
 		for(ix; ix <= fimx; ix++){
 			j = ix * coeficiente_angular + coeficiente_linear;
 			matriz[j][ix][0] = 0;
@@ -146,6 +157,7 @@ void desenha_reta(ponto a, ponto b, unsigned char ***matriz){
 			matriz[iy][j][1] = 0;
 			matriz[iy][j][2] = 255;
 			matriz[iy][j][3] = 1;
+		}
 		}
 	}
 	else {

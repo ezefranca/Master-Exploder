@@ -168,9 +168,14 @@
 			//printf("Ponto A (%d, %d) Ponto B (%d, %d)", f->p[i][X], f->p[i][Y], b[X], b[Y]);
 			desenha_reta(f->p[i], b, matriz_contagem);
 		}
+		//area *b = malloc(sizeof(area));
 		
+		//conta_pb_recursivo(laranja[X], laranja[Y], matriz_contagem, b);
 		area *b = conta_pb(laranja, matriz_contagem);
+		
+		printf("Centro [%d,%d]\n", laranja[X], laranja[Y]);
 		printf("Brancos %d Pretos %d\n", b->qtd_branco, b->qtd_preto);
+		
 		camera_copia(cam, matriz_contagem, direita);
 		
 		//printf("Somada: %li, Preto: %li, Branco: %li, Fecho: %2f\n", (b->qtd_branco + b->qtd_preto),b->qtd_preto, b->qtd_branco, area_do_fecho(f));
