@@ -123,13 +123,13 @@ int inicializar_allegro(){
 	//game->idioma_setado = pegar_configuracao("IDIOMA","user", config);
 	game->idioma_setado = NULL;
 	
-	game->fontes->h1 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->h2 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->h3 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->h4 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->h5 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->h6 = al_load_font("assets/font/h1.ttf", 50, 10);
-	game->fontes->p = al_load_font("assets/font/h1.ttf", 50, 10);
+	game->fontes->h1 = al_load_font("assets/font/PAPYRUS.TTF", 50, 10);
+	game->fontes->h2 = al_load_font("assets/font/PAPYRUS.TTF", 40, 10);
+	game->fontes->h3 = al_load_font("assets/font/PAPYRUS.TTF", 30, 10);
+	game->fontes->h4 = al_load_font("assets/font/PAPYRUS.TTF", 25, 10);
+	game->fontes->h5 = al_load_font("assets/font/PAPYRUS.TTF", 20, 10);
+	game->fontes->h6 = al_load_font("assets/font/PAPYRUS.TTF", 15, 10);
+	game->fontes->p = al_load_font("assets/font/PAPYRUS.TTF", 12, 10);
 	
 	if(game->idioma_setado != NULL)
         carregar_idioma(game->idioma_setado);
