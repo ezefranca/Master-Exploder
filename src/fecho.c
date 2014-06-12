@@ -416,16 +416,19 @@ void conta_pb_recursivo(int x, int y, unsigned char ***matriz_pb_cor, area *a) {
  */
 area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
     area *a = malloc(sizeof(area));
-	
+	int x, y;
     a->qtd_branco = 0;
     a->qtd_preto = 0;
-
+	
+	if((centroide[X] < 2 && centroide[Y] < 2) || ((centroide[X] > largura - 1 && centroide[Y] > altura - 1)))
+		return a;
     /******************************** Marca todos como não visitados ********************************/
     /*for(int y = 0; y < altura; y++){
       for(int x = 0; x < largura; x++){
-        matriz_pb_cor[y][x][3] = 0;
+		if(matriz_pb_cor[y][x][3] != 1)
+			matriz_pb_cor[y][x][3] = 0;
       }
-    }*/
+    }
 
     /* Vamos pensar no fecho convexo como um plano cartesiano X, Y
 
@@ -442,19 +445,21 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
          | X  X |
          | X  A |
     /*******************/
-    for(int y = centroide[Y]; y < altura; y++){
-      for(int x = centroide[X]; x < largura; x++){
-        //se encontra parede do fecho
-        if(matriz_pb_cor[y][x][3] == 1 && matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 255){
-            break;
-        }
-		
-		matriz_pb_cor[y][x][3] = 1;
-        
-		if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0)
-            a->qtd_preto++;
-		else 
-			a->qtd_branco++;
+    for(y = centroide[Y]; y < altura; y++){	 
+		x = centroide[X];
+		if(matriz_pb_cor[y][x][3] == 1) break;
+		for(x; x < largura && matriz_pb_cor[y][x][3] != 1; x++){
+			//se encontra parede do fecho
+			
+			if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0)
+				a->qtd_preto++;
+			else 
+				a->qtd_branco++;
+				
+			matriz_pb_cor[y][x][3] = 1;
+			matriz_pb_cor[y][x][0] = 255;
+			matriz_pb_cor[y][x][1] = 0;
+			matriz_pb_cor[y][x][2] = 0;
 		}
     }
 
@@ -464,22 +469,24 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
          | C  X |
          | X  X |
     /*******************/
-    for(int y = centroide[Y]; y > 1; y--){
-      for(int x = centroide[X]; x > 1; x--) {
+    for(y = centroide[Y]; y > 1; y--){
+		x = centroide[X] - 1;
+		if(matriz_pb_cor[y][x][3] == 1) break;
+		for(x; x > 1 && matriz_pb_cor[y][x][3] != 1; x--) {
         //se encontra parede do fecho
-        if(matriz_pb_cor[y][x][3] == 1 && matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0  && matriz_pb_cor[y][x][2] == 255){
-            break;
-        }    
-		matriz_pb_cor[y][x][3] = 1;
-		matriz_pb_cor[y][x][0] = 0;
-		matriz_pb_cor[y][x][1] = 0;
-		matriz_pb_cor[y][x][2] = 255;
+        
+		
 		
         if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
             a->qtd_branco++;
         else
 			a->qtd_preto++;
-      }
+		matriz_pb_cor[y][x][3] = 1;
+		matriz_pb_cor[y][x][0] = 0;
+		matriz_pb_cor[y][x][1] = 0;
+		matriz_pb_cor[y][x][2] = 255;
+		}
+	  
     }
 
     /************************************ Verificação para trás + baixo ***********************************/
@@ -488,23 +495,20 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
          | X  X |
          | B  X |
     /*******************/
-    for(int y = centroide[Y]; y < altura; y++){
-      for(int x = centroide[X]; x > 1; x--) {
+    for(y = centroide[Y]; y < altura; y++){
+		x = centroide[X] - 1;
+      for(x; x > 1 && matriz_pb_cor[y][x][3] != 1; x--) {
         //se encontra parede do fecho
-        if(matriz_pb_cor[y][x][3] == 1 && matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0  && matriz_pb_cor[y][x][2] == 255){
-            break;
-        }    
-		matriz_pb_cor[y][x][3] = 1;
-        matriz_pb_cor[y][x][0] = 0;
-		matriz_pb_cor[y][x][1] = 0;
-		matriz_pb_cor[y][x][2] = 255;
-		
-		if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
-            //printf("%d\n", a->qtd_branco);
-            a->qtd_branco++;
-        else 
-			a->qtd_preto++;
+			if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
+				a->qtd_branco++;
+			else 
+				a->qtd_preto++;
+			matriz_pb_cor[y][x][3] = 1;
+			matriz_pb_cor[y][x][0] = 0;
+			matriz_pb_cor[y][x][1] = 255;
+			matriz_pb_cor[y][x][2] = 0;
 		}
+		
     }
     /************************************ Verificação para frente + cima ***********************************/
     //Verifica o quadrante A
@@ -512,21 +516,22 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
          | X  D |
          | X  X |
     /*******************/
-    for(int y = centroide[Y]; y > 1; y--){
-      for(int x = centroide[X]; x < largura; x++) {
+    for(y = centroide[Y]; y > 1; y--){
+		x = centroide[X];
+		for(x; x < largura && matriz_pb_cor[y][x][3] != 1; x++) {
         //se encontra parede do fecho
-        if(matriz_pb_cor[y][x][3] == 1 && matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0  && matriz_pb_cor[y][x][2] == 255){
-            break;
-        }
-		matriz_pb_cor[y][x][3] = 1;	
-		matriz_pb_cor[y][x][0] = 0;
-		matriz_pb_cor[y][x][1] = 0;
-		matriz_pb_cor[y][x][2] = 255;
+
+		
 		
         if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
             a->qtd_branco++;
         else 
 			a->qtd_preto++;
+		
+		matriz_pb_cor[y][x][3] = 1;	
+		matriz_pb_cor[y][x][0] = 255;
+		matriz_pb_cor[y][x][1] = 0;
+		matriz_pb_cor[y][x][2] = 0;
 		}
     }
 return a;
