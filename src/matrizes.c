@@ -144,20 +144,20 @@ void desenha_reta(ponto a, ponto b, unsigned char ***matriz){
 			}
 		}
 		else {
-		for(ix; ix <= fimx; ix++){
-			j = ix * coeficiente_angular + coeficiente_linear;
-			matriz[j][ix][0] = 0;
-			matriz[j][ix][1] = 0;
-			matriz[j][ix][2] = 255;
-			matriz[j][ix][3] = 1;
-		}
-		for(iy; iy < fimy; iy++){
-			j = (iy - coeficiente_linear) / coeficiente_angular;
-			matriz[iy][j][0] = 0;
-			matriz[iy][j][1] = 0;
-			matriz[iy][j][2] = 255;
-			matriz[iy][j][3] = 1;
-		}
+			for(ix; ix <= fimx; ix++){
+				j = ix * coeficiente_angular + coeficiente_linear;
+				matriz[j][ix][0] = 0;
+				matriz[j][ix][1] = 0;
+				matriz[j][ix][2] = 255;
+				matriz[j][ix][3] = 1;
+			}
+			for(iy; iy < fimy; iy++){
+				j = (iy - coeficiente_linear) / coeficiente_angular;
+				matriz[iy][j][0] = 0;
+				matriz[iy][j][1] = 0;
+				matriz[iy][j][2] = 255;
+				matriz[iy][j][3] = 1;
+			}
 		}
 	}
 	else {
