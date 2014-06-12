@@ -37,7 +37,7 @@
     int desenhar = 0;
     int terminar = 0;
     int amostragem = 0;
-	int tela = 0;
+	int tela = 1;
     double x[10]; 
     double fx[10];
 
@@ -101,13 +101,15 @@
 		switch(tela){
 			case TELA_OPCAO:
 				//printf("Tela %d\n", tela);
-				tela_abertura(game, linguagem);
+				tela_abertura();
 				break;
 			case TELA_ABERTURA:
-				printf("Tela %d", tela);
 				if(introducao) {
 					tela_introducao();
-					introducao = false;
+					if(controle == PEDRA){
+						introducao = false;
+						tela = TELA_JOGO;
+						}
 					}
 				else {
 					//tela de introducao do Minion.

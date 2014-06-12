@@ -112,27 +112,75 @@ void tela_perdedor(){
  *  <#Description#>
  */
 void tela_abertura(){
-	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/menu.jpg");
-	//al_draw_bitmap(tela, 1, 1, 0);
+	ALLEGRO_BITMAP *tela;
+	tela = al_load_bitmap("assets/image/intro/menu.jpg");
+	al_draw_bitmap(tela, 1, 1, 0);
+	
+	al_destroy_bitmap(tela);
+	
+	tela = al_load_bitmap("assets/image/icones/pedra_small.png");
+	al_draw_bitmap(tela, 790, 204, 0);
+	
+	al_destroy_bitmap(tela);
+	
+	//tela = al_load_bitmap("assets/image/icones/papel_small.png");
+	//al_draw_bitmap(tela, 1, 294, 0);
+	
+	tela = al_load_bitmap("assets/image/icones/tesoura_small.png");
+	al_draw_bitmap(tela, 780, 298, 0);
+	
+	al_destroy_bitmap(tela);
 	
 	printf("%s", pegar_idioma("Play", linguagem));
 	
-	//al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 700, 50, ALLEGRO_ALIGN_CENTRE, "Play");
+	al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 902, 200, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Play", linguagem));
+	//al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 862, 294, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Ranking", linguagem));
+	al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 902, 294, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Exit", linguagem));
 	
-	if(game->fontes->h3 == NULL) {
-		printf("Nyll");
-	}
-	else {
-		printf("notnull");
-	}
-	al_destroy_bitmap(tela);
 }
 
 /**
  *  <#Description#>
  */
 void tela_introducao(){
-	//ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/falas.jpg");
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/falas.jpg");
+	al_draw_bitmap(tela, 1, 1, 0);
+	
+	al_destroy_bitmap(tela);
+	
+	tela = al_load_bitmap("assets/image/icones/pedra_small.png");
+	al_draw_bitmap(tela, 900, 650, 0);
+	
+	al_destroy_bitmap(tela);
+	
+	//tela = al_load_bitmap("assets/image/icones/papel_small.png");
+	//al_draw_bitmap(tela, 1, 294, 0);
+	
+	tela = al_load_bitmap("assets/image/icones/tesoura_small.png");
+	al_draw_bitmap(tela, 1080, 650, 0);
+	
+	al_destroy_bitmap(tela);
+	
+	tela = al_load_bitmap("assets/image/logo/logo.png");
+	al_draw_bitmap(tela, 460, 10, 0);
+	
+	al_destroy_bitmap(tela);
+	
+	
+	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 100, ALLEGRO_ALIGN_LEFT, pegar_idioma("Beelzeboss: - I am complete", linguagem));
+	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 160, ALLEGRO_ALIGN_LEFT, pegar_idioma("Player: - Fuck!", linguagem));
+	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 220, ALLEGRO_ALIGN_LEFT, pegar_idioma("Beelzeboss: - Yes you are fucked, shit out of luck.", linguagem));
+	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 280, ALLEGRO_ALIGN_LEFT, pegar_idioma("Now I'm complete and my cock you will suck. This world will be mine and you're first in line.", linguagem));
+	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 340, ALLEGRO_ALIGN_LEFT, pegar_idioma("You brought me the pick and now you shall both die.", linguagem));
+	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 400, ALLEGRO_ALIGN_LEFT, pegar_idioma("Tenacious D: - Wait wait waait you mother-fucker. We challenge you to a Rock-paper-scissors off,", linguagem));
+	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 460, ALLEGRO_ALIGN_LEFT, pegar_idioma("give us one chance to rock your socks off.", linguagem));
+	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 520, ALLEGRO_ALIGN_LEFT, pegar_idioma("Beelzeboss: - Fuck, fuck, Fuck the demon code prevents me from declining a", linguagem));
+	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 580, ALLEGRO_ALIGN_LEFT, pegar_idioma(" Rock-paper-scissors off challenge.", linguagem));
+	
+	al_draw_text(game->fontes->h2, al_map_rgb(255, 255, 255), 1040, 650, ALLEGRO_ALIGN_RIGHT, pegar_idioma("Play", linguagem));
+	//al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 862, 294, ALLEGRO_ALIGN_RIGHT, pegar_idioma("Ranking", linguagem));
+	al_draw_text(game->fontes->h2, al_map_rgb(255, 255, 255), 1245, 650, ALLEGRO_ALIGN_RIGHT, pegar_idioma("Exit", linguagem));
+	
 }
 
 /**
