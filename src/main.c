@@ -99,7 +99,7 @@
 		/********** Exibição de tela ***********/ 
 		switch(tela){
 			case TELA_OPCAO:
-				printf("Tela %d\n", tela);
+				//printf("Tela %d\n", tela);
 				tela_abertura();
 				break;
 			case TELA_ABERTURA:
@@ -119,9 +119,9 @@
 				break;
 			case TELA_JOGO:
 				printf("Tela %d", tela);
-				/*while*/
 				
-				tela_jogo(pontos_jogador_1, pontos_jogador_2, minion_adversario, contador);
+				for(contador = 1; contador <= 5; contador++)
+					tela_jogo(pontos_jogador_1, pontos_jogador_2, minion_adversario, contador);
 				//if()
 				break;
 			case TELA_VENCEDOR:
@@ -165,6 +165,7 @@
 				}
 				break;
 		}
+		
 		if(sair)
 			break;
 			
@@ -238,7 +239,7 @@
 				reinicio = false;
 			}
 			else {
-				al_rest(1);
+				//al_rest(1);
 				if(controle == TESOURA){
 					break;
 				}
