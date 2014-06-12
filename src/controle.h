@@ -8,6 +8,7 @@
  */
 
 typedef struct _poligono poligono;
+typedef struct _area area;
 
 typedef struct _controle{
     poligono *fecho;          
