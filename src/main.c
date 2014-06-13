@@ -37,7 +37,7 @@
     int desenhar = 0;
     int terminar = 0;
     int amostragem = 0;
-	int tela = 4;
+	int tela = 3;
     double x[10]; 
     double fx[10];
 
@@ -99,194 +99,197 @@
 
 		if(desenhar && al_is_event_queue_empty(queue)) {
 		
-		/********** Exibição de tela ***********/ 
-		switch(tela){
-			case TELA_OPCAO:
-				//printf("Tela %d\n", tela);
-				tela_abertura();
-				break;
-			case TELA_ABERTURA:
-				if(introducao){
-					tela_introducao();
-					if(controle == PEDRA){
-						//Sai da primeira introducao e vai para a abertura de inicio dos minions.
-						introducao = false;
-						primeira = TRUE;
-						controle =-1;
-						}
-					}
-				else {
-						//tela de introducao do Minion.
-						tela_minion(minion_adversario, primeira);
-						if(controle == PEDRA){
-							//Sai da introducao e comeca o jogo no proximo loop.
-							tela = TELA_JOGO;
-							//Próximo loop não é a primeira introdução e não é a primeira frase de minion.
-							primeira = FALSE;
-							controle =-1;
-						}
-					}
-				break;
-			case TELA_JOGO:
-				printf("Tela %d", tela);
-				
-				for(contador = 1; contador <= 5; contador++)
-					tela_jogo(pontos_jogador_1, pontos_jogador_2, minion_adversario, contador);
-				//if()
-				break;
-			case TELA_VENCEDOR:
-				printf("Tela %d", tela);
-				if(chefe)
-					tela_vencedor_chefe();
-				else
-					tela_vencedor(minion_adversario);
-					
-				if(controle == PEDRA){
-					tela = TELA_OPCAO;
-					//Reinicia jogo
-					chefe = false;
-					introducao = true;
-					rodada = 0;
-					controle =-1;
-					pontos_jogador_1 = 0;
-					pontos_jogador_2 = 0;
-					pontos_respeito = 1;
-				}
-				else if(controle == TESOURA) {
-					sair = true;
-				}
-				break;
-			case TELA_PERDEDOR:
-				//printf("Tela %d", tela);
-				tela_perdedor(chefe);
-				if(controle == PEDRA) {
-					tela = TELA_OPCAO;
-					//Reinicia jogo
-					chefe = false;
-					introducao = true;
-					rodada = 0;
-					controle =-1;
-					pontos_jogador_1 = 0;
-					pontos_jogador_2 = 0;
-					pontos_respeito = 1;
-				}
-				else if(controle == TESOURA) {
-					sair = true;
-				}
-				break;
-		}
-		
-		if(sair)
-			break;
-			
-        desenhar = 0;
-        camera_atualiza(cam);
-		//Antigo remove fundo
-        subtrai_matriz(cam->quadro, primeiro, matriz);
-        
-		normalizacao_preto_e_branco(matriz, altura, largura);
-        otsu_binarizacao(matriz, matriz_pb, altura, largura);
-        
-		filtro_borda(matriz_pb, matriz_pb, altura, largura);
-        
-		matriz_copia(matriz_pb, matriz_verde, altura, largura);
-        poligono *f = fecho(matriz_verde, altura, largura);
-		
-		if(game->debug) {
-			camera_copia(cam, matriz, esquerda);
-		}
-		
-		matriz_copia(matriz, matriz_contagem, altura, largura);
-
-		//camera_copia(cam, matriz_verde, direita);
-		
-		ALLEGRO_COLOR azul = al_map_rgb_f(0, 0, 255);
-        ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
-        ALLEGRO_COLOR preto = al_map_rgb_f(0, 0, 0);
-		
-		
-        /*
-        Tesoura, 20000 - 36000
-
-        Pedra,   15000 - 45000
-
-        Papel, 40000 - 120000
-        */
-		ponto laranja;
-        centroide(f, laranja);
-		
-		//printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
-		print_poligono(f);
-		
-		for(int i = 0; i < f->n; i++){
-			ponto b;
-			
-			if(i + 1 == f->n){
-				b[X] = f->p[0][X];
-				b[Y] = f->p[0][Y];
-			}
-			else {
-				b[X] = f->p[i+1][X];
-				b[Y] = f->p[i+1][Y];
-			}
-			//printf("Ponto A (%d, %d) Ponto B (%d, %d)", f->p[i][X], f->p[i][Y], b[X], b[Y]);
-			desenha_reta(f->p[i], b, matriz_contagem);
-		}
-		
-		area *b = conta_pb(laranja, matriz_contagem);
-
-		calcula_padrao(f, b);
-
-		if(game->debug)
-			camera_copia(cam, matriz_contagem, direita);
-		
-		al_flip_display();
-		free(b);
-        free(f);
-		
-
-		/*********** Ações do jogo. ************/
-		
-		//Tela de Abertura rodando.
-		if(tela == TELA_OPCAO){
-			if(reinicio){
-				reinicio = false;
-			}
-			else {
-				if(controle == TESOURA){
+			/********** Exibição de tela ***********/ 
+			switch(tela){
+				case TELA_OPCAO:
+					//printf("Tela %d\n", tela);
+					tela_abertura();
 					break;
-				}
-				else if(controle == PEDRA){
-					//Comeca introducao do chefe no inicio do jogo.
-					tela = TELA_ABERTURA;	
-					introducao = true;
-				}
+				case TELA_ABERTURA:
+					if(introducao){
+						tela_introducao();
+						if(controle == PEDRA){
+							//Sai da primeira introducao e vai para a abertura de inicio dos minions.
+							introducao = false;
+							primeira = TRUE;
+							controle =-1;
+							}
+						}
+					else {
+							//tela de introducao do Minion.
+							tela_minion(minion_adversario, primeira);
+							if(controle == PEDRA){
+								//Sai da introducao e comeca o jogo no proximo loop.
+								tela = TELA_JOGO;
+								//Próximo loop não é a primeira introdução e não é a primeira frase de minion.
+								primeira = FALSE;
+								controle =-1;
+							}
+						}
+					break;
+				case TELA_JOGO:
+					printf("Tela %d", tela);
+					
+					for(contador = 1; contador <= 5; contador++)
+						tela_jogo(pontos_jogador_1, pontos_jogador_2, minion_adversario, contador);
+					//if()
+					break;
+				case TELA_VENCEDOR:
+					printf("Tela %d", tela);
+					if(chefe)
+						tela_vencedor_chefe();
+					else
+						tela_vencedor(minion_adversario);
+						
+					if(controle == PEDRA){
+						tela = TELA_OPCAO;
+						//Reinicia jogo
+						chefe = false;
+						introducao = true;
+						rodada = 0;
+						controle =-1;
+						pontos_jogador_1 = 0;
+						pontos_jogador_2 = 0;
+						pontos_respeito = 1;
+					}
+					else if(controle == TESOURA) {
+						sair = true;
+					}
+					break;
+				case TELA_PERDEDOR:
+					//printf("Tela %d", tela);
+					tela_perdedor(chefe);
+					if(controle == PEDRA) {
+						tela = TELA_OPCAO;
+						//Reinicia jogo
+						chefe = false;
+						introducao = true;
+						rodada = 0;
+						controle =-1;
+						pontos_jogador_1 = 0;
+						pontos_jogador_2 = 0;
+						pontos_respeito = 1;
+					}
+					else if(controle == TESOURA) {
+						sair = true;
+					}
+					break;
 			}
-		} 
-		else if(tela == TELA_JOGO){
+		
+			if(sair)
+				break;
 			
-			if(ganhador_rodada(controle, mao_adversario) == JOGADOR_1){
-					pontos_jogador_1++;
+			desenhar = 0;
+			camera_atualiza(cam);
+			//Antigo remove fundo
+			subtrai_matriz(cam->quadro, primeiro, matriz);
+			
+			normalizacao_preto_e_branco(matriz, altura, largura);
+			otsu_binarizacao(matriz, matriz_pb, altura, largura);
+			
+			filtro_borda(matriz_pb, matriz_pb, altura, largura);
+			
+			matriz_copia(matriz_pb, matriz_verde, altura, largura);
+			poligono *f = fecho(matriz_verde, altura, largura);
+			
+			if(game->debug) {
+				camera_copia(cam, matriz, esquerda);
+			}
+			
+			matriz_copia(matriz, matriz_contagem, altura, largura);
+
+			//camera_copia(cam, matriz_verde, direita);
+			
+			ALLEGRO_COLOR azul = al_map_rgb_f(0, 0, 255);
+			ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
+			ALLEGRO_COLOR preto = al_map_rgb_f(0, 0, 0);
+			
+			
+			/*
+			Tesoura, 20000 - 36000
+
+			Pedra,   15000 - 45000
+
+			Papel, 40000 - 120000
+			*/
+			ponto laranja;
+			centroide(f, laranja);
+			
+			//printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
+			print_poligono(f);
+			
+			for(int i = 0; i < f->n; i++){
+				ponto b;
+				
+				if(i + 1 == f->n){
+					b[X] = f->p[0][X];
+					b[Y] = f->p[0][Y];
 				}
 				else {
-					pontos_jogador_2++;
+					b[X] = f->p[i+1][X];
+					b[Y] = f->p[i+1][Y];
 				}
+				//printf("Ponto A (%d, %d) Ponto B (%d, %d)", f->p[i][X], f->p[i][Y], b[X], b[Y]);
+				desenha_reta(f->p[i], b, matriz_contagem);
+			}
+			
+			area *b = conta_pb(laranja, matriz_contagem);
+
+			calcula_padrao(f, b);
+
+			if(game->debug)
+				camera_copia(cam, matriz_contagem, direita);
+			
+			al_flip_display();
+			free(b);
+			free(f);
+			
+
+			/*********** Ações do jogo. ************/
+			
+			//Tela de Abertura rodando.
+			if(tela == TELA_OPCAO){
+				if(reinicio){
+					reinicio = false;
+				}
+				else {
+					if(controle == TESOURA){
+						break;
+					}
+					else if(controle == PEDRA){
+						//Comeca introducao do chefe no inicio do jogo.
+						tela = TELA_ABERTURA;	
+						introducao = true;
+					}
+				}
+			} 
+			else if(tela == TELA_JOGO){
 				
-			if(fim_jogada(pontos_jogador_1, pontos_jogador_2, game->melhor_de)){
-				if(chefe){
-					//Chefe ganhou
-					if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == JOGADOR_2){
-						tela = TELA_PERDEDOR;
+				if(ganhador_rodada(controle, mao_adversario) == JOGADOR_1){
+						pontos_jogador_1++;
 					}
 					else {
-						tela = TELA_VENCEDOR;
+						pontos_jogador_2++;
 					}
-				}
-				else {
-					//Jogo contra minion.
+					
+				if(fim_jogada(pontos_jogador_1, pontos_jogador_2, game->melhor_de)){
+					if(chefe){
+						//Chefe ganhou
+						if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == JOGADOR_2){
+							tela = TELA_PERDEDOR;
+						}
+						else {
+							tela = TELA_VENCEDOR;
+						}
+					}
+					else {
+						//Jogo contra minion.
+						
 						//Ganhador do jogo atual.
 						if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == EMPATE) {
+							//Tela empate reinicia a partida. Possui al_rest de 4 segundos.
 							tela_empate();
+							
 							//Reinicia a partida.
 							pontos_jogador_1 = 0;
 							pontos_jogador_2 = 0;
@@ -314,11 +317,18 @@
 							}
 						}
 					}
+				}
 			}
+			
+			/******************** Controle e escolha da mão adversária ****************************/
+		
+			//controle = ;
+			//mao_adversaria = ;
 		}
+		
+		
+		
 	}
-}
-
 	
 	al_destroy_bitmap(direita);
 	al_destroy_bitmap(esquerda);

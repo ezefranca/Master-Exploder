@@ -133,7 +133,9 @@ void tela_sprite(){
  *  <#Description#>
  */
 void tela_vencedor(int minion){
-	//ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/win.jpg");
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/final/win.jpg");
+	al_draw_bitmap(tela, 1, 1, 0);
+	al_destroy_bitmap(tela);
 	
 	//al_draw_textf(game.fonte_menu, al_map_rgb(0, 0, 0), 200, 570, ALLEGRO_ALIGN_CENTRE, get_idioma("Level: %d"), game.level);
 		
