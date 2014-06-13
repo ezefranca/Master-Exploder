@@ -50,6 +50,7 @@
 	bool chefe = false;
 	bool sair = false;
 	bool introducao = true;
+	bool first = false;
 	introducao = false;
 	bool fim_introducao = false;
 	bool reinicio = false;
@@ -121,6 +122,7 @@
 						carregar_mao = TRUE;
 					}
 					else {
+						//if(!first){al_rest(1);first = TRUE;}
 						tela_abertura();
 					}
 					//printf("Tela %d\n", tela);
@@ -129,7 +131,7 @@
 				case TELA_ABERTURA:
 					if(introducao){
 						tela_introducao();
-						if(controle == PEDRA){
+						if(controle == PAPEL){
 							//Sai da primeira introducao e vai para a abertura de inicio dos minions.
 							introducao = false;
 							primeira = TRUE;
@@ -141,7 +143,7 @@
 							tela_minion(minion_adversario, primeira);
 							//Quando controle for melhorado tira o al_rest.
 							al_rest(2);
-							if(controle == PEDRA){
+							if(controle == PAPEL){
 								//Sai da introducao e comeca o jogo no proximo loop.
 								tela = TELA_JOGO;
 								//Próximo loop não é a primeira introdução e não é a primeira frase de minion.
@@ -157,7 +159,7 @@
 						tela_chefe();
 						//Quando controle for melhorado tira o al_rest.
 						al_rest(2);
-						if(controle == PEDRA){
+						if(controle == PAPEL){
 							//Continua o loop em TELA_JOGO, mas não entra na abertura.
 							abertura_chefe = false;
 							printf("here");
@@ -176,7 +178,7 @@
 					break;
 				case TELA_VENCEDOR:
 					tela_vencedor();
-					if(controle == PEDRA){
+					if(controle == PAPEL){
 						tela = TELA_OPCAO;
 						//Reinicia jogo
 						chefe = false;
@@ -194,7 +196,7 @@
 				case TELA_PERDEDOR:
 					//printf("Tela %d", tela);
 					tela_perdedor(chefe);
-					if(controle == PEDRA) {
+					if(controle == PAPEL) {
 						tela = TELA_OPCAO;
 						//Reinicia jogo
 						chefe = false;
@@ -228,7 +230,7 @@
 			poligono *f = fecho(matriz_verde, altura, largura);
 			
 			if(game->debug) {
-				camera_copia(cam, matriz, esquerda);
+				camera_copia(cam, matriz_verde, esquerda);
 			}
 			
 			matriz_copia(matriz, matriz_contagem, altura, largura);
@@ -302,9 +304,9 @@
 			//Tela de Abertura rodando.
 			if(tela == TELA_OPCAO){
 				if(controle == TESOURA){
-					break;
+					//break;
 				}
-				else if(controle == PEDRA){
+				else if(controle == PAPEL){
 					//Comeca introducao do chefe no inicio do jogo.
 					tela = TELA_ABERTURA;	
 					introducao = true;
@@ -314,7 +316,7 @@
 				if(!abertura_chefe){
 					//Exibe mãos
 					tela_jogo_maos(pontos_jogador_1, pontos_jogador_2, pontos_respeito, controle, mao_adversaria);
-					al_rest(2);
+					//al_rest(2);
 					
 					if(ganhador_rodada(controle, mao_adversaria) == JOGADOR_1){
 							pontos_jogador_1++;

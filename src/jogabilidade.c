@@ -81,7 +81,7 @@ int fazer_jogada_pior(int jogador) {
  */
 int mao_adversario(int jogador_1){
 	srand(abs(time(NULL)));
-	int randomic;
+	int randomic = rand();
 	if(randomic % 10 == 0){
 		//Trapaceia
 		return fazer_jogada_melhor(jogador_1);
