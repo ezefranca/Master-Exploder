@@ -34,7 +34,6 @@ int finalizar_allegro(){
 	al_destroy_font(game->fontes->h6);
 	al_destroy_font(game->fontes->p);*/
 	
-	
 	free(game->fontes);
 	free(game->telas);
 	free(game->carrega);
@@ -42,6 +41,8 @@ int finalizar_allegro(){
 	free(game->pontos);
 	
 	for(int i = 0; i < 5; i++){
+		free(game->minions->minion[i]->falas->frase);
+		free(game->minions->minion[i]->falas);
 		free(game->minions->minion[i]);
 	}
 	free(game->minions->minion);

@@ -37,7 +37,7 @@
     int desenhar = 0;
     int terminar = 0;
     int amostragem = 0;
-	int tela = 1;
+	int tela = 4;
     double x[10]; 
     double fx[10];
 
@@ -112,6 +112,7 @@
 						//Sai da primeira introducao e vai para a abertura de inicio dos minions.
 						introducao = false;
 						primeira = TRUE;
+						controle =-1;
 						}
 					}
 				else {
@@ -122,6 +123,7 @@
 							tela = TELA_JOGO;
 							//Próximo loop não é a primeira introdução e não é a primeira frase de minion.
 							primeira = FALSE;
+							controle =-1;
 						}
 					}
 				break;
@@ -155,8 +157,8 @@
 				}
 				break;
 			case TELA_PERDEDOR:
-				printf("Tela %d", tela);
-				tela_perdedor();
+				//printf("Tela %d", tela);
+				tela_perdedor(chefe);
 				if(controle == PEDRA) {
 					tela = TELA_OPCAO;
 					//Reinicia jogo

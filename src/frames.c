@@ -62,11 +62,22 @@ void fadein(ALLEGRO_BITMAP *imagem, int velocidade)
 /**
  *  <#Description#>
  */
-void opcoes_rodape(){
+void opcoes_rodape(int final){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/falas.jpg");
+	const char *play;
+	int x;
 	
+	if(final) {
+		play = pegar_idioma("Options", linguagem);
+		x = 820;
+	}
+	else {
+		play = pegar_idioma("Play", linguagem);
+		x = 900;
+		}
+		
 	tela = al_load_bitmap("assets/image/icones/pedra_small.png");
-	al_draw_bitmap(tela, 900, 650, 0);
+	al_draw_bitmap(tela, x, 650, 0);
 	
 	al_destroy_bitmap(tela);
 	
@@ -74,11 +85,13 @@ void opcoes_rodape(){
 	//al_draw_bitmap(tela, 1, 294, 0);
 	
 	tela = al_load_bitmap("assets/image/icones/tesoura_small.png");
+	
 	al_draw_bitmap(tela, 1080, 650, 0);
 	
 	al_destroy_bitmap(tela);
 	
-	al_draw_text(game->fontes->h2, al_map_rgb(255, 255, 255), 1040, 650, ALLEGRO_ALIGN_RIGHT, pegar_idioma("Play", linguagem));
+	
+	al_draw_text(game->fontes->h2, al_map_rgb(255, 255, 255), 1040, 650, ALLEGRO_ALIGN_RIGHT, play);
 	//al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 862, 294, ALLEGRO_ALIGN_RIGHT, pegar_idioma("Ranking", linguagem));
 	al_draw_text(game->fontes->h2, al_map_rgb(255, 255, 255), 1245, 650, ALLEGRO_ALIGN_RIGHT, pegar_idioma("Exit", linguagem));
 }
@@ -128,9 +141,26 @@ void tela_vencedor(int minion){
 /**
  *  <#Description#>
  */
-void tela_perdedor(){
-	//ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/perdeu.jpg");
+void tela_perdedor(int chefe){
+	ALLEGRO_BITMAP *tela;
+	const char *frase, *frase2;
+	if(chefe) {
+		tela = al_load_bitmap("assets/image/final/perdeu_chefe.jpg");
+		frase = pegar_idioma("You are a loser. You think that can defeat me?!", linguagem);
+		frase2 = pegar_idioma("Now you are dead bitch. HaHAHA", linguagem);
+		}
+	else {
+		tela = al_load_bitmap("assets/image/final/perdeu.jpg");
+		frase = pegar_idioma("Ya 're a loser. Ya re not even worth suck my master cock!", linguagem);
+		frase2 = pegar_idioma("Hwua Hwia Hwia", linguagem);
+	}
+	al_draw_bitmap(tela, 1, 1, 0);
+	al_destroy_bitmap(tela);
 	
+	al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 640, 40, ALLEGRO_ALIGN_CENTRE, frase);
+	al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 640, 130, ALLEGRO_ALIGN_CENTRE, frase2);
+	
+	opcoes_rodape(1);
 }
 
 /**
@@ -187,7 +217,7 @@ void tela_introducao(){
 	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 520, ALLEGRO_ALIGN_LEFT, pegar_idioma("Beelzeboss: - Fuck, fuck, Fuck the demon code prevents me from declining a", linguagem));
 	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, 580, ALLEGRO_ALIGN_LEFT, pegar_idioma(" Rock-paper-scissors off challenge.", linguagem));
 	
-	opcoes_rodape();
+	opcoes_rodape(0);
 }
 
 /**
@@ -218,7 +248,7 @@ void tela_minion(Minion *minion_adversario, int primeira_frase){
 			al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 10, y, ALLEGRO_ALIGN_LEFT, minion_adversario->falas->frase[i]);
 		}
 	}
-	opcoes_rodape();
+	opcoes_rodape(0);
 }
 
 /**
