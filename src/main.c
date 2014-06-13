@@ -277,8 +277,10 @@
     			captura_pedra(pedra_inicial, f, b);
     	    }
 
-    	    calcula_padrao(f, b, pedra_inicial);
-
+			if(pedra_inicial != NULL){
+				calcula_padrao(f, b, pedra_inicial);
+			}
+			
 			free(b);
 			free(f);
 			/******************** Controle e escolha da mão adversária ****************************/
