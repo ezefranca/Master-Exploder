@@ -159,7 +159,8 @@ const char *pegar_idioma(const char *key, IDIOMA *idioma){
     anterior = idioma->hash[key[0] % NUMERO_ALFABETO];
 		
 	if (anterior == NULL) {
-        aviso("lista de idioma vazio\n");
+        if(game->debug)
+			aviso("lista de idioma vazio\n");
         return key;
     } else if (strcmp(key, anterior->var) == 0) {
         return (anterior->string);
