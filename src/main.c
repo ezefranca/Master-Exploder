@@ -79,8 +79,9 @@
 	
 	//Seleção do minion inicial.
 	minion_adversario = rand_boss(&minion_4_usado);
-	
+	pedra_inicial = NULL;
     while(1) {
+
 		ALLEGRO_EVENT event;
 
 		al_wait_for_event(queue, &event);
@@ -247,15 +248,22 @@
 			
 			area *b = conta_pb(laranja, matriz_contagem);
 
-			calcula_padrao(f, b);
+			
 
 			if(game->debug)
 				camera_copia(cam, matriz_contagem, direita);
 			
 			al_flip_display();
+			
+		    if(pedra_inicial != NULL){
+		    	pedra_inicial = malloc(sizeof(mao));
+    			captura_pedra(pedra_inicial, f, b);
+    	    }
+
+    	    calcula_padrao(f, b);
+
 			free(b);
 			free(f);
-			
 			/******************** Controle e escolha da mão adversária ****************************/
 			printf("Pontos de respeito%d", pontos_respeito);
 			
