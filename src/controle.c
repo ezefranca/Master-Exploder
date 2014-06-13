@@ -16,8 +16,15 @@
  */
 int calcula_padrao(poligono *f, area *b){
 
-	c = malloc(sizeof(controle));
+	pontos_extremo(f, altura, largura);
 
+	if ((pedra_inicial->maior_y[Y] - pedra_inicial->menor_y[Y]) < maior_y[Y] - menor_y[Y])
+	{
+		printf("nao eh pedra\n");
+	}
+
+
+	c = malloc(sizeof(controle));
 	c->razao = abs(area_do_fecho(f) / b->qtd_branco);
 	
 	if(contador_global < 10){
@@ -62,8 +69,15 @@ int calcula_padrao(poligono *f, area *b){
  *  @param altura  <#altura description#>
  *  @param largura <#largura description#>
  */
-mao* captura_pedra(mao *pedra_inicial, poligono *fecho, area *b){
+void captura_pedra(mao *pedra_inicial, poligono *fecho, area *b){
 
 	pedra_inicial->qtd_branco = b->qtd_branco;
+	pontos_extremo(fecho, altura, largura);
+	pedra_inicial->maior_x[X] = maior_x[X];
+	pedra_inicial->maior_x[Y] = maior_x[Y];
+	pedra_inicial->menor_y[X] = menor_y[X];
+	pedra_inicial->menor_y[Y] = menor_y[Y];
+
+	return;
 
 }
