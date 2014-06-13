@@ -29,6 +29,8 @@
     
     ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
 	
+	ALLEGRO_BITMAP *tela_calibragem = al_create_sub_bitmap(buffer, largura/2, 100, largura, altura);
+	
 	ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
 	ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
 	
@@ -109,6 +111,8 @@
 			switch(tela){
 				case TELA_OPCAO:
 					if(calibragem < 60 * game->calibragem){
+						al_draw_filled_rectangle(1, 1, game->largura_tela, game->altura_tela, al_map_rgb(0,0,0));
+						camera_copia(cam, matriz, tela_calibragem);
 						tela_carregando(matriz_contagem);
 						calibragem++;
 					}
