@@ -39,7 +39,7 @@ int contador_global;
 
 
 
-int calcula_padrao(poligono *fecho, area *b);
+int calcula_padrao(poligono *f, area *b, mao *pedra_inicial);
 void captura_pedra(mao *pedra_inicial, poligono *fecho, area *b);
 
 #endif

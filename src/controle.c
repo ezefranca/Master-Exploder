@@ -14,7 +14,7 @@
  *  @param altura  <#altura description#>
  *  @param largura <#largura description#>
  */
-int calcula_padrao(poligono *f, area *b){
+int calcula_padrao(poligono *f, area *b, mao *pedra_inicial){
 
 	pontos_extremo(f, altura, largura);
 

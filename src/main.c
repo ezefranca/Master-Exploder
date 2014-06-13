@@ -263,22 +263,21 @@
 			area *b = conta_pb(laranja, matriz_contagem);
 
 			
-
 			if(game->debug)
 				camera_copia(cam, matriz_contagem, direita);
 			
 			al_flip_display();
 			
-			if(calibragem % 60 == 0){
+			/*if(calibragem % 60 == 0){
 				printf("Contador %d", calibragem);
-			}
+			}*/
 			
 		    if(pedra_inicial == NULL && carregar_mao){
 		    	pedra_inicial = malloc(sizeof(mao));
     			captura_pedra(pedra_inicial, f, b);
     	    }
 
-    	    calcula_padrao(f, b);
+    	    calcula_padrao(f, b, pedra_inicial);
 
 			free(b);
 			free(f);
