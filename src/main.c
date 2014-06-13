@@ -297,18 +297,13 @@
 			
 			//Tela de Abertura rodando.
 			if(tela == TELA_OPCAO){
-				if(reinicio){
-					reinicio = false;
+				if(controle == TESOURA){
+					break;
 				}
-				else {
-					if(controle == TESOURA){
-						break;
-					}
-					else if(controle == PEDRA){
-						//Comeca introducao do chefe no inicio do jogo.
-						tela = TELA_ABERTURA;	
-						introducao = true;
-					}
+				else if(controle == PEDRA){
+					//Comeca introducao do chefe no inicio do jogo.
+					tela = TELA_ABERTURA;	
+					introducao = true;
 				}
 			} 
 			else if(tela == TELA_JOGO){
