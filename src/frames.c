@@ -132,14 +132,16 @@ void tela_sprite(){
 /**
  *  <#Description#>
  */
-void tela_vencedor(int minion){
+void tela_vencedor(){
 	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/final/win.jpg");
 	al_draw_bitmap(tela, 1, 1, 0);
 	al_destroy_bitmap(tela);
 	
-	//al_draw_textf(game.fonte_menu, al_map_rgb(0, 0, 0), 200, 570, ALLEGRO_ALIGN_CENTRE, get_idioma("Level: %d"), game.level);
-		
+	al_draw_textf(game->fontes->h1, al_map_rgb(255, 255, 255), 640, 40, ALLEGRO_ALIGN_CENTRE, pegar_idioma("DAMNED FUCK BAGS FRAK demon code!", linguagem));
+	al_draw_textf(game->fontes->h1, al_map_rgb(255, 255, 255), 640, 130, ALLEGRO_ALIGN_CENTRE, pegar_idioma("You can have this victory!", linguagem));
+	opcoes_rodape(1);	
 }
+
 /**
  *  <#Description#>
  */

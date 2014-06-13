@@ -133,13 +133,16 @@
 					for(contador = 1; contador <= 5; contador++)
 						tela_jogo(pontos_jogador_1, pontos_jogador_2, minion_adversario, contador);
 					//if()
+					//Se venceu contra chefe vai para tela vencedor. Se não vai para a próxima partida contra outro minion.
+					/*if()
+					else {
+						tela = TELA_ABERTURA;
+						introducao = false;
+						controle = -1;
+					}*/
 					break;
 				case TELA_VENCEDOR:
-					printf("Tela %d", tela);
-					if(chefe)
-						tela_vencedor_chefe();
-					else
-						tela_vencedor(minion_adversario);
+					tela_vencedor(minion_adversario);
 						
 					if(controle == PEDRA){
 						tela = TELA_OPCAO;
