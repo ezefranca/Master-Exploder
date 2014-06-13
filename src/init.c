@@ -23,23 +23,21 @@ int inicializar_allegro(){
 	game->minions->minion[0]->pontos_perdidos = 1;
 	game->minions->minion[0]->pontos_vencidos = 1;
 	game->minions->minion[0]->falas = malloc(sizeof(Fala));
-	game->minions->minion[0]->falas->n = 3;
+	game->minions->minion[0]->falas->n = 2;
 	game->minions->minion[0]->imagem = "assets/image/minions/vinicius.png";
-	game->minions->minion[0]->falas->frase = malloc(3 * sizeof(char*));
-	game->minions->minion[0]->falas->frase[0] = "Teste";
-	game->minions->minion[0]->falas->frase[1] = "teste";
-	game->minions->minion[0]->falas->frase[2] = "teste";
+	game->minions->minion[0]->falas->frase = malloc(game->minions->minion[0]->falas->n * sizeof(char*));
+	game->minions->minion[0]->falas->frase[0] = "Now is my turn!";
+	game->minions->minion[0]->falas->frase[1] = "I will make you burn!";
+	//game->minions->minion[0]->falas->frase[2] = "teste";
 	
 	game->minions->minion[1]->probabilidade = 0.75;
 	game->minions->minion[1]->pontos_perdidos = 2;
 	game->minions->minion[1]->pontos_vencidos = 3;
 	game->minions->minion[1]->falas = malloc(sizeof(Fala));
-	game->minions->minion[1]->falas->n = 3;
+	game->minions->minion[1]->falas->n = 1;
 	game->minions->minion[1]->imagem = "assets/image/minions/vinicius.png";
-	game->minions->minion[1]->falas->frase = malloc(3 * sizeof(char*));
-	game->minions->minion[1]->falas->frase[0] = "Teste";
-	game->minions->minion[1]->falas->frase[1] = "teste";
-	game->minions->minion[1]->falas->frase[2] = "teste";
+	game->minions->minion[1]->falas->frase = malloc(game->minions->minion[1]->falas->n * sizeof(char*));
+	game->minions->minion[1]->falas->frase[0] = "You can try, but ya gona down";
 	
 	game->minions->minion[2]->probabilidade = 0.9;
 	game->minions->minion[2]->pontos_perdidos = 3;
@@ -47,32 +45,28 @@ int inicializar_allegro(){
 	game->minions->minion[2]->falas = malloc(sizeof(Fala));
 	game->minions->minion[2]->falas->n = 3;
 	game->minions->minion[2]->imagem = "assets/image/minions/vinicius.png";
-	game->minions->minion[2]->falas->frase = malloc(3 * sizeof(char*));
-	game->minions->minion[2]->falas->frase[0] = "Teste";
-	game->minions->minion[2]->falas->frase[1] = "teste";
-	game->minions->minion[2]->falas->frase[2] = "teste";
+	game->minions->minion[2]->falas->frase = malloc(game->minions->minion[2]->falas->n * sizeof(char*));
+	game->minions->minion[2]->falas->frase[0] = "I am not the minion Vinicius.";
+	game->minions->minion[2]->falas->frase[1] = "I am the Vinicius Second.";
+	game->minions->minion[2]->falas->frase[2] = "Lets play";
 	
 	game->minions->minion[3]->probabilidade = 0.95;
 	game->minions->minion[3]->pontos_perdidos = 10;
 	game->minions->minion[3]->pontos_vencidos = 0;
 	game->minions->minion[3]->falas = malloc(sizeof(Fala));
-	game->minions->minion[3]->falas->n = 3;
+	game->minions->minion[3]->falas->n = 1;
 	game->minions->minion[3]->imagem = "assets/image/minions/vinicius.png";
-	game->minions->minion[3]->falas->frase = malloc(3 * sizeof(char*));
-	game->minions->minion[3]->falas->frase[0] = "Teste";
-	game->minions->minion[3]->falas->frase[1] = "teste";
-	game->minions->minion[3]->falas->frase[2] = "teste";
+	game->minions->minion[3]->falas->frase = malloc(game->minions->minion[3]->falas->n * sizeof(char*));
+	game->minions->minion[3]->falas->frase[0] = "I am Vinicius!";
 		
 	game->minions->minion[4]->probabilidade = 1;
 	game->minions->minion[4]->pontos_perdidos = 3;
 	game->minions->minion[4]->pontos_vencidos = 2;
 	game->minions->minion[4]->falas = malloc(sizeof(Fala));
-	game->minions->minion[4]->falas->n = 3;
+	game->minions->minion[4]->falas->n = 1;
 	game->minions->minion[4]->imagem = "assets/image/minions/vinicius.png";
-	game->minions->minion[4]->falas->frase = malloc(3 * sizeof(char*));
-	game->minions->minion[4]->falas->frase[0] = "Teste";
-	game->minions->minion[4]->falas->frase[1] = "teste";
-	game->minions->minion[4]->falas->frase[2] = "teste";
+	game->minions->minion[4]->falas->frase = malloc(game->minions->minion[4]->falas->n * sizeof(char*));
+	game->minions->minion[4]->falas->frase[0] = "A dica para o EP4 está no EP3!";
 	
 	int pontos_perdidos;
 	int pontos_vencidos;
