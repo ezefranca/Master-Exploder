@@ -269,6 +269,25 @@ void tela_empate(){
 	al_rest(2.0);
 }
 
+void desenha_pontos(int pontos){
+	ALLEGRO_BITMAP *ponto = al_load_bitmap("assets/image/partida/ponto.png");
+	int i;
+	
+	for(i = 650; i < 650 + (pontos * 60); i+=60){
+		al_draw_bitmap(ponto, i, 650, 0);
+	}
+	
+	al_destroy_bitmap(ponto);
+	ponto = al_load_bitmap("assets/image/partida/ponto_gasto.png");
+	
+	for(i; i < 650 + 600; i+=60){
+		al_draw_bitmap(ponto, i, 650, 0);
+	}
+	
+	al_destroy_bitmap(ponto);
+	al_draw_text(game->fontes->h2, al_map_rgb(200, 200, 200), 650, 550, ALLEGRO_ALIGN_LEFT, pegar_idioma("Respect points", linguagem));
+}
+
 /**
  *  <#Description#>
  *
@@ -276,7 +295,76 @@ void tela_empate(){
  *  @param pontos_jogador_2 <#pontos_jogador_2 description#>
  *  @param contador         <#contador description#>
  */
-void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, Minion *minion_adversario, int contador){
-	//ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/jogada.jpg");
+void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, int pontos_respeito, Minion *minion_adversario, int contador, int mostra_contador){
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/jogada.jpg");
+	al_draw_bitmap(tela, 1, 1, 0);
+	al_destroy_bitmap(tela);
+	
+	tela = al_load_bitmap("assets/image/partida/standby.png");
+	al_draw_bitmap(tela, 10, 340, 0);
+	al_destroy_bitmap(tela);
+	
+	tela = al_load_bitmap("assets/image/partida/standby_adversario.png");
+	al_draw_bitmap(tela, 900, 40, 0);
+	al_destroy_bitmap(tela);
+	
+	if(mostra_contador)
+		al_draw_textf(game->fontes->super, al_map_rgb(255, 255, 255), 50, -30, ALLEGRO_ALIGN_LEFT, "%d", contador);
+	
+	al_draw_textf(game->fontes->super, al_map_rgb(255, 255, 255), 250, -40, ALLEGRO_ALIGN_LEFT, "%d", pontos_jogador_1);
+	al_draw_textf(game->fontes->super, al_map_rgb(255, 255, 255), 450, -40, ALLEGRO_ALIGN_LEFT, "%d", pontos_jogador_2);
+	
+	desenha_pontos(pontos_respeito);
+	
+	al_flip_display();
+}
 
+void tela_jogo_maos(int pontos_jogador_1, int pontos_jogador_2, int pontos_respeito, int mao_jogador, int mao_adversaria){
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/jogada.jpg");
+	al_draw_bitmap(tela, 1, 1, 0);
+	al_destroy_bitmap(tela);
+	
+	switch(mao_jogador){
+		case PEDRA:
+			tela = al_load_bitmap("assets/image/partida/pedra.png");
+			break;
+		case PAPEL:
+			tela = al_load_bitmap("assets/image/partida/papel.png");
+			break;
+		default:
+			tela = al_load_bitmap("assets/image/partida/tesoura.png");
+			break;
+	}
+	
+	al_draw_bitmap(tela, 10, 340, 0);
+	al_destroy_bitmap(tela);
+	
+	switch(mao_jogador){
+		case PEDRA:
+			tela = al_load_bitmap("assets/image/partida/pedra_adversario.png");
+			break;
+		case PAPEL:
+			tela = al_load_bitmap("assets/image/partida/papel_adversario.png");
+			break;
+		default:
+			tela = al_load_bitmap("assets/image/partida/tesoura_adversario.png");
+			break;
+	}
+	al_draw_bitmap(tela, 900, 40, 0);
+	al_destroy_bitmap(tela);
+	
+	al_draw_textf(game->fontes->super, al_map_rgb(255, 255, 255), 250, -40, ALLEGRO_ALIGN_LEFT, "%d", pontos_jogador_1);
+	al_draw_textf(game->fontes->super, al_map_rgb(255, 255, 255), 450, -40, ALLEGRO_ALIGN_LEFT, "%d", pontos_jogador_2);
+	
+	desenha_pontos(pontos_respeito);
+	
+	al_flip_display();
+}
+
+void tela_chefe(){
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/chefe/fundo.jpg");
+	
+	al_destroy_bitmap(tela);
+	
+	opcoes_rodape(0);
 }

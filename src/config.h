@@ -97,6 +97,7 @@ typedef struct _minions {
  *  <#Description#>
  */
 typedef struct _fontes {
+	ALLEGRO_FONT *super;
 	ALLEGRO_FONT *h1;
 	ALLEGRO_FONT *h2;
 	ALLEGRO_FONT *h3;
@@ -138,6 +139,7 @@ typedef struct _game {
 	int _vizinhos;
 	int maximo_respeito;
 	int melhor_de;
+	int tempo_jogada;
 	const char *idioma_setado;
 	Telas *telas;
 	Carregamento *carrega;

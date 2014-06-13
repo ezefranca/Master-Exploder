@@ -37,14 +37,15 @@
     int desenhar = 0;
     int terminar = 0;
     int amostragem = 0;
-	int tela = 3;
+	int tela = 2;
     double x[10]; 
     double fx[10];
 
     //int atualiza = 0;
 
 	//Configuracoes da jogabilidade
-	bool chefe = false;
+	bool abertura_chefe = true;
+	bool chefe = true;
 	bool sair = false;
 	bool introducao = true;
 	introducao = false;
@@ -52,8 +53,8 @@
 	bool reinicio = false;
 	bool minion_4_usado = FALSE;
 	int rodada = 0;
-	int controle =- 1;
-	int mao_adversario = -1;
+	int controle = -1;
+	int mao_adversaria = -1;
 	int pontos_jogador_1 = 0;
 	int pontos_jogador_2 = 0;
 	int pontos_respeito = 1;
@@ -129,18 +130,26 @@
 						}
 					break;
 				case TELA_JOGO:
-					printf("Tela %d", tela);
+					if(chefe && abertura_chefe){
+						printf("aqui");
+						//Exibe tela que vai duelar contra chefe.
+						tela_chefe();
+						if(controle == PEDRA){
+							//Continua o loop em TELA_JOGO, mas não entra na abertura.
+							abertura_chefe = false;
+							printf("here");
+						}
+					}
 					
-					for(contador = 1; contador <= 5; contador++)
-						tela_jogo(pontos_jogador_1, pontos_jogador_2, minion_adversario, contador);
-					//if()
-					//Se venceu contra chefe vai para tela vencedor. Se não vai para a próxima partida contra outro minion.
-					/*if()
-					else {
-						tela = TELA_ABERTURA;
-						introducao = false;
-						controle = -1;
-					}*/
+					if(!abertura_chefe){
+						tela_jogo(pontos_jogador_1, pontos_jogador_2, pontos_respeito, minion_adversario, contador, 0);
+						al_rest(3.0);
+						
+						for(contador = game->tempo_jogada; contador >= 0; contador--){
+							tela_jogo(pontos_jogador_1, pontos_jogador_2, pontos_respeito, minion_adversario, contador, 1);
+							al_rest(1.0);
+						}
+					}
 					break;
 				case TELA_VENCEDOR:
 					tela_vencedor();
@@ -218,8 +227,8 @@
 			ponto laranja;
 			centroide(f, laranja);
 			
-			//printf("PB %d %d %d %d %d %d\n", laranja[X], laranja[Y], menor_x[X], maior_x[X], menor_y[Y], maior_y[Y]);
-			print_poligono(f);
+			if(game->debug)
+				print_poligono(f);
 			
 			for(int i = 0; i < f->n; i++){
 				ponto b;
@@ -247,7 +256,12 @@
 			free(b);
 			free(f);
 			
-
+			/******************** Controle e escolha da mão adversária ****************************/
+			printf("Pontos de respeito%d", pontos_respeito);
+			
+			//controle = ;
+			//mao_adversaria = ;
+			
 			/*********** Ações do jogo. ************/
 			
 			//Tela de Abertura rodando.
@@ -267,66 +281,68 @@
 				}
 			} 
 			else if(tela == TELA_JOGO){
-				
-				if(ganhador_rodada(controle, mao_adversario) == JOGADOR_1){
-						pontos_jogador_1++;
-					}
-					else {
-						pontos_jogador_2++;
-					}
+				if(!abertura_chefe){
+					//Exibe mãos
+					tela_jogo_maos(pontos_jogador_1, pontos_jogador_2, pontos_respeito, controle, mao_adversaria);
+					al_rest(2);
 					
-				if(fim_jogada(pontos_jogador_1, pontos_jogador_2, game->melhor_de)){
-					if(chefe){
-						//Chefe ganhou
-						if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == JOGADOR_2){
-							tela = TELA_PERDEDOR;
+					if(ganhador_rodada(controle, mao_adversaria) == JOGADOR_1){
+							pontos_jogador_1++;
 						}
 						else {
-							tela = TELA_VENCEDOR;
+							pontos_jogador_2++;
 						}
-					}
-					else {
-						//Jogo contra minion.
 						
-						//Ganhador do jogo atual.
-						if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == EMPATE) {
-							//Tela empate reinicia a partida. Possui al_rest de 4 segundos.
-							tela_empate();
-							
-							//Reinicia a partida.
-							pontos_jogador_1 = 0;
-							pontos_jogador_2 = 0;
+					if(fim_jogada(pontos_jogador_1, pontos_jogador_2, game->melhor_de)){
+						if(chefe){
+							//Chefe ganhou
+							if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == JOGADOR_2){
+								tela = TELA_PERDEDOR;
+							}
+							else {
+								tela = TELA_VENCEDOR;
+							}
 						}
-						else if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == JOGADOR_1){
-							//Adiciona pontos de respeito.
-							pontos_respeito += minion_adversario->pontos_vencidos;
-							//Se acabou pontos de respeito exibe tela 4.
-							if(fim_de_jogo(pontos_respeito)){
-								//Jogo acabou contra minions, agora tem respeito suficiente para jogar contra o chefe. É tudo ou nada contra o chefe.
-								if(pontos_respeito >= 10){
-									chefe = true;
+						else {
+							//Jogo contra minion. 
+							//Ganhador do jogo atual.
+							if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == EMPATE){
+								//Tela empate reinicia a partida. Possui al_rest de 4 segundos.
+								tela_empate();
+								
+								//Reinicia a partida.
+								pontos_jogador_1 = 0;
+								pontos_jogador_2 = 0;
+							}
+							else if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == JOGADOR_1){
+								//Adiciona pontos de respeito.
+								pontos_respeito += minion_adversario->pontos_vencidos;
+								//Se acabou pontos de respeito exibe tela 4.
+								if(fim_de_jogo(pontos_respeito)){
+									//Jogo acabou contra minions, agora tem respeito suficiente para jogar contra o chefe. É tudo ou nada contra o chefe.
+									if(pontos_respeito >= 10){
+										chefe = true;
+										abertura_chefe = true;
+									}
+								}
+								else {
+									//Selecao do próximo minion.
+									minion_adversario = rand_boss(&minion_4_usado);
+									//Exibição tela proximo minion.
+									tela = TELA_ABERTURA;
 								}
 							}
 							else {
-								//Selecao do próximo minion.
-								minion_adversario = rand_boss(&minion_4_usado);
-							}
-						}
-						else {
-							//Remove pontos de respeito.
-							pontos_respeito -= minion_adversario->pontos_perdidos;
-							if(fim_de_jogo(pontos_respeito)){
-								tela = TELA_PERDEDOR;
+								//Remove pontos de respeito.
+								pontos_respeito -= minion_adversario->pontos_perdidos;
+								if(fim_de_jogo(pontos_respeito)){
+									tela = TELA_PERDEDOR;
+								}
 							}
 						}
 					}
 				}
 			}
-			
-			/******************** Controle e escolha da mão adversária ****************************/
-		
-			//controle = ;
-			//mao_adversaria = ;
 		}
 		
 		

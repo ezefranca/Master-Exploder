@@ -1,5 +1,9 @@
 #ifndef FRAME_H
 #define FRAME_H
+#define PEDRA 2
+#define TESOURA 1
+#define PAPEL 0
+#define EMPATE 0
 
 typedef struct _idioma IDIOMA;
 typedef struct _game Game;
@@ -38,6 +42,10 @@ void tela_minion(Minion *minion_adversario, int primeira_frase);
  */
 void tela_empate();
 
+/**
+ *  <#Description#>
+ */
+void tela_chefe();
 
 /**
  *  <#Description#>
@@ -46,6 +54,8 @@ void tela_empate();
  *  @param pontos_jogador_2 <#pontos_jogador_2 description#>
  *  @param contador         <#contador description#>
  */
-void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, Minion *minion_adversario, int contador);
+void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, int pontos_respeito, Minion *minion_adversario, int contador, int mostra_contador);
+
+void tela_jogo_maos(int pontos_jogador_1, int pontos_jogador_2, int pontos_respeito, int mao_jogador, int mao_adversaria);
 
 #endif

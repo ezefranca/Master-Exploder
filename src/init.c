@@ -94,7 +94,7 @@ int inicializar_allegro(){
 	game->_vizinhos = 100;
 	game->usa_fecho = TRUE;
 	game->melhor_de = 3;
-	
+	game->tempo_jogada = 5;
 	game->pontos->numero_partidas = 0;
 	game->pontos->jogador_1 = 0;
 	game->pontos->jogador_2 = 0;
@@ -158,6 +158,7 @@ int inicializar_allegro(){
 	//game->idioma_setado = pegar_configuracao("IDIOMA","user", config);
 	game->idioma_setado = NULL;
 	
+	game->fontes->super = al_load_font("assets/font/PAPYRUS.TTF", 150, 10);
 	game->fontes->h1 = al_load_font("assets/font/PAPYRUS.TTF", 50, 10);
 	game->fontes->h2 = al_load_font("assets/font/PAPYRUS.TTF", 40, 10);
 	game->fontes->h3 = al_load_font("assets/font/PAPYRUS.TTF", 30, 10);
