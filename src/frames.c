@@ -63,7 +63,7 @@ void fadein(ALLEGRO_BITMAP *imagem, int velocidade)
  *  <#Description#>
  */
 void opcoes_rodape(int final){
-	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/falas.jpg");
+	ALLEGRO_BITMAP *tela;
 	const char *play;
 	int x;
 	
@@ -78,16 +78,13 @@ void opcoes_rodape(int final){
 		
 	tela = al_load_bitmap("assets/image/icones/pedra_small.png");
 	al_draw_bitmap(tela, x, 650, 0);
-	
 	al_destroy_bitmap(tela);
 	
 	//tela = al_load_bitmap("assets/image/icones/papel_small.png");
 	//al_draw_bitmap(tela, 1, 294, 0);
 	
 	tela = al_load_bitmap("assets/image/icones/tesoura_small.png");
-	
 	al_draw_bitmap(tela, 1080, 650, 0);
-	
 	al_destroy_bitmap(tela);
 	
 	
@@ -207,7 +204,6 @@ void tela_introducao(){
 	
 	tela = al_load_bitmap("assets/image/logo/logo.png");
 	al_draw_bitmap(tela, 460, 10, 0);
-	
 	al_destroy_bitmap(tela);
 	
 	
@@ -361,9 +357,25 @@ void tela_jogo_maos(int pontos_jogador_1, int pontos_jogador_2, int pontos_respe
 	al_flip_display();
 }
 
+
+/**
+ *  <#Description#>
+ */
 void tela_chefe(){
-	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/chefe/fundo.jpg");
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/chefe/fundo.png");
+	al_draw_bitmap(tela, 1, 1, 0);
+	al_destroy_bitmap(tela);
 	
+	tela = al_load_bitmap("assets/image/logo/logo.png");
+	al_draw_bitmap(tela, 460, 10, 0);
+	al_destroy_bitmap(tela);
+	
+	tela = al_load_bitmap("assets/image/chefe/chefe.png");
+	al_draw_bitmap(tela, 400, 140, 0);
+	al_destroy_bitmap(tela);
+	
+	tela = al_load_bitmap("assets/image/chefe/fogo.png");
+	al_draw_bitmap(tela, 1, 530, 0);
 	al_destroy_bitmap(tela);
 	
 	opcoes_rodape(0);
