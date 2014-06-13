@@ -104,6 +104,9 @@
 			/********** Exibição de tela ***********/ 
 			switch(tela){
 				case TELA_OPCAO:
+					if(){
+						tela_carregando();
+					}
 					//printf("Tela %d\n", tela);
 					tela_abertura();
 					break;

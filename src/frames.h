@@ -45,6 +45,11 @@ void tela_empate();
 /**
  *  <#Description#>
  */
+void tela_carregando(unsigned char ***matriz);
+
+/**
+ *  <#Description#>
+ */
 void tela_chefe();
 
 /**

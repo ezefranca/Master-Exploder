@@ -286,6 +286,11 @@ void desenha_pontos(int pontos){
 	al_draw_text(game->fontes->h2, al_map_rgb(200, 200, 200), 650, 550, ALLEGRO_ALIGN_LEFT, pegar_idioma("Respect points", linguagem));
 }
 
+void tela_carregando(unsigned char ***matriz){
+	al_draw_text(game->fontes->h2, al_map_rgb(200, 200, 200), 640, 30, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Calibration in progress...", linguagem));
+	
+}
+
 /**
  *  <#Description#>
  *
