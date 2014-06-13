@@ -190,8 +190,6 @@ void tela_abertura(){
 	al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 902, 200, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Play", linguagem));
 	//al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 862, 294, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Ranking", linguagem));
 	al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 902, 294, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Exit", linguagem));
-
-	pedra_inicial = malloc(sizeof(mao));
 	
 }
 

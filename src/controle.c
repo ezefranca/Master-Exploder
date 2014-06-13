@@ -64,4 +64,6 @@ int calcula_padrao(poligono *f, area *b){
  */
 mao* captura_pedra(mao *pedra_inicial, poligono *fecho, area *b){
 
+	pedra_inicial->qtd_branco = b->qtd_branco;
+
 }
