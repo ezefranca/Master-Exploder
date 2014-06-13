@@ -44,8 +44,8 @@
     //int atualiza = 0;
 
 	//Configuracoes da jogabilidade
-	bool abertura_chefe = true;
-	bool chefe = true;
+	bool abertura_chefe = false;
+	bool chefe = false;
 	bool sair = false;
 	bool introducao = true;
 	introducao = false;
