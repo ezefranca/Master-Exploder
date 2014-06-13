@@ -57,6 +57,15 @@ int fazer_jogada_pior(int jogador);
 /**
  *  <#Description#>
  *
+ *  @param jogador <#jogador description#>
+ *
+ *  @return <#return value description#>
+ */
+int mao_adversario(int jogador_1);
+
+/**
+ *  <#Description#>
+ *
  *  @return <#return value description#>
  */
 Minion *rand_boss(bool *minion_4_usado);

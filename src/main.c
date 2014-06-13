@@ -283,7 +283,8 @@
     	    }
 
 			if(pedra_inicial != NULL){
-				calcula_padrao(f, b, pedra_inicial);
+				controle = calcula_padrao(f, b, pedra_inicial);
+				mao_adversaria = mao_adversario(controle);
 			}
 			
 			free(b);
@@ -291,8 +292,6 @@
 			/******************** Controle e escolha da mão adversária ****************************/
 			//printf("Pontos de respeito%d", pontos_respeito);
 			
-			//controle = ;
-			//mao_adversaria = ;
 			
 			/*********** Ações do jogo. ************/
 			

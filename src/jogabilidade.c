@@ -25,6 +25,7 @@ int ganhador_rodada(int jogador_1, int jogador_2){
 		return JOGADOR_2;
 }
 
+
 /**
  *  <#Description#>
  *
@@ -69,6 +70,25 @@ int fazer_jogada_pior(int jogador) {
 	if(jogador == PAPEL)
 		return PEDRA;
 	return jogador - 1;
+}
+
+/**
+ *  <#Description#>
+ *
+ *  @param jogador <#jogador description#>
+ *
+ *  @return <#return value description#>
+ */
+int mao_adversario(int jogador_1){
+	srand(abs(time(NULL)));
+	int randomic;
+	if(randomic % 10 == 0){
+		//Trapaceia
+		return fazer_jogada_melhor(jogador_1);
+	}
+	else {
+		return randomic % 3;		
+	}
 }
 
 /**
