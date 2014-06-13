@@ -58,6 +58,7 @@ int inicializar_allegro(){
 	game->minions->minion[3]->imagem = "assets/image/minions/vinicius.png";
 	game->minions->minion[3]->falas->frase = malloc(game->minions->minion[3]->falas->n * sizeof(char*));
 	game->minions->minion[3]->falas->frase[0] = "I am Vinicius!";
+	game->minions->minion[3]->falas->frase[0] = "Kibe is not a crime!";
 		
 	game->minions->minion[4]->probabilidade = 1;
 	game->minions->minion[4]->pontos_perdidos = 3;

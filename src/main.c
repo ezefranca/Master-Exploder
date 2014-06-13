@@ -139,6 +139,8 @@
 					else {
 							//tela de introducao do Minion.
 							tela_minion(minion_adversario, primeira);
+							//Quando controle for melhorado tira o al_rest.
+							al_rest(2);
 							if(controle == PEDRA){
 								//Sai da introducao e comeca o jogo no proximo loop.
 								tela = TELA_JOGO;
@@ -153,6 +155,8 @@
 						printf("aqui");
 						//Exibe tela que vai duelar contra chefe.
 						tela_chefe();
+						//Quando controle for melhorado tira o al_rest.
+						al_rest(2);
 						if(controle == PEDRA){
 							//Continua o loop em TELA_JOGO, mas não entra na abertura.
 							abertura_chefe = false;
