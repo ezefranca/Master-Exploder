@@ -37,10 +37,10 @@ int calcula_padrao(poligono *f, area *b){
 	contador_global++;
 
 	if(padrao >= 5){
-		printf("encontrado um padrao\n");
+		//printf("encontrado um padrao\n");
 
 		for(int i = 0; i < 10; i++){
-			printf("%d\n", verificacoes[i]);
+			//printf("%d\n", verificacoes[i]);
 			verificacoes[i] == 1;
 
 		}

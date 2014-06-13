@@ -89,11 +89,12 @@ int inicializar_allegro(){
 	game->divisor_tempo = 1;
 	game->divisor_camera = 1;
 	game->luminus = 80;
-	game->debug = TRUE;
+	game->debug = FALSE;
 	game->maximo_respeito = 10; 
 	game->_vizinhos = 100;
 	game->usa_fecho = TRUE;
 	game->melhor_de = 3;
+	game->calibragem = 3;
 	game->tempo_jogada = 5;
 	game->pontos->numero_partidas = 0;
 	game->pontos->jogador_1 = 0;

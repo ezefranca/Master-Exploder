@@ -37,7 +37,7 @@
     int desenhar = 0;
     int terminar = 0;
     int amostragem = 0;
-	int tela = 2;
+	int tela = 0;
     double x[10]; 
     double fx[10];
 
@@ -52,6 +52,7 @@
 	bool fim_introducao = false;
 	bool reinicio = false;
 	bool minion_4_usado = FALSE;
+	bool carregar_mao = FALSE;
 	int rodada = 0;
 	int controle = -1;
 	int mao_adversaria = -1;
@@ -60,6 +61,7 @@
 	int pontos_respeito = 1;
 	int contador = 0;
 	int primeira = 0;
+	int calibragem = 0;
 	Minion *minion_adversario;
 	
     camera_atualiza(cam);
@@ -80,6 +82,7 @@
 	//Seleção do minion inicial.
 	minion_adversario = rand_boss(&minion_4_usado);
 	pedra_inicial = NULL;
+	
     while(1) {
 
 		ALLEGRO_EVENT event;
@@ -105,11 +108,19 @@
 			/********** Exibição de tela ***********/ 
 			switch(tela){
 				case TELA_OPCAO:
-					if(){
-						tela_carregando();
+					if(calibragem < 60 * game->calibragem){
+						tela_carregando(matriz_contagem);
+						calibragem++;
 					}
+					else if(carregar_mao == FALSE) {
+						carregar_mao = TRUE;
+					}
+					else {
+						tela_abertura();
+					}
+					
 					//printf("Tela %d\n", tela);
-					tela_abertura();
+					//tela_abertura();
 					break;
 				case TELA_ABERTURA:
 					if(introducao){
@@ -258,7 +269,11 @@
 			
 			al_flip_display();
 			
-		    if(pedra_inicial != NULL){
+			if(calibragem % 60 == 0){
+				printf("Contador %d", calibragem);
+			}
+			
+		    if(pedra_inicial == NULL && carregar_mao){
 		    	pedra_inicial = malloc(sizeof(mao));
     			captura_pedra(pedra_inicial, f, b);
     	    }
@@ -268,7 +283,7 @@
 			free(b);
 			free(f);
 			/******************** Controle e escolha da mão adversária ****************************/
-			printf("Pontos de respeito%d", pontos_respeito);
+			//printf("Pontos de respeito%d", pontos_respeito);
 			
 			//controle = ;
 			//mao_adversaria = ;

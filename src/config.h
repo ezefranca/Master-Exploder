@@ -140,6 +140,7 @@ typedef struct _game {
 	int maximo_respeito;
 	int melhor_de;
 	int tempo_jogada;
+	int calibragem;
 	const char *idioma_setado;
 	Telas *telas;
 	Carregamento *carrega;
