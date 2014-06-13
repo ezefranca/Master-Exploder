@@ -2,6 +2,18 @@
 #include <math.h>
 #include "fecho.h"
 
+// Como para dar play ele terá na primeira tela usar pedra, contabiliza a quantidade de brancos no fecho (deveria ser muito maior que preto) e registra a informação de minimo e maximo da primeira detecção com maioria branco como pedra, usa essa informação para diferenciar papel, e tesoura é a diferença de preto e branco (mesmo tendo o mesmo minimo e maximo do papel - eixo Y).
+
+// Bom essa é minha sugestão, talvez você já a tenha tentado.
+
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param saida   <#saida description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ */
 int calcula_padrao(poligono *f, area *b){
 
 	c = malloc(sizeof(controle));
@@ -39,4 +51,17 @@ int calcula_padrao(poligono *f, area *b){
 	//printf("razao: %.1f\n", razao);
   	free(c);
 	return 0;
+}
+
+
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param saida   <#saida description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ */
+mao* captura_pedra(mao *pedra_inicial, poligono *fecho, area *b){
+
 }

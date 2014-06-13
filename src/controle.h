@@ -10,18 +10,36 @@
 typedef struct _poligono poligono;
 typedef struct _area area;
 
+typedef struct _mao
+{
+    int max_x;
+    int max_y;
+    int min_x;
+    int min_y;
+    int qtd_branco;
+} mao;
+
 typedef struct _controle{
     poligono *fecho;          
     int selecionado;
+    int max_x;
+    int max_y;
+    int min_x;
+    int min_y;
+    int qtd_branco;
     double razao;
 } controle;
 
 controle *c;
+mao *pedra_inicial;
 
 int verificacoes[10];
 int padrao;
 int contador_global;
 
+
+
 int calcula_padrao(poligono *fecho, area *b);
+mao* captura_pedra(mao *pedra_inicial, poligono *fecho, area *b);
 
 #endif
