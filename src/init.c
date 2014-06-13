@@ -170,16 +170,15 @@ int inicializar_allegro(){
 	char *test = pegar_idioma("test", linguagem);
 	printf("%s", test);
 
-	game->musica = al_load_sample("assets/sound/one.ogg");
+	game->musica = al_load_sample("assets/sound/one.wav");
 
-	if(game->carrega->musica) {
+	//if(game->carrega->musica != NULL) {
 		if (!game->musica)
 		{
 			erro("Nao carregou o arquivo de musica game->musica");
 		}
-	
 		al_play_sample(game->musica, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
-	}
+	//}
 	
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));
