@@ -17,6 +17,7 @@ typedef struct _mao
     ponto menor_y;
     ponto maior_y;
     int qtd_branco;
+    int area_fecho;
 } mao;
 
 typedef struct _controle{
