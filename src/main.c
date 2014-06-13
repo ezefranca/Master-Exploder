@@ -29,7 +29,7 @@
     
     ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
 	
-	ALLEGRO_BITMAP *tela_calibragem = al_create_sub_bitmap(buffer, largura/2, 100, largura, altura);
+	ALLEGRO_BITMAP *tela_calibragem = al_create_sub_bitmap(buffer, game->largura_tela/2 - largura/2, 100, largura, altura);
 	
 	ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
 	ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
