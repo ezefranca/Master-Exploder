@@ -279,6 +279,7 @@
 		    if(pedra_inicial == NULL && carregar_mao){
 		    	pedra_inicial = malloc(sizeof(mao));
     			captura_pedra(pedra_inicial, f, b);
+    			printf("teste\n");
     	    }
 
 			if(pedra_inicial != NULL){

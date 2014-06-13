@@ -18,28 +18,23 @@ int calcula_padrao(poligono *f, area *b, mao *pedra_inicial){
 
 	pontos_extremo(f, altura, largura);
 
-	if ((pedra_inicial->maior_y[Y] - pedra_inicial->menor_y[Y]) < maior_y[Y] - menor_y[Y])
-	{
-		printf("nao eh pedra\n");
-	}
-
-
-	c = malloc(sizeof(controle));
-	c->razao = abs(area_do_fecho(f) / b->qtd_branco);
+		//printf("nao eh pedra\n");
+			c = malloc(sizeof(controle));
+			c->razao = abs(area_do_fecho(f) / b->qtd_branco);
 	
-	if(contador_global < 10){
-		verificacoes[contador_global] = c->razao;
-	}else{
-		for(int i = 0; i < 10; i++){
-			for (int j = i+1; j < 9; j++)
-			{
-				if (verificacoes[i] == verificacoes[j])
-				{
-					padrao++;
+			if(contador_global < 10){
+				verificacoes[contador_global] = c->razao;
+			}else{
+				for(int i = 0; i < 10; i++){
+					for (int j = i+1; j < 9; j++)
+					{
+						if (verificacoes[i] == verificacoes[j])
+						{
+							padrao++;
+						}
+					}
 				}
-			}
-		}
-		contador_global = -1;
+					contador_global = -1;
 	}
 	contador_global++;
 
@@ -51,13 +46,32 @@ int calcula_padrao(poligono *f, area *b, mao *pedra_inicial){
 			verificacoes[i] == 1;
 
 		}
-
+		//printf("razao: %.3f\n", c->razao);
+		int 
 		padrao = 0;
+
+		if (c->razao < 2)
+		{
+			printf("papel %.2f\n", c->razao);
+			return 0;
+		}
+		if(c->razao >= 2){
+
+			if ((maior_y[Y] - menor_y[Y]) > (pedra_inicial->maior_y[X] - pedra_inicial->menor_y[Y]) + 20)
+			{
+				printf("tesoura %.2f\n", c->razao);
+				return 1;
+			}else{
+				printf("pedra %.2f\n", c->razao);
+				return 2;
+			}
+
+		}
 	}
 
-	//printf("razao: %.1f\n", razao);
+	
   	free(c);
-	return 0;
+	return -1;
 }
 
 

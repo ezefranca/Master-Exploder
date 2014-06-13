@@ -104,7 +104,7 @@ void pontos_extremo(poligono *p, int largura, int altura){
     //printf("maior ponto X(%d,%d)\n",maior_x[X], maior_x[Y]);
     //printf("menor ponto Y(%d,%d)\n",menor_y[X], menor_y[Y]);
     //printf("maior ponto Y(%d,%d)\n",maior_y[X], maior_y[Y]);
-	printf("ponto teste (%d,%d) (%d,%d)", menor_x[X], maior_y[Y], maior_x[X], menor_y[Y]);
+	//printf("ponto teste (%d,%d) (%d,%d)", menor_x[X], maior_y[Y], maior_x[X], menor_y[Y]);
     return;
 }
 /**
