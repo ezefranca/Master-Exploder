@@ -258,15 +258,15 @@ void tela_minion(Minion *minion_adversario, int primeira_frase){
 /**
  *  <#Description#>
  */
-void tela_vencedor_chefe(){
-
-}
-
-/**
- *  <#Description#>
- */
 void tela_empate(){
-
+	ALLEGRO_BITMAP *tela = al_load_bitmap("assets/image/intro/falas.jpg");
+	al_draw_bitmap(tela, 1, 1, 0);
+	al_destroy_bitmap(tela);
+	
+	al_draw_text(game->fontes->h2, al_map_rgb(255, 255, 255), 640, 100, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Tie", linguagem));
+	al_draw_text(game->fontes->h3, al_map_rgb(255, 255, 255), 640, 250, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Restarting match!", linguagem));
+	al_flip_display();
+	al_rest(2.0);
 }
 
 /**

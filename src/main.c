@@ -74,6 +74,7 @@
 	if(game->telas->sprite)
 		tela_sprite();
 
+		
 	
 	//Seleção do minion inicial.
 	minion_adversario = rand_boss(&minion_4_usado);
@@ -142,8 +143,7 @@
 					}*/
 					break;
 				case TELA_VENCEDOR:
-					tela_vencedor(minion_adversario);
-						
+					tela_vencedor();
 					if(controle == PEDRA){
 						tela = TELA_OPCAO;
 						//Reinicia jogo

@@ -38,10 +38,6 @@ void tela_minion(Minion *minion_adversario, int primeira_frase);
  */
 void tela_empate();
 
-/**
- *  <#Description#>
- */
-void tela_vencedor_chefe();
 
 /**
  *  <#Description#>
