@@ -115,6 +115,9 @@ Minion *rand_boss(bool *minion_4_usado){
  */
 
 int fim_jogada(int pontos_jogador_1, int pontos_jogador_2, int melhor_jogo){
+	if(pontos_jogador_1 == 0 && pontos_jogador_2 == 0)
+		return 0;
+
 	//Verifica se jogadas sao impares.
 	if((melhor_jogo % 2) > 0)
 		return (pontos_jogador_1 > (melhor_jogo/2) || pontos_jogador_2 > (melhor_jogo/2));
