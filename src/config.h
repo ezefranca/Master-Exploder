@@ -70,6 +70,11 @@ typedef struct _pontos {
 	int respeito_jogador_2;
 } Pontuacao;
 
+typedef struct _falas {
+	int n;
+	char **frase;
+} Fala;
+
 /**
  *  <#Description#>
  */
@@ -77,6 +82,8 @@ typedef struct _minion {
 	double probabilidade;
 	int pontos_perdidos;
 	int pontos_vencidos;
+	Fala *falas;
+	char *imagem;
 } Minion;
 
 /**

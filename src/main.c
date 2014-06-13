@@ -47,6 +47,7 @@
 	bool chefe = false;
 	bool sair = false;
 	bool introducao = true;
+	introducao = false;
 	bool fim_introducao = false;
 	bool reinicio = false;
 	bool minion_4_usado = FALSE;
@@ -57,6 +58,7 @@
 	int pontos_jogador_2 = 0;
 	int pontos_respeito = 1;
 	int contador = 0;
+	int primeira = 0;
 	Minion *minion_adversario;
 	
     camera_atualiza(cam);
@@ -104,21 +106,24 @@
 				tela_abertura();
 				break;
 			case TELA_ABERTURA:
-				if(introducao) {
+				if(introducao){
 					tela_introducao();
 					if(controle == PEDRA){
+						//Sai da primeira introducao e vai para a abertura de inicio dos minions.
 						introducao = false;
-						tela = TELA_JOGO;
+						primeira = TRUE;
 						}
 					}
 				else {
-					//tela de introducao do Minion.
-					tela_minion(minion_adversario);
-				}
-				//Sai da introducao e comeca o jogo.
-				if(controle == PEDRA){
-					fim_introducao = true;
-				}
+						//tela de introducao do Minion.
+						tela_minion(minion_adversario, primeira);
+						if(controle == PEDRA){
+							//Sai da introducao e comeca o jogo no proximo loop.
+							tela = TELA_JOGO;
+							//Próximo loop não é a primeira introdução e não é a primeira frase de minion.
+							primeira = FALSE;
+						}
+					}
 				break;
 			case TELA_JOGO:
 				printf("Tela %d", tela);
@@ -246,20 +251,16 @@
 				reinicio = false;
 			}
 			else {
-				//al_rest(1);
 				if(controle == TESOURA){
 					break;
 				}
 				else if(controle == PEDRA){
-					//Comeca introducao.
-					tela = 1;	
+					//Comeca introducao do chefe no inicio do jogo.
+					tela = TELA_ABERTURA;	
 					introducao = true;
 				}
 			}
 		} 
-		else if(tela == TELA_ABERTURA && fim_introducao){
-			tela = TELA_JOGO;
-		}
 		else if(tela == TELA_JOGO){
 			
 			if(ganhador_rodada(controle, mao_adversario) == JOGADOR_1){

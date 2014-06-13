@@ -31,7 +31,7 @@ void tela_introducao();
 /**
  *  <#Description#>
  */
-void tela_minion(Minion *minion_adversario);
+void tela_minion(Minion *minion_adversario, int primeira_frase);
 
 /**
  *  <#Description#>
