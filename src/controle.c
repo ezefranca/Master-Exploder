@@ -21,7 +21,7 @@
 
  	if(contador_global < 10){
  		verificacoes[contador_global] = c->razao;
- 	}else{
+ 	} else{
  		for(int i = 0; i < 10; i++){
  			for (int j = i+1; j < 9; j++)
  			{
@@ -52,8 +52,12 @@
 
  		if (c->razao < 1)
  		{
+ 			if(area_do_fecho(f) > 100){
  			printf("PEDRA\n");
  			return 2;
+ 			} else {
+ 				return -1;
+ 			}
  		}
  		else{
  			printf("TESOURA ou PAPEL\n");
@@ -75,6 +79,8 @@
  		free(c);
  		return -1;
  	}
+ 	free(c);
+ 	return -1;
  }
 
 

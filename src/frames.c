@@ -76,7 +76,7 @@ void opcoes_rodape(int final){
 		x = 900;
 		}
 		
-	tela = al_load_bitmap("assets/image/icones/pedra_small.png");
+	tela = al_load_bitmap("assets/image/icones/papel_small.png");
 	al_draw_bitmap(tela, x, 650, 0);
 	al_destroy_bitmap(tela);
 	
@@ -174,7 +174,7 @@ void tela_abertura(){
 	
 	al_destroy_bitmap(tela);
 	
-	tela = al_load_bitmap("assets/image/icones/pedra_small.png");
+	tela = al_load_bitmap("assets/image/icones/papel_small.png");
 	al_draw_bitmap(tela, 790, 204, 0);
 	
 	al_destroy_bitmap(tela);
@@ -182,10 +182,9 @@ void tela_abertura(){
 	//tela = al_load_bitmap("assets/image/icones/papel_small.png");
 	//al_draw_bitmap(tela, 1, 294, 0);
 	
-	tela = al_load_bitmap("assets/image/icones/tesoura_small.png");
-	al_draw_bitmap(tela, 780, 298, 0);
-	
-	al_destroy_bitmap(tela);
+	//tela = al_load_bitmap("assets/image/icones/tesoura_small.png");
+	//al_draw_bitmap(tela, 780, 298, 0);
+	//al_destroy_bitmap(tela);
 	
 	al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 902, 200, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Play", linguagem));
 	//al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 862, 294, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Ranking", linguagem));
@@ -360,6 +359,7 @@ void tela_jogo_maos(int pontos_jogador_1, int pontos_jogador_2, int pontos_respe
 	desenha_pontos(pontos_respeito);
 	
 	al_flip_display();
+	al_rest(2);
 }
 
 
