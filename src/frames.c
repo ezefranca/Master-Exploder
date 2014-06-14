@@ -15,7 +15,7 @@ void exibe_fade_out(int velocidade) {
     buffer = al_create_bitmap(game->largura_tela, game->altura_tela);
     al_set_target_bitmap(buffer);
 	
-    al_draw_bitmap(al_get_backbuffer(display), 1, 1, 0);
+    al_draw_bitmap(al_get_backbuffer(display), 0, 0, 0);
     al_set_target_bitmap(al_get_backbuffer(display));
 
     if (velocidade <= 0)
@@ -27,7 +27,7 @@ void exibe_fade_out(int velocidade) {
     for (alfa = 0; alfa <= 255; alfa += velocidade)
     {
         al_clear_to_color(al_map_rgba(0, 0, 0, 0));
-        al_draw_tinted_bitmap(buffer, al_map_rgba(255 - alfa, 255 - alfa, 255 - alfa, alfa), 1, 1, 0);
+        al_draw_tinted_bitmap(buffer, al_map_rgba(255 - alfa, 255 - alfa, 255 - alfa, alfa), 0, 0, 0);
         al_flip_display();
         al_rest(0.005); // Não é necessário caso haja controle de FPS
     }
@@ -102,7 +102,7 @@ void exibe_com_efeito(const char *arquivo, int efeito, double rest){
 			al_rest(rest);
 		case 1:
 			//Fade out 
-			al_draw_bitmap(tela, 1, 1, 0);
+			al_draw_bitmap(tela, 0, 0, 0);
 			al_rest(rest);
 			exibe_fade_out(8);
 		case 3:
@@ -197,9 +197,17 @@ void tela_perdedor(int chefe){
  *  <#Description#>
  */
 void tela_abertura(){
+	ALLEGRO_BITMAP *tela;
+	
 	exibe_sem_efeito("assets/image/intro/menu.jpg");
-	exibe_sem_efeito("assets/image/icones/papel_small.png");
-	exibe_sem_efeito("assets/image/icones/tesoura_small.png");
+	
+	tela = al_load_bitmap("assets/image/icones/papel_small.png");
+	al_draw_bitmap(tela, 790, 204, 0);
+	al_destroy_bitmap(tela);
+
+	tela = al_load_bitmap("assets/image/icones/tesoura_small.png");
+	al_draw_bitmap(tela, 780, 298, 0);
+	al_destroy_bitmap(tela);
 	
 	al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 902, 200, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Play", linguagem));
 	al_draw_text(game->fontes->h1, al_map_rgb(255, 255, 255), 902, 294, ALLEGRO_ALIGN_CENTRE, pegar_idioma("Exit", linguagem));

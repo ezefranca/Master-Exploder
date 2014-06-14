@@ -86,7 +86,7 @@ int inicializar_allegro(){
 	game->divisor_tempo = 1;
 	game->divisor_camera = 1.5;
 	game->luminus = 80;
-	game->debug = true;
+	game->debug = false;
 	game->maximo_respeito = 10; 
 	game->_vizinhos = 100;
 	game->usa_fecho = TRUE;
@@ -103,7 +103,7 @@ int inicializar_allegro(){
 	game->carrega->fonte = false;
 	game->carrega->display = false;
 	
-	game->telas->sprite = false;
+	game->telas->sprite = true;
 	game->telas->gameover = true;
 	game->telas->start = true;
 	game->telas->game = true;
