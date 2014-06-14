@@ -44,8 +44,6 @@ bool criar_configuracao(char *name){
 	
 	/** Configurações do Allegro **/
 	setar_configuracao("TIMER_DIVIDENDO", "1.0", "allegro", new_config);
-	setar_configuracao("LARGURA", "1280", "allegro", new_config);
-	setar_configuracao("ALTURA", "720", "allegro", new_config);
 	
 	/** Configurações do Sistema do Jogo **/
 	setar_configuracao("IDIOMA", "data/idiomas/pt_br.conf", "system", new_config);
@@ -56,8 +54,6 @@ bool criar_configuracao(char *name){
 	
 	/** Configurações de Jogabilidade **/
 	setar_configuracao("QTD_MINIONS", "5", "jogo", new_config);
-	setar_configuracao("PONTOS_RESPEITO_MAXIMO", "10", "jogo", new_config);
-	setar_configuracao("PONTOS_RESPEITO_INICIAL", "1", "jogo", new_config);
 	setar_configuracao("MELHOR_DE", "5", "jogo", new_config);
 	setar_configuracao("MULTI_CALIBRAGEM", "2", "jogo", new_config);
 	setar_configuracao("TEMPO_ANTES_JOGADA", "2", "jogo", new_config);
@@ -66,10 +62,11 @@ bool criar_configuracao(char *name){
 	
 	
 	/** Configurações de pontuação **/
-	setar_configuracao("IDIOMA", "data/idiomas/pt_br.conf", "points", new_config);
+	setar_configuracao("MAXIMO", "10", "points", new_config);
+	setar_configuracao("INICIAL", "1", "points", new_config);
 	
 	/** Configurações de Fonte **/
-	setar_configuracao("HABILITADO", "false", "fonts", new_config);
+	setar_configuracao("HABILITADO", "true", "fonts", new_config);
 	setar_configuracao("H1_FONTE", "assets/font/PAPYRUS.TTF", "fonts", new_config);
 	setar_configuracao("H2_FONTE", "assets/font/PAPYRUS.TTF", "fonts", new_config);
 	setar_configuracao("H3_FONTE", "assets/font/PAPYRUS.TTF", "fonts", new_config);
@@ -92,6 +89,9 @@ bool criar_configuracao(char *name){
 	/** Configurações de Audio **/
 	setar_configuracao("HABILITADO", "true", "audio", new_config);
 	setar_configuracao("FUNDO", "assets/sound/one.wav", "audio", new_config);
+	setar_configuracao("FUNDO_GAIN", "1.0", "audio", new_config);
+	setar_configuracao("FUNDO_PAN", "0.0", "audio", new_config);
+	setar_configuracao("FUNDO_SPEED", "1.0", "audio", new_config);
 	
 	/** Configurações de Telas **/
 	setar_configuracao("HABILITADO", "true", "tela", new_config);

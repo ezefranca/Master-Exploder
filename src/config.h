@@ -90,6 +90,7 @@ typedef struct _minion {
  *  <#Description#>
  */
 typedef struct _minions {
+	int qtd;
 	MINION **minion;
 } MINIONS;
 
@@ -144,6 +145,8 @@ typedef struct _game {
 	int maximo_respeito;
 	int melhor_de;
 	int tempo_jogada;
+	int tempo_antes_jogada;
+	int tempo_exibicao_jogada;
 	int calibragem;
 	const char *idioma_setado;
 	TELAS *telas;

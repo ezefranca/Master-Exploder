@@ -26,7 +26,7 @@ void aviso(char *mensagem);
  *
  *  @return <#return value description#>
  */
-double string_para_double(char *string);
+double string_para_double(const char *string);
 /**
  *  <#Description#>
  *
@@ -34,7 +34,7 @@ double string_para_double(char *string);
  *
  *  @return <#return value description#>
  */
-int string_para_int(char *string);
+int string_para_int(const char *string);
 
 /**
  *  <#Description#>
@@ -43,5 +43,5 @@ int string_para_int(char *string);
  *
  *  @return <#return value description#>
  */
-int string_para_boolean(char *string);
+int string_para_boolean(const char *string);
 #endif

@@ -13,9 +13,58 @@ int inicializar_allegro(){
 	game->carrega = malloc(sizeof(CARREGAMENTO));
 	game->telas = malloc(sizeof(TELAS));
 	game->minions = malloc(sizeof(MINIONS));
-	game->minions->minion = malloc(5 * sizeof(MINION*));
 	
-	for(int i = 0; i < 5; i++){
+	int pontos_perdidos;
+	int pontos_vencidos;
+	
+	config = carregar_configuracao("configuration.conf");
+    
+	if(config == NULL){
+        criar_configuracao("configuration.conf");
+		config = carregar_configuracao("configuration.conf");
+	}
+	
+	game->divisor_camera = string_para_double(pegar_configuracao("CAM_DIVISOR","camera", config));//1.5;
+	game->luminus =  string_para_int(pegar_configuracao("LUMINUS","camera", config));//80;
+	game->usa_fecho = string_para_boolean(pegar_configuracao("USAR_FECHO","camera", config));
+
+	game->largura_tela = string_para_int(pegar_configuracao("LARGURA_TELA","system", config));//1280;
+	game->altura_tela = string_para_int(pegar_configuracao("ALTURA_TELA","system", config));//720;
+	game->divisor_tempo = string_para_double(pegar_configuracao("TIMER_DIVIDENDO","allegro", config));//1;
+	
+	game->_vizinhos = string_para_int(pegar_configuracao("VIZINHOS","system", config));//100;
+	
+	game->melhor_de = string_para_int(pegar_configuracao("MELHOR_DE","jogo", config));//5;
+	game->calibragem = string_para_int(pegar_configuracao("MULTI_CALIBRAGEM","jogo", config));//3;
+	game->tempo_jogada = string_para_int(pegar_configuracao("TEMPO_JOGADA","jogo", config));//5;
+	game->tempo_antes_jogada = string_para_int(pegar_configuracao("TEMPO_ANTES_JOGADA","jogo", config));//5;
+	game->tempo_exibicao_jogada = string_para_int(pegar_configuracao("TEMPO_EXIBICAO_JOGADA","jogo", config));//5;
+	game->minions->qtd = string_para_int(pegar_configuracao("QTD_MINIONS","jogo", config));//5;
+	
+	game->maximo_respeito = string_para_int(pegar_configuracao("MAXIMO","points", config));//10; 
+	game->pontos->respeito_jogador_1 = string_para_int(pegar_configuracao("INICIAL","points", config));//0;
+	game->pontos->respeito_jogador_2 = game->pontos->respeito_jogador_1;//0;
+	
+	//Valor se altera durante o jogo:
+	game->pontos->numero_partidas = 0;
+	game->pontos->jogador_1 = 0;
+	game->pontos->jogador_2 = 0;
+	
+	game->debug = string_para_boolean(pegar_configuracao("HABILITADO","debug", config));//false;
+	
+	game->carrega->musica = string_para_boolean(pegar_configuracao("HABILITADO","audio", config));//false;
+	game->carrega->fonte = string_para_boolean(pegar_configuracao("HABILITADO","fonts", config));//false;
+	
+	game->carrega->display = string_para_boolean(pegar_configuracao("HABILITADO","tela", config));//false;
+	game->telas->sprite = string_para_boolean(pegar_configuracao("SPRITE_HABILITADO","tela", config));//;
+	game->telas->gameover = string_para_boolean(pegar_configuracao("GAMEOVER_HABILITADO","tela", config));//;
+	game->telas->start = string_para_boolean(pegar_configuracao("START_HABILITADO","tela", config));//;
+	game->telas->game = string_para_boolean(pegar_configuracao("GAME_HABILITADO","tela", config));//;
+	
+	/** Carregamento dos Minions **/
+	game->minions->minion = malloc(game->minions->qtd * sizeof(MINION*));
+	
+	for(int i = 0; i < game->minions->qtd; i++){
 		game->minions->minion[i] = malloc(sizeof(MINION));
 	}
 	
@@ -69,47 +118,7 @@ int inicializar_allegro(){
 	game->minions->minion[4]->falas->frase = malloc(game->minions->minion[4]->falas->n * sizeof(char*));
 	game->minions->minion[4]->falas->frase[0] = "A dica para o EP4 está no EP3!";
 	
-	int pontos_perdidos;
-	int pontos_vencidos;
 	
-	config = carregar_configuracao("configuration.conf");
-    
-	if(config == NULL){
-        criar_configuracao("configuration.conf");
-	}
-	
-	//largura_imagem = string_para_int(pegar_configuracao("ALTURA","allegro", config)); 
-	//altura_imagem = string_para_int(pegar_configuracao("LARGURA","allegro", config));
-	//string_para_double
-	//string_para_boolean
-	
-	game->largura_tela = 1280;
-	game->altura_tela = 720;
-	game->divisor_tempo = 1;
-	game->divisor_camera = 1.5;
-	game->luminus = 80;
-	game->debug = false;
-	game->maximo_respeito = 10; 
-	game->_vizinhos = 100;
-	game->usa_fecho = TRUE;
-	game->melhor_de = 5;
-	game->calibragem = 3;
-	game->tempo_jogada = 5;
-	game->pontos->numero_partidas = 0;
-	game->pontos->jogador_1 = 0;
-	game->pontos->jogador_2 = 0;
-	game->pontos->respeito_jogador_1 = 0;
-	game->pontos->respeito_jogador_2 = 0;
-	
-	game->carrega->musica = false;
-	game->carrega->fonte = false;
-	game->carrega->display = false;
-	
-	game->telas->sprite = true;
-	game->telas->gameover = true;
-	game->telas->start = true;
-	game->telas->game = true;
-
 	cam = camera_inicializa(0);
 
 	game->largura_camera = cam->largura;
@@ -142,7 +151,8 @@ int inicializar_allegro(){
 	if(!al_reserve_samples(1))
 		erro("failed to reserve samples!\n");
 
-    timer = al_create_timer(1.0 / FPS);
+    timer = al_create_timer(game->divisor_tempo/ FPS);
+	
     if(!timer)
         erro("erro na criacao do relogio\n");
 
@@ -154,18 +164,16 @@ int inicializar_allegro(){
     if(!queue)
         erro("erro na criacao da fila\n");
 
-    
-	//game->idioma_setado = pegar_configuracao("IDIOMA","user", config);
-	game->idioma_setado = NULL;
+	game->idioma_setado = pegar_configuracao("IDIOMA","system", config);
 	
-	game->fontes->super = al_load_font("assets/font/PAPYRUS.TTF", 150, 10);
-	game->fontes->h1 = al_load_font("assets/font/PAPYRUS.TTF", 50, 10);
-	game->fontes->h2 = al_load_font("assets/font/PAPYRUS.TTF", 40, 10);
-	game->fontes->h3 = al_load_font("assets/font/PAPYRUS.TTF", 30, 10);
-	game->fontes->h4 = al_load_font("assets/font/PAPYRUS.TTF", 25, 10);
-	game->fontes->h5 = al_load_font("assets/font/PAPYRUS.TTF", 20, 10);
-	game->fontes->h6 = al_load_font("assets/font/PAPYRUS.TTF", 15, 10);
-	game->fontes->p = al_load_font("assets/font/PAPYRUS.TTF", 12, 10);
+	game->fontes->super = al_load_font(pegar_configuracao("SUPER_FONTE","fonts", config), string_para_int(pegar_configuracao("SUPER_TAMANHO","fonts", config)), 10);
+	game->fontes->h1 = al_load_font(pegar_configuracao("H1_FONTE","fonts", config), string_para_int(pegar_configuracao("H1_TAMANHO","fonts", config)), 10);
+	game->fontes->h2 = al_load_font(pegar_configuracao("H2_FONTE","fonts", config), string_para_int(pegar_configuracao("H2_TAMANHO","fonts", config)), 10);
+	game->fontes->h3 = al_load_font(pegar_configuracao("H3_FONTE","fonts", config), string_para_int(pegar_configuracao("H3_TAMANHO","fonts", config)), 10);
+	game->fontes->h4 = al_load_font(pegar_configuracao("H4_FONTE","fonts", config), string_para_int(pegar_configuracao("H4_TAMANHO","fonts", config)), 10);
+	game->fontes->h5 = al_load_font(pegar_configuracao("H5_FONTE","fonts", config), string_para_int(pegar_configuracao("H5_TAMANHO","fonts", config)), 10);
+	game->fontes->h6 = al_load_font(pegar_configuracao("H6_FONTE","fonts", config), string_para_int(pegar_configuracao("H6_TAMANHO","fonts", config)), 10);
+	game->fontes->p = al_load_font(pegar_configuracao("P_FONTE","fonts", config), string_para_int(pegar_configuracao("P_TAMANHO","fonts", config)), 10);
 	
 	if(game->idioma_setado != NULL)
         carregar_idioma(game->idioma_setado);
@@ -173,15 +181,16 @@ int inicializar_allegro(){
 		carregar_idioma("data/idiomas/pt_br.conf");
 	
 	char *test = pegar_idioma("test", linguagem);
-	printf("%s", test);
 
-	game->musica = al_load_sample("assets/sound/one.wav");
-
-	if (!game->musica)
-		{
-			erro("Nao carregou o arquivo de musica game->musica");
-		}
-		al_play_sample(game->musica, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
+	if(game->carrega->musica){
+		game->musica = al_load_sample(pegar_configuracao("FUNDO","audio", config));
+		
+		if (!game->musica){
+				erro("Nao carregou o arquivo de musica game->musica");
+			}
+		else
+			al_play_sample(game->musica, string_para_double(pegar_configuracao("FUNDO_GAIN","audio", config)), string_para_double(pegar_configuracao("FUNDO_PAN","audio", config)), string_para_double(pegar_configuracao("FUNDO_SPEED","audio", config)), ALLEGRO_PLAYMODE_LOOP,NULL);
+	}
 	
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));

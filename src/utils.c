@@ -24,12 +24,16 @@ void aviso(char *mensagem){
  *
  *  @return <#return value description#>
  */
-double string_para_double(char *string){
+double string_para_double(const char *string){
+	char *debug;
+	double value;
 	if(string == NULL) {
-		aviso("Não pegou a configuração correta.");
+		aviso("Não pegou a configuração correta.\n");
 		return 1;
 	}
-	return strtod(string, NULL);
+	
+	value = strtod(string, &debug);
+	return value;
 }
 /**
  *  <#Description#>
@@ -38,9 +42,9 @@ double string_para_double(char *string){
  *
  *  @return <#return value description#>
  */
-int string_para_int(char *string){
+int string_para_int(const char *string){
 	if(string == NULL) {
-		aviso("Não pegou a configuração correta.");
+		aviso("Não pegou a configuração correta.\n");
 		return 1;
 	}
 	return atoi(string);
@@ -53,6 +57,6 @@ int string_para_int(char *string){
  *
  *  @return <#return value description#>
  */
-int string_para_boolean(char *string){
+int string_para_boolean(const char *string){
 	return (strcmp(string, "TRUE") == 0 || strcmp(string, "true") == 0 || strcmp(string, "True") == 0);
 }
