@@ -24,7 +24,7 @@ void aviso(char *mensagem){
  *
  *  @return <#return value description#>
  */
-float string_para_float(char *string){
+double string_para_double(char *string){
 	if(string == NULL) {
 		aviso("Não pegou a configuração correta.");
 		return 1;
@@ -44,4 +44,15 @@ int string_para_int(char *string){
 		return 1;
 	}
 	return atoi(string);
+}
+
+/**
+ *  <#Description#>
+ *
+ *  @param string <#string description#>
+ *
+ *  @return <#return value description#>
+ */
+int string_para_boolean(char *string){
+	return (strcmp(string, "TRUE") == 0 || strcmp(string, "true") == 0 || strcmp(string, "True") == 0);
 }

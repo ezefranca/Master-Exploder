@@ -80,6 +80,8 @@ int inicializar_allegro(){
 	
 	//largura_imagem = string_para_int(pegar_configuracao("ALTURA","allegro", config)); 
 	//altura_imagem = string_para_int(pegar_configuracao("LARGURA","allegro", config));
+	//string_para_double
+	//string_para_boolean
 	
 	game->largura_tela = 1280;
 	game->altura_tela = 720;
