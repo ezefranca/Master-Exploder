@@ -34,26 +34,15 @@
 	ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
 	ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
 	
-    //ALLEGRO_COLOR vermelho = al_map_rgb_f(255, 0, 0);
-
+	//Configuracoes do Allegro
     int desenhar = 0;
     int terminar = 0;
-    int amostragem = 0;
-	int tela = 0;
-    double x[10]; 
-    double fx[10];
-
-    //int atualiza = 0;
 
 	//Configuracoes da jogabilidade
 	bool abertura_chefe = false;
 	bool chefe = false;
-	bool sair = false;
 	bool introducao = true;
-	bool first = false;
-	introducao = false;
-	bool fim_introducao = false;
-	bool reinicio = false;
+	bool logo = true;//bool first = false;
 	bool minion_4_usado = FALSE;
 	bool carregar_mao = FALSE;
 	
@@ -66,6 +55,8 @@
 	int contador = 0;
 	int primeira = 0;
 	int calibragem = 0;
+	int tela = 0;
+	
 	MINION *minion_adversario;
 	
     camera_atualiza(cam);
@@ -80,7 +71,6 @@
 
 	if(game->telas->sprite)
 		tela_sprite();
-
 		
 	
 	//Seleção do minion inicial.
@@ -123,11 +113,12 @@
 						carregar_mao = TRUE;
 					}
 					else {
-						//if(!first){al_rest(1);first = TRUE;}
+						if(logo){
+							tela_logo();
+							logo = false;
+							}
 						tela_abertura();
 					}
-					//printf("Tela %d\n", tela);
-					//tela_abertura();
 					break;
 				case TELA_ABERTURA:
 					if(introducao){
@@ -140,18 +131,18 @@
 							}
 						}
 					else {
-							//tela de introducao do Minion.
-							tela_minion(minion_adversario, primeira);
-							//Quando controle for melhorado tira o al_rest.
-							al_rest(2);
-							if(controle == PAPEL){
-								//Sai da introducao e comeca o jogo no proximo loop.
-								tela = TELA_JOGO;
-								//Próximo loop não é a primeira introdução e não é a primeira frase de minion.
-								primeira = FALSE;
-								controle =-1;
-							}
+						//tela de introducao do Minion.
+						tela_minion(minion_adversario, primeira);
+						//Quando controle for melhorado tira o al_rest.
+						al_rest(2);
+						if(controle == PAPEL){
+							//Sai da introducao e comeca o jogo no proximo loop.
+							tela = TELA_JOGO;
+							//Próximo loop não é a primeira introdução e não é a primeira frase de minion.
+							primeira = FALSE;
+							controle =-1;
 						}
+					}
 					break;
 				case TELA_JOGO:
 					if(chefe && abertura_chefe){
@@ -191,7 +182,7 @@
 						pontos_respeito = 1;
 					}
 					else if(controle == TESOURA) {
-						sair = true;
+						terminar = 1;
 					}
 					break;
 				case TELA_PERDEDOR:
@@ -209,17 +200,17 @@
 						pontos_respeito = 1;
 					}
 					else if(controle == TESOURA) {
-						sair = true;
+						terminar = 1;
 					}
 					break;
 			}
-		
-			if(sair)
+			//Segundo terminar, termina antes de executar as proximas acoes, caso estado tenha sido alterado nas telas.
+			if(terminar)
 				break;
 			
 			desenhar = 0;
 			camera_atualiza(cam);
-			//Antigo remove fundo
+
 			subtrai_matriz(cam->quadro, primeiro, matriz);
 			
 			normalizacao_preto_e_branco(matriz, altura, largura);
@@ -236,20 +227,8 @@
 			
 			matriz_copia(matriz, matriz_contagem, altura, largura);
 
-			//camera_copia(cam, matriz_verde, direita);
+			/* Tesoura, 20000 - 36000 | Pedra,   15000 - 45000 | Papel, 40000 - 120000 */
 			
-			ALLEGRO_COLOR azul = al_map_rgb_f(0, 0, 255);
-			ALLEGRO_COLOR verde = al_map_rgb_f(0, 255, 0);
-			ALLEGRO_COLOR preto = al_map_rgb_f(0, 0, 0);
-			
-			
-			/*
-			Tesoura, 20000 - 36000
-
-			Pedra,   15000 - 45000
-
-			Papel, 40000 - 120000
-			*/
 			ponto laranja;
 			centroide(f, laranja);
 			
@@ -273,7 +252,6 @@
 			
 			area *b = conta_pb(laranja, matriz_contagem);
 
-			
 			if(game->debug)
 				camera_copia(cam, matriz_contagem, direita);
 			
@@ -288,7 +266,9 @@
     			captura_pedra(pedra_inicial, f, b);
     			printf("teste\n");
     	    }
-
+			
+			/******************** Controle e escolha da mão adversária ****************************/
+			
 			if(pedra_inicial != NULL){
 				controle = calcula_padrao(f, b, pedra_inicial);
 				mao_adversaria = mao_adversario(controle);
@@ -296,8 +276,9 @@
 			
 			free(b);
 			free(f);
-			/******************** Controle e escolha da mão adversária ****************************/
-			//printf("Pontos de respeito%d", pontos_respeito);
+			
+			
+			//printf("Pontos de respeito%d\n", pontos_respeito);
 			
 			
 			/*********** Ações do jogo. ************/
@@ -305,14 +286,14 @@
 			//Tela de Abertura rodando.
 			if(tela == TELA_OPCAO){
 				if(controle == TESOURA){
-					//break;
+					break;
 				}
 				else if(controle == PAPEL){
 					//Comeca introducao do chefe no inicio do jogo.
 					tela = TELA_ABERTURA;	
 					introducao = true;
 				}
-			} 
+			}
 			else if(tela == TELA_JOGO){
 				if(!abertura_chefe){
 					//Exibe mãos
@@ -327,6 +308,8 @@
 						}
 						
 					if(fim_jogada(pontos_jogador_1, pontos_jogador_2, game->melhor_de)){
+						rodada++;
+						
 						if(chefe){
 							//Chefe ganhou
 							if(ganhador_jogo(pontos_jogador_1, pontos_jogador_2) == JOGADOR_2){
@@ -376,10 +359,7 @@
 					}
 				}
 			}
-		}
-		
-		
-		
+		}		
 	}
 	
 	al_destroy_bitmap(direita);
