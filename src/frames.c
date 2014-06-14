@@ -144,7 +144,7 @@ void exibe_pontos(int pontos){
  *  <#Description#>
  */
 void tela_logo(){
-	exibe_com_efeito("assets/image/intro/logo2.jpg", 3, 2);
+	exibe_com_efeito("assets/image/intro/logo2.jpg", 3, 3);
 }
 /**
  *  <#Description#>
