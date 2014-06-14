@@ -26,7 +26,7 @@ int finalizar_allegro(){
 	
 	destroi_idioma(linguagem);
 	
-	/*
+	
 	al_destroy_font(game->fontes->super);
 	al_destroy_font(game->fontes->h1);
 	al_destroy_font(game->fontes->h2);
@@ -34,7 +34,7 @@ int finalizar_allegro(){
 	al_destroy_font(game->fontes->h4);
 	al_destroy_font(game->fontes->h5);
 	al_destroy_font(game->fontes->h6);
-	al_destroy_font(game->fontes->p);*/
+	al_destroy_font(game->fontes->p);
 	
 	free(game->fontes);
 	free(game->telas);

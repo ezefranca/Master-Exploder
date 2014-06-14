@@ -1,4 +1,5 @@
 #include "jogabilidade.h"
+#include <time.h>
 
 /**
  *  <#Description#>
@@ -97,7 +98,7 @@ int mao_adversario(int jogador_1){
  *
  *  @return <#return value description#>
  */
-Minion *rand_boss(bool *minion_4_usado){
+MINION *rand_boss(bool *minion_4_usado){
 	double resultado;
 	int randomic;
 	srand(abs(time(NULL)));

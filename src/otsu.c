@@ -8,9 +8,9 @@
  *  @param altura  <#altura description#>
  *  @param largura <#largura description#>
  */
-void otsu_binarizacao(unsigned char ***matriz, unsigned char ***saida, int altura, int largura)
-/* método de otsu - referencia teórica wiki.icmc.usp.br/images/b/bb/Otsu_e_derivadas.pdf‎ */
-{
+void otsu_binarizacao(unsigned char ***matriz, unsigned char ***saida, int altura, int largura){
+	/* método de otsu - referencia teórica wiki.icmc.usp.br/images/b/bb/Otsu_e_derivadas.pdf‎ */
+
   int histograma[256];
   double probabilidade[256], omega[256]; /* probabilidade de ser cinza */
   double myu[256];

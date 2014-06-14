@@ -9,7 +9,7 @@ typedef struct {
     int r;       // vermelho
     int g;       // verde
     int b;       // azul
-} Rgb;
+} RGB;
 
 /**
  *  <#Description#>
@@ -18,7 +18,7 @@ typedef struct {
     double h;       // hue
     double s;       // 
     double v;       //
-} Hsv;
+} HSV;
 
 /**
  *  <#Description#>
@@ -55,6 +55,6 @@ void valorizador_de_bordas(unsigned char ***matriz, int vizinhos, int localX, in
  *  @param cores     <#cores description#>
  *  @param cores_hsv <#cores_hsv description#>
  */
-void rgb_para_hsv(Rgb *cores, Hsv *cores_hsv);
+void rgb_para_hsv(RGB *cores, HSV *cores_hsv);
 
 #endif

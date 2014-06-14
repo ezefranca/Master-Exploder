@@ -8,5 +8,4 @@
  */
 int inicializar_allegro();
 
-
 #endif

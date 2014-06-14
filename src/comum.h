@@ -28,8 +28,6 @@
 /*Constantes*/
 #define FPS 60
 
-
-
 //Bloco de variaveis
 int euclidiana;
 camera *cam;

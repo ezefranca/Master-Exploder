@@ -6,8 +6,8 @@
 #define EMPATE 0
 
 typedef struct _idioma IDIOMA;
-typedef struct _game Game;
-typedef struct _minion Minion;
+typedef struct _game GAME;
+typedef struct _minion MINION;
 
 
 /**
@@ -35,7 +35,7 @@ void tela_introducao();
 /**
  *  <#Description#>
  */
-void tela_minion(Minion *minion_adversario, int primeira_frase);
+void tela_minion(MINION *minion_adversario, int primeira_frase);
 
 /**
  *  <#Description#>
@@ -59,7 +59,7 @@ void tela_chefe();
  *  @param pontos_jogador_2 <#pontos_jogador_2 description#>
  *  @param contador         <#contador description#>
  */
-void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, int pontos_respeito, Minion *minion_adversario, int contador, int mostra_contador);
+void tela_jogo(int pontos_jogador_1, int pontos_jogador_2, int pontos_respeito, MINION *minion_adversario, int contador, int mostra_contador);
 
 void tela_jogo_maos(int pontos_jogador_1, int pontos_jogador_2, int pontos_respeito, int mao_jogador, int mao_adversaria);
 

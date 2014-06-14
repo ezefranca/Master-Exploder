@@ -56,6 +56,7 @@
 	bool reinicio = false;
 	bool minion_4_usado = FALSE;
 	bool carregar_mao = FALSE;
+	
 	int rodada = 0;
 	int controle = -1;
 	int mao_adversaria = -1;
@@ -65,7 +66,7 @@
 	int contador = 0;
 	int primeira = 0;
 	int calibragem = 0;
-	Minion *minion_adversario;
+	MINION *minion_adversario;
 	
     camera_atualiza(cam);
 
@@ -283,7 +284,7 @@
 			}*/
 			
 		    if(pedra_inicial == NULL && carregar_mao){
-		    	pedra_inicial = malloc(sizeof(mao));
+		    	pedra_inicial = malloc(sizeof(MAO));
     			captura_pedra(pedra_inicial, f, b);
     			printf("teste\n");
     	    }

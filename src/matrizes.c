@@ -38,15 +38,10 @@ void bitmap_para_matriz(ALLEGRO_BITMAP *bitmap, unsigned char ***matriz){
 			pixel++;
 
 			matriz[y][x][2] = *pixel;
-			pixel += 2;
-      // matriz[y][x][2] = *pixel;
-      // pixel++;
-
-      // matriz[y][x][1] = *pixel;
-      // pixel++;
-
-      // matriz[y][x][0] = *pixel;
-      // pixel++;
+			pixel++;
+			//Alpha
+			matriz[y][x][3] = *pixel;
+			pixel++;
 		}
     row += region->pitch;
   }
@@ -121,7 +116,6 @@ void desenha_reta(ponto a, ponto b, unsigned char ***matriz){
 	}
 	else {
 		usar_y = true;
-		//Verificando qual Y é maior.
 	}
 	
 	if(b[Y] > a[Y]){

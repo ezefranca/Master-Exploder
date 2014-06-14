@@ -110,8 +110,6 @@ void filtro_mediana(unsigned char ***matriz, unsigned char ***saida, int altura,
           for(int dj = -1; dj <= 1; dj++) {
 
             buffer[k] = matriz[i + di][j + dj][0];
-            // buffer[k] = imagem[i + di][j + dj][1];
-            // buffer[k] = imagem[i + di][j + dj][2];
             k++;
           }
 
@@ -159,8 +157,6 @@ void filtro_media(unsigned char ***matriz, unsigned char ***saida, int altura, i
           for(int dj = -1; dj <= 1; dj++) {
 
             buffer[k] = matriz[i + di][j + dj][0];
-            // buffer[k] = imagem[i + di][j + dj][1];
-            // buffer[k] = imagem[i + di][j + dj][2];
             k++;
           }
 

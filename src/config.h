@@ -68,12 +68,12 @@ typedef struct _pontos {
 	int jogador_2;
 	int respeito_jogador_1;
 	int respeito_jogador_2;
-} Pontuacao;
+} PONTUACAO;
 
 typedef struct _falas {
 	int n;
 	char **frase;
-} Fala;
+} FALAS;
 
 /**
  *  <#Description#>
@@ -82,16 +82,16 @@ typedef struct _minion {
 	double probabilidade;
 	int pontos_perdidos;
 	int pontos_vencidos;
-	Fala *falas;
+	FALAS *falas;
 	char *imagem;
-} Minion;
+} MINION;
 
 /**
  *  <#Description#>
  */
 typedef struct _minions {
-	Minion **minion;
-} Minions;
+	MINION **minion;
+} MINIONS;
 
 /**
  *  <#Description#>
@@ -105,7 +105,7 @@ typedef struct _fontes {
 	ALLEGRO_FONT *h5;
 	ALLEGRO_FONT *h6;
 	ALLEGRO_FONT *p;	
-} Fontes;
+} FONTES;
 
 /**
  *  <#Description#>
@@ -114,14 +114,18 @@ typedef struct _carrega {
 	bool musica;
 	bool fonte;
 	bool display;
-} Carregamento;
+} CARREGAMENTO;
 
+/**
+ *  <#Description#>
+ */
 typedef struct _telas {
 	bool sprite;
 	bool gameover;
 	bool start;
 	bool game;
-} Telas;
+} TELAS;
+
 /**
  *  <#Description#>
  */
@@ -142,14 +146,14 @@ typedef struct _game {
 	int tempo_jogada;
 	int calibragem;
 	const char *idioma_setado;
-	Telas *telas;
-	Carregamento *carrega;
-	Pontuacao *pontos;
-	Fontes *fontes;
-	Minions *minions;
+	TELAS *telas;
+	CARREGAMENTO *carrega;
+	PONTUACAO *pontos;
+	FONTES *fontes;
+	MINIONS *minions;
 	ALLEGRO_SAMPLE *musica;
-} Game;
+} GAME;
 
-Game *game;
+GAME *game;
 
 #endif

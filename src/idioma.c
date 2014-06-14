@@ -142,7 +142,6 @@ void carregar_idioma(const char *arquivo){
     free(tstring);
     free(tvar);
 
-    //loaded_idioma = 1;
     return;
 }
 /**
@@ -177,6 +176,7 @@ const char *pegar_idioma(const char *key, IDIOMA *idioma){
     }
 	return key;
 }
+
 /**
  *  <#Description#>
  *

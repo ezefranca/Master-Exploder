@@ -7,22 +7,22 @@
  *  @return <#return value description#>
  */
 int inicializar_allegro(){
-	game = malloc(sizeof(Game));
-	game->pontos = malloc(sizeof(Pontuacao));
-	game->fontes = malloc(sizeof(Fontes));
-	game->carrega = malloc(sizeof(Carregamento));
-	game->telas = malloc(sizeof(Telas));
-	game->minions = malloc(sizeof(Minions));
-	game->minions->minion = malloc(5 * sizeof(Minion*));
+	game = malloc(sizeof(GAME));
+	game->pontos = malloc(sizeof(PONTUACAO));
+	game->fontes = malloc(sizeof(FONTES));
+	game->carrega = malloc(sizeof(CARREGAMENTO));
+	game->telas = malloc(sizeof(TELAS));
+	game->minions = malloc(sizeof(MINIONS));
+	game->minions->minion = malloc(5 * sizeof(MINION*));
 	
 	for(int i = 0; i < 5; i++){
-		game->minions->minion[i] = malloc(sizeof(Minion));
+		game->minions->minion[i] = malloc(sizeof(MINION));
 	}
 	
 	game->minions->minion[0]->probabilidade = 0.4;
 	game->minions->minion[0]->pontos_perdidos = 1;
 	game->minions->minion[0]->pontos_vencidos = 1;
-	game->minions->minion[0]->falas = malloc(sizeof(Fala));
+	game->minions->minion[0]->falas = malloc(sizeof(FALAS));
 	game->minions->minion[0]->falas->n = 2;
 	game->minions->minion[0]->imagem = "assets/image/minions/vinicius.png";
 	game->minions->minion[0]->falas->frase = malloc(game->minions->minion[0]->falas->n * sizeof(char*));
@@ -33,7 +33,7 @@ int inicializar_allegro(){
 	game->minions->minion[1]->probabilidade = 0.75;
 	game->minions->minion[1]->pontos_perdidos = 2;
 	game->minions->minion[1]->pontos_vencidos = 3;
-	game->minions->minion[1]->falas = malloc(sizeof(Fala));
+	game->minions->minion[1]->falas = malloc(sizeof(FALAS));
 	game->minions->minion[1]->falas->n = 1;
 	game->minions->minion[1]->imagem = "assets/image/minions/vinicius.png";
 	game->minions->minion[1]->falas->frase = malloc(game->minions->minion[1]->falas->n * sizeof(char*));
@@ -42,7 +42,7 @@ int inicializar_allegro(){
 	game->minions->minion[2]->probabilidade = 0.9;
 	game->minions->minion[2]->pontos_perdidos = 3;
 	game->minions->minion[2]->pontos_vencidos = 2;
-	game->minions->minion[2]->falas = malloc(sizeof(Fala));
+	game->minions->minion[2]->falas = malloc(sizeof(FALAS));
 	game->minions->minion[2]->falas->n = 3;
 	game->minions->minion[2]->imagem = "assets/image/minions/vinicius.png";
 	game->minions->minion[2]->falas->frase = malloc(game->minions->minion[2]->falas->n * sizeof(char*));
@@ -53,7 +53,7 @@ int inicializar_allegro(){
 	game->minions->minion[3]->probabilidade = 0.95;
 	game->minions->minion[3]->pontos_perdidos = 10;
 	game->minions->minion[3]->pontos_vencidos = 0;
-	game->minions->minion[3]->falas = malloc(sizeof(Fala));
+	game->minions->minion[3]->falas = malloc(sizeof(FALAS));
 	game->minions->minion[3]->falas->n = 1;
 	game->minions->minion[3]->imagem = "assets/image/minions/vinicius.png";
 	game->minions->minion[3]->falas->frase = malloc(game->minions->minion[3]->falas->n * sizeof(char*));
@@ -63,7 +63,7 @@ int inicializar_allegro(){
 	game->minions->minion[4]->probabilidade = 1;
 	game->minions->minion[4]->pontos_perdidos = 3;
 	game->minions->minion[4]->pontos_vencidos = 2;
-	game->minions->minion[4]->falas = malloc(sizeof(Fala));
+	game->minions->minion[4]->falas = malloc(sizeof(FALAS));
 	game->minions->minion[4]->falas->n = 1;
 	game->minions->minion[4]->imagem = "assets/image/minions/vinicius.png";
 	game->minions->minion[4]->falas->frase = malloc(game->minions->minion[4]->falas->n * sizeof(char*));
@@ -71,10 +71,12 @@ int inicializar_allegro(){
 	
 	int pontos_perdidos;
 	int pontos_vencidos;
-	//config = carregar_configuracao("configuration.conf");
+	
+	config = carregar_configuracao("configuration.conf");
     
-	//if(config == NULL)
-    //    criar_configuracao("configuration.conf");
+	if(config == NULL){
+        criar_configuracao("configuration.conf");
+	}
 	
 	//largura_imagem = string_para_int(pegar_configuracao("ALTURA","allegro", config)); 
 	//altura_imagem = string_para_int(pegar_configuracao("LARGURA","allegro", config));
@@ -84,7 +86,7 @@ int inicializar_allegro(){
 	game->divisor_tempo = 1;
 	game->divisor_camera = 1.5;
 	game->luminus = 80;
-	game->debug = false;
+	game->debug = true;
 	game->maximo_respeito = 10; 
 	game->_vizinhos = 100;
 	game->usa_fecho = TRUE;
@@ -173,13 +175,11 @@ int inicializar_allegro(){
 
 	game->musica = al_load_sample("assets/sound/one.wav");
 
-	//if(game->carrega->musica != NULL) {
-		if (!game->musica)
+	if (!game->musica)
 		{
 			erro("Nao carregou o arquivo de musica game->musica");
 		}
-		//al_play_sample(game->musica, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
-	//}
+		al_play_sample(game->musica, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
 	
     al_register_event_source(queue, al_get_timer_event_source(timer));
     al_register_event_source(queue, al_get_display_event_source(display));

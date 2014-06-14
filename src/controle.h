@@ -3,6 +3,7 @@
 
 #include <math.h>
 #include "fecho.h"
+
 /**
  *  <#Description#>
  */
@@ -18,7 +19,7 @@ typedef struct _mao
     ponto maior_y;
     int qtd_branco;
     int area_fecho;
-} mao;
+} MAO;
 
 typedef struct _controle{
     poligono *fecho;          
@@ -32,15 +33,31 @@ typedef struct _controle{
 } controle;
 
 controle *c;
-mao *pedra_inicial;
+MAO *pedra_inicial;
 
 int verificacoes[10];
 int padrao;
 int contador_global;
 
 
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param saida   <#saida description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ */
+int calcula_padrao(poligono *f, area *b, MAO *pedra_inicial);
 
-int calcula_padrao(poligono *f, area *b, mao *pedra_inicial);
-void captura_pedra(mao *pedra_inicial, poligono *fecho, area *b);
+/**
+ *  <#Description#>
+ *
+ *  @param matriz  <#matriz description#>
+ *  @param saida   <#saida description#>
+ *  @param altura  <#altura description#>
+ *  @param largura <#largura description#>
+ */
+void captura_pedra(MAO *pedra_inicial, poligono *fecho, area *b);
 
 #endif

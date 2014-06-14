@@ -99,12 +99,6 @@ void pontos_extremo(poligono *p, int largura, int altura){
             maior_y[Y] = p->p[i][Y];
         }
     }
-    //copia_ponto(menor_ponto,ponto_inicial);
-    //printf("menor ponto X(%d,%d)\n",menor_x[X], menor_x[Y]);
-    //printf("maior ponto X(%d,%d)\n",maior_x[X], maior_x[Y]);
-    //printf("menor ponto Y(%d,%d)\n",menor_y[X], menor_y[Y]);
-    //printf("maior ponto Y(%d,%d)\n",maior_y[X], maior_y[Y]);
-	//printf("ponto teste (%d,%d) (%d,%d)", menor_x[X], maior_y[Y], maior_x[X], menor_y[Y]);
     return;
 }
 /**
@@ -310,7 +304,7 @@ poligono* fecho(unsigned char ***matriz, int altura, int largura){
     poligono *fecho;
     fecho = malloc(sizeof(poligono));
     int n = 0; //numero de pontos
-    //int _vizinhos = 100;
+
     for (int i = game->_vizinhos; i < altura - game->_vizinhos; i++)
         for (int j = game->_vizinhos; j < largura - game->_vizinhos; j++)
             if(matriz[i][j][0] == 255 && matriz[i][j][1] == 255 && matriz[i][j][2] == 255)
@@ -422,13 +416,7 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
 	
 	if((centroide[X] < 2 && centroide[Y] < 2) || ((centroide[X] > largura - 1 && centroide[Y] > altura - 1)))
 		return a;
-    /******************************** Marca todos como não visitados ********************************/
-    /*for(int y = 0; y < altura; y++){
-      for(int x = 0; x < largura; x++){
-		if(matriz_pb_cor[y][x][3] != 1)
-			matriz_pb_cor[y][x][3] = 0;
-      }
-    }
+		
 
     /* Vamos pensar no fecho convexo como um plano cartesiano X, Y
 
@@ -457,9 +445,11 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
 				a->qtd_branco++;
 				
 			matriz_pb_cor[y][x][3] = 1;
-			matriz_pb_cor[y][x][0] = 255;
-			matriz_pb_cor[y][x][1] = 0;
-			matriz_pb_cor[y][x][2] = 0;
+			if(game->debug) {
+				matriz_pb_cor[y][x][0] = 255;
+				matriz_pb_cor[y][x][1] = 0;
+				matriz_pb_cor[y][x][2] = 0;
+			}
 		}
     }
 
@@ -471,22 +461,19 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
     /*******************/
     for(y = centroide[Y]; y > 1; y--){
 		x = centroide[X] - 1;
-		if(matriz_pb_cor[y][x][3] == 1) break;
+		if(matriz_pb_cor[y][x][3] == 1) break; 
 		for(x; x > 1 && matriz_pb_cor[y][x][3] != 1; x--) {
-        //se encontra parede do fecho
-        
-		
-		
-        if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
-            a->qtd_branco++;
-        else
-			a->qtd_preto++;
-		matriz_pb_cor[y][x][3] = 1;
-		matriz_pb_cor[y][x][0] = 0;
-		matriz_pb_cor[y][x][1] = 0;
-		matriz_pb_cor[y][x][2] = 255;
-		}
-	  
+			if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
+				a->qtd_branco++;
+			else
+				a->qtd_preto++;
+			matriz_pb_cor[y][x][3] = 1;
+			if(game->debug) {
+				matriz_pb_cor[y][x][0] = 0;
+				matriz_pb_cor[y][x][1] = 0;
+				matriz_pb_cor[y][x][2] = 255;
+			}
+		}	  
     }
 
     /************************************ Verificação para trás + baixo ***********************************/
@@ -497,16 +484,17 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
     /*******************/
     for(y = centroide[Y]; y < altura; y++){
 		x = centroide[X] - 1;
-      for(x; x > 1 && matriz_pb_cor[y][x][3] != 1; x--) {
-        //se encontra parede do fecho
+		for(x; x > 1 && matriz_pb_cor[y][x][3] != 1; x--) {
 			if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
 				a->qtd_branco++;
 			else 
 				a->qtd_preto++;
 			matriz_pb_cor[y][x][3] = 1;
-			matriz_pb_cor[y][x][0] = 0;
-			matriz_pb_cor[y][x][1] = 255;
-			matriz_pb_cor[y][x][2] = 0;
+			if(game->debug) {
+				matriz_pb_cor[y][x][0] = 0;
+				matriz_pb_cor[y][x][1] = 255;
+				matriz_pb_cor[y][x][2] = 0;
+			}
 		}
 		
     }
@@ -519,19 +507,17 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
     for(y = centroide[Y]; y > 1; y--){
 		x = centroide[X];
 		for(x; x < largura && matriz_pb_cor[y][x][3] != 1; x++) {
-        //se encontra parede do fecho
-
-		
-		
-        if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
-            a->qtd_branco++;
-        else 
-			a->qtd_preto++;
-		
-		matriz_pb_cor[y][x][3] = 1;	
-		matriz_pb_cor[y][x][0] = 255;
-		matriz_pb_cor[y][x][1] = 0;
-		matriz_pb_cor[y][x][2] = 0;
+			if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
+				a->qtd_branco++;
+			else 
+				a->qtd_preto++;
+			
+			matriz_pb_cor[y][x][3] = 1;	
+			if(game->debug) {
+				matriz_pb_cor[y][x][0] = 255;
+				matriz_pb_cor[y][x][1] = 0;
+				matriz_pb_cor[y][x][2] = 0;
+			}
 		}
     }
 return a;

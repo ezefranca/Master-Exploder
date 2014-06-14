@@ -1,7 +1,6 @@
 #ifndef JOGABILIDADE_H
 #define JOGABILIDADE_H
 
-#include <time.h>
 #include "comum.h"
 
 /* Constantes */
@@ -68,7 +67,7 @@ int mao_adversario(int jogador_1);
  *
  *  @return <#return value description#>
  */
-Minion *rand_boss(bool *minion_4_usado);
+MINION *rand_boss(bool *minion_4_usado);
 
 /**
  *  <#Description#>

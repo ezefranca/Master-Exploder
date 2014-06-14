@@ -14,7 +14,7 @@
  *  @param altura  <#altura description#>
  *  @param largura <#largura description#>
  */
- int calcula_padrao(poligono *f, area *b, mao *pedra_inicial){
+ int calcula_padrao(poligono *f, area *b, MAO *pedra_inicial){
 
  	c = malloc(sizeof(controle));
  	c->razao = abs(area_do_fecho(f) / pedra_inicial->area_fecho);
@@ -72,17 +72,12 @@
  				return 0;
  			}
  		}
-
- 		
-
-
  		free(c);
  		return -1;
  	}
  	free(c);
  	return -1;
  }
-
 
 /**
  *  <#Description#>
@@ -92,7 +87,7 @@
  *  @param altura  <#altura description#>
  *  @param largura <#largura description#>
  */
- void captura_pedra(mao *pedra_inicial, poligono *fecho, area *b){
+ void captura_pedra(MAO *pedra_inicial, poligono *fecho, area *b){
 
  	pedra_inicial->qtd_branco = b->qtd_branco;
  	pedra_inicial->area_fecho = area_do_fecho(fecho);
@@ -103,5 +98,4 @@
  	pedra_inicial->menor_y[Y] = menor_y[Y];
 
  	return;
-
  }
