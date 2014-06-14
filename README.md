@@ -36,12 +36,13 @@ A biblioteca para aquisição da câmera fornecida pelo [Profº Marcelo Hashimot
 ### Requisitos de instalação
 ----------------------
 
-Git (opcional recomendado), Allegro 5.x e OpenCV instalados no sistema. Versão do Allegro utilizada é a 5.0.10.
+Git (opcional recomendado), Allegro 5.x e OpenCV instalados no sistema.
 
 [![Git](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/git.png)](http://git-scm.com/) | [![OpenCV](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/opencv-logo.png)](http://www.opencv.org/) | [![Allegro5](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/allegro-logo.png)](http://alleg.sourceforge.net/)
 --- | --- | --- | --- | --- | --- | ---
 [Git](http://git-scm.com/) | [OpenCV](http://www.opencv.org/) | [Allegro5](http://alleg.sourceforge.net/)
 
+Versão do Allegro utilizada no Windows foi a 5.0.10.
 
 #### Windows
 -----------------------
