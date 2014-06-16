@@ -29,10 +29,10 @@
     
     ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
 	
-	ALLEGRO_BITMAP *tela_calibragem = al_create_sub_bitmap(buffer, game->largura_tela/2 - largura/2, 100, largura, altura);
+	ALLEGRO_BITMAP *tela_calibragem = al_create_sub_bitmap(buffer, game->largura_tela/2 - game->largura_camera/2, 100, game->largura_camera, game->altura_camera);
 	
-	ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, largura, altura);
-	ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
+	ALLEGRO_BITMAP *esquerda = al_create_sub_bitmap(buffer, 0, 0, game->largura_camera, game->altura_camera);
+	ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, game->largura_camera, 0, game->largura_camera, game->altura_camera);
 	
 	//Configuracoes do Allegro
     int desenhar = 0;
@@ -61,17 +61,21 @@
 	
     camera_atualiza(cam);
 
-    for(int y = 0; y < altura; y++){
-      for(int x = 0; x < largura; x++) {
+	printf("aqui %d %d", game->altura_camera, game->largura_camera);
+	
+    for(int y = 0; y < game->altura_camera; y++){
+      for(int x = 0; x < game->largura_camera; x++) {
         primeiro[y][x][0] = cam->quadro[y][x][0];
         primeiro[y][x][1] = cam->quadro[y][x][1];
         primeiro[y][x][2] = cam->quadro[y][x][2];
       }
     }
 
+	
 	if(game->telas->sprite)
 		tela_sprite();
-		
+	
+	printf("aqui");
 	
 	//Seleção do minion inicial.
 	minion_adversario = rand_boss(&minion_4_usado);
@@ -213,19 +217,19 @@
 
 			subtrai_matriz(cam->quadro, primeiro, matriz);
 			
-			normalizacao_preto_e_branco(matriz, altura, largura);
-			otsu_binarizacao(matriz, matriz_pb, altura, largura);
+			normalizacao_preto_e_branco(matriz, game->altura_camera, game->largura_camera);
+			otsu_binarizacao(matriz, matriz_pb, game->altura_camera, game->largura_camera);
 			
-			filtro_borda(matriz_pb, matriz_pb, altura, largura);
+			filtro_borda(matriz_pb, matriz_pb, game->altura_camera, game->largura_camera);
 			
-			matriz_copia(matriz_pb, matriz_verde, altura, largura);
-			poligono *f = fecho(matriz_verde, altura, largura);
+			matriz_copia(matriz_pb, matriz_verde, game->altura_camera, game->largura_camera);
+			poligono *f = fecho(matriz_verde, game->altura_camera, game->largura_camera);
 			
 			if(game->debug) {
 				camera_copia(cam, matriz_verde, esquerda);
 			}
 			
-			matriz_copia(matriz, matriz_contagem, altura, largura);
+			matriz_copia(matriz, matriz_contagem, game->altura_camera, game->largura_camera);
 
 			/* Tesoura, 20000 - 36000 | Pedra,   15000 - 45000 | Papel, 40000 - 120000 */
 			

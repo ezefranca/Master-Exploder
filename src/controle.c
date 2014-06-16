@@ -47,7 +47,7 @@
  		int 
  		padrao = 0;
 
- 		pontos_extremo(f, altura, largura);
+ 		pontos_extremo(f, game->altura_camera, game->largura_camera);
  		//printf("%.2f\n", c->razao);
 
  		if (c->razao < 1)
@@ -91,7 +91,7 @@
 
  	pedra_inicial->qtd_branco = b->qtd_branco;
  	pedra_inicial->area_fecho = area_do_fecho(fecho);
- 	pontos_extremo(fecho, altura, largura);
+ 	pontos_extremo(fecho, game->altura_camera, game->largura_camera);
  	pedra_inicial->maior_x[X] = maior_x[X];
  	pedra_inicial->maior_x[Y] = maior_x[Y];
  	pedra_inicial->menor_y[X] = menor_y[X];

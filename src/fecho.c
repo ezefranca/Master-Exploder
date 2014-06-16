@@ -372,7 +372,7 @@ int menor_angulo(ponto *p1, ponto *p2){
 void conta_pb_recursivo(int x, int y, unsigned char ***matriz_pb_cor, area *a) {
 	bool verificacao;
 	
-	if(x >= (largura - 10) || y >= (altura - 10) || x < 10 || y < 10)
+	if(x >= (game->largura_camera - 10) || y >= (game->altura_camera - 10) || x < 10 || y < 10)
 		return;
 	
 	if(game->usa_fecho)
@@ -414,7 +414,7 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
     a->qtd_branco = 0;
     a->qtd_preto = 0;
 	
-	if((centroide[X] < 2 && centroide[Y] < 2) || ((centroide[X] > largura - 1 && centroide[Y] > altura - 1)))
+	if((centroide[X] < 2 && centroide[Y] < 2) || ((centroide[X] > game->largura_camera - 1 && centroide[Y] > game->altura_camera - 1)))
 		return a;
 		
 
@@ -433,10 +433,10 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
          | X  X |
          | X  A |
     /*******************/
-    for(y = centroide[Y]; y < altura; y++){	 
+    for(y = centroide[Y]; y < game->altura_camera; y++){	 
 		x = centroide[X];
 		if(matriz_pb_cor[y][x][3] == 1) break;
-		for(x; x < largura && matriz_pb_cor[y][x][3] != 1; x++){
+		for(x; x < game->largura_camera && matriz_pb_cor[y][x][3] != 1; x++){
 			//se encontra parede do fecho
 			
 			if(matriz_pb_cor[y][x][0] == 0 && matriz_pb_cor[y][x][1] == 0 && matriz_pb_cor[y][x][2] == 0)
@@ -482,7 +482,7 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
          | X  X |
          | B  X |
     /*******************/
-    for(y = centroide[Y]; y < altura; y++){
+    for(y = centroide[Y]; y < game->altura_camera; y++){
 		x = centroide[X] - 1;
 		for(x; x > 1 && matriz_pb_cor[y][x][3] != 1; x--) {
 			if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
@@ -506,7 +506,7 @@ area* conta_pb(ponto centroide, unsigned char ***matriz_pb_cor){
     /*******************/
     for(y = centroide[Y]; y > 1; y--){
 		x = centroide[X];
-		for(x; x < largura && matriz_pb_cor[y][x][3] != 1; x++) {
+		for(x; x < game->largura_camera && matriz_pb_cor[y][x][3] != 1; x++) {
 			if(matriz_pb_cor[y][x][0] == 255 && matriz_pb_cor[y][x][1] == 255 && matriz_pb_cor[y][x][2] == 255)
 				a->qtd_branco++;
 			else 

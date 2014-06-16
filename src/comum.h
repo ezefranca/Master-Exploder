@@ -34,9 +34,6 @@ camera *cam;
 
 //Fim do bloco de variaveis
 
-int largura;
-int altura;
-
 IDIOMA *linguagem;
 ALLEGRO_TIMER *timer;
 ALLEGRO_DISPLAY *display;

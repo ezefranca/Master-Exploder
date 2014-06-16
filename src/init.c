@@ -122,13 +122,10 @@ int inicializar_allegro(){
 	cam = camera_inicializa(0);
 
 	game->largura_camera = cam->largura;
-	game->altura_camera = cam->largura;
+	game->altura_camera = cam->altura;
 	
     if(!cam)
         erro("erro na inicializacao da camera\n");
-
-    largura = cam->largura;
-    altura = cam->altura;
 
 	if(!al_init())
         erro("erro na inicializacao do allegro\n");
