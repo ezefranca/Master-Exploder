@@ -6,7 +6,7 @@
  *  @param cam   recebe um tipo camera
  *  @param image recebe um tipo IplImage (OpenCV)
  */
-void camera_converte(CAMERA *cam, IplImage *image) {
+void camera_converte(CAMERA *cam, IplImage *image){
   char *row = image->imageData;
 
   for(int y = 0; y < cam->altura; y++) {
