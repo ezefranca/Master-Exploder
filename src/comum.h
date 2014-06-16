@@ -30,7 +30,7 @@
 
 //Bloco de variaveis
 int euclidiana;
-camera *cam;
+CAMERA *cam;
 
 //Fim do bloco de variaveis
 
