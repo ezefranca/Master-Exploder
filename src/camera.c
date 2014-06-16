@@ -35,25 +35,32 @@ void camera_converte(camera *cam, IplImage *image) {
  *  @return returna cam, um tipo camera (Hashimoto)
  */
 camera *camera_inicializa(int i) {
-  camera *cam = NULL;
+	camera *cam = NULL;
+	double proporcao_h,proporcao_x;
+	CvCapture *capture = cvCaptureFromCAM(i);
 
-  CvCapture *capture = cvCaptureFromCAM(i);
+	if(capture) {
+		IplImage *image = cvQueryFrame(capture);
 
-  if(capture) {
-    IplImage *image = cvQueryFrame(capture);
+		if(image) {
+			cam = malloc(sizeof(camera));
 
-    if(image) {
-      cam = malloc(sizeof(camera));
-
-      cam->capture = capture;
-      cam->altura = (image->height)/game->divisor_camera;
-      cam->largura = (image->width)/game->divisor_camera;
-      cam->quadro = camera_aloca_matriz(cam);
-
-      camera_converte(cam, image);
-    }
-    else
-      cvReleaseCapture(&capture);
+			cam->capture = capture;
+			//Manter a proporcao da camera, mas com a resolução de 640 de largura.
+			proporcao_h = (double) image->height/image->width;
+			proporcao_x = (double) image->width/image->height;
+			
+			cam->altura = (int) (game->largura_tela / 2) * proporcao_h;
+			printf("%d", cam->altura);
+			
+			cam->largura = (int) cam->altura * proporcao_x;
+			printf("%d %f", cam->largura, proporcao_x);
+			
+			cam->quadro = camera_aloca_matriz(cam);
+		  camera_converte(cam, image);
+		}
+		else
+		  cvReleaseCapture(&capture);
   }
 
   return cam;
