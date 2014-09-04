@@ -1,5 +1,4 @@
-### Projeto Integrador III - [![Build Status](http://img.shields.io/travis/ezefranca/BCC-1s14-PI3-Master-Exploder.svg?style=flat)](https://travis-ci.org/ezefranca/BCC-1s14-PI3-Master-Exploder)
-===
+### Projeto Integrador III - [![Build Status](http://img.shields.io/travis/ezefranca/BCC-1s14-PI3-MASTER-EXPLODER.svg?branch=master)](https://travis-ci.org/ezefranca/BCC-1s14-PI3-MASTER-EXPLODER)
 
 ![Logo](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/bin/assets/image/intro/logo2.jpg)
 #### Sobre o Projeto Integrador
