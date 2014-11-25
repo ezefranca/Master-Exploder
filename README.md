@@ -1,4 +1,5 @@
-### Projeto Integrador III - [![Build Status](http://img.shields.io/travis/ezefranca/Master-Exploder-ComputerVision-Game
+### Projeto Integrador III - Bacharelado em Ciência da Computação
+[![Build Status](http://img.shields.io/travis/ezefranca/Master-Exploder-ComputerVision-Game
 .svg?branch=master)](https://travis-ci.org/ezefranca/Master-Exploder-ComputerVision-Game)
 
 ![Logo](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/bin/assets/image/intro/logo2.jpg)
