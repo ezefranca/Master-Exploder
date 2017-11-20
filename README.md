@@ -1,8 +1,11 @@
 ### Projeto Integrador III - Bacharelado em Ciência da Computação
-[![Build Status](http://img.shields.io/travis/ezefranca/Master-Exploder-ComputerVision-Game
-.svg?branch=master)](https://travis-ci.org/ezefranca/Master-Exploder-ComputerVision-Game)
 
 ![Logo](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/bin/assets/image/intro/logo2.jpg)
+
+#### Abstract
+
+This project presents a game, controlled by computer vision, in identiﬁcation of hand gestures (hand-tracking). The proposed work is based on image segmentation and construction of a convex hull with Jarvis’s Algorithm, and determination of the pattern based on the extraction of area characteristics in the convex hull.
+
 #### Sobre o Projeto Integrador
 ---------------------
 Projeto Integrador III, do Bacharelado em Ciência da Computação do Centro Universitário Senac - Campus São Paulo. 
@@ -16,18 +19,19 @@ A biblioteca para aquisição da câmera fornecida pelo [Profº Marcelo Hashimot
 
 #### Funcionamento
 
-![fluxo](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/banca/src/artigo/fluxo.png)
+![fluxo](https://raw.githubusercontent.com/ezefranca/Master-Exploder/05cb008c4249fa01d33a80f192a79b3599d9eee1/banca/src/artigo/fluxo.png)
 
-![tesoura](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/banca/src/artigo/tesoura-artigo.png)
-![papel](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/banca/src/artigo/papel-artigo.png)
+![tesoura](https://raw.githubusercontent.com/ezefranca/Master-Exploder/master/banca/src/tesoura-artigo.png)
 
-####Integrantes
+![papel](https://raw.githubusercontent.com/ezefranca/Master-Exploder/master/banca/src/papel-artigo.png)
+
+#### Integrantes
 ---------------------
 ##### Alunos:
 
-[![Ezequiel França](https://0.gravatar.com/avatar/3b4da2efb9fda1566a2907dd551fc907?d=https%3A%2F%2Fidenticons.github.com%2F3a716d3607e5bf63ee1c167fa81c8f5d.png&r=x&s=50)](https://github.com/ezefranca) | [![Gabriel Fontenelle](https://avatars2.githubusercontent.com/u/3775677?s=50)](https://github.com/OdnaropX)
---- | --- | --- | --- | --- | --- | ---
-[Ezequiel França](github.com/ezefranca) | [Gabriel Fontenelle](https://github.com/OdnaropX)
+| [![Ezequiel França](https://0.gravatar.com/avatar/3b4da2efb9fda1566a2907dd551fc907?d=https%3A%2F%2Fidenticons.github.com%2F3a716d3607e5bf63ee1c167fa81c8f5d.png&r=x&s=50)](https://github.com/ezefranca) | [![Gabriel Fontenelle](https://avatars2.githubusercontent.com/u/3775677?s=50)](https://github.com/OdnaropX) |
+|---|---|
+| [Ezequiel França](github.com/ezefranca) | [Gabriel Fontenelle](https://github.com/OdnaropX) |
 
 ##### Professor Orientador:
 
@@ -39,9 +43,9 @@ A biblioteca para aquisição da câmera fornecida pelo [Profº Marcelo Hashimot
 
 Git (opcional recomendado), Allegro 5.x e OpenCV instalados no sistema.
 
-[![Git](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/git.png)](http://git-scm.com/) | [![OpenCV](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/opencv-logo.png)](http://www.opencv.org/) | [![Allegro5](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/allegro-logo.png)](http://alleg.sourceforge.net/)
---- | --- | --- | --- | --- | --- | ---
-[Git](http://git-scm.com/) | [OpenCV](http://www.opencv.org/) | [Allegro5](http://alleg.sourceforge.net/)
+| [![Git](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/git.png)](http://git-scm.com/) | [![OpenCV](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/opencv-logo.png)](http://www.opencv.org/) | [![Allegro5](https://raw.githubusercontent.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/others/travis/allegro-logo.png)](http://alleg.sourceforge.net/)|
+| --- | --- | --- | 
+|[Git](http://git-scm.com/) | [OpenCV](http://www.opencv.org/) | [Allegro5](http://alleg.sourceforge.net/)|
 
 Versão do Allegro utilizada no Windows foi a 5.0.10.
 
@@ -81,7 +85,7 @@ $ git clone git@github.com:ezefranca/BCC-1s14-PI3-Master-Exploder.git
 ```
 ou, 
 
-baixe o projeto todo compactado em zip [![Download Zip](https://raw.github.com/ezefranca/BCC-1s14-PI3-Master-Exploder/master/travis-install/zip-download.png)](https://github.com/ezefranca/BCC-1s14-PI3-Master-Exploder/archive/master.zip).
+baixe o projeto todo compactado em zip [aqui](https://github.com/ezefranca/BCC-1s14-PI3-Master-Exploder/archive/master.zip).
 
 
 ### Como compilar
@@ -117,13 +121,13 @@ Navegue até o diretório do projeto e digite:
 $ mingw32-make
 ```
 
-####Master Exploder
+#### Master Exploder
 -----------------
 
 O nome "Master Exploder" é uma referência a uma das músicas da banda [Tenacius D](http://en.wikipedia.org/wiki/Tenacious_D) no album (e filme) [The Pick of Destiny](http://en.wikipedia.org/wiki/The_Pick_of_Destiny)
 
 
-####Licença e Créditos
+#### Licença e Créditos
 ----------------------
 
 Este trabalho foi licenciado sob uma [Licença Creative Commons Atribuição-CompartilhaIgual 3.0 Brasil.](http://creativecommons.org/choose/results-one?license_code=by-sa&jurisdiction=br&version=2.5&lang=pt_BR)
