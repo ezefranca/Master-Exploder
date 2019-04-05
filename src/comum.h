@@ -30,12 +30,9 @@
 
 //Bloco de variaveis
 int euclidiana;
-camera *cam;
+CAMERA *cam;
 
 //Fim do bloco de variaveis
-
-int largura;
-int altura;
 
 IDIOMA *linguagem;
 ALLEGRO_TIMER *timer;

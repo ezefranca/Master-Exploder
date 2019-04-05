@@ -27,10 +27,10 @@ void bitmap_para_matriz(ALLEGRO_BITMAP *bitmap, unsigned char ***matriz){
 	
 	char *row = region->data;
 
-	for(int y = 0; y < altura; y++) {
+	for(int y = 0; y < game->altura_camera; y++) {
 		char *pixel = row;
 
-		for(int x = 0; x < largura; x++) {
+		for(int x = 0; x < game->largura_camera; x++) {
 			matriz[y][x][0] = *pixel;
 			pixel++;
 
@@ -59,8 +59,8 @@ void subtrai_matriz(unsigned char ***atual, unsigned char ***primeiro, unsigned 
     int r , g , b;
 
 	//printf("luminus %s %d", pegar_configuracao("LUMINUS", "camera", config), string_para_int(pegar_configuracao("LUMINUS", "camera", config)));
-    for (int y = game->_vizinhos; y < altura - game->_vizinhos; y++){
-      for (int x = game->_vizinhos; x < largura - game->_vizinhos; x++){
+    for (int y = game->_vizinhos; y < game->altura_camera - game->_vizinhos; y++){
+      for (int x = game->_vizinhos; x < game->largura_camera - game->_vizinhos; x++){
         r = abs(atual[y][x][0] -  primeiro[y][x][0]);
         g = abs(atual[y][x][1] -  primeiro[y][x][1]);
         b = abs(atual[y][x][2] -  primeiro[y][x][2]);

@@ -12,7 +12,7 @@ typedef struct {
   unsigned char ***quadro;
   int largura, altura;
   CvCapture *capture;
-} camera;
+} CAMERA;
 
 
 /**
@@ -22,19 +22,19 @@ typedef struct {
  *
  *  @return <#return value description#>
  */
-camera *camera_inicializa(int i);
+CAMERA *camera_inicializa(int i);
 /**
  *  <#Description#>
  *
  *  @param cam <#cam description#>
  */
-void camera_finaliza(camera *cam);
+void camera_finaliza(CAMERA *cam);
 /**
  *  <#Description#>
  *
  *  @param cam <#cam description#>
  */
-void camera_atualiza(camera *cam);
+void camera_atualiza(CAMERA *cam);
 /**
  *  <#Description#>
  *
@@ -42,7 +42,7 @@ void camera_atualiza(camera *cam);
  *  @param matriz <#matriz description#>
  *  @param bitmap <#bitmap description#>
  */
-void camera_copia(camera *cam, unsigned char ***matriz, ALLEGRO_BITMAP *bitmap);
+void camera_copia(CAMERA *cam, unsigned char ***matriz, ALLEGRO_BITMAP *bitmap);
 /**
  *  <#Description#>
  *
@@ -50,13 +50,13 @@ void camera_copia(camera *cam, unsigned char ***matriz, ALLEGRO_BITMAP *bitmap);
  *
  *  @return <#return value description#>
  */
-unsigned char ***camera_aloca_matriz(camera *cam);
+unsigned char ***camera_aloca_matriz(CAMERA *cam);
 /**
  *  <#Description#>
  *
  *  @param cam    <#cam description#>
  *  @param matriz <#matriz description#>
  */
-void camera_libera_matriz(camera *cam, unsigned char ***matriz);
+void camera_libera_matriz(CAMERA *cam, unsigned char ***matriz);
 
 #endif
